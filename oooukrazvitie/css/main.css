@@ -9894,7 +9894,8 @@ header {
         margin-bottom: 20px; }
     @media (max-width: 767px) {
       header form {
-        margin-bottom: 50px; } }
+        margin-bottom: 50px;
+        padding-left: 0; } }
   header blockquote {
     text-align: right;
     margin-left: auto; }
