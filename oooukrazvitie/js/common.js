@@ -195,7 +195,13 @@ $(function() {
 
         if ( $(".tabs").length ) {
 
-            $(".tabs").tabs();
+            $(".tabs").tabs({
+                activate: function () {
+                    $('html, body').stop().animate({
+                        scrollTop: $(".tabs-content").offset().top - 100
+                    }, 300);
+                }
+            });
 
         }
 
@@ -206,6 +212,24 @@ $(function() {
 
     // -------------------- //
 
+
+
+    // ---------- Табы ---------- //
+
+    var scroll = function () {
+
+        if ( $(".scroll").length ) {
+
+            $(".scroll").mCustomScrollbar();
+
+        }
+
+    };
+
+    scroll();
+
+
+    // -------------------- //
 
 
 
