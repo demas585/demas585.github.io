@@ -1,12 +1,32 @@
 .carousel
 	.carousel__item
-		min-width: 200px
-		min-height: 200px
 		background: c-neutral
-
+		a
+			display: block
 		img
 			width: auto
-			
+
+
+.carousel-wrapper
+	position: relative
+	z-index: 1
+	.carousel-nav
+
+		.btn
+			position: absolute
+			z-index: 10
+			top: 50%
+			transform: translateY(-50%)
+			color: $c-light
+			background: none
+			font-size: $h1-font-size
+
+		.carousel-prev
+			right: 100%
+
+		.carousel-next
+			left: 100%
+
 
 .owl-carousel
 	.owl-stage-outer

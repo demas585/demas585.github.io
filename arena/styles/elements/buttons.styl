@@ -12,3 +12,21 @@ button
 	&:active
 		background: darken(@background-color, 20%)
 		transform: scale(.98)
+
+	.icon,.fa
+		&:first-child
+			margin-right: 10px
+		&:last-child
+			margin-left: 10px
+
+		&:first-child:last-child
+			margin: 0
+
+
+.btn
+	&--c-accent
+		background-color: $c-accent
+		color: $c-light
+		&:hover, &:active
+			background-color: lighten(@background-color, 10%)
+			color: @color

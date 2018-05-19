@@ -1,3 +1,16 @@
+- var iconPrefix = "fa-";
+- var iconClass = "fa ";
+
+- var linkPrefix = "link--";
+- var linkClass = "link";
+
+- var btnPrefix = "btn--";
+- var btnClass = "btn";
+
+- var inputPrefix = "input--";
+- var inputClass = "input";
+
+
 mixin btn(...mods)
 
     -
@@ -7,12 +20,12 @@ mixin btn(...mods)
     each mod in mods
 
         //- если модификатор содержит строку "icon"
-        if !mod.search("icon")
-            - icon = "icon " + mod  //- формируем класс для иконки
+        if !mod.search(iconPrefix)
+            - icon = iconClass + mod  //- формируем класс для иконки
 
         //- если модификатор не содержит строку "icon"
         else
-            - classes += "btn--"+mod+" "  //- формируем список классов-модификаторов
+            - classes += btnPrefix+mod+" "  //- формируем список классов-модификаторов
 
 
     //- html
@@ -63,12 +76,12 @@ mixin link(...mods)
             - href = mod+".html"  //- формируем href
 
         //- если модификатор содержит строку "icon"
-        else if !mod.search("icon")
-            - icon = "icon " + mod  //- формируем класс для иконки
+        else if !mod.search(iconPrefix)
+            - icon = iconClass + mod  //- формируем класс для иконки
 
         //- если модификатор не содержит строку "icon"
         else
-            - classes += "link--"+mod+" "  //- формируем список классов-модификаторов
+            - classes += linkPrefix+mod+" "  //- формируем список классов-модификаторов
 
 
     //- html
@@ -85,7 +98,7 @@ mixin input(...mods)
         var classes = ""
 
     each mod in mods
-        - classes += "input--"+mod+" "  //- формируем список классов-модификаторов
+        - classes += inputPrefix+mod+" "  //- формируем список классов-модификаторов
 
 
     //- html
@@ -105,7 +118,7 @@ mixin textarea(...mods)
         var classes = ""
 
     each mod in mods
-        - classes += "input--"+mod+" "  //- формируем список классов-модификаторов
+        - classes += inputPrefix+mod+" "  //- формируем список классов-модификаторов
 
 
     //- html
@@ -122,14 +135,14 @@ mixin textarea(...mods)
 mixin search
     form.search
         input(type="text" placeholder="Поиск по сайту").fluid
-        +btn("icon-search")
+        +btn(iconPrefix+"search")
 
 
 
 mixin checkbox(...mods)
 
     each mod in mods
-        - classes += "input--"+mod+" "
+        - classes += inputPrefix+mod+" "
 
     //- html
     label.checkbox&attributes(attributes)
@@ -152,7 +165,12 @@ mixin radio(...mods)
 mixin carousel(items,responsive)
 
     //- html
-    .carousel.owl-carousel(data-items=responsive)
-        - for (var i=0; i<items; i++)
-            .carousel__item
-                block
+    .carousel-wrapper
+        .carousel.owl-carousel.owl-theme(data-items=responsive)
+            - for (var i=0; i<items; i++)
+                .carousel__item
+                    block
+
+        .carousel-nav
+            button.btn.carousel-prev: span.fa.fa-angle-left
+            button.btn.carousel-next: span.fa.fa-angle-right

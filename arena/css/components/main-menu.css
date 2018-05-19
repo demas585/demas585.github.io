@@ -16,3 +16,15 @@
 .main-menu a:hover {
   background: $c-neutral--dark;
 }
+@media (max-width: $grid-xl) {
+  .main-menu a {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+@media (max-width: $grid-lg) {
+  .main-menu a {
+    font-size: 10px;
+    padding: 5px;
+  }
+}
