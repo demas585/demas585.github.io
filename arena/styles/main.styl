@@ -1,0 +1,58 @@
+@require "system/*"
+@require "utilites/*"
+@require "elements/*"
+@require "components/*"
+
+::placeholder
+	color: #666
+
+::selection
+	background-color: $c-accent
+	color: $c-light
+
+body
+	font-size: 14px
+	font-family: $font-default
+	min-width: 320px
+	position: relative
+	background: $c-light
+	color: $c-dark--dark
+	line-height: 1.5
+	overflow-x: hidden
+
+
+main
+	overflow: hidden
+
+
+.container
+	transition max-width .3s
+
+img
+	max-width: 100%
+
+
+.category-title
+	font-weight: 900
+	font-size: $h1-font-size
+
+.page-title
+	position: relative
+	display: inline-block
+	margin-bottom: 30px
+	font-weight: $font-weight-bold
+	font-size: $h2-font-size
+	text-transform: uppercase
+	&:before,&:after
+		content: ''
+		display: block
+		position: absolute
+		width: 50px
+		height: 4px
+		background: $c-accent
+		top: calc(50% - 2px)
+
+	&:before
+		right: calc(100% + 20px)
+	&:after
+		left: calc(100% + 20px)

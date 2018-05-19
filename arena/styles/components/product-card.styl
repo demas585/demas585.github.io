@@ -1,0 +1,62 @@
+.product-card
+	display: block
+	position: relative
+	overflow: hidden
+	background: $c-light
+	border: 1px solid $c-neutral
+	margin: 100px auto
+	border-radius: 2px
+	shd()
+
+	&__header
+		height: 200px
+		padding: 20px
+		overflow: hidden
+
+	&__body
+		padding: 20px
+
+	&__footer
+		padding: 20px
+		.btn
+			width: 100%
+
+
+	// -----
+
+
+	&__delete-product
+		position: absolute
+		top: -20px
+		right: -20px
+		width: 50px
+		border-radius: 50%
+		height: @width
+		background-color: $c-neutral
+		cursor: pointer
+		&:hover
+			//background-color: darken(@background-color,10%)
+
+	&__img-link
+		display: block
+		height: 100%
+		overflow: hidden
+		-webkit-user-drag: none
+
+	&__img
+		display: block
+		margin: 0 auto
+		height: 100%
+
+	&__title
+		margin-bottom: 10px
+		a
+			font-weight: bold
+			color: $c-dark--dark
+
+	&__price
+		font-weight: bold
+		margin-bottom: 20px
+
+	&__description
+		font-size: 14px

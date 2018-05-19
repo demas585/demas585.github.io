@@ -1,0 +1,22 @@
+.product-description--header {
+  position: relative;
+  font-size: 18px;
+}
+.product-description--header:after {
+  content: '';
+  width: 4px;
+  position: absolute;
+  top: 10px;
+  bottom: 10px;
+  left: -webkit-calc(50% - 2px);
+  left: calc(50% - 2px);
+  background: $c-accent;
+}
+@media (max-width: $grid-lg) {
+  .product-description--header:after {
+    display: none;
+  }
+}
+.product-description--header p {
+  margin: 0;
+}

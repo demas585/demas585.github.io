@@ -1,0 +1,14 @@
+button
+	outline: none !important
+	background: none
+	padding: 10px 20px
+	border: 0
+	border-radius: 0
+	background-color: $c-neutral
+	cursor: pointer
+	transition: .2s
+	&:hover
+		background: darken(@background-color, 10%)
+	&:active
+		background: darken(@background-color, 20%)
+		transform: scale(.98)

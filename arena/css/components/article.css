@@ -1,0 +1,11 @@
+.article-content {
+  color: $c-light;
+  font-size: 18px;
+}
+.article-content .scroll {
+  height: 600px;
+  overflow: hidden;
+}
+.article-content .scroll .mCSB_outside + .mCSB_scrollTools {
+  margin-right: -70px;
+}
