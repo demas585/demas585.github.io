@@ -1,0 +1,176 @@
+- var iconPrefix = "fa-";
+- var iconClass = "fa ";
+
+- var linkPrefix = "link--";
+- var linkClass = "link";
+
+- var btnPrefix = "btn--";
+- var btnClass = "btn";
+
+- var inputPrefix = "input--";
+- var inputClass = "input";
+
+
+mixin btn(...mods)
+
+    -
+        var classes = "",
+            icon = ""
+
+    each mod in mods
+
+        //- если модификатор содержит строку "icon"
+        if !mod.search(iconPrefix)
+            - icon = iconClass + mod  //- формируем класс для иконки
+
+        //- если модификатор не содержит строку "icon"
+        else
+            - classes += btnPrefix+mod+" "  //- формируем список классов-модификаторов
+
+
+    //- html
+    button.btn(class=classes)&attributes(attributes)
+
+        if icon
+            span(class=icon)
+
+        if block
+            span: block
+
+
+
+mixin a(...mods)
+
+    -
+        var classes = "",
+        href = ""
+
+
+    each mod in mods
+
+        //- если модификатор содержит строку "/"
+        if !mod.search("/")
+            - href = mod+".html"  //- формируем href
+
+        //- если модификатор содержит строку "tel"
+        else
+            - href = mod  //- формируем tel
+
+    //- html
+    a(href=href)&attributes(attributes)
+        block
+
+
+
+mixin link(...mods)
+
+    -
+        var classes = "",
+            href = "",
+            icon = ""
+
+    each mod in mods
+
+        //- если модификатор содержит строку "/"
+        if !mod.search("/")
+            - href = mod+".html"  //- формируем href
+
+        //- если модификатор содержит строку "icon"
+        else if !mod.search(iconPrefix)
+            - icon = iconClass + mod  //- формируем класс для иконки
+
+        //- если модификатор не содержит строку "icon"
+        else
+            - classes += linkPrefix+mod+" "  //- формируем список классов-модификаторов
+
+
+    //- html
+    a.link(href=href class=classes)&attributes(attributes)
+        if icon
+            span(class=icon)
+        span: block
+
+
+
+mixin input(...mods)
+
+    -
+        var classes = ""
+
+    each mod in mods
+        - classes += inputPrefix+mod+" "  //- формируем список классов-модификаторов
+
+
+    //- html
+
+    if block
+        label.label
+            .label_title: block
+            input.input(class=classes type="text")&attributes(attributes)
+
+    else
+        input.input(class=classes type="text")&attributes(attributes)
+
+
+mixin textarea(...mods)
+
+    -
+        var classes = ""
+
+    each mod in mods
+        - classes += inputPrefix+mod+" "  //- формируем список классов-модификаторов
+
+
+    //- html
+
+    if block
+        label.label
+            .label_title: block
+            textarea.input(class=classes)&attributes(attributes)
+
+    else
+        textarea.input(class=classes)&attributes(attributes)
+
+
+mixin search
+    form.search
+        input(type="text" placeholder="Поиск по сайту").fluid
+        +btn(iconPrefix+"search")
+
+
+
+mixin checkbox(...mods)
+
+    each mod in mods
+        - classes += inputPrefix+mod+" "
+
+    //- html
+    label.checkbox&attributes(attributes)
+        input(type="checkbox")
+        span.checkbox_icon
+        span.checkbox_text: block
+
+
+
+mixin radio(...mods)
+
+    //- html
+    label.radio
+        input(type="radio")&attributes(attributes)
+        span.radio_icon
+        span.radio_text: block
+
+
+
+mixin carousel(items,responsive)
+
+    //- html
+    .carousel-wrapper
+        .carousel.owl-carousel.owl-theme(data-items=responsive)
+            - for (var i=0; i<items; i++)
+                .carousel__item
+                    block
+
+        .carousel-nav
+            button.btn.carousel-prev: span.fa.fa-angle-left
+            button.btn.carousel-next: span.fa.fa-angle-right

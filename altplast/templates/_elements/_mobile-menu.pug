@@ -1,0 +1,19 @@
+.mobile-menu-helper
+.mobile-top-menu
+
+    .toggle-top-menu.close-btn
+
+    ul.menu
+        li: +link("light")(href="page.html" title="Информация для покупателей") Клиентам
+        li: +link("light")(href="page.html" title="Информация для партнеров").active Партнерам
+        li: +link("light")(href="page.html" title="Информация о доставке") Доставка
+        li: +link("light")(href="page.html" title="Информация об оплате") Оплата
+        li: +link("light")(href="page.html" title="Наши гарантии") Гарантии
+        li: +link("light")(href="page.html" title="Наши контакты") Контакты
+
+    ul.menu
+        li: +btn-action("light","marker")(title="Выбрать город" data-modal="geo") Барнаул
+        li: +link-action("light","phone")(title="Позвонить по этому номеру") 8 (3852) 33-33-33
+        li: +link-action("light","phone")(title="Позвонить по этому номеру") 8 (3852) 33-33-33
+
+    +btn("accent")(data-modal="callback" title="Заказать обратный звонок").outlined.fluid.c-light Обратный звонок

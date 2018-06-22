@@ -1,0 +1,27 @@
+-
+    function rand(min, max) {
+        if (!min)
+            min = 0;
+
+        if (!max)
+            max = 5;
+        var rand = min - 0.5 + Math.random() * (max - min + 1)
+        rand = Math.round(rand);
+        return rand;
+    }
+
+mixin imgProduct()
+
+    //- html
+    img(src=urlImgProducts+rand(1, 5)+".jpg" alt="")
+
+
+mixin img(img)
+
+    //- html
+    img(src=img alt="")
+
+
+mixin agreement
+
+    .agreement&attributes(attributes) Отправляя свои личные данные через формы на сайте, вы даёте своё согласие на обработку персональных данных согласно Федеральному закону №152-ФЗ «О персональных данных»

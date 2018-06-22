@@ -1,0 +1,30 @@
+.main-menu-line {
+  background: $c-neutral;
+  -webkit-box-shadow: 0 0 20px rgba(0,0,0,0.2);
+          box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  color: $c-dark--dark;
+}
+.main-menu li {
+  margin: 0;
+}
+.main-menu a {
+  display: block;
+  padding: 15px;
+  text-transform: uppercase;
+  font-weight: $font-weight-bold;
+}
+.main-menu a:hover {
+  background: $c-neutral--dark;
+}
+@media (max-width: $grid-xl) {
+  .main-menu a {
+    font-size: 12px;
+    padding: 10px;
+  }
+}
+@media (max-width: $grid-lg) {
+  .main-menu a {
+    font-size: 10px;
+    padding: 5px;
+  }
+}

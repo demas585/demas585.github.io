@@ -1,0 +1,13 @@
+button {
+  outline: none !important;
+  background: none;
+  padding: 10px 20px;
+  border: 0;
+  -webkit-border-radius: 0;
+          border-radius: 0;
+  background-color: $c-neutral;
+  cursor: pointer;
+  -webkit-transition: 0.2s;
+  -o-transition: 0.2s;
+  transition: 0.2s;
+}

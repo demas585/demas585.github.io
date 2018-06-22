@@ -1,0 +1,26 @@
+mixin product-card--mini
+
+    .product-card.product-card--mini
+        .product-card__delete-product
+
+        .product-card__header
+            a(href="#").product-card__img-link
+                +imgProduct.product-card__img
+
+        .product-card__body
+            .product-card__title
+                a(href="") Телевизор LG-3453 черный
+
+            .product-card__price
+                | #[span 9 999] #[span руб.]
+
+            .product-card__description Товарищи! рамки и место обучения кадров способствует подготовки и реализации модели развития. Повседневная практика показывает, что новая модель организационной деятельности играет важную роль в формировании дальнейших направлений развития.
+
+
+        .product-card__footer
+            .product-card__buttons
+                .row
+                    .col-6
+                        +btn("c-neutral--light","action","fa-globe","bordered") Кнопка
+                    .col-6
+                        +btn("c-neutral--light","action","fa-globe","bordered") Кнопка

@@ -1,0 +1,19 @@
+.carousel .carousel__item {
+  min-width: 200px;
+  min-height: 200px;
+  background: c-neutral;
+}
+.carousel .carousel__item img {
+  width: auto;
+}
+.owl-carousel .owl-stage-outer {
+  overflow: visible;
+}
+.owl-carousel .owl-item {
+  -webkit-transition: width 0.3s, opacity 0.3s;
+  -o-transition: width 0.3s, opacity 0.3s;
+  transition: width 0.3s, opacity 0.3s;
+}
+.owl-carousel .owl-item:not(.active) {
+  opacity: 0.1;
+}

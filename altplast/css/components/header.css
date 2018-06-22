@@ -1,0 +1,6 @@
+.site-header {
+  background: url("../img/header-bg.jpg") top center no-repeat;
+  -webkit-background-size: cover;
+          background-size: cover;
+  color: $c-light;
+}

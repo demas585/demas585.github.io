@@ -1,0 +1,53 @@
+// position
+
+pos(position=absolute, z=1, top=0, right=0, bottom=0, left=0)
+  position position
+  z-index z
+  top top px
+  right right px
+  bottom bottom px
+  left left px
+
+.position-relative
+  position: relative
+  z-index: 1
+
+// fx
+
+shd(color=#000)
+  box-shadow 0 10px 60px -30px rgba(color,1)
+
+
+
+// sizes
+
+.fluid
+  width: 100%
+
+
+// colors
+
+.bg
+
+  &--c-neutral
+    background-color: $c-neutral
+
+  &--c-main
+    background-color: $c-main
+
+
+  &--stripped
+    position: relative
+    z-index: 1
+    &:after
+      content: ''
+      position: absolute
+      z-index: -1
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      margin: 0 auto
+      width: $container-lg
+      background: url(../img/strip-white.png) repeat
+      opacity: .05
