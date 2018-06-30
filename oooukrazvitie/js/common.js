@@ -214,7 +214,79 @@ $(function() {
 
 
 
-    // ---------- Табы ---------- //
+    // ---------- Фккордеон ---------- //
+
+    var accordion = function () {
+
+        if ( $(".accordion").length ) {
+
+            $(".accordion").accordion({
+                heightStyle: "content",
+                collapsible: true,
+                active: false,
+                header: "> .accordion__item > .accordion__title",
+                activate: function () {
+                    $(this)
+                        .find(".accordion__item").removeClass("active")
+                        .find(".ui-accordion-header-active").closest(".accordion__item").addClass("active");
+                }
+            });
+
+        }
+
+    };
+
+    accordion();
+
+    // -------------------- //
+
+
+
+    // ---------- Фильтр ---------- //
+
+    function listFilter() {
+        // Declare variables
+        var input, filter, ul, li, a, i;
+        input = $("#filterInput");
+        filter = input.val().toUpperCase();
+        ul = $("#filterList");
+        li = $(".filterListItem");
+
+        // Loop through all list items, and hide those who don't match the search query
+        for (i = 0; i < li.length; i++) {
+            a = li.eq(i).find(".accordion__content, .accordion__title");
+            if ( a.eq(0).html().toUpperCase().indexOf(filter) > -1 || a.eq(1).html().toUpperCase().indexOf(filter) > -1) {
+                if (filter !== "" && filter !== " ") {
+                    li.eq(i).removeClass("half-hidden").addClass("filter-active");
+                } else {
+                    li.eq(i).removeClass("half-hidden").removeClass("filter-active");
+                }
+            } else {
+                li.eq(i).addClass("half-hidden").removeClass("filter-active");
+            }
+        }
+    }
+
+    $("#filterInput").on("keyup", function () {
+        listFilter();
+    });
+
+    // -------------------- //
+
+
+
+    // ---------- Clear input ---------- //
+
+    $(".clear-input").on("click", function () {
+       $(this).siblings("input").val("");
+        listFilter();
+    });
+
+    // -------------------- //
+
+
+
+    // ---------- Скролл ---------- //
 
     var scroll = function () {
 
