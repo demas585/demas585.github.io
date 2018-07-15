@@ -198,7 +198,7 @@ $(function() {
             $(".tabs").tabs({
                 activate: function () {
                     $('html, body').stop().animate({
-                        scrollTop: $(".tabs-content").offset().top - 100
+                        scrollTop: $(".tabs__content").offset().top - 100
                     }, 300);
                 }
             });
@@ -214,7 +214,7 @@ $(function() {
 
 
 
-    // ---------- Фккордеон ---------- //
+    // ---------- Аккордеон ---------- //
 
     var accordion = function () {
 
@@ -300,6 +300,31 @@ $(function() {
 
     scroll();
 
+
+    // -------------------- //
+
+
+
+    // ---------- Popup gallery ---------- //
+
+    function popupGallery() {
+        if ($(".popup-gallery").length) {
+            $(".popup-gallery").each(function() {
+                $(this).magnificPopup({
+                    delegate: "a",
+                    type: "image",
+                    tClose: "Закрыть (Esc)",
+                    gallery: {
+                        enabled: true,
+                        tPrev: "Предыдущее",
+                        tNext: "Следующее",
+                        tCounter: "%curr% из %total%"
+                    }
+                });
+            });
+        }
+    }
+    popupGallery();
 
     // -------------------- //
 
