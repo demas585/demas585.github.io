@@ -9883,6 +9883,12 @@ body.preloader:after {
 .comparison-carousel .owl-item .item {
   height: auto; }
 
+.section_certificates {
+  background: #fafafa;
+  background: -webkit-radial-gradient(circle, #fafafa, #f2f2f2);
+  background: -o-radial-gradient(circle, #fafafa, #f2f2f2);
+  background: radial-gradient(circle, #fafafa, #f2f2f2); }
+
 .section_consult {
   padding: 100px 0;
   background: -webkit-gradient(linear, left bottom, right top, from(#b38324), to(#333));
