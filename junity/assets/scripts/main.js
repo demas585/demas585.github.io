@@ -52,9 +52,11 @@ $(function () {
                 lastId = id;
 
                 // Set/remove active class
-                // menuItems
-                //     .removeClass("active")
-                //     .filter("[href='#"+id+"']").addClass("active");
+                menuItems
+                    .removeClass("active")
+                    .filter("[href='#"+id+"']").addClass("active");
+
+                $("section").filter("[id="+id+"]").addClass("active");
             }
         });
 
@@ -210,7 +212,7 @@ $(function () {
         if ( $(".carousel").length ) {
 
             var carousel = $(".carousel:not([data-sync])"),
-                navText = ["<span class='icon icon-arrow-left'>","<span class='icon icon-arrow-right'>"],
+                navText = ["<span class='icon icon-arrow-left'></span>","<span class='icon icon-arrow-right'></span>"],
                 responsive,
                 nav,
                 dots,
@@ -234,6 +236,7 @@ $(function () {
                     navText: navText,
                     autoPlay: autoPlay,
                     mouseDrag: false,
+                    touchDrag: false,
                     responsive: {
                         0: {
                             items: responsive[0]
