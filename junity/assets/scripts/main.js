@@ -27,7 +27,7 @@ $(function () {
                 offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
             $('html, body').stop().animate({
                 scrollTop: offsetTop
-            }, 1000);
+            }, 1100);
             e.preventDefault();
         });
 
