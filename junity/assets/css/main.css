@@ -6527,8 +6527,8 @@ body .ui-tooltip {
   fill: transparent;
   stroke: #02458a;
   stroke-width: 8px;
-  stroke-dasharray: 2500px;
-  stroke-dashoffset: 2500px;
+  stroke-dasharray: 2400px;
+  stroke-dashoffset: 2400px;
 }
 
 section.active .draw-animate {
