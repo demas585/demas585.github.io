@@ -6526,9 +6526,8 @@ body .ui-tooltip {
 .draw-animate {
   fill: transparent;
   stroke: #02458a;
-  stroke-width: 8px;
-  stroke-dasharray: 2400px;
-  stroke-dashoffset: 2400px;
+  stroke-dasharray: 3500px;
+  stroke-dashoffset: 3500px;
 }
 
 section.active .draw-animate {
@@ -6540,14 +6539,10 @@ section.active .draw-animate {
     fill: transparent;
     stroke: #02458a;
   }
-  80% {
+  100% {
     fill: transparent;
     stroke: #02458a;
     stroke-dashoffset: 0;
-  }
-  100% {
-    fill: #02458a;
-    stroke: transparent;
   }
 }
 
