@@ -6542,7 +6542,7 @@ body .ui-tooltip {
   stroke-dashoffset: 8000px;
 }
 
-section .draw-animate {
+section.active .draw-animate {
   animation: draw 3s linear forwards;
 }
 
@@ -18034,6 +18034,17 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
   overflow: hidden;
 }
 
+.section-header-video:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
+  background: rgba(0, 0, 0, 0.3);
+}
+
 .section-header-video .container {
   position: relative;
   z-index: 5;
@@ -18084,6 +18095,92 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
 @media (max-width: 991.98px) {
   .graph-icon {
     width: 200px;
+  }
+}
+
+.graph-icon-wrapper-1 {
+  position: relative;
+  display: inline-block;
+}
+
+.graph-icon-wrapper-1 .graph-value {
+  position: absolute;
+}
+
+.graph-icon-wrapper-1 .graph-value:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.graph-icon-wrapper-1 .graph-value:nth-child(2) {
+  top: 8px;
+  right: 10px;
+}
+
+.graph-icon-wrapper-1 .graph-value:nth-child(3) {
+  top: 110px;
+  right: 5px;
+}
+
+@media (max-width: 991.98px) {
+  .graph-icon-wrapper-1 .graph-value:nth-child(3) {
+    top: 85px;
+    right: 0;
+  }
+}
+
+.graph-icon-wrapper-1 .graph-value:nth-child(4) {
+  top: 160px;
+  right: 15px;
+}
+
+@media (max-width: 991.98px) {
+  .graph-icon-wrapper-1 .graph-value:nth-child(4) {
+    top: 120px;
+    right: 10px;
+  }
+}
+
+.graph-icon-wrapper-2 {
+  position: relative;
+  display: inline-block;
+}
+
+.graph-icon-wrapper-2 .graph-value {
+  position: absolute;
+}
+
+.graph-icon-wrapper-2 .graph-value:nth-child(1) {
+  top: 0;
+  left: 0;
+}
+
+.graph-icon-wrapper-2 .graph-value:nth-child(2) {
+  top: 8px;
+  right: 10px;
+}
+
+.graph-icon-wrapper-2 .graph-value:nth-child(3) {
+  top: 110px;
+  right: 5px;
+}
+
+@media (max-width: 991.98px) {
+  .graph-icon-wrapper-2 .graph-value:nth-child(3) {
+    top: 85px;
+    right: 0;
+  }
+}
+
+.graph-icon-wrapper-2 .graph-value:nth-child(4) {
+  top: 180px;
+  right: 50px;
+}
+
+@media (max-width: 991.98px) {
+  .graph-icon-wrapper-2 .graph-value:nth-child(4) {
+    top: 135px;
+    right: 30px;
   }
 }
 
