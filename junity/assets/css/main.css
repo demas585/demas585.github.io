@@ -18040,7 +18040,7 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
 
 .section-header-video .container {
   position: relative;
-  z-index: 5;
+  z-index: 6;
 }
 
 .header-video {
