@@ -17168,7 +17168,7 @@ ol.list li:before {
 
 .mobile-menu {
   position: fixed;
-  z-index: 99;
+  z-index: 98;
   top: 0;
   left: -250px;
   width: 250px;
