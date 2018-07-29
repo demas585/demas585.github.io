@@ -6546,6 +6546,10 @@ section.active .draw-animate {
   animation: draw 3s linear forwards;
 }
 
+section.active .draw-animate--slow {
+  animation-duration: 6s;
+}
+
 @keyframes draw {
   0% {
     fill: transparent;
