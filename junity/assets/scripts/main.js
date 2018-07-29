@@ -11,7 +11,9 @@ $(function () {
             topMenuHeight = 120,
 
             // All list items
-            menuItems = $("a[href^='#']"),
+            menuItems = topMenu.find("a[href^='#']"),
+
+            otherLinks = $("a[href^='#']"),
 
             // Anchors corresponding to menu items
             scrollItems = menuItems.map(function(){
@@ -23,6 +25,15 @@ $(function () {
         // Bind click handler to menu items
         // so we can get a fancy scroll animation
         menuItems.click(function(e){
+            var href = $(this).attr("href"),
+                offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
+            $('html, body').stop().animate({
+                scrollTop: offsetTop
+            }, 1100);
+            e.preventDefault();
+        });
+
+        otherLinks.click(function(e){
             var href = $(this).attr("href"),
                 offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
             $('html, body').stop().animate({
