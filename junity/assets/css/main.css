@@ -17866,7 +17866,7 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
 .drag-table {
   display: none;
   position: absolute;
-  bottom: 30px;
+  bottom: 20px;
   left: 50%;
   transform: translatex(-50%);
   text-align: center;
