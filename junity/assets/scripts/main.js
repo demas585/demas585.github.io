@@ -8,7 +8,7 @@ $(function () {
         // Cache selectors
         var lastId,
             topMenu = $(".main-menu"),
-            topMenuHeight = 15,
+            topMenuHeight = 120,
 
             // All list items
             menuItems = $("a[href^='#']"),

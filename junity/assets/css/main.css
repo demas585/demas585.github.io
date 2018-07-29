@@ -6526,11 +6526,23 @@ body .ui-tooltip {
 .draw-animate {
   fill: transparent;
   stroke: #02458a;
-  stroke-dasharray: 3500px;
-  stroke-dashoffset: 3500px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
-section.active .draw-animate {
+.draw-animate--why-ico {
+  stroke-width: 15px;
+  stroke-dasharray: 1500px;
+  stroke-dashoffset: 1500px;
+}
+
+.draw-animate--erp {
+  stroke-width: 60px;
+  stroke-dasharray: 8000px;
+  stroke-dashoffset: 8000px;
+}
+
+section .draw-animate {
   animation: draw 3s linear forwards;
 }
 
@@ -15075,6 +15087,7 @@ body {
 }
 
 body {
+  padding-top: 100px;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-direction: column;
@@ -15096,8 +15109,29 @@ body.covered header, body.covered main, body.covered footer, body.mfp-zoom-out-c
 }
 
 @media (max-width: 991.98px) {
+  body {
+    padding-top: 80px;
+  }
   body header .h4 {
     font-size: 24px;
+  }
+}
+
+header {
+  position: fixed;
+  z-index: 50;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+header .site-logo {
+  height: 80px;
+}
+
+@media (max-width: 767.98px) {
+  header .site-logo {
+    height: 50px;
   }
 }
 
@@ -17059,6 +17093,35 @@ ul.list li:before {
   width: 12px;
 }
 
+ul.list--legend li {
+  margin-bottom: 15px;
+}
+
+ul.list--legend li:before {
+  content: '';
+  display: block;
+  background: #bbb;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+ul.list--legend li:nth-child(1):before {
+  background: #fbc300;
+}
+
+ul.list--legend li:nth-child(2):before {
+  background: #00a7e5;
+}
+
+ul.list--legend li:nth-child(3):before {
+  background: #d7d9db;
+}
+
+ul.list--legend li:nth-child(4):before {
+  background: #002a5f;
+}
+
 ol.list {
   counter-reset: list;
 }
@@ -17069,7 +17132,7 @@ ol.list li {
 
 ol.list li:before {
   top: 4px;
-  content: counter(list) ".";
+  content: counter(list) ")";
 }
 
 .menu {
@@ -17948,7 +18011,7 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
 
 .country-card .table th, .country-card .table td {
   padding: 0;
-  height: 45px;
+  height: 48px;
 }
 
 .country-card .table td {
@@ -17978,15 +18041,21 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
 
 .header-video {
   position: absolute;
-  top: 0;
+  top: auto;
+  left: 0;
   right: 0;
   bottom: 0;
-  left: 0;
+  width: 100%;
+  height: auto;
   z-index: 2;
-  -o-object-fit: cover;
-     object-fit: cover;
-  -o-object-position: center;
-     object-position: center;
+}
+
+.main-menu a {
+  transition: 0.3s;
+}
+
+.main-menu a:hover, .main-menu a.active {
+  color: #9ebf45 !important;
 }
 
 .partner-logo {
