@@ -18041,13 +18041,22 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
 
 .header-video {
   position: absolute;
-  top: auto;
-  left: 0;
+  z-index: 2;
+  top: 50%;
+  bottom: auto;
+  left: 50%;
   right: 0;
-  bottom: 0;
   width: 100%;
   height: auto;
-  z-index: 2;
+  min-height: 100%;
+  transform: translate(-50%, -50%);
+}
+
+@media (max-width: 1299.98px) {
+  .header-video {
+    height: 100%;
+    width: auto;
+  }
 }
 
 .main-menu a {
