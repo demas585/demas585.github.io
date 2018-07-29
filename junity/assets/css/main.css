@@ -18036,7 +18036,7 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
 
 .section-header-video .container {
   position: relative;
-  z-index: 10;
+  z-index: 5;
 }
 
 .header-video {
