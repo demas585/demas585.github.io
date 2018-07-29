@@ -17857,12 +17857,6 @@ table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--s
   overflow: auto;
 }
 
-@media (max-width: 991.98px) {
-  .table-wrapper {
-    margin-bottom: 20px;
-  }
-}
-
 .drag-table {
   display: none;
   position: absolute;
