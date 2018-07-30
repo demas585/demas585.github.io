@@ -17848,8 +17848,8 @@ table td, table th, table .td, table .th, .table td, .table th, .table .td, .tab
   }
 }
 
-table--stripped tr:nth-child(odd), table--stripped .tr:nth-child(odd), .table--stripped tr:nth-child(odd), .table--stripped .tr:nth-child(odd) {
-  background: #f2f3f3;
+table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .tr {
+  border-bottom: 2px solid #bbb;
 }
 
 .table-wrapper {
