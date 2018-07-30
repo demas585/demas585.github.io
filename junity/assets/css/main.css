@@ -18066,6 +18066,22 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
   }
 }
 
+.erp-icon.erp-icon--1 {
+  animation-delay: 0s !important;
+}
+
+.erp-icon.erp-icon--2 {
+  animation-delay: .5s !important;
+}
+
+.erp-icon.erp-icon--3 {
+  animation-delay: 1s !important;
+}
+
+.erp-icon.erp-icon--4 {
+  animation-delay: 1.5s !important;
+}
+
 .section-header-video {
   position: relative;
   z-index: 1;
