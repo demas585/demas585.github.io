@@ -18066,19 +18066,19 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
   }
 }
 
-.erp-icon.erp-icon--1 {
+.erp-icon--1 {
   animation-delay: 0s !important;
 }
 
-.erp-icon.erp-icon--2 {
+.erp-icon--2 {
   animation-delay: .5s !important;
 }
 
-.erp-icon.erp-icon--3 {
+.erp-icon--3 {
   animation-delay: 1s !important;
 }
 
-.erp-icon.erp-icon--4 {
+.erp-icon--4 {
   animation-delay: 1.5s !important;
 }
 
@@ -18251,14 +18251,30 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
   }
 }
 
-.why-ico__icon {
+.why-ico-icon {
   height: 100px;
 }
 
 @media (max-width: 991.98px) {
-  .why-ico__icon {
+  .why-ico-icon {
     height: 60px;
   }
+}
+
+.why-ico-icon--1 {
+  animation-delay: 0s !important;
+}
+
+.why-ico-icon--2 {
+  animation-delay: .5s !important;
+}
+
+.why-ico-icon--3 {
+  animation-delay: 1s !important;
+}
+
+.why-ico-icon--4 {
+  animation-delay: 1.5s !important;
 }
 
 .worker {
