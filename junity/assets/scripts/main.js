@@ -67,7 +67,6 @@ $(function () {
                     .removeClass("active")
                     .filter("[href='#"+id+"']").addClass("active");
 
-                $("section").filter("[id="+id+"]").addClass("active");
             }
         });
 
@@ -189,7 +188,7 @@ $(function () {
 
                 $(this).magnificPopup({
                     delegate: "a",
-                    type: "image",
+                    type: "iframe",
                     tClose: "Закрыть (Esc)",
                     removalDelay: 500,
                     callbacks: {
@@ -508,23 +507,19 @@ $(function () {
 
 
 
-
-    // search();
-
-    // tabs();
-
     anchorMenu();
 
     accordion();
 
-    // scroll();
-
     mobileMenu();
 
-    // popupGallery();
+    popupGallery();
 
     carousel();
-    // carouselGallery();
+
+    AOS.init({
+        duration: 1000
+    });
 
     modals();
 
