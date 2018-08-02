@@ -16808,6 +16808,10 @@ body.covered header, body.covered main, body.covered footer, body.mfp-zoom-out-c
   }
 }
 
+main {
+  overflow: hidden;
+}
+
 header {
   position: fixed;
   z-index: 50;
@@ -19971,7 +19975,7 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
 
 .why-ico-icon--1 {
   animation-delay: 0s !important;
-  animation-duration: 5s !important;
+  animation-duration: 6s !important;
 }
 
 .why-ico-icon--2 {
