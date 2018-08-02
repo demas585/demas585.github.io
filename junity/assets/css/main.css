@@ -20007,10 +20007,22 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
 }
 
 .worker__avatar {
+  position: relative;
   width: 135px;
   height: 135px;
   border: 3px solid #02458a;
   border-radius: 50%;
+  overflow: hidden;
+}
+
+.worker__avatar-img {
+  overflow: hidden;
+  position: absolute;
+  z-index: 10;
+  top: -5px;
+  right: -5px;
+  bottom: -5px;
+  left: -5px;
 }
 
 .worker__desc .icon {

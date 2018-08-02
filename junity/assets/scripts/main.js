@@ -519,7 +519,8 @@ $(function () {
 
     AOS.init({
         duration: 1000,
-        once: true
+        once: false,
+        anchorPlacement: 'top-bottom'
     });
 
     modals();
