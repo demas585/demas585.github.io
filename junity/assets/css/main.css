@@ -19725,6 +19725,26 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
   display: block;
 }
 
+.video-preview {
+  position: relative;
+}
+
+.video-preview:after {
+  content: url("../images/icons/play.svg");
+  width: 100px;
+  position: absolute;
+  z-index: 10;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: 0.3s;
+  pointer-events: none;
+}
+
+.video-preview:hover:after {
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
 .country-card {
   max-width: 300px;
   border-radius: 10px;
