@@ -16830,8 +16830,8 @@ header .site-logo {
   }
 }
 
-header .btn.btn--c-main-dark:hover {
-  background: #00a32d;
+header .btn:hover {
+  background: #00a32d !important;
   box-shadow: none;
 }
 
@@ -18785,7 +18785,7 @@ ul.list:last-child, ol.list:last-child {
 ul.list li, ol.list li {
   position: relative;
   margin-bottom: 5px;
-  padding-left: 35px;
+  padding-left: 30px;
 }
 
 ul.list li:before, ol.list li:before {
@@ -18802,7 +18802,7 @@ ul.list li:before, ol.list li:before {
 ul.list li:before {
   content: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz48c3ZnIHZlcnNpb249IjEuMSIgaWQ9ItCh0LvQvtC5XzEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMy4yIDQuMiIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgMy4yIDQuMjsiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+LnN0MHtmaWxsOiMwMEEzMkQ7fTwvc3R5bGU+PHBhdGggY2xhc3M9InN0MCIgZD0iTTAsMC43VjRjMCwwLjEsMCwwLjIsMCwwLjJDMS43LDMsMi44LDEuNywzLjIsMEMyLDAsMC45LDAuMywwLDAuNyIvPjwvc3ZnPg==);
   top: 4px;
-  width: 11px;
+  width: 12px;
 }
 
 ul.list--legend li {
