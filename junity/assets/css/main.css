@@ -20003,10 +20003,14 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
 
 .why-ico-icon--1 {
   animation-delay: 0s !important;
+}
+
+.why-ico-icon--1_1 {
   animation-duration: 7s !important;
 }
 
 .why-ico-icon--1_2 {
+  animation-duration: 7s !important;
   animation-delay: 1s !important;
 }
 
