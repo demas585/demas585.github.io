@@ -16830,7 +16830,7 @@ header .site-logo {
   }
 }
 
-header .btn:hover {
+header .link.btn:hover {
   background: #00a32d !important;
   box-shadow: none;
 }
@@ -18800,7 +18800,7 @@ ul.list li:before, ol.list li:before {
 }
 
 ul.list li:before {
-  content: url("../images/icons/bullet.svg");
+  content: url("../images/icons/bullet.png");
   top: 4px;
   width: 12px;
 }
