@@ -18793,7 +18793,7 @@ ul.list li:before, ol.list li:before {
   content: '';
   position: absolute;
   top: 7px;
-  left: 0;
+  left: 1px;
   font-weight: 700;
   line-height: 1;
   color: #004a9d;
