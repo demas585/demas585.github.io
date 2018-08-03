@@ -18814,19 +18814,19 @@ ul.list--legend li:before {
 }
 
 ul.list--legend li:nth-child(1):before {
-  background: #fbc300;
+  background: #32dccc;
 }
 
 ul.list--legend li:nth-child(2):before {
-  background: #00a7e5;
+  background: #fffa4d;
 }
 
 ul.list--legend li:nth-child(3):before {
-  background: #d7d9db;
+  background: #e72fed;
 }
 
 ul.list--legend li:nth-child(4):before {
-  background: #002a5f;
+  background: #1c01c8;
 }
 
 ol.list {
@@ -19570,6 +19570,7 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
   left: 50%;
   transform: translatex(-50%);
   text-align: center;
+  white-space: nowrap;
   vertical-align: middle;
   color: #000;
   opacity: .3;
@@ -19727,6 +19728,8 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
 
 .video-preview {
   position: relative;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .video-preview:after {
