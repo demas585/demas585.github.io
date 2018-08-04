@@ -5499,7 +5499,7 @@ a.text-dark:hover, a.text-dark:focus {
   top: 50%;
   margin-left: -40px;
   margin-top: -40px;
-  background: url("owl.video.play.png") no-repeat;
+  /*background: url("owl.video.play.png") no-repeat;*/
   cursor: pointer;
   z-index: 1;
   -webkit-backface-visibility: hidden;
@@ -16462,23 +16462,6 @@ img.mfp-img {
   box-shadow: -5px 0 0 #00a32d, 5px 0 0 #00a32d;
   -webkit-box-decoration-break: clone;
           box-decoration-break: clone;
-}
-
-.del {
-  position: relative;
-}
-
-.del:after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  left: -10px;
-  right: -10px;
-  background: url(../images/decor/divider-c-accent.svg) left center repeat-x;
-  opacity: .7;
 }
 
 *::-webkit-input-placeholder {
