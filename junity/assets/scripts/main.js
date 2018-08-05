@@ -187,7 +187,7 @@ $(function () {
             $(".popup-gallery").each(function() {
 
                 $(this).magnificPopup({
-                    delegate: "a",
+                    delegate: "span",
                     type: "iframe",
                     tClose: "Закрыть (Esc)",
                     removalDelay: 500,

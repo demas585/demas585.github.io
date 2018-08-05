@@ -19484,6 +19484,7 @@ table--stripped tr, table--stripped .tr, .table--stripped tr, .table--stripped .
   position: relative;
   border-radius: 10px;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .video-preview:after {
