@@ -1,5 +1,99 @@
 $(document).ready(function () {
 
+
+    var search = function () {
+
+        if ( $(".search__autocomplete").length ) {
+
+            let searchDropdown = $(".search__autocomplete");
+
+            $("form.search input").on("input", function () {
+                $(this).closest("form.search").find(".search__autocomplete").addClass("active");
+            });
+
+            $(document).on("click", function(event) {
+                if ( !$(event.target).closest("form.search").length ) {
+                    if ( searchDropdown.is(":visible") ) {
+                        searchDropdown.removeClass("active");
+                    }
+                }
+            });
+
+        }
+
+    };
+
+    // ---------- /Search ---------- //
+
+
+
+    // ---------- Toggle block ---------- //
+
+    var toggleBlock = function () {
+      $(document).on("click", "[data-toggle]", function () {
+          let toggleBtn = $(this);
+          let toggleClass = toggleBtn.data("toggle");
+          let toggleIcon = toggleBtn.find(".icon");
+          let toggleIconClass = toggleIcon.attr("class");
+
+          $("."+toggleClass).toggle();
+
+          if ( toggleIcon.hasClass("icon-close") ) {
+              toggleIcon.removeClass().addClass("icon icon-search");
+          } else {
+              toggleIcon.removeClass().addClass("icon icon-close");
+          }
+      });
+    };
+
+    // -------------------- //
+
+
+
+    // ---------- list filter ---------- //
+
+    var filterList = function() {
+
+        $(".filter-list .filter-list__input").keyup( function () {
+
+            let filterListInput,
+                filterListInputVal,
+                filterListItems,
+                filterListItem,
+                filterListTitle,
+                i;
+
+            filterListInput = $(this);
+            filterListInputVal = filterListInput.val().toUpperCase();
+            filterListItems = $(this).closest(".filter-list").find(".filter-list__items");
+            filterListItem = filterListItems.find(".filter-list__item");
+
+            // Loop through all list items, and hide those who don't match the search query
+            for (i = 0; i < filterListItem.length; i++) {
+                filterListTitle = filterListItem.eq(i).find(".filter-list__title");
+                if (filterListTitle.html().toUpperCase().indexOf(filterListInputVal) > -1) {
+                    filterListItem.eq(i).removeClass("filtered");
+                } else {
+                    filterListItem.eq(i).addClass("filtered");
+                }
+            }
+
+            filterListItems.each(function () {
+                if ( $(this).find(".filter-list__item:not(.filtered)").length ) {
+                    $(this).removeClass("filtered");
+                } else {
+                    $(this).addClass("filtered");
+                }
+            });
+
+        });
+
+    };
+
+    // -------------------- //
+
+
+
     // ---------- Anchor menu ---------- //
 
     var anchorMenu = function () {
@@ -76,7 +170,7 @@ $(document).ready(function () {
 
     // ---------- Tabs ---------- //
 
-    var tabs = function () {
+    var lightTabs = function () {
 
         if ( $(".tabs").length ) {
 
@@ -502,7 +596,13 @@ $(document).ready(function () {
 
     // -------------------- //
 
+    search();
 
+    toggleBlock();
+
+    filterList();
+
+    lightTabs();
 
     anchorMenu();
 
