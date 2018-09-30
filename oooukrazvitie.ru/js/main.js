@@ -544,7 +544,7 @@ $(document).ready(function () {
     var showMessage = function () {
 
 
-        $(".modal-message-wrapper").fadeIn(300);
+        // $(".modal-message-wrapper").fadeIn(300);
 
         $(".modal.modal-message").find(".close-button").on("click", function () {
             $(this).parents(".modal-message-wrapper").fadeOut(300);
