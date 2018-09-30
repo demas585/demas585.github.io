@@ -280,8 +280,8 @@ $(document).ready(function () {
             $(".popup-gallery").each(function() {
 
                 $(this).magnificPopup({
-                    delegate: "span",
-                    type: "iframe",
+                    delegate: "a",
+                    type: "image",
                     tClose: "Закрыть (Esc)",
                     removalDelay: 500,
                     callbacks: {
@@ -539,6 +539,27 @@ $(document).ready(function () {
     // ---------- /Validation ---------- //
 
 
+    // ---------- Всплывающие уведомления ---------- //
+
+    var showMessage = function () {
+
+
+        $(".modal-message-wrapper").fadeIn(300);
+
+        $(".modal.modal-message").find(".close-button").on("click", function () {
+            $(this).parents(".modal-message-wrapper").fadeOut(300);
+        });
+
+        setTimeout(function () {
+            $(".modal-message-wrapper").fadeOut(1000);
+        },3000);
+
+
+    };
+
+
+    // -------------------- //
+
 
     // ---------- Modals ---------- //
 
@@ -615,6 +636,8 @@ $(document).ready(function () {
     popupGallery();
 
     carousel();
+
+    showMessage();
 
     modals();
 
