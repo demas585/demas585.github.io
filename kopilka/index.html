@@ -10,7 +10,7 @@
     <link rel="stylesheet" type="text/css" href="css/main.css"><!--[if lt IE 9]>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"></script><![endif]-->
   </head>
-  <body>
+  <body class="index">
     <div class="mobile-menu-helper"></div>
     <div class="mobile-menu">
       <button class="btn btn--c-light btn--action  toggle-mobile-menu" title="Поиск по сайту" type="button"><span class="icon icon-close"></span>
@@ -30,39 +30,41 @@
         </ul>
       </nav>
     </div>
-    <header class="site-header mb-5 pb-5">
-      <div class="container">
-        <div class="topline">
-          <div class="row align-items-center justify-content-between">
-            <div class="col-sm-auto my-2 my-sm-4 d-none d-sm-block"><a class="site-logo bb-none" href="index.html" title=""><img src="img/general/logo.svg"/></a>
-            </div>
-            <div class="col-auto my-2 my-sm-4">
-              <div class="d-block d-lg-none">
-                <button class="btn btn--link btn--c-light  toggle-mobile-menu h4" title="Поиск по сайту" type="button"><span class="icon icon-bars"></span>
-                </button>
+    <header class="site-header index mb-5 pb-5">
+      <div class="container fluid-y">
+        <div class="d-flex flex-column fluid-y">
+          <div class="topline">
+            <div class="row align-items-center justify-content-between">
+              <div class="col-sm-auto my-2 my-sm-4 d-none d-sm-block"><a class="site-logo bb-none" href="index.html" title=""><img src="img/general/logo.svg"/></a>
               </div>
-              <nav class="main-menu d-none d-lg-block">
-                <ul class="list list--x">
-                  <li><a class="font-weight-bold bb-none" href="index.html" title="">Оформить заем</a>
-                  </li>
-                  <li class="dropdown"><a class="font-weight-bold bb-none o-70" href="/content">Улучшение кредитной истории</a>
-                    <ul class="dropdown__submenu c-dark">
-                      <li><a class="bb-none" href="content.html" title="">Категория услуг</a>
-                      </li>
-                      <li><a class="bb-none" href="content.html" title="">Категория услуг</a>
-                      </li>
-                      <li><a class="bb-none" href="content.html" title="">Категория услуг</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li><a class="font-weight-bold bb-none o-70" href="/content">Как это работает</a></li>
-                  <li><a class="font-weight-bold bb-none o-70" href="contacts.html" title="">Контакты</a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <div class="col-auto my-2 my-sm-4 text-right"><a class="h5 bb-none font-weight-black" href="" title="">8 913 123 45 67</a>
-              <div class="fs-sm o-50"><i class="icon icon-cell-phone ml-2"></i><i class="icon icon-whatsapp-logo ml-2"></i><i class="icon icon-skype ml-2"></i>
+              <div class="col-auto my-2 my-sm-4">
+                <div class="d-block d-lg-none">
+                  <button class="btn btn--link btn--c-light  toggle-mobile-menu h4" title="Поиск по сайту" type="button"><span class="icon icon-bars"></span>
+                  </button>
+                </div>
+                <nav class="main-menu d-none d-lg-block">
+                  <ul class="list list--x">
+                    <li><a class="font-weight-bold bb-none" href="index.html" title="">Оформить заем</a>
+                    </li>
+                    <li class="dropdown"><a class="font-weight-bold bb-none o-70" href="/content">Улучшение кредитной истории</a>
+                      <ul class="dropdown__submenu c-dark">
+                        <li><a class="bb-none" href="content.html" title="">Категория услуг</a>
+                        </li>
+                        <li><a class="bb-none" href="content.html" title="">Категория услуг</a>
+                        </li>
+                        <li><a class="bb-none" href="content.html" title="">Категория услуг</a>
+                        </li>
+                      </ul>
+                    </li>
+                    <li><a class="font-weight-bold bb-none o-70" href="/content">Как это работает</a></li>
+                    <li><a class="font-weight-bold bb-none o-70" href="contacts.html" title="">Контакты</a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <div class="col-auto my-2 my-sm-4 text-right"><a class="h5 bb-none font-weight-black" href="" title="">8 913 123 45 67</a>
+                <div class="fs-sm o-50"><i class="icon icon-cell-phone ml-2"></i><i class="icon icon-whatsapp-logo ml-2"></i><i class="icon icon-skype ml-2"></i>
+                </div>
               </div>
             </div>
           </div>
@@ -74,37 +76,90 @@
         <div class="carousel-wrapper">
           <div class="carousel owl-carousel owl-theme mb-4" data-responsive="1 1 1 1 1" data-nav="false" data-dots="true" data-margin="100">
             <div class="carousel__item d-flex flex-column fluid-y px-3">
-              <h1 class="h1 font-weight-bold text-center mb-5">Укажите контактные данные</h1>
+              <h1 class="h1 font-weight-bold text-center mb-5">Укажите сумму займа</h1>
+              <div class="range-container my-5">
+                <input class="rangeslider" type="range" min="10000" max="100000" step="100">
+                <div class="row justify-content-between mt-2">
+                  <div class="col-auto">
+                    <div class="range__min h2 font-weight-black o-50"><span>10 000</span> <span class="fs-md">руб.</span></div>
+                  </div>
+                  <div class="col-auto">
+                    <div class="range__max h2 font-weight-black o-50"><span>100 000</span> <span class="fs-md">руб.</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-between">
+                <div class="col-xl-auto mb-4">
+                  <div class="fs-md o-50">Срок займа</div>
+                  <div class="h4 font-weight-bold">1-6 мес.</div>
+                </div>
+                <div class="col-xl-auto mb-4">
+                  <div class="fs-md o-50">Комиссия</div>
+                  <div class="h4 font-weight-bold">1 500 руб.</div>
+                </div>
+                <div class="col-xl-auto mb-4">
+                  <div class="fs-md o-50">Сумма возврата</div>
+                  <div class="h4 font-weight-bold">18 000 руб.</div>
+                </div>
+              </div>
+              <div class="row mt-auto justify-content-center">
+                <div class="col-auto mb-4 text-left ml-5">
+                  <button class="btn btn--link btn--c-light owl-next text-left">
+                    <div class="fs-sm o-50">Следующий шаг</div>
+                    <div class="h5">Личные данные <i class="icon icon-right-arrow mx-3"></i>
+                    </div>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="carousel__item d-flex flex-column fluid-y px-3">
+              <h1 class="h1 font-weight-bold text-center mb-5">Укажите личные данные</h1>
               <div class="row mb-4">
-                <div class="col-xl-6 mb-4">
+                <div class="col-xl-4 mb-4">
                   <label class="fluid-x">
-                    <div class="label-title">Укажите ФИО *</div>
+                    <div class="label-title">Укажите фамилию *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="Иванов Иван Иванович"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="Иванов"/>
                     </div>
                   </label>
                 </div>
-                <div class="col-xl-6 mb-4">
+                <div class="col-xl-4 mb-4">
+                  <label class="fluid-x">
+                    <div class="label-title">Укажите имя *</div>
+                    <div class="error-wrapper">
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="Иван"/>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-xl-4 mb-4">
+                  <label class="fluid-x">
+                    <div class="label-title">Укажите отчество *</div>
+                    <div class="error-wrapper">
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="Иванович"/>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-xl-4 mb-4">
                   <label class="fluid-x">
                     <div class="label-title">Укажите дату рождения *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="01.01.1990"/>
+                      <input class="input input--c-light  fluid-x datepick" type="text" title="Тайтл" placeholder="01.01.1990"/>
                     </div>
                   </label>
                 </div>
-                <div class="col-xl-6 mb-4">
+                <div class="col-xl-4 mb-4">
                   <label class="fluid-x">
-                    <div class="label-title">Укажите номер вашего телефона *</div>
+                    <div class="label-title">Укажите номер телефона *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="8 913 1234 56 78"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="8 913 1234 56 78"/>
                     </div>
                   </label>
                 </div>
-                <div class="col-xl-6 mb-4">
+                <div class="col-xl-4 mb-4">
                   <label class="fluid-x">
                     <div class="label-title">Укажите ваш email *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="mail@mail.ru"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="mail@mail.ru"/>
                     </div>
                   </label>
                 </div>
@@ -133,39 +188,39 @@
                   <label class="fluid-x">
                     <div class="label-title">Укажите адрес регистрации *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="Пример: г. Москва, ул. Ленина, д. 123, кв. 456"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="Пример: г. Москва, ул. Ленина, д. 123, кв. 456"/>
                     </div>
                   </label>
                 </div>
                 <div class="col-xl-auto mb-4">
-                  <div class="fs-sm o-50">Город</div>
-                  <div class="font-weight-bold">Петропавловск-Камчатский</div>
+                  <div class="fs-md o-50">Город</div>
+                  <div class="fs-lg font-weight-bold">Петропавловск-Камчатский</div>
                 </div>
                 <div class="col-xl-auto mb-4">
-                  <div class="fs-sm o-50">Улица</div>
-                  <div class="font-weight-bold">Десяти негритят</div>
+                  <div class="fs-md o-50">Улица</div>
+                  <div class="fs-lg font-weight-bold">Десяти негритят</div>
                 </div>
                 <div class="col-xl-auto mb-4">
-                  <div class="fs-sm o-50">Номер дома</div>
-                  <div class="font-weight-bold">12</div>
+                  <div class="fs-md o-50">Номер дома</div>
+                  <div class="fs-lg font-weight-bold">12</div>
                 </div>
                 <div class="col-xl-auto mb-4">
-                  <div class="fs-sm o-50">Номер квартиры</div>
-                  <div class="font-weight-bold">147</div>
+                  <div class="fs-md o-50">Номер квартиры</div>
+                  <div class="fs-lg font-weight-bold">147</div>
                 </div>
               </div>
               <div class="row mt-auto">
                 <div class="col mb-4 text-right">
                   <button class="btn btn--link btn--c-light owl-prev text-right">
                     <div class="fs-sm o-50">Предыдущий шаг</div>
-                    <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Сумма Займа
+                    <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Личные данные
                     </div>
                   </button>
                 </div>
                 <div class="col mb-4 text-left">
                   <button class="btn btn--link btn--c-light owl-next text-left">
                     <div class="fs-sm o-50">Следующий шаг</div>
-                    <div class="h5">Адрес регистрации <i class="icon icon-right-arrow mx-3"></i>
+                    <div class="h5">Паспортные данные <i class="icon icon-right-arrow mx-3"></i>
                     </div>
                   </button>
                 </div>
@@ -178,7 +233,7 @@
                   <label class="fluid-x">
                     <div class="label-title">Серия и номер паспорта *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="0123 456789"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="0123 456789"/>
                     </div>
                   </label>
                 </div>
@@ -186,7 +241,7 @@
                   <label class="fluid-x">
                     <div class="label-title">Дата выдачи</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="01.01.1990"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="01.01.1990"/>
                     </div>
                   </label>
                 </div>
@@ -194,7 +249,7 @@
                   <label class="fluid-x">
                     <div class="label-title">Кем выдан *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="УФМС по г. Москва"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="УФМС по г. Москва"/>
                     </div>
                   </label>
                 </div>
@@ -202,7 +257,7 @@
                   <label class="fluid-x">
                     <div class="label-title">Код органа *</div>
                     <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="123 456"/>
+                      <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="123 456"/>
                     </div>
                   </label>
                 </div>
@@ -211,14 +266,14 @@
                 <div class="col mb-4 text-right">
                   <button class="btn btn--link btn--c-light owl-prev text-right">
                     <div class="fs-sm o-50">Предыдущий шаг</div>
-                    <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Сумма Займа
+                    <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Адрес регистрации
                     </div>
                   </button>
                 </div>
                 <div class="col mb-4 text-left">
                   <button class="btn btn--link btn--c-light owl-next text-left">
                     <div class="fs-sm o-50">Следующий шаг</div>
-                    <div class="h5">Адрес регистрации <i class="icon icon-right-arrow mx-3"></i>
+                    <div class="h5">Данные карты <i class="icon icon-right-arrow mx-3"></i>
                     </div>
                   </button>
                 </div>
@@ -226,30 +281,49 @@
             </div>
             <div class="carousel__item d-flex flex-column fluid-y px-3">
               <h1 class="h1 font-weight-bold text-center mb-5">Укажите данные карты</h1>
-              <div class="row mb-4">
-                <div class="col-xl-12 mb-4">
-                  <label class="fluid-x">
-                    <div class="label-title">Номер карты</div>
-                    <div class="error-wrapper">
-                      <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="1234 5678 8745 6123"/>
-                    </div>
-                  </label>
-                </div>
-                <div class="col-xl-6 mb-4">
-                  <div class="label-title">Срок действия</div>
+              <div class="row justify-content-center mb-4">
+                <div class="card card--front bg-c-light c-dark p-4 w-400">
                   <div class="row">
-                    <div class="col">
+                    <div class="col-xl-12 text-right"><img src="img/content/payment-system.png"></div>
+                    <div class="col-xl-12 mb-4">
                       <label class="fluid-x">
+                        <div class="label-title">Номер карты</div>
                         <div class="error-wrapper">
-                          <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="Число"/>
+                          <input class="input input--c-neutral  fluid-x" type="text" title="Тайтл" placeholder="1234 5678 8745 6123"/>
                         </div>
                       </label>
                     </div>
-                    <div class="col">
+                    <div class="col-xl-8">
+                      <div class="label-title">Срок действия</div>
+                      <div class="row align-items-center no-gutters">
+                        <div class="col">
+                          <label class="fluid-x">
+                            <div class="error-wrapper">
+                              <input class="input input--c-neutral  fluid-x" type="text" title="Тайтл" placeholder="Число"/>
+                            </div>
+                          </label>
+                        </div>
+                        <div class="col-auto mx-3">/</div>
+                        <div class="col">
+                          <label class="fluid-x">
+                            <div class="error-wrapper">
+                              <input class="input input--c-neutral  fluid-x" type="text" title="Тайтл" placeholder="Месяц"/>
+                            </div>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="card card--back bg-c-neutral-dark c-dark p-4 w-400">
+                  <div class="card__field bg-dark h-50 mb-4"></div>
+                  <div class="row">
+                    <div class="col-xl-3 ml-auto text-right">
                       <label class="fluid-x">
                         <div class="error-wrapper">
-                          <input class="input input--c-light  fluid-x" type="text" title="Тайтл" placeholder="Месяц"/>
+                          <input class="input input--c-light  fluid-x selectize" type="text" title="Тайтл" placeholder="123"/>
                         </div>
+                        <div class="label-title">CVV2</div>
                       </label>
                     </div>
                   </div>
@@ -259,14 +333,14 @@
                 <div class="col mb-4 text-right">
                   <button class="btn btn--link btn--c-light owl-prev text-right">
                     <div class="fs-sm o-50">Предыдущий шаг</div>
-                    <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Сумма Займа
+                    <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Паспортные данные
                     </div>
                   </button>
                 </div>
                 <div class="col mb-4 text-left">
                   <button class="btn btn--link btn--c-light owl-next text-left">
                     <div class="fs-sm o-50">Следующий шаг</div>
-                    <div class="h5">Адрес регистрации <i class="icon icon-right-arrow mx-3"></i>
+                    <div class="h5">Получение займа <i class="icon icon-right-arrow mx-3"></i>
                     </div>
                   </button>
                 </div>
@@ -282,67 +356,7 @@
     +footer
     
     -->
-    <div class="modal-body" title="Обратный звонок" data-modal="callback" data-modal-size="modal--sm">
-      <form class="mb-4">
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="error-wrapper">
-              <input class="input input--c-main input--bordered  fluid-x fluid-x mb-2" type="text" title="Тайтл" placeholder="Ваше имя"/>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="error-wrapper">
-              <input class="input input--c-main input--bordered  fluid-x fluid-x mb-2" type="text" title="Тайтл" placeholder="Номер телефона"/>
-            </div>
-          </div>
-        </div>
-        <button class="btn btn--c-main  fluid-x" title="Поиск по сайту" type="button"><span>Оставить заявку</span>
-        </button>
-      </form>
-      <div class="agreement fs-sm o-50 c-dark">Отправляя свои личные данные через формы на сайте, Вы даёте своё согласие на обработку персональных данных согласно <a href="" title="">Федеральному закону №152-ФЗ «О персональных данных»</a> от 27.07.2006 г.
-      </div>
-    </div>
-    <div class="modal-body" title="Бесплатная консультация" data-modal="consult" data-modal-size="modal--sm">
-      <form class="mb-4">
-        <div class="error-wrapper">
-          <input class="input input--c-main input--bordered  fluid-x fluid-x mb-2" type="text" title="Тайтл" placeholder="Ваше имя"/>
-        </div>
-        <div class="row">
-          <div class="col-sm-6">
-            <div class="error-wrapper">
-              <input class="input input--c-main input--bordered  fluid-x fluid-x mb-2" type="text" title="Тайтл" placeholder="Номер телефона"/>
-            </div>
-          </div>
-          <div class="col-sm-6">
-            <div class="error-wrapper">
-              <input class="input input--c-main input--bordered  fluid-x fluid-x mb-2" type="text" title="Тайтл" placeholder="Email"/>
-            </div>
-          </div>
-        </div>
-        <textarea class="input input--c-main input--bordered  fluid-x mb-2 d-block mh-100" title="Тайтл" placeholder="Комментарий"></textarea>
-        <button class="btn btn--c-main  fluid-x" title="Поиск по сайту" type="button"><span>Проконсультироваться</span>
-        </button>
-      </form>
-      <div class="agreement fs-sm o-50 c-dark">Отправляя свои личные данные через формы на сайте, Вы даёте своё согласие на обработку персональных данных согласно <a href="" title="">Федеральному закону №152-ФЗ «О персональных данных»</a> от 27.07.2006 г.
-      </div>
-    </div>
-    <div class="modal-wrapper">
-      <div class="modal-container">
-        <div class="container"></div>
-      </div>
-    </div>
-    <div class="modal-message-wrapper">
-      <div class="modal modal-message modal-small">
-        <div class="done">
-          <div class="close-button"><i class="icon icon-close"></i>
-          </div>
-          <div class="form-overlay">
-            <div class="title mt0">Заявка отправлена</div>
-            <div class="description">Наш менеджер звяжется с вами в ближайшее время.</div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <!--+s-modals-->
     <script src="js/jquery.js"></script>
     <script src="js/libs.min.js"></script>
     <script src="js/main.js"></script>

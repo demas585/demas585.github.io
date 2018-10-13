@@ -338,6 +338,7 @@ $(document).ready(function () {
                     dots: dots,
                     navText: navText,
                     autoPlay: autoPlay,
+                    mouseDrag: false,
                     responsive: {
                         0: {
                             items: responsive[0]
@@ -617,29 +618,86 @@ $(document).ready(function () {
 
     // -------------------- //
 
-    search();
 
-    toggleBlock();
+    // ---------- Range slider ---------- //
 
-    filterList();
+    var range = function () {
 
-    lightTabs();
+        if ( $(".rangeslider").length ) {
 
-    anchorMenu();
+            $(".rangeslider").rangeslider({
+                polyfill: false
+            });
 
-    accordion();
+        }
 
-    scroll();
+    };
 
+    // -------------------- //
+
+
+    // ---------- Selectize ---------- //
+
+    var selectize = function () {
+
+        if ( $(".selectize").length ) {
+            $(".selectize").selectize({
+                sortField: 'text',
+                options: [
+                    {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
+                    {email: 'nikola@tesla.com', name: 'Nikola Tesla'},
+                    {email: 'someone@gmail.com'}
+                ],
+            });
+        }
+
+    };
+
+    // -------------------- //
+
+
+    // ---------- Datepicker ---------- //
+
+    var datepick = function () {
+
+        if ( $(".datepick").length ) {
+            $(".datepick").datepicker();
+        }
+
+    };
+
+    // -------------------- //
+
+
+    // search();
+    //
+    // toggleBlock();
+    //
+    // filterList();
+    //
+    // lightTabs();
+    //
+    // anchorMenu();
+    //
+    // accordion();
+    //
+    // scroll();
+    //
     mobileMenu();
-
-    popupGallery();
-
+    //
+    // popupGallery();
+    //
     carousel();
+    //
+    // showMessage();
+    //
+    // modals();
 
-    showMessage();
-
-    modals();
+    range();
 
     // svg4everybody({});
+
+    selectize();
+
+    datepick();
 });
