@@ -339,6 +339,7 @@ $(document).ready(function () {
                     navText: navText,
                     autoPlay: autoPlay,
                     mouseDrag: false,
+                    touchDrag: false,
                     responsive: {
                         0: {
                             items: responsive[0]
@@ -364,7 +365,13 @@ $(document).ready(function () {
                 $(this).closest(".carousel-wrapper").find(".carousel").trigger('prev.owl.carousel');
             });
             $(".owl-next").on("click", function () {
-                $(this).closest(".carousel-wrapper").find(".carousel").trigger('next.owl.carousel');
+                // if ( !$(this).closest("form.invalid").length ) {
+                    $(this).closest(".carousel-wrapper").find(".carousel").trigger('next.owl.carousel');
+                // }
+            });
+
+            $(".owl-dot").on("click", function(e){
+                e.stopPropagation()
             });
 
         }
@@ -625,8 +632,31 @@ $(document).ready(function () {
 
         if ( $(".rangeslider").length ) {
 
+            var value;
+
             $(".rangeslider").rangeslider({
-                polyfill: false
+                polyfill: false,
+                onInit: function() {
+                    value = $(".rangeslider").val();
+                    $(".range__output").html(value);
+                    $(".refund").html( value*1 + value*0.015 + " руб." );
+
+                    if (value <10000) { $(".period").html("1-14 дней")      }
+                    if (value>=10000) { $(".period").html("15-30 дней")     }
+                    if (value>=30000) { $(".period").html("30-180 дней")    }
+                    if (value>=50000) { $(".period").html("210-365 дней")   }
+                },
+                onSlide: function() {
+                    value = $(".rangeslider").val();
+                    $(".range__output").html(value);
+                    $(".refund").html( value*1 + value*0.015 + " руб." );
+
+                    if (value <10000) { $(".period").html("1-14 дней")      }
+                    if (value>=10000) { $(".period").html("15-30 дней")     }
+                    if (value>=30000) { $(".period").html("30-180 дней")    }
+                    if (value>=50000) { $(".period").html("210-365 дней")   }
+                }
+
             });
 
         }
