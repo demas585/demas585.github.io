@@ -782,6 +782,26 @@ $(document).ready(function () {
 
     };
 
+
+    function up() {
+        var upBtn = $(".up");
+
+        $(window).scroll(function() {
+            if ( $(window).scrollTop() > 300) {
+                upBtn.addClass('show');
+            } else {
+                upBtn.removeClass('show');
+            }
+        });
+
+        upBtn.on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate( {scrollTop:0}, '300' );
+        });
+    }
+
+    up();
+
     // -------------------- //
 
 
