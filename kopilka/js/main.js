@@ -630,36 +630,122 @@ $(document).ready(function () {
 
     var range = function () {
 
-        if ( $(".rangeslider").length ) {
+        if ( $(".sliderRange").length ) {
 
-            var value;
+            var jsonData = [
+                {
+                    "slider1": 5000,
+                    "slider2": 1
 
-            $(".rangeslider").rangeslider({
-                polyfill: false,
-                onInit: function() {
-                    value = $(".rangeslider").val();
-                    $(".range__output").html(value);
-                    $(".refund").html( value*1 + value*0.015 + " руб." );
-
-                    if (value <10000) { $(".period").html("1-14 дней")      }
-                    if (value>=10000) { $(".period").html("15-30 дней")     }
-                    if (value>=30000) { $(".period").html("30-180 дней")    }
-                    if (value>=50000) { $(".period").html("210-365 дней")   }
                 },
-                onSlide: function() {
-                    value = $(".rangeslider").val();
-                    $(".range__output").html(value);
-                    $(".refund").html( value*1 + value*0.015 + " руб." );
+                {
+                    "slider1": 10000,
+                    "slider2": 2
+                },
+                {
+                    "slider1": 15000,
+                    "slider2": 3
 
-                    if (value <10000) { $(".period").html("1-14 дней")      }
-                    if (value>=10000) { $(".period").html("15-30 дней")     }
-                    if (value>=30000) { $(".period").html("30-180 дней")    }
-                    if (value>=50000) { $(".period").html("210-365 дней")   }
+                },
+                {
+                    "slider1": 20000,
+                    "slider2": 4
+                },
+                {
+                    "slider1": 25000,
+                    "slider2": 5
+                },
+                {
+                    "slider1": 30000,
+                    "slider2": 6
+
+                },
+                {
+                    "slider1": 35000,
+                    "slider2": 7
+                },
+                {
+                    "slider1": 40000,
+                    "slider2": 8
+
+                },
+                {
+                    "slider1": 45000,
+                    "slider2": 10
+                },
+                {
+                    "slider1": 50000,
+                    "slider2": 12
                 }
+            ];
+
+            var sliderArray = function(el) {
+                var result = [];
+                $.each( jsonData, function( index, value ){
+                    result.push(value[el]);
+                });
+                return result;
+            };
+
+            // Gat closest number from array
+            var closestNumber = function( arr, number) {
+                var result = arr.reduce(function (prev, curr) {
+                    return (Math.abs(curr - number) < Math.abs(prev - number) ? curr : prev);
+                });
+                return result;
+            };
+
+
+            $('.sliderRange').each( function() {
+                var _this = $(this);
+                _this.rangeslider({
+                    polyfill: false,
+                    onSlide: function(position, value) {
+                        _this.closest(".range-container").find(".sliderText").val(_this.val());
+                    },
+                    onSlideEnd: function(position, value) {
+                        var thisArray = sliderArray(_this.attr('id')),
+                            thisTextField = _this.prev();
+                        updateAll( thisArray.indexOf(closestNumber( thisArray, value )) );
+                    }
+
+                });
 
             });
 
+            // Update sliders on text input change or keyup
+            $('.sliderText').each( function() {
+                $(this).on('change keyup', function() {
+                    $( '.sliderRange[data-index="'+$(this).data('index')+'"]').val($(this).val()).change();
+                });
+            });
+
+            // Update all text input boxes
+            function updateAll(arrIndex) {
+                $('.sliderText').each( function() {
+                    var newValue = jsonData[arrIndex]["slider"+$(this).data('index')];
+                    $('.sliderText[data-index="'+$(this).data('index')+'"]').val(newValue);
+                });
+                // Keyup called to force slider update
+                $('.sliderText').keyup();
+            }
+            updateAll(3);
+
+
+            function updateRefund() {
+                var refund = $(".refund");
+                var priceValue = $(".price-value");
+                var feeValue;
+
+                priceValue.on('change keyup', function() {
+                    feeValue = priceValue.val()*0.1;
+                    refund.html(priceValue.val()*1 + feeValue + " руб.")
+                });
+            }
+            updateRefund();
+
         }
+
 
     };
 
