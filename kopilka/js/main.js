@@ -632,7 +632,7 @@ $(document).ready(function () {
 
         if ( $(".sliderRange").length ) {
 
-            var jsonData = [
+            /*var jsonData = [
                 {
                     "slider1": 5000,
                     "slider2": 1
@@ -729,20 +729,32 @@ $(document).ready(function () {
                 // Keyup called to force slider update
                 $('.sliderText').keyup();
             }
-            updateAll(3);
+            updateAll(3);*/
+
+            var refund = $(".refund-value"),
+                price,
+                period;
 
 
-            function updateRefund() {
-                var refund = $(".refund");
-                var priceValue = $(".price-value");
-                var feeValue;
+            $('.sliderRange').each( function() {
+                var _this = $(this);
+                _this.rangeslider({
+                    polyfill: false,
+                    onSlide: function(position, value) {
 
-                priceValue.on('change keyup', function() {
-                    feeValue = priceValue.val()*0.1;
-                    refund.html(priceValue.val()*1 + feeValue + " руб.")
+                        price =   $(".price-value").val();
+                        period =  $(".period-value").val();
+                        percent = price * period * 0.01;
+                        total =   1 * price + percent;
+
+                        _this.closest(".range-container").find(".sliderText").val(_this.val());
+                        refund.html(total);
+                    }
+
                 });
-            }
-            updateRefund();
+
+            });
+
 
         }
 
@@ -782,6 +794,8 @@ $(document).ready(function () {
 
     };
 
+    // -------------------- //
+
 
     function up() {
         var upBtn = $(".up");
@@ -801,8 +815,6 @@ $(document).ready(function () {
     }
 
     up();
-
-    // -------------------- //
 
 
     // search();
