@@ -748,7 +748,7 @@ $(document).ready(function () {
                         total =   1 * price + percent;
 
                         _this.closest(".range-container").find(".sliderText").val(_this.val());
-                        refund.html(total);
+                        refund.html(total + " рублей");
                     }
 
                 });
