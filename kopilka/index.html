@@ -75,11 +75,11 @@
                   </div>
                 </div>
                 <div class="range-container mb-5">
-                  <div class="input-text mb-3"><span class="h5 mr-2">Срок займа в месяцах:</span>
-                    <input class="sliderText period-value h3 font-weight-black c-light" type="number" value="1" min="1" max="12" data-index="2" data-type="Мес." disabled>
+                  <div class="input-text mb-3"><span class="h5 mr-2">Срок займа в днях:</span>
+                    <input class="sliderText period-value h3 font-weight-black c-light" type="number" value="1" min="1" max="30" data-index="2" data-type="Дней" disabled>
                   </div>
                   <div class="input-slider">
-                    <input class="sliderRange" id="slider2" type="range" min="1" max="12" step="1" value="1" data-index="2">
+                    <input class="sliderRange" id="slider2" type="range" min="1" max="30" step="1" value="1" data-index="2">
                   </div>
                 </div>
                 <div class="row">
@@ -156,15 +156,15 @@
                 <div class="row mt-auto mb-4">
                   <div class="col-sm mb-3 text-left text-sm-right">
                     <button class="prev-step btn btn--link btn--c-light owl-prev text-right" type="button">
-                      <div class="fs-sm o-50">Предыдущий шаг</div>
-                      <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Сумма займа
+                      <div class="fs-sm o-50">Сумма займа</div>
+                      <div class="h5 o-50"><i class="icon icon-left-arrow mx-3"></i> Назад
                       </div>
                     </button>
                   </div>
                   <div class="col-sm mb-3 text-right text-sm-left">
                     <button class="next-step btn btn--link btn--c-light owl-next text-left" type="button">
-                      <div class="fs-sm o-50">Следующий шаг</div>
-                      <div class="h5">Адрес регистрации <i class="icon icon-right-arrow mx-3"></i>
+                      <div class="fs-sm o-50">Адрес регистрации</div>
+                      <div class="h5">Далее <i class="icon icon-right-arrow mx-3"></i>
                       </div>
                     </button>
                   </div>
@@ -325,7 +325,17 @@
                   </div>
                 </div>
                 <div class="text-center">
-                  <div class="o-50 mb-4 font-weight-black">Стоимость услуги составляет 299 рублей</div>
+                  <div class="o-50 mb-5 font-weight-black">Стоимость услуги составляет 299 рублей</div>
+                </div>
+                <div class="row mt-auto mb-2">
+                  <div class="col-sm text-center text-sm-left"></div>
+                  <div class="col-sm text-center text-sm-right">
+                    <div class="maw-3">
+                      <label class="checkbox fs-sm"><span class="checkbox__text">Соглашаюсь с условаиями <br> оказания услуг</span>
+                        <input type="checkbox" name="name" checked><span class="checkbox__icon"></span>
+                      </label>
+                    </div>
+                  </div>
                 </div>
                 <div class="row mt-auto mb-4">
                   <div class="col-sm mb-3 text-center text-sm-left order-sm-last">
