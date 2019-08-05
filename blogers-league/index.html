@@ -6,7 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE = edge"><![endif]-->
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="keywords" content="">
-    <link rel="stylesheet" type="text/css" href="static/css/styles.min.css"><!--[if lt IE 9]>
+    <link rel="stylesheet" type="text/css" href="static/css/styles.min.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="static/images/general/favicon/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/images/general/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/images/general/favicon/favicon-16x16.png">
+    <link rel="manifest" href="static/images/general/favicon/site.webmanifest">
+    <link rel="mask-icon" href="static/images/general/favicon/safari-pinned-tab.svg" color="#ffce03">
+    <meta name="msapplication-TileColor" content="#ffce03">
+    <meta name="theme-color" content="#ffffff"><!--[if lt IE 9]>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script><![endif]-->
   </head>
   <body>
@@ -15,19 +22,21 @@
         <div class="row align-items-center justify-content-between">
           <div class="col-auto my-3"><img src="static/images/general/logo.svg" alt="logo" style="width:160px;"></div>
           <div class="col-lg-auto my-3 d-none d-lg-block">
-            <nav class="main-nav row">
-              <div class="col-auto"><a class="text-decoration-none small" href="#whoweare">Кто мы</a></div>
-              <div class="col-auto"><a class="text-decoration-none small" href="#students">Наши ученики</a></div>
-              <div class="col-auto"><a class="text-decoration-none small" href="#education">Образование</a></div>
-              <div class="col-auto"><a class="text-decoration-none small" href="#profit">Что вы получите</a></div>
-              <div class="col-auto"><a class="text-decoration-none small" href="#wegive">Что мы даем вам</a></div>
-              <div class="col-auto"><a class="text-decoration-none small" href="#itplatform">IT-платформа</a></div>
-              <div class="col-auto"><a class="text-decoration-none small" href="#steps">Этапы открытия</a></div>
+            <nav class="main-nav">
+              <div class="row">
+                <div class="col-auto"><a class="main-nav__item text-decoration-none" href="#whoweare">Кто мы</a></div>
+                <div class="col-auto"><a class="main-nav__item text-decoration-none" href="#students">Наши ученики</a></div>
+                <div class="col-auto"><a class="main-nav__item text-decoration-none" href="#education">Образование</a></div>
+                <div class="col-auto"><a class="main-nav__item text-decoration-none" href="#profit">Что вы получите</a></div>
+                <div class="col-auto"><a class="main-nav__item text-decoration-none" href="#wegive">Что мы даем вам</a></div>
+                <div class="col-auto"><a class="main-nav__item text-decoration-none" href="#itplatform">IT-платформа</a></div>
+                <div class="col-auto"><a class="main-nav__item text-decoration-none" href="#steps">Этапы открытия</a></div>
+              </div>
             </nav>
           </div>
           <div class="col-auto text-right my-3">
             <div class="font-weight-bold h6 mb-0">+7 (показать номер)</div>
-            <button class="btn btn-link btn-sm p-0" type="button">Перезвонить мне</button>
+            <button class="btn btn-link btn-sm p-0" type="button" data-fancybox data-src="#modal-callback">Перезвонить мне</button>
           </div>
         </div>
       </div>
@@ -56,7 +65,7 @@
           </div>
         </div><img class="section-img fixed-right d-none d-lg-block" src="static/images/content/sections-img/header-img.png">
       </section>
-      <section class="my-5 bg-icon bg-icon-mic">
+      <section class="bg-icon bg-icon-mic my-5 py-5">
         <div class="container">
           <div class="bg-orange-light bg-icon bg-icon-mic shadow py-4 shadow rounded">
             <div class="row justify-content-center text-center">
@@ -80,7 +89,7 @@
           </div>
         </div>
       </section>
-      <section class="my-5" id="whoweare">
+      <section class="my-5 py-5" id="whoweare">
         <div class="container">
           <div class="shadow rounded p-5">
             <div class="row mb-4">
@@ -133,7 +142,7 @@
           </div>
         </div>
       </section>
-      <section class="my-5">
+      <section class="my-5 py-5">
         <div class="container">
           <div class="shadow rounded p-5">
             <div class="row">
@@ -154,7 +163,7 @@
                 <div class="row mt-5">
                   <div class="col-lg-6 col-xl-8">
                     <p class="mb-3 small">Получите презентацию по линейке курсов <br>для детей и подростков от 7-15 лет</p>
-                    <button class="btn btn-secondary shadow mb-5 w-100">Получить презентацию</button>
+                    <button class="btn btn-secondary shadow w-100">Получить презентацию</button>
                   </div>
                 </div>
               </div>
@@ -382,6 +391,21 @@
       </section>
     </main>
     <footer></footer>
+    <div class="modal bg-blue-light bg-icon bg-icon-like rounded p-4 text-center text-white h-auto shadow-lg" id="modal-callback">
+      <div class="section-title h3 text-primary font-weight-bold mb-4">Введите ваш <br>номер телефона</div>
+      <form>
+        <p class="mb-4">Наш менеджер свяжется с вами</p>
+        <input class="form-control is-invalid mb-3" placeholder="Ваше имя">
+        <input class="form-control is-valid mb-3" placeholder="Ваш телефон" type="number">
+        <input class="form-control mb-3" placeholder="Ваш город">
+        <input class="form-control mb-3" placeholder="Ваш email" type="email">
+        <div class="form-check mb-4 text-left">
+          <input class="form-check-input" type="checkbox" id="agreement-modal">
+          <label class="form-check-label small" for="agreement-modal">Я принимаю <a href="#">условия cоглашения</a> на обработку персональных данных</label>
+        </div>
+        <button class="btn btn-secondary shadow w-100" type="button">Отправить заявку</button>
+      </form>
+    </div>
     <script src="static/js/jquery-3.3.1.min.js"></script>
     <script src="static/js/libs.min.js"></script>
     <script src="static/js/main.js"></script>
