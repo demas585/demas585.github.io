@@ -8,20 +8,75 @@ $(document).ready(function () {
 
     $( 'a[href="#mobile-menu"]' ).on("click", function(){
         menu.open();
-        // evnt.preventDefault();
-        // evnt.stopPropagation();
     });
 
     $( '.main-nav__item' ).on("click", function(){
         menu.close();
-        // evnt.preventDefault();
-        // evnt.stopPropagation();
     });
 
-    AOS.init({
+    /*AOS.init({
         duration: "600"
+    });*/
+
+
+
+
+
+    $(".slick-4").slick({
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1650,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 1300,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
     });
 
+    $(".slick-6").slick({
+        dots: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 6,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1650,
+                settings: {
+                    slidesToShow: 4
+                }
+            },
+            {
+                breakpoint: 1300,
+                settings: {
+                    slidesToShow: 2
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            }
+        ]
+    });
 
 
     // Cache selectors
@@ -73,6 +128,7 @@ $(document).ready(function () {
     $(document).on("scroll", function (event) {
         $(document).scrollTop() > 100 ? $("header").addClass("fixed") : $("header").removeClass("fixed");
     });
+
 });
 
 
