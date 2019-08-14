@@ -20,10 +20,38 @@ $(document).ready(function () {
 
 
 
+    $(".slick-1").slick({
+        dots: true,
+        arrows: false,
+        infinite: false,
+        speed: 300,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1650,
+                settings: {
+                    slidesToShow: 4
+                }
+            },
+            {
+                breakpoint: 1300,
+                settings: {
+                    slidesToShow: 3
+                }
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 2
+                }
+            }
+        ]
+    });
 
-
-    $(".slick-4").slick({
-        dots: false,
+    $(".slick-2").slick({
+        dots: true,
+        arrows: false,
         infinite: false,
         speed: 300,
         slidesToShow: 4,
@@ -50,8 +78,9 @@ $(document).ready(function () {
         ]
     });
 
-    $(".slick-6").slick({
-        dots: false,
+    $(".slick-3").slick({
+        dots: true,
+        arrows: false,
         infinite: false,
         speed: 300,
         slidesToShow: 6,
