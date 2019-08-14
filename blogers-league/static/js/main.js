@@ -111,9 +111,9 @@ $(document).ready(function () {
     // Cache selectors
     var lastId,
         topMenu = $(".main-nav"),
-        topMenuHeight = topMenu.outerHeight(),
+        topMenuHeight = 80,
         // All list items
-        menuItems = topMenu.find("a"),
+        menuItems = $(".anchor"),
         // Anchors corresponding to menu items
         scrollItems = menuItems.map(function(){
             var item = $($(this).attr("href"));
@@ -134,7 +134,7 @@ $(document).ready(function () {
     // Bind to scroll
     $(window).scroll(function(){
         // Get container scroll position
-        var fromTop = $(this).scrollTop()+topMenuHeight;
+        var fromTop = 50;
 
         // Get id of current scroll item
         var cur = scrollItems.map(function(){
