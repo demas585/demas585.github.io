@@ -124,7 +124,7 @@ $(document).ready(function () {
     // so we can get a fancy scroll animation
     menuItems.click(function(e){
         var href = $(this).attr("href"),
-            offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight+1;
+            offsetTop = href === "#" ? 0 : $(href).offset().top-topMenuHeight;
         $('html, body').stop().animate({
             scrollTop: offsetTop
         }, 1000);
