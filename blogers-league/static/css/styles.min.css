@@ -10264,11 +10264,11 @@ img {
   -o-object-fit: cover;
      object-fit: cover; }
 
-.slick__slide:not(:first-child) {
+/*.slick__slide:not(:first-child) {
   display: none; }
 
 .slick-initialized .slick__slide {
-  display: block; }
+  display: block; }*/
 
 .slick-dots {
   z-index: 50;
