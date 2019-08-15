@@ -9937,8 +9937,8 @@ body.compensate-for-scrollbar {
     z-index: -1000 !important;
 }
 
-.mm.mm--offcanvas.mm-open {
-    z-index: 1000 !important;
+.mm.mm--offcanvas.mm--open {
+    z-index: 9995 !important;
 }
 
 .mm-blocker {
