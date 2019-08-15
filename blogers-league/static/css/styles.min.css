@@ -10686,6 +10686,7 @@ footer {
   content: "";
   display: block; }
 
+/*
 .slick-track {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -10695,6 +10696,7 @@ footer {
     .slick-track .slick-slide > div {
       height: 100%;
       padding: 0 10px; }
+*/
 
 .slick-3 .slick-slide > div {
   padding: 0; }
