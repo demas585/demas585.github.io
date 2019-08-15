@@ -6,7 +6,7 @@ $(document).ready(function () {
     menu.enable( "(max-width: 1300px)" );
     menu.offcanvas();
 
-    $( 'a[href="#mobile-menu"]' ).on("click", function(){ 
+    $( 'a[href="#mobile-menu"]' ).on("click", function(){
         menu.open();
     });
 

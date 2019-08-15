@@ -9931,6 +9931,16 @@ body.compensate-for-scrollbar {
           -ms-transform: translateX(100%);
               transform: translateX(100%); }
 
+.mm-main, .mm-blocker {
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.mm-main.mm-open, .mm-blocker.mm-open {
+    pointer-events: all;
+    visibility: visible;
+}
+
 .mm-blocker {
   pointer-events: auto;
   display: block;
