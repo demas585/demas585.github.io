@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // svg4everybody({});
+    svg4everybody({});
 
     var menu = new MmenuLight( $("#mobile-menu")[0], { title: "Меню" });
 
@@ -115,8 +115,6 @@ $(document).ready(function () {
             }
         ]
     });
-
-    // jQuery('.slick-slide').bind('touchstart', function(){ console.log('touchstart') });
 
 
     // Cache selectors
