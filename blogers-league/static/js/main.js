@@ -1,10 +1,10 @@
 $(document).ready(function () {
     // svg4everybody({});
 
-    // var menu = new MmenuLight( $("#mobile-menu")[0], { title: "Меню" });
+    var menu = new MmenuLight( $("#mobile-menu")[0], { title: "Меню" });
 
-    // menu.enable( "(max-width: 1300px)" );
-    // menu.offcanvas();
+    menu.enable( "(max-width: 1300px)" );
+    menu.offcanvas();
 
     $( 'a[href="#mobile-menu"]' ).on("click", function(){
         // menu.open();
