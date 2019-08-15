@@ -7,11 +7,11 @@ $(document).ready(function () {
     menu.offcanvas();
 
     $( 'a[href="#mobile-menu"]' ).on("click", function(){
-        // menu.open();
+        menu.open();
     });
 
     $( '.main-nav__item' ).on("click", function(){
-        // menu.close();
+        menu.close();
     });
 
     /*AOS.init({
