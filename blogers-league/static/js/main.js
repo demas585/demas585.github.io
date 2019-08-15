@@ -19,6 +19,15 @@ $(document).ready(function () {
     });*/
 
 
+    $('[data-fancybox]').fancybox({
+        lang: "en",
+        i18n: {
+            en: {
+                CLOSE: "Закрыть",
+            }
+        }
+    });
+
 
     $(".slick-1").slick({
         dots: true,
