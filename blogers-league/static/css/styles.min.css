@@ -10217,11 +10217,11 @@ section {
 
 #whoweare .section-img {
   max-width: 900px;
-  right: 40%; }
+  right: 50%; }
   @media (max-width: 1649.98px) {
     #whoweare .section-img {
       max-width: 600px;
-      right: 45%; } }
+      right: 55%; } }
   @media (max-width: 1299.98px) {
     #whoweare .section-img {
       max-width: 500px;
