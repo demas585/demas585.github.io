@@ -9934,11 +9934,13 @@ body.compensate-for-scrollbar {
 .mm-main, .mm-blocker {
     pointer-events: none;
     visibility: hidden;
+    z-index: -1000;
 }
 
 .mm-main.mm-open, .mm-blocker.mm-open {
     pointer-events: all;
     visibility: visible;
+    z-index: 1000;
 }
 
 .mm-blocker {
