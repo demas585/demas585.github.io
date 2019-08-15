@@ -10677,10 +10677,6 @@ footer {
 .modal-lg {
   max-width: 800px; }
 
-.slick-slider {
-  width: 1px;
-  min-width: 100%;
-  *width: 100%; }
 
 .slick-list {
   overflow: hidden; }
