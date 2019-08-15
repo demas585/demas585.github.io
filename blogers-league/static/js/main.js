@@ -107,6 +107,8 @@ $(document).ready(function () {
         ]
     });
 
+    jQuery('.slick-slide').bind('touchstart', function(){ console.log('touchstart') });
+
 
     // Cache selectors
     var lastId,
