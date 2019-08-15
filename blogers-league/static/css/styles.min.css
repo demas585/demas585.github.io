@@ -9933,7 +9933,7 @@ body.compensate-for-scrollbar {
 
 .mm-blocker {
   pointer-events: auto;
-  display: none;
+  display: none !important;
   position: fixed;
   bottom: 0;
   right: 0;
