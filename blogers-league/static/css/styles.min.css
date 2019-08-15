@@ -9937,6 +9937,11 @@ body.compensate-for-scrollbar {
     z-index: -1000;
 }
 
+
+.mm.mm--offcanvas {
+    z-index: -1000 !important;
+}
+
 .mm-main.mm-open, .mm-blocker.mm-open {
     pointer-events: all;
     visibility: visible;
