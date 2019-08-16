@@ -10193,7 +10193,7 @@ section {
           filter: drop-shadow(0 0 80px white); }
 
 #banner .section-img {
-  max-width: 1000px;
+  max-width: 900px;
   left: 45%; }
   @media (max-width: 1649.98px) {
     #banner .section-img {
