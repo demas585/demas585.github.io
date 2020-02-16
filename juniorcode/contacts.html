@@ -84,263 +84,74 @@
         </nav>
       </div>
       <div class="container">
-        <h1 class="h1 font-weight-bold mb-4 text-white o-100">Базовый курс</h1>
+        <div class="row align-items-center mb-5">
+          <div class="col-xl-auto mr-auto mb-4 mb-xl-0">
+            <h1 class="h1 font-weight-bold text-white mb-0 o-100">Контакты</h1>
+          </div>
+          <div class="col-xl-auto">
+            <select class="custom-select">
+              <option>Выберите город</option>
+            </select>
+          </div>
+        </div>
         <div class="row">
-          <div class="col-12 mb-5">
-            <div class="card p-0 h-100">
-              <div class="row no-gutters h-100">
-                <div class="col mr-2"><img class="w-100 h-100" src="images/content/courses/1.jpg"/>
+          <div class="col-xl-4 mb-5 mb-xl-0">
+            <div class="card p-5">
+              <div class="mb-6">
+                <div class="h6 text-sm font-weight-bold text-uppercase mb-4">Свяжитесь с нами</div>
+                <div class="d-flex mb-3 o-60"><i class="icon icon-phone text-lg mr-3"></i><span>8 800 550-07-25</span>
                 </div>
-                <div class="col-4 p-3 d-flex flex-column">
-                  <div class="mb-auto">
-                    <div class="row align-items-center justify-content-between">
-                      <div class="col-auto">
-                        <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                <div class="d-flex mb-3 o-60"><i class="icon icon-envelope text-lg mr-3"></i><span>hello@roob.in</span>
+                </div>
+                <div class="d-flex o-60"><i class="icon icon-clock text-lg mr-3"></i><span>пн-пт 10:00 — 19:00<br>сб-вс 9:00 — 20:00</span>
+                </div>
+              </div>
+              <div class="mb-0">
+                <div class="h6 text-sm font-weight-bold text-uppercase mb-4">Соцсети</div><a class="btn btn-action btn-block d-flex mb-3 font-weight-normal o-60" href="/buildhttp://vk.com.html"><i class="icon icon-insta text-lg mr-3"></i><span>juniorcode</span></a><a class="btn btn-action btn-block d-flex mb-3 font-weight-normal o-60" href="/buildhttp://vk.com.html"><i class="icon icon-vk text-lg mr-3"></i><span>juniorcode</span></a><a class="btn btn-action btn-block d-flex mb-3 font-weight-normal o-60" href="/buildhttp://vk.com.html"><i class="icon icon-fb text-lg mr-3"></i><span>juniorcode</span></a><a class="btn btn-action btn-block d-flex font-weight-normal o-60" href="/buildhttp://vk.com.html"><i class="icon icon-yt text-lg mr-3"></i><span>juniorcode</span></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-xl-8">
+            <div class="position-relative h-100">
+              <div class="w-100 map rounded-lg overflow-hidden h-100" id="map"></div>
+              <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
+              <script>
+                DG.then(function() {
+                    DG.map('map', {
+                        center: [54.98, 82.89],
+                        zoom: 13
+                    });
+                });
+                
+                
+                
+              </script>
+              <div class="position-absolute left-0 top-0 right-0 bottom-0" style="pointer-events:none;">
+                <div class="row h-100">
+                  <div class="col-5" style="pointer-events:all;">
+                    <div class="card p-5 h-100 w-100">
+                      <div class="mb-6">
+                        <div class="h6 text-sm font-weight-bold text-uppercase mb-4">Санкт-петербург</div>
+                        <div class="d-flex mb-3 o-60"><i class="icon icon-check text-lg mr-3"></i><span>4 школы</span>
+                        </div>
+                        <div class="d-flex mb-3 o-60"><i class="icon icon-map-marker text-lg mr-3"></i><span>ул. Навои 208/1 офис 271, развивающий центр "CUBE"</span>
+                        </div>
                       </div>
-                      <div class="col-auto">
-                        <div class="badge badge-primary">4-6 лет</div>
+                      <div class="mb-0">
+                        <div class="h6 text-sm font-weight-bold text-uppercase mb-4">Москва</div>
+                        <div class="d-flex mb-3 o-60"><i class="icon icon-check text-lg mr-3"></i><span>4 школы</span>
+                        </div>
+                        <div class="d-flex o-60"><i class="icon icon-map-marker text-lg mr-3"></i><span>ул. Навои 208/1 офис 271, развивающий центр "CUBE"</span>
+                        </div>
                       </div>
                     </div>
-                    <div class="h4 font-weight-bold mb-5">Базовый курс</div>
-                    <p class="mb-3">В данном курсе мы будем обучать ребёнка, как пользоваться программой для создания игр, мультфильмов и различных интерактивных объектов, а также учить ребёнка создавать собственные игры и мультфильмы с интерактивными объектами</p>
                   </div>
-                  <div class="row no-gutters align-items-baseline mb-3">
-                    <div class="col-auto mr-3">
-                      <div class="badge badge-primary p-2"><i class="icon icon-clock text-lg"></i>
-                      </div>
-                    </div>
-                    <div class="col">
-                      <p>Развивает креативность<br>и воображение</p>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <section class="py-6">
-      <div class="container">
-        <div class="badge badge-primary mb-4">Курсы</div>
-        <div class="h1 font-weight-bold mb-4">Программа курса</div>
-        <div class="row">
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-          <div class="col-3 mb-5">
-            <div class="card p-0"><img class="w-100 h-100" src="images/content/courses/2.jpg"/>
-              <div class="p-3">
-                <div class="badge badge-primary mb-3 text-capitalize">Урок 1</div>
-                <div class="h5 font-weight-bold mb-3">Создание игры</div>
-                <p class="text-sm">За этот урок ребёнок сможет впервые создать собственную игру с уникальной логикой</p>
-                <button class="btn btn-primary btn-ghost btn-sm" type="button">Подробнее
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-6 d-flex flex-column">
-            <div class="mb-auto">
-              <div class="badge badge-primary mb-4">Фотогалерея</div>
-              <div class="h1 font-weight-bold mb-5">Лучшие моменты</div>
-            </div>
-            <div class="row">
-              <div class="col-6 mb-5"><a href="/build/images/content/gallery/1.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/1.jpg"/></a>
-              </div>
-              <div class="col-6 mb-5"><a href="/build/images/content/gallery/2.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/2.jpg"/></a>
-              </div>
-              <div class="col-12 mb-5"><a href="/build/images/content/gallery/4.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/4.jpg"/></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-6">
-            <div class="row">
-              <div class="col-12 mb-5"><a href="/build/images/content/gallery/3.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/3.jpg"/></a>
-              </div>
-              <div class="col-6 mb-5"><a href="/build/images/content/gallery/5.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/5.jpg"/></a>
-              </div>
-              <div class="col-6 mb-5"><a href="/build/images/content/gallery/6.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/6.jpg"/></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="badge badge-primary mb-4">Создатели курсов</div>
-        <div class="h1 font-weight-bold mb-5">Наши методисты со стажем более 20 лет</div>
-        <div class="row overflow-x-auto flex-nowrap flex-xl-wrap">
-          <div class="col-auto col-xl-4">
-            <div class="card p-4"><img class="rounded-circle mb-5" src="images/content/teachers/1.jpg" style="width:128px;height:128px;"/>
-              <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
-              <div class="h4 font-weight-medium mb-3">Иван Сухов</div>
-              <p>Обладает богатым опытом в сфере детского IT-образования: более 20 лет. Работал в качестве…</p>
-              <button class="btn btn-primary btn-ghost" type="button">Подробнее
-              </button>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4">
-            <div class="card p-4"><img class="rounded-circle mb-5" src="images/content/teachers/2.jpg" style="width:128px;height:128px;"/>
-              <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
-              <div class="h4 font-weight-medium mb-3">Денис Голиков</div>
-              <p>Родоначальник Scratch-движения в России и СНГ. Финалист Конкурса инноваций…</p>
-              <button class="btn btn-primary btn-ghost" type="button">Подробнее
-              </button>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4">
-            <div class="card p-4"><img class="rounded-circle mb-5" src="images/content/teachers/3.jpg" style="width:128px;height:128px;"/>
-              <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
-              <div class="h4 font-weight-medium mb-3">Ольга Журавлева</div>
-              <p>Работает в системе образования более 25 лет. Специалист по системной диагностике…</p>
-              <button class="btn btn-primary btn-ghost" type="button">Подробнее
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container position-relative pt-4">
-        <div class="position-absolute top-0 right-0 bottom-0 left-0 fixed-top" style="z-index:-1;height:380px;"><img class="w-100 h-100 cover rounded-xl" src="images/bg/lesson-bg.png"/>
-        </div>
-        <div class="row pt-6 mx-n3">
-          <div class="col-xl-4 offset-1 d-flex flex-column">
-            <div class="mb-auto">
-              <div class="badge badge-light mb-4">Попробуйте сейчас</div>
-              <div class="h1 font-weight-bold mb-5 text-white o-100">Запишись на бесплатный урок</div>
-            </div>
-            <p class="mt-auto d-none d-xl-block">Пробное занятие в ЮниорКод — это первый шаг на пути к большим жизненным целям ребенка. Чем бы он ни занялся в дальнейшем — творчеством, бизнесом или написанием мобильных приложений.</p>
-          </div>
-          <div class="col-xl-5 offset-xl-1 px-0 px-xl-3">
-            <form class="card p-4 p-xl-5 mb-5 mb-xl-0">
-              <div class="h4 font-weight-medium mb-6">Заполните форму заявки</div>
-              <input class="form-control mb-4" type="text" placeholder="Ваше имя"/>
-              <input class="form-control mb-4" type="text" placeholder="Имя вашего ребенка"/>
-              <input class="form-control mb-4" type="text" placeholder="Ваш телефон"/>
-              <select class="custom-select mb-4">
-                <option>Санкт-Петербург</option>
-              </select>
-              <select class="custom-select mb-4">
-                <option>Школа</option>
-              </select>
-              <div class="mb-5">
-                <div class="custom-checkbox custom-control">
-                  <input class="custom-control-input" type="checkbox" id="check-confirm-1" checked="checked"/>
-                  <label class="custom-control-label" for="check-confirm-1">Я подтверждаю, что согласен на обработку персональных данных
-                  </label>
-                </div>
-              </div>
-              <div class="row align-items-center">
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-success">Записаться
-                  </button>
-                </div>
-                <div class="col">
-                  <p class="mb-0 text-sm">Мы позвоним и согласуем время урока</p>
-                </div>
-              </div>
-            </form>
-            <p class="mt-auto d-block d-xl-none">Пробное занятие в ЮниорКод — это первый шаг на пути к большим жизненным целям ребенка. Чем бы он ни занялся в дальнейшем — творчеством, бизнесом или написанием мобильных приложений.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <div class="container-xl my-6">
-      <div class="w-100 map rounded-lg overflow-hidden" id="map" style="height:280px;"></div>
-      <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
-      <script>
-        DG.then(function() {
-            DG.map('map', {
-                center: [54.98, 82.89],
-                zoom: 13
-            });
-        });
-        
-        
-        
-      </script>
     </div>
     <header class="py-4 mt-6">
       <div class="container pt-6">

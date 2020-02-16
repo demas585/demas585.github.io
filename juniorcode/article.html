@@ -8,18 +8,41 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="apple-touch-icon" href="icon.png">
     <!-- Place favicon.ico in the root directory-->
-    <link rel="stylesheet" href="themes/engine/css/main.css">
+    <link rel="stylesheet" href="css/main.css">
     <meta name="theme-color" content="#fafafa">
   </head>
   <body>
     <!--+s-header-->
     <div class="bg-header" style="background:url('images/bg/header-bg.png') no-repeat top -350px center">
+      <div class="mobile-menu d-xl-none">
+        <ul class="list-unstyled">
+          <li><a href="/build/index.html"><img src="images/system/logo-color.svg" style="height:20px;"/></a>
+          </li>
+          <li><a class="d-flex" href="/build/courses.html"><i class="icon icon-check text-lg mr-3 o-0"></i><span>Курсы</span></a>
+          </li>
+          <li><a class="d-flex" href="/build/news.html"><i class="icon icon-check text-lg mr-3 o-0"></i><span>Блог</span></a>
+          </li>
+          <li><a class="d-flex" href="/build/fran.html"><i class="icon icon-check text-lg mr-3 o-0"></i><span>Франшиза</span></a>
+          </li>
+        </ul>
+        <ul class="list-unstyled">
+          <li><a class="d-flex" href="javascript:;" data-fancybox="" data-src="#modal-geo"><i class="icon icon-map-marker text-lg mr-3 o-40"></i><span>Москва</span></a></li>
+          <li><a class="btn btn-action d-flex" href="tel:88005500725"><i class="icon icon-phone text-lg mr-3 o-40"></i><span>8 800 550-07-25</span></a>
+          </li>
+        </ul>
+        <ul class="list-unstyled">
+          <li>
+            <button class="btn btn-primary btn-block" type="button" data-fancybox="" data-src="#modal-lesson">Запись на урок
+            </button>
+          </li>
+        </ul>
+      </div>
       <header class="py-3 text-white">
         <div class="container">
           <div class="row align-items-center justify-content-between">
-            <div class="col-auto"><img src="images/system/logo-white.svg" style="height:32px;"/>
+            <div class="col-auto"><a href="/build/index.html"><img src="images/system/logo-white.svg" style="height:32px;"/></a>
             </div>
-            <div class="col-auto">
+            <div class="col-auto d-none d-xl-block">
               <menu class="p-0 m-0">
                 <div class="row list-unstyled list-inline mb-0">
                   <div class="col-auto"><a href="/build/courses.html">Курсы</a>
@@ -33,39 +56,43 @@
                 </div>
               </menu>
             </div>
-            <div class="col-auto">
-              <div class="text-white text-uppercase"><span>Москва</span><i class="icon icon-angle-down ml-2"></i>
-              </div>
+            <div class="col-auto d-none d-xl-block">
+              <button class="btn btn-action btn-sm text-white text-uppercase o-80" type="button" data-fancybox="" data-src="#modal-geo"><span>Москва</span><i class="icon icon-angle-down ml-2"></i>
+              </button>
             </div>
-            <div class="col-auto">
+            <div class="col-auto d-none d-xl-block">
               <div class="font-weight-bold">8 800 550-07-25</div>
             </div>
-            <div class="col-auto">
-              <button class="btn btn-light" type="button" data-src="lesson">Запись на урок
+            <div class="col-auto d-none d-xl-block">
+              <button class="btn btn-light text-primary" type="button" data-fancybox="" data-src="#modal-lesson">Запись на урок
+              </button>
+            </div>
+            <div class="col-auto d-block d-xl-none align-self-stretch">
+              <button class="btn btn-action toggle-mobile-menu" type="button"><span></span>
               </button>
             </div>
           </div>
         </div>
       </header>
       <div class="container">
-        <nav class="py-4 text-white">
-          <ol class="row no-gutters list-unstyled mb-0">
-            <li class="col-auto breadcrumb-item o-80"><a href="/build/.html">Главная</a>
-            </li>
-            <li class="col-auto breadcrumb-item" aria-current="page"><span>Блог</span></li>
-          </ol>
+        <nav class="breadcrumb">
+          <div class="breadcrumb-item"><a href="/build/index.html">Главная</a>
+          </div>
+          <div class="breadcrumb-item"><a href="/build/article.html">Страница</a>
+          </div>
+          <div class="breadcrumb-item active">Текущая страница</div>
         </nav>
       </div>
       <div class="container">
         <div class="row">
           <div class="col-8 mx-auto">
             <article class="article">
-              <h1 class="h1 font-weight-bold mb-4 text-white">Базовый курс</h1><img class="img-fluid d-block w-100 mb-6 rounded-lg shadow-sm" src="images/content/news/new-1.jpg"/>
-              <h2 class="h2 font-weight-bold mb-5">Is that an old fashioned word?</h2>
+              <h1 class="h1 font-weight-bold mb-6 text-white o-100">Robinium Welcomes Machine Learning Team Lead New</h1><img class="w-100 mb-6 rounded-lg shadow-sm" src="images/content/news/1.jpg" style="height:400px;"/>
+              <h2 class="h2 font-weight-bold mb-6">Is that an old fashioned word?</h2>
               <div class="h5 font-weight-bold mb-4">Do they keep you in a cell?</div>
-              <p>A merry little surge of electricity piped by automatic alarm from the mood organ beside his bed awakened Rick Deckard. Surprised — it always surprised him to find himself awake without prior notice — he rose from the bed, stood up in his multicolored pajamas, and stretched. Now, in her bed, his wife Iran opened her gray, unmerry eyes, blinked, then groaned and shut her eyes again.</p>
+              <p>A merry little surge of <b>electricity piped</b> by automatic alarm from the mood organ beside his bed awakened Rick Deckard. Surprised — it always surprised him to find himself awake without prior notice — he <b>rose from the bed</b>, stood up in his multicolored pajamas, and stretched. Now, in her bed, his wife Iran opened her gray, unmerry eyes, blinked, then groaned and shut her eyes again.</p>
               <p>After a hurried breakfast — he had lost time due to the discussion with his wife — he ascended clad for venturing out, including his Ajax model Mountibank Lead Codpiece, to the covered roof pasture whereon his electric sheep "grazed." Whereon it, sophisticated piece of hardware that it was, chomped away in simulated contentment, bamboozling the other tenants of the building.</p>
-              <figure class="figure my-6 d-block"><img class="figure-img w-100 rounded-lg" src="images/content/news/new-1.jpg"/>
+              <figure class="figure my-6 d-block"><img class="figure-img w-100 rounded-lg" src="images/content/news/1.jpg" style="height:400px;"/>
                 <figcaption class="figure-caption text-center">Caption Placeholder</figcaption>
               </figure>
               <div class="h5 font-weight-bold mb-4">What was your most shameful moment?</div>
@@ -74,19 +101,19 @@
                 <li class="mb-4">It had been a pit of corpses and dead bones and he had struggled for years to get up from it. The donkey and especially the toad, the creatures most important to him, had vanished, had become extinct; only rotting fragments, an eyeless head here.</li>
                 <li class="mb-4">The donkey and especially the toad, the creatures most important to him, had vanished, had become extinct; only rotting fragments.</li>
               </ol>
-              <div class="incut my-6">
-                <div class="h5 font-weight-bold">System</div>
+              <div class="incut">
+                <div class="h5 font-weight-medium mb-4">System</div>
                 <p>Without his parents’ consent they — the killers — had bombarded the unique nodule which had formed in his brain, had attacked it with radioactive cobalt.</p>
               </div>
-              <h2 class="h2 font-weight-bold mb-5">A blood black nothingness</h2>
+              <h2 class="h2 font-weight-bold mb-6">A blood black nothingness</h2>
               <div class="h5 font-weight-bold mb-4">What was your most shameful moment?</div>
               <ul>
                 <li class="mb-4">Without his parents’ consent they — the killers — had bombarded the unique nodule which had formed in his brain, had attacked it with radioactive cobalt.</li>
                 <li class="mb-4">It had been a pit of corpses and dead bones and he had struggled for years to get up from it. The donkey and especially the toad, the creatures most important to him, had vanished, had become extinct; only rotting fragments, an eyeless head here.</li>
                 <li class="mb-4">The donkey and especially the toad, the creatures most important to him, had vanished, had become extinct; only rotting fragments.</li>
               </ul>
-              <div class="incut my-6">
-                <div class="h5 font-weight-bold">Summary</div>
+              <div class="incut">
+                <div class="h5 font-weight-bold mb-4">Summary</div>
                 <ul>
                   <li class="mb-4">To own your crypto assets, you need to manage your own private keys.</li>
                   <li class="mb-4">Ledger hardware wallets make private key management easy and secure.</li>
@@ -97,15 +124,15 @@
               </div>
               <div class="row justify-content-between align-items-center mb-6">
                 <div class="col-auto">
-                  <button class="btn btn-light" type="button"><i class="icon icon-angle-left mr-2"></i><span>Назад к статьям</span>
+                  <button class="btn btn-dark btn-ghost" type="button"><i class="icon icon-angle-left mr-2"></i><span>Назад к статьям</span>
                   </button>
                 </div>
                 <div class="col-auto">
-                  <div class="row align-items-center">
-                    <div class="col-auto"><span>Поделиться</span></div>
-                    <div class="col-auto"><a class="badge badge-primary badge-pill p-3" href="/build/instagram.com"><i class="icon icon-vk"></i></a>
+                  <div class="row align-items-center no-gutters">
+                    <div class="col-auto mr-4"><span class="o-60">Поделиться</span></div>
+                    <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/build/instagram.com"><i class="icon icon-vk h5 mb-0 o-60"></i></a>
                     </div>
-                    <div class="col-auto"><a class="badge badge-primary badge-pill p-3" href="/build/instagram.com"><i class="icon icon-fb"></i></a>
+                    <div class="col-auto"><a class="badge badge-dark badge-pill p-3" href="/build/instagram.com"><i class="icon icon-fb h5 mb-0 o-60"></i></a>
                     </div>
                   </div>
                 </div>
@@ -115,51 +142,229 @@
         </div>
       </div>
     </div>
-    <header class="py-3">
-      <div class="container">
+    <header class="py-4 mt-6">
+      <div class="container pt-6">
         <div class="row align-items-center justify-content-between mb-6">
-          <div class="col-auto"><img src="images/system/logo-color.svg" style="height:32px;"/>
+          <div class="col col-xl-auto"><img class="img-fluid" src="images/system/logo-color.svg" style="height:32px;"/>
           </div>
-          <div class="col-auto">
-            <menu class="p-0 m-0">
-              <div class="row list-unstyled list-inline mb-0">
-                <div class="col-auto"><a href="/build/courses.html">Курсы</a>
+          <div class="col-auto order-1 order-xl-0">
+            <menu class="p-0 my-3 m-xl-0">
+              <div class="row list-unstyled list-inline mb-0 text-sm text-uppercase">
+                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="/build/courses.html">Курсы <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
                 </div>
-                <div class="col-auto"><a href="/build/courses.html">Блог</a>
+                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="/build/blog.html">Блог <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
                 </div>
-                <div class="col-auto"><a href="/build/courses.html">Франшиза</a>
+                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="/build/fran.html">Франшиза <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
                 </div>
-                <div class="col-auto"><a href="/build/courses.html">Контакты</a>
+                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="/build/contscts.html">Контакты <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
                 </div>
               </div>
             </menu>
           </div>
           <div class="col-auto">
-            <div class="font-weight-bold">8 800 550-07-25</div>
+            <div class="font-weight-medium text-lg">8 800 550-07-25</div>
           </div>
-          <div class="col-auto">
-            <div class="row">
-              <div class="col-auto"><a class="badge badge-primary badge-pill p-3" href="/build/instagram.com"><i class="icon icon-insta"></i></a>
+          <div class="col-auto order-2 order-xl-0">
+            <div class="row no-gutters">
+              <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/build/instagram.com"><i class="icon icon-insta h5 mb-0 o-60"></i></a>
               </div>
-              <div class="col-auto"><a class="badge badge-primary badge-pill p-3" href="/build/instagram.com"><i class="icon icon-vk"></i></a>
+              <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/build/instagram.com"><i class="icon icon-vk h5 mb-0 o-60"></i></a>
               </div>
-              <div class="col-auto"><a class="badge badge-primary badge-pill p-3" href="/build/instagram.com"><i class="icon icon-fb"></i></a>
+              <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/build/instagram.com"><i class="icon icon-fb h5 mb-0 o-60"></i></a>
               </div>
-              <div class="col-auto"><a class="badge badge-primary badge-pill p-3" href="/build/instagram.com"><i class="icon icon-yt"></i></a>
+              <div class="col-auto"><a class="badge badge-dark badge-pill p-3" href="/build/instagram.com"><i class="icon icon-yt h5 mb-0 o-60"></i></a>
               </div>
             </div>
           </div>
         </div>
-        <div class="row justify-content-between">
+        <div class="row justify-content-between text-sm pt-3">
           <div class="col-auto">
-            <p class="o-60">© ЮниорКод, 2018-2019. Все права защищены.</p>
+            <div class="mb-0 o-60">© ЮниорКод, 2018-2019. Все права защищены.</div>
           </div>
-          <div class="col-auto">
-            <p class="o-80">made by roobinium</p>
+          <div class="col-auto d-none d-xl-block">
+            <div class="mb-0"><span class="o-60">made by</span> <span class="o-80">roobinium</span></div>
           </div>
         </div>
       </div>
     </header>
     <!--+footer-->
+    <div class="modal modal-md card" id="modal-lesson">
+      <div class="row no-gutters">
+        <div class="col-xl-6 d-none d-xl-block"><img class="w-100 h-100 cover" src="images/system/modal.jpg"/>
+        </div>
+        <div class="col-xl-6 p-4 p-xl-6">
+          <form>
+            <div class="h4 font-weight-medium mb-6 pr-4">Запишитесь на бесплатный урок</div>
+            <input class="form-control mb-4" type="text" placeholder="Ваше имя"/>
+            <input class="form-control mb-4" type="text" placeholder="Имя вашего ребенка"/>
+            <input class="form-control mb-4" type="text" placeholder="Ваш телефон"/>
+            <select class="custom-select mb-4">
+              <option>Санкт-Петербург</option>
+            </select>
+            <select class="custom-select mb-4">
+              <option>Школа</option>
+            </select>
+            <div class="mb-5">
+              <div class="custom-checkbox custom-control">
+                <input class="custom-control-input" type="checkbox" id="check-confirm-modal" checked="checked"/>
+                <label class="custom-control-label" for="check-confirm-modal">Я подтверждаю, что согласен на обработку персональных данных
+                </label>
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col-auto">
+                <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-success">Записаться
+                </button>
+              </div>
+              <div class="col">
+                <p class="mb-0 text-sm">Мы позвоним и согласуем время урока</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-md card" id="modal-content">
+      <div class="p-4 p-xl-6">
+        <div class="h4 font-weight-medium mb-6 pr-4">Заголовок статьи</div>
+        <p>Было приятно видеть оживленный диалог между сыном и преподавателем</p>
+      </div>
+    </div>
+    <div class="modal modal-md card" id="modal-success">
+      <div class="p-4 p-xl-6">
+        <div class="h4 font-weight-medium mb-6 pr-4">Ваша заявка принята</div>
+        <p>Мы скоро перезвонима вам по указанному номеру и обсудим все вопросы.</p>
+      </div>
+    </div>
+    <div class="modal modal-md card" id="modal-geo">
+      <div class="p-4 p-xl-6">
+        <div class="h4 font-weight-medium mb-6 pr-4">Выберите ваш город</div>
+        <div class="search-filter mb-6">
+          <div class="row mb-5">
+            <div class="col">
+              <input class="form-control" type="text" placeholder="Начните вводить город"/>
+            </div>
+            <!--.col-auto
+            +btn("primary").h-100 Выбрать
+            
+            -->
+          </div>
+          <div class="scroll" style="height:300px; overflow-y:auto; overflow-x:hidden;">
+            <div class="row">
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="h4 font-weight-medium mb-4">Мы правильно угадали ваш город?</div>
+        <div class="mb-0"><span class="mr-3">Ваш город:</span><a class="btn btn-action active-text-primary font-weight-normal" href="/build/index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery/dist/jquery.js"></script>
+    <script src="js/jquery.nice-number/dist/jquery.nice-number.js"></script>
+    <script src="js/lighttabs/lighttabs.js"></script>
+    <script src="js/noty/lib/noty.js"></script>
+    <script src="js/lightslider/js/lightslider.js"></script>
+    <script src="js/raty/jquery.raty.js"></script>
+    <script src="js/tippy.js/tippy.js"></script>
+    <script src="js/yall-js/dist/yall.js"></script>
+    <script src="js/fancybox/dist/jquery.fancybox.js"></script>
+    <script src="js/hc-offcanvas-nav/dist/hc-offcanvas-nav.js"></script>
+    <script src="js/main.js"></script>
   </body>
 </html>
