@@ -5,7 +5,7 @@ $(document).ready(function () {
 
         new Noty({
             layout: "topLeft",
-            text: "Ваш город <b>Новосибирск</b>?<br><button class='btn btn-sm btn-primary mr-1 mt-2'>Верно</button><button class='btn btn-sm btn-light mt-2' data-modal='geo'>Другой</button>",
+            text: "Ваш город <b>Новосибирск</b>?<br><button class='btn btn-sm btn-primary mr-1 mt-2'>Верно</button><button class='btn btn-sm btn-light mt-2' data-fancybox data-src='#modal-geo'>Другой</button>",
             theme: "light",
             timeout: 8000
         }).show();
@@ -38,21 +38,6 @@ $(document).ready(function () {
         arrow: true,
         delay: [0,500]
     });
-
-    tippy("[data-tippy-apply]", {
-        interactive: true,
-        theme: "primary",
-        arrow: true,
-        trigger: "click",
-        followCursor: "vertical",
-        placement: "right",
-        onMount: function () {
-            $(".tippy-tooltip").addClass("p-0")
-        },
-        content: "<button type='button' class='btn btn-primary btn-lg'>Применить</button>",
-        delay: [0,3000]
-    });
-
 
 
 
@@ -109,94 +94,7 @@ $(document).ready(function () {
     })
 
 
-
-
-    $("[class*='active-']").on("click", function () {
-        $(this).toggleClass("active");
-    });
-
     $(".lighttabs").lighttabs();
-
-
-    // - modals
-    function modals() {
-
-        var modalSelector = $(".modal-body");
-
-        if ( modalSelector.length) {
-
-            $("body").append("<div class='modal-wrapper'><div class='container'></div></div>");
-
-            var modalWrapper = $(".modal-wrapper");
-
-            modalSelector.dialog({
-                appendTo: modalWrapper.find(".container"),
-                dialogClass: "modal",
-                autoOpen: false,
-                modal: true,
-                draggable: false,
-                resizable: false,
-                closeText: "",
-                show: { effect: "fade", duration: 300 },
-                hide: { effect: "fade", duration: 300 },
-                open: function open() {
-
-                    var modal = $(this);
-
-                    modal.find("[data-autofocus]").removeAttr("data-autofocus").attr("autofocus='autofocus'");
-
-                    modalWrapper.fadeIn();
-                    $("body").addClass("covered");
-
-                    modal.dialog("option", "dialogClass", "modal modal-" + modal.attr("data-modal-size"));
-
-                    if ( this.hasAttribute("data-nofocus") ) { modal.parent().focus() }
-
-                    $(".modal-wrapper").on("click", function (e) {
-                        !$(e.target).closest(".ui-dialog").length ? modal.dialog('close') : true
-                    });
-
-                    $(document).on('click', '.modal-close', function() { $(this).dialog('close') });
-
-                },
-                close: function close() { modalWrapper.fadeOut(300); $("body").removeClass("covered"); }
-            });
-            $("[data-modal]").on("click", function() {
-                var modalName = $(this).attr("data-modal");
-                $(".modal-body[data-modal=" + modalName + "]").dialog("open");
-            });
-
-        }
-    }
-    modals();
-
-
-    function dropdowns () {
-
-        dropdownSelector = $(".dropdown");
-
-        if ( dropdownSelector.length ) {
-
-            var currentDropdown, currentDropdownData;
-
-            $("[data-dropdown-target]").hover(
-                function () {
-                    currentDropdown = $(this);
-                    currentDropdownData = currentDropdown.data("dropdown-target");
-                    $("[data-dropdown='" + currentDropdownData + "']").addClass("active");
-                },
-                function () {
-                    $("[data-dropdown-wrapper]").mouseleave( function () {
-                        $("[data-dropdown='" + currentDropdownData + "']").removeClass("active")
-                    });
-                }
-            );
-
-        }
-
-    }
-    dropdowns();
-
 
 
     function spoiler() {
@@ -209,13 +107,7 @@ $(document).ready(function () {
             });
         }
     }
-    spoiler();
-
-
-    /*$(".rangeslider").ionRangeSlider({
-        type: "double",
-        grid: false
-    });*/
+    // spoiler();
 
 
     function searchFilter() {
@@ -246,120 +138,7 @@ $(document).ready(function () {
     });
 
 
-    $("[data-btn-toggle]").click(function () {
-        if ( $(this).attr("data-btn-toggle") === "done") {
-            $(this).attr("data-btn-toggle","").addClass("loader").delay(1000).queue(function (next) {
-                $(this).removeClass("loader");
-                next();
-            })
-        } else {
-            $(this).addClass("loader").delay(1000).queue(function (next) {
-                $(this).removeClass("loader").attr("data-btn-toggle","done");
-                next();
-            })
-        }
-    });
-    $("[data-btn-check]").click(function () {
-        if ( $(this).attr("data-btn-check") === "done") {
-            $(this).addClass("loader").delay(1000).queue(function (next) {
-                $(this).removeClass("loader");
-                next();
-            })
-        } else {
-            $(this).addClass("loader").delay(1000).queue(function (next) {
-                $(this).removeClass("loader").attr("data-btn-check","done");
-                next();
-            })
-        }
-    });
-
-    function comparisonTable() {
-        function liAutoHeight() {
-            var li = $("li.auto-height");
-            var liNumber = li.filter(":last-child").index()+1;
-            var maxHeight, currentLi;
-
-            li.height("auto");
-
-            for (var i=1; i<=liNumber; i++) {
-
-                currentLi = li.filter(":nth-child(" + i + ")");
-
-                maxHeight = Math.max.apply(null, currentLi.map(
-                    function(){
-                        return $(this).height();
-                    }).get()
-                );
-
-                currentLi.each(function () {
-                    $(this).height(maxHeight)
-                });
-
-            }
-
-        }
-        liAutoHeight();
-
-        $(window).on("resize",function () {
-            liAutoHeight();
-        })
-    }
-    comparisonTable();
-
-
-    function visibility() {
-
-        var item = $("[data-visible-offset]");
-
-        function visibilityToggling() { $(document).scrollTop() >= item.data("visible-offset") ? item.fadeIn(300) : item.fadeOut(300); }
-
-        if ( item.length ) {
-            visibilityToggling();
-            $(document).scroll( visibilityToggling )
-        }
-    }
-    visibility();
-
-
-    yall({
-        events: {
-            load: function (event) {
-                if (!event.target.classList.contains("lazy") && event.target.nodeName == "IMG") {
-                    event.target.classList.add("yall-loaded");
-                }
-            },
-            play: function (event) {
-                if (event.target.nodeName == "VIDEO") {
-                    event.target.nextElementSibling.classList.add("visible");
-                }
-            },
-            error: {
-                listener: function (event) {
-                    if (!event.target.classList.contains("lazy") && event.target.nodeName == "IMG") {
-                        event.target.classList.add("yall-error");
-                        event.target.nextElementSibling.classList.add("visible");
-                    }
-                },
-                options: {
-                    once: true
-                }
-            }
-        }
-    });
-
-
-    function autocomplete() {
-        $(".search-field").on("keyup", function () {
-            $(".autocomplete").fadeIn(300);
-            $(document).on("click", function (e) {
-                if ( !$(e.target).closest(".search").length ) {
-                    $(".autocomplete").fadeOut(300);
-                }
-            })
-        })
-    }
-
-    autocomplete();
+    yall();
 
 
     function scrollTop() {
@@ -367,23 +146,8 @@ $(document).ready(function () {
             $("html, body").stop().animate({scrollTop: 0}, 2000, 'swing');
         })
     }
-    scrollTop();
+    // scrollTop();
 
-
-    function toggling() {
-        if ( $("[data-toggle]").length ) {
-            var togglingItemClass;
-            $("[data-toggle]").on("click", function() {
-
-                togglingItemClass = $(this).data("toggle");
-                $(this).closest("[data-toggle-parent]").find(togglingItemClass).fadeToggle("300");
-
-            })
-        }
-    }
-    toggling();
-
-    // $("select").niceSelect();
 
     $.fancybox.defaults.lang  = "ru";
     $.fancybox.defaults.i18n.ru = {

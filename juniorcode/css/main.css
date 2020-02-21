@@ -11060,6 +11060,7 @@ a, a:hover, .btn-link, .btn-link:hover {
   border-radius: 50rem;
   border: none;
   background: #fafafa;
+  padding-right: 45px;
 }
 .nice-select:after {
   right: 1.5rem;
@@ -11611,4 +11612,33 @@ header[stuck] .hc-nav-trigger span, header[stuck] .hc-nav-trigger span:before, h
 }
 section {
   background-repeat: no-repeat;
+}
+
+.map-info {
+  position: absolute;
+  z-index: 10;
+}
+@media (max-width: 1199.98px) {
+  .map-info {
+    position: relative;
+    pointer-events: none;
+    margin-bottom: -30px;
+  }
+}
+
+@media (max-width: 1199.98px) {
+  .map.map-contacts {
+    height: 500px !important;
+  }
+}
+.events-all {
+  pointer-events: all;
+}
+
+header .btn-action {
+  transition: all 0.2s ease-in-out;
+}
+header .btn-action:hover {
+  color: #fff;
+  opacity: 1 !important;
 }
