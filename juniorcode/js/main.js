@@ -32,13 +32,6 @@ $(document).ready(function () {
         labelBack: "Назад"
     });
 
-    $(".pages-list").hcOffcanvasNav({
-        maxWidth: false,
-        customToggle: $(".toggle-pages-list"),
-        labelClose: "Закрыть",
-        labelBack: "Назад",
-    });
-
     tippy("[data-tippy-content]", {
         interactive: true,
         theme: "light",
@@ -74,63 +67,48 @@ $(document).ready(function () {
         });
     });
 
+    $('select').niceSelect();
 
-    $(".slider").lightSlider({
-        item: 1,
-        loop: true,
-        thumbItem: 3,
-        slideMargin: 30,
-        currentPagerPosition:'left',
-        prevHtml: "<i class='icon icon-angle-left'></i>",
-        nextHtml: "<i class='icon icon-angle-right'></i>"
-    });
 
-    $(".gallery").lightSlider({
-        item: 1,
-        gallery: true,
-        enableDrag: false,
-        loop: true,
-        thumbItem: 3,
-        slideMargin: 2,
-        prevHtml: "<i class='icon icon-angle-left'></i>",
-        nextHtml: "<i class='icon icon-angle-right'></i>"
-    });
+    const observer = new IntersectionObserver(
+        ([e]) => e.target.toggleAttribute('stuck', e.intersectionRatio < 1),
+        {threshold: [1]}
+    );
 
-    $(".carousel").each(function () {
-        var xl = $(this).data("xl"),
-            lg = $(this).data("lg"),
-            md = $(this).data("md"),
-            sm = $(this).data("sm"),
-            xs = $(this).data("xs");
+    observer.observe(document.querySelector('header'));
 
-        $(this).lightSlider({
-            item: xl,
-            slideMargin: 25,
-            pager: false,
-            prevHtml: "<i class='icon icon-angle-left'></i>",
-            nextHtml: "<i class='icon icon-angle-right'></i>",
-            responsive : [
-                {
-                    breakpoint:1200,
-                    settings: { item:lg }
-                },
-                {
-                    breakpoint:992,
-                    settings: { item:md }
-                },
-                {
-                    breakpoint:768,
-                    settings: { item:sm }
-                },
-                {
-                    breakpoint:576,
-                    settings: { item:xs }
-                }
-            ]
-        });
-    });
 
-    // $(".lightgallery").lightGallery();
+    function slider() {
+        var slider;
+        $(".slider:not(.slick-slider)").each(function () {
+            $(this).slick({
+                infinite: false,
+                dots: true,
+                arrows: true,
+                speed: 300,
+                slidesToShow: 1,
+                variableWidth: true,
+                mobileFirst: true,
+                prevArrow: $(this).closest(".slider-wrapper").find(".slider-prev"),
+                nextArrow: $(this).closest(".slider-wrapper").find(".slider-next"),
+                responsive: [
+                    {
+                        breakpoint: 1200,
+                        settings: "unslick"
+                    }
+
+                ]
+            })
+
+        })
+    }
+
+    slider();
+    $(window).resize(function () {
+        slider();
+    })
+
+
 
 
     $("[class*='active-']").on("click", function () {
@@ -219,10 +197,6 @@ $(document).ready(function () {
     }
     dropdowns();
 
-
-    $("input[type='number']").niceNumber({
-        buttonPosition: "right"
-    });
 
 
     function spoiler() {

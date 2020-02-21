@@ -13,7 +13,7 @@
   </head>
   <body>
     <!--+s-header-->
-    <div class="bg-header" style="background:url('images/bg/header-bg.png') no-repeat top center">
+    <main class="bg-header" style="background:url('images/bg/header-bg.png') no-repeat top center">
       <div class="mobile-menu d-xl-none">
         <ul class="list-unstyled">
           <li><a href="index.html"><img src="images/system/logo-color.svg" style="height:20px;"/></a>
@@ -37,10 +37,10 @@
           </li>
         </ul>
       </div>
-      <header class="py-3 text-white">
+      <header class="py-3">
         <div class="container">
           <div class="row align-items-center justify-content-between">
-            <div class="col-auto"><a href="index.html"><img src="images/system/logo-white.svg" style="height:32px;"/></a>
+            <div class="col-auto"><a class="site-logo" href="index.html"><img src="images/system/logo-white.svg" style="height:32px;"/><img src="images/system/logo-color.svg" style="height:32px;"/></a>
             </div>
             <div class="col-auto d-none d-xl-block">
               <menu class="p-0 m-0">
@@ -57,7 +57,7 @@
               </menu>
             </div>
             <div class="col-auto d-none d-xl-block">
-              <button class="btn btn-action btn-sm text-white text-uppercase o-80" type="button" data-fancybox="" data-src="#modal-geo"><span>Москва</span><i class="icon icon-angle-down ml-2"></i>
+              <button class="btn btn-action btn-sm text-uppercase o-80" type="button" data-fancybox="" data-src="#modal-geo"><span>Москва</span><i class="icon icon-angle-down ml-2"></i>
               </button>
             </div>
             <div class="col-auto d-none d-xl-block">
@@ -74,7 +74,7 @@
           </div>
         </div>
       </header>
-      <section class="py-6 my-3">
+      <section class="py-6 my-3 overflow-visible">
         <div class="container">
           <div class="banner text-white"><img class="banner-img" src="images/system/boy.png"/>
             <div class="row align-items-center">
@@ -97,13 +97,13 @@
           </div>
         </div>
       </section>
-      <section class="py-6">
+      <section class="section-experience py-6"> 
         <div class="container">
           <div class="experience">
             <div class="row">
               <div class="col-xl-6">
-                <div class="overflow-x-auto">
-                  <div class="row flex-nowrap flex-xl-wrap">
+                <div class="slider-wrapper">
+                  <div class="row flex-nowrap flex-xl-wrap slider">
                     <div class="col-auto col-xl-4 mb-4">
                       <div class="card" style="min-width:160px">
                         <div class="badge badge-primary mb-4 p-1">
@@ -159,6 +159,12 @@
                       </div>
                     </div>
                   </div>
+                  <div class="slider-navs">
+                    <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+                    </button>
+                    <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+                    </button>
+                  </div>
                 </div>
               </div>
               <div class="col-xl-5 offset-xl-1 order-first order-xl-last mb-5">
@@ -170,528 +176,811 @@
           </div>
         </div>
       </section>
-    </div>
-    <section class="py-6">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-5 mb-5">
-            <div class="badge badge-primary mb-4">Развиваем в ребенке</div>
-            <div class="h1 font-weight-bold mb-5">Навыки 21 века</div>
-            <p class="text-lg mb-4">Программист может создать свой уникальный продукт и прославиться на весь мир, а может и устроиться на в крупнейшие компании мира. А если ваш ребенок и не будет программистом, полученные навыки пригодятся ему абсолютно в любой сфере</p>
-            <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Бесплатный урок
-            </button>
-          </div>
-          <div class="col-xl-6 offset-xl-1">
-            <div class="row flex-nowrap flex-xl-wrap overflow-x-auto">
-              <div class="col-auto col-xl-6 mb-5">
-                <div class="card h-100" style="min-width:255px">
-                  <div class="badge badge-primary p-4 mb-4"><i class="icon icon-note h1 mb-0 text-primary"></i>
-                  </div>
-                  <div class="h5 font-weight-medium mb-3">Самоорганизация</div>
-                  <p class="text-sm">Научим организовывать себя и достигать поставленных целей шаг за шагом</p>
-                </div>
-              </div>
-              <div class="col-auto col-xl-6 mb-5">
-                <div class="card h-100" style="min-width:255px">
-                  <div class="badge badge-accent p-4 mb-4"><i class="icon icon-share h1 mb-0 text-accent"></i>
-                  </div>
-                  <div class="h5 font-weight-medium mb-3">Воображение</div>
-                  <p class="text-sm">The Demand Side Platform is a complex interface designed for allowing buyers of digital ads</p>
-                </div>
-              </div>
-              <div class="col-auto col-xl-6 mb-5">
-                <div class="card h-100" style="min-width:255px">
-                  <div class="badge badge-warning p-4 mb-4"><i class="icon icon-comment h1 mb-0 text-warning"></i>
-                  </div>
-                  <div class="h5 font-weight-medium mb-3">Коммуникация</div>
-                  <p class="text-sm">Умение выстраивать отношения с людьми напрямую влияет на успех</p>
-                </div>
-              </div>
-              <div class="col-auto col-xl-6 mb-5">
-                <div class="card h-100" style="min-width:255px">
-                  <div class="badge badge-danger p-4 mb-4"><i class="icon icon-cubes h1 mb-0 text-danger"></i>
-                  </div>
-                  <div class="h5 font-weight-medium mb-3">Мышление</div>
-                  <p class="text-sm">The function of analyzing user data and generating accurate targeting for ad placement</p>
-                </div>
-              </div>
+      <section class="section-skills py-6">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-5 mb-5">
+              <div class="badge badge-primary mb-4">Развиваем в ребенке</div>
+              <div class="h1 font-weight-bold mb-5">Навыки 21 века</div>
+              <p class="text-lg mb-4">Программист может создать свой уникальный продукт и прославиться на весь мир, а может и устроиться на в крупнейшие компании мира. А если ваш ребенок и не будет программистом, полученные навыки пригодятся ему абсолютно в любой сфере</p>
+              <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Бесплатный урок
+              </button>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="badge badge-primary mb-4">Курсы</div>
-        <div class="h1 font-weight-bold mb-5">У нас более 15 курсов для детей с 4 до 13 лет</div>
-        <div class="lighttabs">
-          <div class="row no-gutters flex-nowrap flex-xl-wrap align-items-center lighttabs__titles mb-3 overflow-x-auto">
-            <div class="col-auto lighttabs__title active mb-2 mr-4">
-              <div class="badge badge-primary py-3 px-4">4-6 лет</div>
-            </div>
-            <div class="col-auto lighttabs__title mb-2 mr-4">
-              <div class="badge badge-primary py-3 px-4">5-7 лет</div>
-            </div>
-            <div class="col-auto lighttabs__title mb-2 mr-4">
-              <div class="badge badge-primary py-3 px-4">8-10 лет</div>
-            </div>
-            <div class="col-auto lighttabs__title mb-2 mr-4">
-              <div class="badge badge-primary py-3 px-4">10-12 лет</div>
-            </div>
-            <div class="col-auto lighttabs__title mb-2 mr-4">
-              <div class="badge badge-primary py-3 px-4">11-13 лет</div>
-            </div>
-            <div class="col-auto ml-auto mb-2"><a class="btn btn-light text-dark" href="courses.html"><span>Все курсы</span><i class="icon icon-angle-right ml-2"></i></a>
-            </div>
-          </div>
-          <div class="lighttabs__contents">
-            <div class="lighttabs__content active">
-              <div class="row flex-nowrap flex-xl-wrap overflow-x-auto">
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Базовый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
+            <div class="col-xl-6 offset-xl-1">
+              <div class="slider-wrapper">
+                <div class="row flex-nowrap flex-xl-wrap slider">
+                  <div class="col-auto col-xl-6 mb-5">
+                    <div class="card card-skill h-100">
+                      <div class="badge badge-primary p-4 mb-4"><i class="icon icon-note h1 mb-0 text-primary"></i>
                       </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
+                      <div class="h5 font-weight-medium mb-3">Самоорганизация</div>
+                      <p class="text-sm">Научим организовывать себя и достигать поставленных целей шаг за шагом</p>
                     </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
+                  </div>
+                  <div class="col-auto col-xl-6 mb-5">
+                    <div class="card card-skill h-100">
+                      <div class="badge badge-accent p-4 mb-4"><i class="icon icon-share h1 mb-0 text-accent"></i>
                       </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
+                      <div class="h5 font-weight-medium mb-3">Воображение</div>
+                      <p class="text-sm">The Demand Side Platform is a complex interface designed for allowing buyers of digital ads</p>
+                    </div>
+                  </div>
+                  <div class="col-auto col-xl-6 mb-5">
+                    <div class="card card-skill h-100">
+                      <div class="badge badge-warning p-4 mb-4"><i class="icon icon-comment h1 mb-0 text-warning"></i>
                       </div>
+                      <div class="h5 font-weight-medium mb-3">Коммуникация</div>
+                      <p class="text-sm">Умение выстраивать отношения с людьми напрямую влияет на успех</p>
+                    </div>
+                  </div>
+                  <div class="col-auto col-xl-6 mb-5">
+                    <div class="card card-skill h-100">
+                      <div class="badge badge-danger p-4 mb-4"><i class="icon icon-cubes h1 mb-0 text-danger"></i>
+                      </div>
+                      <div class="h5 font-weight-medium mb-3">Мышление</div>
+                      <p class="text-sm">The function of analyzing user data and generating accurate targeting for ad placement</p>
                     </div>
                   </div>
                 </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Профи курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="lighttabs__content">
-              <div class="row flex-nowrap flex-xl-wrap overflow-x-auto">
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Базовый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Профи курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="lighttabs__content">
-              <div class="row flex-nowrap flex-xl-wrap overflow-x-auto">
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Базовый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Профи курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="lighttabs__content">
-              <div class="row flex-nowrap flex-xl-wrap overflow-x-auto">
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Базовый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Профи курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="lighttabs__content">
-              <div class="row flex-nowrap flex-xl-wrap overflow-x-auto">
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Базовый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-auto col-xl-4">
-                  <div class="card p-4">
-                    <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
-                    <div class="h4 font-weight-medium mb-5">Профи курс</div>
-                    <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
-                    <div class="row no-gutters align-items-baseline mb-3">
-                      <div class="col-auto mr-3">
-                        <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
-                        </div>
-                      </div>
-                      <div class="col">
-                        <p>Развивает креативность<br>и воображение</p>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <div class="col-auto flex-xl-grow-1">
-                        <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
-                        </button>
-                      </div>
-                      <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
-                      </div>
-                    </div>
-                  </div>
+                <div class="slider-navs">
+                  <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+                  </button>
+                  <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+                  </button>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="badge badge-primary mb-4">Как проходят уроки</div>
-        <div class="h1 font-weight-bold mb-5">В наших школах по всей стране</div>
-        <div class="row flex-nowrap flex-xl-wrap overflow-auto">
-          <div class="col-auto col-xl-4 mb-5">
-            <div class="card p-4" style="min-width:295px">
-              <div class="badge badge-primary p-5 mb-5"><i class="icon icon-layers text-xl"></i>
+      </section>
+      <section class="section-courses py-6">
+        <div class="container">
+          <div class="badge badge-primary mb-4">Курсы</div>
+          <div class="h1 font-weight-bold mb-5">У нас более 15 курсов для детей с 4 до 13 лет</div>
+          <div class="lighttabs">
+            <div class="row no-gutters flex-nowrap flex-xl-wrap lighttabs__titles mb-3 slider">
+              <div class="col-auto lighttabs__title active mb-2 mr-xl-4">
+                <div class="badge badge-primary py-3 px-4">4-6 лет</div>
               </div>
-              <div class="h4 font-weight-medium mb-3">Обучение с 4 лет</div>
-              <p class="mb-0">Обучаем детей дошкольного возраста и помогаем подготовиться к школе</p>
+              <div class="col-auto lighttabs__title mb-2 mr-xl-4">
+                <div class="badge badge-primary py-3 px-4">5-7 лет</div>
+              </div>
+              <div class="col-auto lighttabs__title mb-2 mr-xl-4">
+                <div class="badge badge-primary py-3 px-4">8-10 лет</div>
+              </div>
+              <div class="col-auto lighttabs__title mb-2 mr-xl-4">
+                <div class="badge badge-primary py-3 px-4">10-12 лет</div>
+              </div>
+              <div class="col-auto lighttabs__title mb-2 mr-xl-4">
+                <div class="badge badge-primary py-3 px-4">11-13 лет</div>
+              </div>
+              <div class="col-auto ml-auto mb-2"><a class="btn btn-light text-dark" href="courses.html"><span>Все курсы</span><i class="icon icon-angle-right ml-2"></i></a>
+              </div>
             </div>
-          </div>
-          <div class="col-auto col-xl-4 mb-5">
-            <div class="card p-4" style="min-width:295px">
-              <div class="badge badge-accent p-5 mb-5"><i class="icon icon-calendar text-xl"></i>
+            <div class="lighttabs__contents">
+              <div class="lighttabs__content active">
+                <div class="slider-wrapper">
+                  <div class="row flex-nowrap flex-xl-wrap slider">
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Базовый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Профи курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slider-navs">
+                    <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+                    </button>
+                    <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="h4 font-weight-medium mb-3">8 уроков в месяц</div>
-              <p class="mb-0">Занятия дважды в неделю по уникальной методике, разработанной в Сколково</p>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4 mb-5">
-            <div class="card p-4" style="min-width:295px">
-              <div class="badge badge-info p-5 mb-5"><i class="icon icon-joystick text-xl"></i>
+              <div class="lighttabs__content">
+                <div class="slider-wrapper">
+                  <div class="row flex-nowrap flex-xl-wrap slider">
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Базовый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Профи курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slider-navs">
+                    <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+                    </button>
+                    <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="h4 font-weight-medium mb-3">В игровой форме</div>
-              <p class="mb-0">Программирование ещё никогда не было таким понятным, интересным и увлекательным</p>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4 mb-5">
-            <div class="card p-4" style="min-width:295px">
-              <div class="badge badge-secondary p-5 mb-5"><i class="icon icon-video text-xl"></i>
+              <div class="lighttabs__content">
+                <div class="slider-wrapper">
+                  <div class="row flex-nowrap flex-xl-wrap slider">
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Базовый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Профи курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slider-navs">
+                    <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+                    </button>
+                    <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="h4 font-weight-medium mb-3">Медиа объекты</div>
-              <p class="mb-0">С первого занятия сможет создать собственный мультфильм, игру и приложение</p>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4 mb-5">
-            <div class="card p-4" style="min-width:295px">
-              <div class="badge badge-warning p-5 mb-5"><i class="icon icon-users text-xl"></i>
+              <div class="lighttabs__content">
+                <div class="slider-wrapper">
+                  <div class="row flex-nowrap flex-xl-wrap slider">
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Базовый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Профи курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slider-navs">
+                    <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+                    </button>
+                    <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="h4 font-weight-medium mb-3">До 8 учеников</div>
-              <p class="mb-0">За время урока ученику уделяется максимум времени, за счет работы в мини-группах</p>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4 mb-5">
-            <div class="card p-4" style="min-width:295px">
-              <div class="badge badge-danger p-5 mb-5"><i class="icon icon-terminal text-xl"></i>
+              <div class="lighttabs__content">
+                <div class="slider-wrapper">
+                  <div class="row flex-nowrap flex-xl-wrap slider">
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-primary rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Базовый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-primary p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-primary btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-warning rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Продвинутый курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-warning p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-warning" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-warning btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-auto col-xl-4">
+                      <div class="card card-course p-4">
+                        <div class="bg-accent rounded-pill d-inline-block py-1 px-4 my-3"></div>
+                        <div class="h4 font-weight-medium mb-5">Профи курс</div>
+                        <p class="mb-4">Дети будут учиться создавать интерактивные объекты, обучающие мультфильмы и игры</p>
+                        <div class="row no-gutters align-items-baseline mb-3">
+                          <div class="col-auto mr-3">
+                            <div class="badge badge-accent p-2"><i class="icon icon-check text-lg"></i>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <p>Развивает креативность<br>и воображение</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-auto flex-xl-grow-1">
+                            <button class="btn btn-accent" type="button" data-fancybox="" data-src="#modal-lesson">Выбрать
+                            </button>
+                          </div>
+                          <div class="col-auto flex-xl-grow-1"><a class="btn btn-accent btn-ghost" href="course.html">Подробнее</a>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="slider-navs">
+                    <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+                    </button>
+                    <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div class="h4 font-weight-medium mb-3">Личный кабинет</div>
-              <p class="mb-0">Родители могут отслеживать результаты своего ребёнка через нашу онлайн платформу</p>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="row">
-          <div class="col-6">
-            <div class="row">
-              <div class="col-6 mb-5">
-                <div class="card h-100">
+      </section>
+      <section class="section-lessons py-6">
+        <div class="container">
+          <div class="badge badge-primary mb-4">Как проходят уроки</div>
+          <div class="h1 font-weight-bold mb-5">В наших школах по всей стране</div>
+          <div class="slider-wrapper">
+            <div class="row flex-nowrap flex-xl-wrap slider">
+              <div class="col-auto col-xl-4 mb-5">
+                <div class="card card-lesson p-4">
+                  <div class="badge badge-primary p-5 mb-5"><i class="icon icon-layers text-xl"></i>
+                  </div>
+                  <div class="h4 font-weight-medium mb-3">Обучение с 4 лет</div>
+                  <p class="mb-0">Обучаем детей дошкольного возраста и помогаем подготовиться к школе</p>
+                </div>
+              </div>
+              <div class="col-auto col-xl-4 mb-5">
+                <div class="card card-lesson p-4">
+                  <div class="badge badge-accent p-5 mb-5"><i class="icon icon-calendar text-xl"></i>
+                  </div>
+                  <div class="h4 font-weight-medium mb-3">8 уроков в месяц</div>
+                  <p class="mb-0">Занятия дважды в неделю по уникальной методике, разработанной в Сколково</p>
+                </div>
+              </div>
+              <div class="col-auto col-xl-4 mb-5">
+                <div class="card card-lesson p-4">
+                  <div class="badge badge-info p-5 mb-5"><i class="icon icon-joystick text-xl"></i>
+                  </div>
+                  <div class="h4 font-weight-medium mb-3">В игровой форме</div>
+                  <p class="mb-0">Программирование ещё никогда не было таким понятным, интересным и увлекательным</p>
+                </div>
+              </div>
+              <div class="col-auto col-xl-4 mb-5">
+                <div class="card card-lesson p-4">
+                  <div class="badge badge-secondary p-5 mb-5"><i class="icon icon-video text-xl"></i>
+                  </div>
+                  <div class="h4 font-weight-medium mb-3">Медиа объекты</div>
+                  <p class="mb-0">С первого занятия сможет создать собственный мультфильм, игру и приложение</p>
+                </div>
+              </div>
+              <div class="col-auto col-xl-4 mb-5">
+                <div class="card card-lesson p-4">
+                  <div class="badge badge-warning p-5 mb-5"><i class="icon icon-users text-xl"></i>
+                  </div>
+                  <div class="h4 font-weight-medium mb-3">До 8 учеников</div>
+                  <p class="mb-0">За время урока ученику уделяется максимум времени, за счет работы в мини-группах</p>
+                </div>
+              </div>
+              <div class="col-auto col-xl-4 mb-5">
+                <div class="card card-lesson p-4">
+                  <div class="badge badge-danger p-5 mb-5"><i class="icon icon-terminal text-xl"></i>
+                  </div>
+                  <div class="h4 font-weight-medium mb-3">Личный кабинет</div>
+                  <p class="mb-0">Родители могут отслеживать результаты своего ребёнка через нашу онлайн платформу</p>
+                </div>
+              </div>
+            </div>
+            <div class="slider-navs">
+              <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+              </button>
+              <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section-testimonials py-6">
+        <div class="container">
+          <div class="row">
+            <div class="col-6 d-none d-xl-block">
+              <div class="row">
+                <div class="col-6 mb-5">
+                  <div class="card card-testimonial d-flex flex-column h-100">
+                    <div class="row no-gutters align-items-center mb-4">
+                      <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/2.jpg" style="width:64px;height:64px;"/>
+                      </div>
+                      <div class="col">
+                        <div class="h5 text-lg mb-0">Алексей</div>
+                        <div class="text-sm o-60">Родитель</div>
+                      </div>
+                    </div>
+                    <div class="row no-gutters align-items-center mb-3">
+                      <div class="col-auto mr-auto">
+                        <div class="h5 font-weight-bold mb-0">Огонь 🔥</div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="row no-gutters">
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-sm mb-3">Было приятно видеть оживленный диалог между сыном и преподавателем</p>
+                    <div class="row no-gutters align-items-center mt-auto">
+                      <div class="col-auto mr-auto">
+                        <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
+                        </button>
+                      </div>
+                      <div class="col-auto">
+                        <div class="text-sm o-60">Мар 15, 2018</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 mb-5">
+                  <div class="card card-testimonial d-flex flex-column h-100">
+                    <div class="row no-gutters align-items-center mb-4">
+                      <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/3.jpg" style="width:64px;height:64px;"/>
+                      </div>
+                      <div class="col">
+                        <div class="h5 text-lg mb-0">Юлия</div>
+                        <div class="text-sm o-60">Родитель</div>
+                      </div>
+                    </div>
+                    <div class="row no-gutters align-items-center mb-3">
+                      <div class="col-auto mr-auto">
+                        <div class="h5 font-weight-bold mb-0">Лучшие 👨‍💻</div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="row no-gutters">
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-sm mb-3">Ребёнок занятиями доволен! Ходит с удовольствием! Педагогу спасибо за урок!</p>
+                    <div class="row no-gutters align-items-center mt-auto">
+                      <div class="col-auto mr-auto">
+                        <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
+                        </button>
+                      </div>
+                      <div class="col-auto">
+                        <div class="text-sm o-60">Сен 30, 2019</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-5 offset-xl-1 mb-5 order-first order-xl-0">
+              <div class="badge badge-primary mb-4">Отзывы</div>
+              <div class="h1 font-weight-bold mb-5">Нам доверяют сотни родителей</div>
+              <p>*отзывы транслируются с нашей платформы education-erp</p>
+            </div>
+            <div class="col-6 mb-5 d-none d-xl-block">
+              <div class="card p-0 h-100">
+                <div class="row no-gutters">
+                  <div class="col-6">
+                    <div class="position-relative"><img class="w-100 h-100" src="images/content/clients/1.jpg"/>
+                      <div class="position-absolute bottom-0 p-3 text-sm w-100">
+                        <div class="row no-gutters bg-white rounded-pill p-2 justify-content-around align-items-center">
+                          <div class="col-auto"><span>Мария Бедрих</span></div>
+                          <div class="col-auto">
+                            <div class="bg-primary rounded-pill o-10" style="width:4px;height:4px;"></div>
+                          </div>
+                          <div class="col-auto"><span class="text-black-50">Родитель</span></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6 p-3 d-flex flex-column">
+                    <div class="row no-gutters align-items-center mb-3">
+                      <div class="col-auto mr-auto">
+                        <div class="h5 font-weight-bold mb-0">В восторге</div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="row no-gutters">
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-sm mb-3">Удивительно, что ребенок разбирается в таких штуках. Я при виде этих конструкций теряюсь, видимо совсем отстала от жизни…</p>
+                    <div class="row no-gutters align-items-center mt-auto">
+                      <div class="col-auto mr-auto">
+                        <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
+                        </button>
+                      </div>
+                      <div class="col-auto">
+                        <div class="text-sm o-60">Мар 15, 2018</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 d-none d-xl-block">
+              <div class="row h-100">
+                <div class="col-6 mb-5">
+                  <div class="card card-testimonial d-flex flex-column h-100">
+                    <div class="row no-gutters align-items-center mb-4">
+                      <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/4.jpg" style="width:64px;height:64px;"/>
+                      </div>
+                      <div class="col">
+                        <div class="h5 text-lg mb-0">Лидия</div>
+                        <div class="text-sm o-60">Родитель</div>
+                      </div>
+                    </div>
+                    <div class="row no-gutters align-items-center mb-3">
+                      <div class="col-auto mr-auto">
+                        <div class="h5 font-weight-bold mb-0">Выбор года</div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="row no-gutters">
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-sm mb-3">Алисе очень понравился квест. Дмитрий очень внимателен ко всем детям.</p>
+                    <div class="row no-gutters align-items-center mt-auto">
+                      <div class="col-auto mr-auto">
+                        <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
+                        </button>
+                      </div>
+                      <div class="col-auto">
+                        <div class="text-sm o-60">Ноя 3, 2019</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6 mb-5">
+                  <div class="card card-testimonial d-flex flex-column h-100">
+                    <div class="row no-gutters align-items-center mb-4">
+                      <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/5.jpg" style="width:64px;height:64px;"/>
+                      </div>
+                      <div class="col">
+                        <div class="h5 text-lg mb-0">Гульназ</div>
+                        <div class="text-sm o-60">Родитель</div>
+                      </div>
+                    </div>
+                    <div class="row no-gutters align-items-center mb-3">
+                      <div class="col-auto mr-auto">
+                        <div class="h5 font-weight-bold mb-0">Супер 👍🏻</div>
+                      </div>
+                      <div class="col-auto">
+                        <div class="row no-gutters">
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                          <div class="col-auto mr-1"><i class="icon icon-star"></i>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="text-sm mb-3">Рада, что моя дочь погружается в мир, за которым будущее!</p>
+                    <div class="row no-gutters align-items-center mt-auto">
+                      <div class="col-auto mr-auto">
+                        <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
+                        </button>
+                      </div>
+                      <div class="col-auto">
+                        <div class="text-sm o-60">Окт 28, 2019</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="slider-wrapper d-block d-xl-none">
+            <div class="row flex-nowrap flex-xl-wrap slider">
+              <div class="col-auto">
+                <div class="card card-testimonial d-flex flex-column h-100">
                   <div class="row no-gutters align-items-center mb-4">
                     <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/2.jpg" style="width:64px;height:64px;"/>
                     </div>
@@ -720,7 +1009,7 @@
                     </div>
                   </div>
                   <p class="text-sm mb-3">Было приятно видеть оживленный диалог между сыном и преподавателем</p>
-                  <div class="row no-gutters align-items-center">
+                  <div class="row no-gutters align-items-center mt-auto">
                     <div class="col-auto mr-auto">
                       <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
                       </button>
@@ -731,8 +1020,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6 mb-5">
-                <div class="card h-100">
+              <div class="col-auto">
+                <div class="card card-testimonial d-flex flex-column h-100">
                   <div class="row no-gutters align-items-center mb-4">
                     <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/3.jpg" style="width:64px;height:64px;"/>
                     </div>
@@ -761,7 +1050,7 @@
                     </div>
                   </div>
                   <p class="text-sm mb-3">Ребёнок занятиями доволен! Ходит с удовольствием! Педагогу спасибо за урок!</p>
-                  <div class="row no-gutters align-items-center">
+                  <div class="row no-gutters align-items-center mt-auto">
                     <div class="col-auto mr-auto">
                       <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
                       </button>
@@ -772,30 +1061,16 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-5 offset-xl-1 mb-5 order-first order-xl-0">
-            <div class="badge badge-primary mb-4">Отзывы</div>
-            <div class="h1 font-weight-bold mb-5">Нам доверяют сотни родителей</div>
-            <p>*отзывы транслируются с нашей платформы education-erp</p>
-          </div>
-          <div class="col-6 mb-5">
-            <div class="card p-0 h-100">
-              <div class="row no-gutters">
-                <div class="col-6">
-                  <div class="position-relative"><img class="w-100 h-100" src="images/content/clients/1.jpg"/>
-                    <div class="position-absolute bottom-0 p-3 text-sm w-100">
-                      <div class="row no-gutters bg-white rounded-pill p-2 justify-content-around align-items-center">
-                        <div class="col-auto"><span>Мария Бедрих</span></div>
-                        <div class="col-auto">
-                          <div class="bg-primary rounded-pill o-10" style="width:4px;height:4px;"></div>
-                        </div>
-                        <div class="col-auto"><span class="text-black-50">Родитель</span></div>
-                      </div>
+              <div class="col-auto">
+                <div class="card card-testimonial d-flex flex-column h-100">
+                  <div class="row no-gutters align-items-center mb-4">
+                    <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/1.jpg" style="width:64px;height:64px;"/>
+                    </div>
+                    <div class="col">
+                      <div class="h5 text-lg mb-0">Мария Бедрих</div>
+                      <div class="text-sm o-60">Родитель</div>
                     </div>
                   </div>
-                </div>
-                <div class="col-6 p-3 d-flex flex-column">
                   <div class="row no-gutters align-items-center mb-3">
                     <div class="col-auto mr-auto">
                       <div class="h5 font-weight-bold mb-0">В восторге</div>
@@ -827,12 +1102,8 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div class="col-6">
-            <div class="row h-100">
-              <div class="col-6 mb-5">
-                <div class="card h-100">
+              <div class="col-auto">
+                <div class="card card-testimonial d-flex flex-column h-100">
                   <div class="row no-gutters align-items-center mb-4">
                     <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/4.jpg" style="width:64px;height:64px;"/>
                     </div>
@@ -861,7 +1132,7 @@
                     </div>
                   </div>
                   <p class="text-sm mb-3">Алисе очень понравился квест. Дмитрий очень внимателен ко всем детям.</p>
-                  <div class="row no-gutters align-items-center">
+                  <div class="row no-gutters align-items-center mt-auto">
                     <div class="col-auto mr-auto">
                       <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
                       </button>
@@ -872,8 +1143,8 @@
                   </div>
                 </div>
               </div>
-              <div class="col-6 mb-5">
-                <div class="card h-100">
+              <div class="col-auto">
+                <div class="card card-testimonial d-flex flex-column h-100">
                   <div class="row no-gutters align-items-center mb-4">
                     <div class="col-auto mr-3"><img class="rounded-circle" src="images/content/clients/5.jpg" style="width:64px;height:64px;"/>
                     </div>
@@ -902,7 +1173,7 @@
                     </div>
                   </div>
                   <p class="text-sm mb-3">Рада, что моя дочь погружается в мир, за которым будущее!</p>
-                  <div class="row no-gutters align-items-center">
+                  <div class="row no-gutters align-items-center mt-auto">
                     <div class="col-auto mr-auto">
                       <button class="btn btn-primary btn-ghost btn-sm" type="button" data-fancybox="" data-src="#modal-content">Читать
                       </button>
@@ -914,285 +1185,315 @@
                 </div>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="badge badge-primary mb-4">Создатели курсов</div>
-        <div class="h1 font-weight-bold mb-5">Наши методисты со стажем более 20 лет</div>
-        <div class="row overflow-x-auto flex-nowrap flex-xl-wrap">
-          <div class="col-auto col-xl-4">
-            <div class="card p-4"><img class="rounded-circle mb-5" src="images/content/teachers/1.jpg" style="width:128px;height:128px;"/>
-              <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
-              <div class="h4 font-weight-medium mb-3">Иван Сухов</div>
-              <p>Обладает богатым опытом в сфере детского IT-образования: более 20 лет. Работал в качестве…</p>
-              <button class="btn btn-primary btn-ghost" type="button">Подробнее
+            <div class="slider-navs">
+              <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
               </button>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4">
-            <div class="card p-4"><img class="rounded-circle mb-5" src="images/content/teachers/2.jpg" style="width:128px;height:128px;"/>
-              <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
-              <div class="h4 font-weight-medium mb-3">Денис Голиков</div>
-              <p>Родоначальник Scratch-движения в России и СНГ. Финалист Конкурса инноваций…</p>
-              <button class="btn btn-primary btn-ghost" type="button">Подробнее
-              </button>
-            </div>
-          </div>
-          <div class="col-auto col-xl-4">
-            <div class="card p-4"><img class="rounded-circle mb-5" src="images/content/teachers/3.jpg" style="width:128px;height:128px;"/>
-              <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
-              <div class="h4 font-weight-medium mb-3">Ольга Журавлева</div>
-              <p>Работает в системе образования более 25 лет. Специалист по системной диагностике…</p>
-              <button class="btn btn-primary btn-ghost" type="button">Подробнее
+              <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
               </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="row">
-          <div class="col-xl-6 d-flex flex-column">
-            <div class="mb-auto">
-              <div class="badge badge-primary mb-4">Фотогалерея</div>
-              <div class="h1 font-weight-bold mb-5">Лучшие моменты</div>
-            </div>
-            <div class="row">
-              <div class="col-6 mb-5"><a href="/images/content/gallery/1.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/1.jpg"/></a>
-              </div>
-              <div class="col-6 mb-5"><a href="/images/content/gallery/2.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/2.jpg"/></a>
-              </div>
-              <div class="col-12 mb-5"><a href="/images/content/gallery/4.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/4.jpg"/></a>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-6">
-            <div class="row">
-              <div class="col-12 mb-5"><a href="/images/content/gallery/3.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/3.jpg"/></a>
-              </div>
-              <div class="col-6 mb-5"><a href="/images/content/gallery/5.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/5.jpg"/></a>
-              </div>
-              <div class="col-6 mb-5"><a href="/images/content/gallery/6.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/6.jpg"/></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container">
-        <div class="badge badge-primary mb-4">Партнеры</div>
-        <div class="h1 font-weight-bold mb-5">С нами работают</div>
-        <div class="row">
-          <div class="col-6 col-xl-2 mb-3">
-            <div class="card p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/1.png"/>
-            </div>
-          </div>
-          <div class="col-6 col-xl-2 mb-3">
-            <div class="card p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/2.png"/>
-            </div>
-          </div>
-          <div class="col-6 col-xl-2 mb-3">
-            <div class="card p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/3.png"/>
-            </div>
-          </div>
-          <div class="col-6 col-xl-2 mb-3">
-            <div class="card p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/4.png"/>
-            </div>
-          </div>
-          <div class="col-6 col-xl-2 mb-3">
-            <div class="card p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/5.png"/>
-            </div>
-          </div>
-          <div class="col-6 col-xl-2 mb-3">
-            <div class="card p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/6.png"/>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section class="py-6">
-      <div class="container position-relative pt-4">
-        <div class="position-absolute top-0 right-0 bottom-0 left-0 fixed-top" style="z-index:-1;height:380px;"><img class="w-100 h-100 cover rounded-xl" src="images/bg/lesson-bg.png"/>
-        </div>
-        <div class="row pt-6 mx-n3">
-          <div class="col-xl-4 offset-1 d-flex flex-column">
-            <div class="mb-auto">
-              <div class="badge badge-light mb-4">Попробуйте сейчас</div>
-              <div class="h1 font-weight-bold mb-5 text-white o-100">Запишись на бесплатный урок</div>
-            </div>
-            <p class="mt-auto d-none d-xl-block">Пробное занятие в ЮниорКод — это первый шаг на пути к большим жизненным целям ребенка. Чем бы он ни занялся в дальнейшем — творчеством, бизнесом или написанием мобильных приложений.</p>
-          </div>
-          <div class="col-xl-5 offset-xl-1 px-0 px-xl-3">
-            <form class="card p-4 p-xl-5 mb-5 mb-xl-0">
-              <div class="h4 font-weight-medium mb-6">Заполните форму заявки</div>
-              <input class="form-control mb-4" type="text" placeholder="Ваше имя"/>
-              <input class="form-control mb-4" type="text" placeholder="Имя вашего ребенка"/>
-              <input class="form-control mb-4" type="text" placeholder="Ваш телефон"/>
-              <select class="custom-select mb-4">
-                <option>Санкт-Петербург</option>
-              </select>
-              <select class="custom-select mb-4">
-                <option>Школа</option>
-              </select>
-              <div class="mb-5">
-                <div class="custom-checkbox custom-control">
-                  <input class="custom-control-input" type="checkbox" id="check-confirm-1" checked="checked"/>
-                  <label class="custom-control-label" for="check-confirm-1">Я подтверждаю, что согласен на обработку персональных данных
-                  </label>
-                </div>
-              </div>
-              <div class="row align-items-center">
-                <div class="col-auto">
-                  <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-success">Записаться
+      </section>
+      <section class="section-teachers py-6">
+        <div class="container">
+          <div class="badge badge-primary mb-4">Создатели курсов</div>
+          <div class="h1 font-weight-bold mb-5">Наши методисты со стажем более 20 лет</div>
+          <div class="slider-wrapper">
+            <div class="row flex-nowrap flex-xl-wrap slider">
+              <div class="col-auto col-xl-4">
+                <div class="card card-teacher p-4"><img class="rounded-circle mb-5" src="images/content/teachers/1.jpg" style="width:128px;height:128px;"/>
+                  <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
+                  <div class="h4 font-weight-medium mb-3">Иван Сухов</div>
+                  <p>Обладает богатым опытом в сфере детского IT-образования: более 20 лет. Работал в качестве…</p>
+                  <button class="btn btn-primary btn-ghost" type="button">Подробнее
                   </button>
                 </div>
-                <div class="col">
-                  <p class="mb-0 text-sm">Мы позвоним и согласуем время урока</p>
+              </div>
+              <div class="col-auto col-xl-4">
+                <div class="card card-teacher p-4"><img class="rounded-circle mb-5" src="images/content/teachers/2.jpg" style="width:128px;height:128px;"/>
+                  <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
+                  <div class="h4 font-weight-medium mb-3">Денис Голиков</div>
+                  <p>Родоначальник Scratch-движения в России и СНГ. Финалист Конкурса инноваций…</p>
+                  <button class="btn btn-primary btn-ghost" type="button">Подробнее
+                  </button>
                 </div>
               </div>
-            </form>
-            <p class="mt-auto d-block d-xl-none">Пробное занятие в ЮниорКод — это первый шаг на пути к большим жизненным целям ребенка. Чем бы он ни занялся в дальнейшем — творчеством, бизнесом или написанием мобильных приложений.</p>
+              <div class="col-auto col-xl-4">
+                <div class="card card-teacher p-4"><img class="rounded-circle mb-5" src="images/content/teachers/3.jpg" style="width:128px;height:128px;"/>
+                  <div class="text-uppercase font-weight-medium o-60 mb-2 text-sm">Методолог юниоркод</div>
+                  <div class="h4 font-weight-medium mb-3">Ольга Журавлева</div>
+                  <p>Работает в системе образования более 25 лет. Специалист по системной диагностике…</p>
+                  <button class="btn btn-primary btn-ghost" type="button">Подробнее
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="slider-navs">
+              <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+              </button>
+              <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+              </button>
+            </div>
           </div>
         </div>
+      </section>
+      <section class="section-gallery py-6">
+        <div class="container">
+          <div class="row">
+            <div class="col-xl-6 d-flex flex-column">
+              <div class="mb-auto">
+                <div class="badge badge-primary mb-4">Фотогалерея</div>
+                <div class="h1 font-weight-bold mb-5">Лучшие моменты</div>
+              </div>
+              <div class="row">
+                <div class="col-6 mb-5"><a href="/images/content/gallery/1.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/1.jpg"/></a>
+                </div>
+                <div class="col-6 mb-5"><a href="/images/content/gallery/2.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/2.jpg"/></a>
+                </div>
+                <div class="col-12 mb-5"><a href="/images/content/gallery/4.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/4.jpg"/></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-6">
+              <div class="row">
+                <div class="col-12 mb-5"><a href="/images/content/gallery/3.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/3.jpg"/></a>
+                </div>
+                <div class="col-6 mb-5"><a href="/images/content/gallery/5.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/5.jpg"/></a>
+                </div>
+                <div class="col-6 mb-5"><a href="/images/content/gallery/6.jpg" data-fancybox="gallery"><img class="rounded-lg cover w-100" src="images/content/gallery/6.jpg"/></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section-partners py-6">
+        <div class="container">
+          <div class="badge badge-primary mb-4">Партнеры</div>
+          <div class="h1 font-weight-bold mb-5">С нами работают</div>
+          <div class="row">
+            <div class="col-6 col-xl-2 mb-3">
+              <div class="card card-partner p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/1.png"/>
+              </div>
+            </div>
+            <div class="col-6 col-xl-2 mb-3">
+              <div class="card card-partner p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/2.png"/>
+              </div>
+            </div>
+            <div class="col-6 col-xl-2 mb-3">
+              <div class="card card-partner p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/3.png"/>
+              </div>
+            </div>
+            <div class="col-6 col-xl-2 mb-3">
+              <div class="card card-partner p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/4.png"/>
+              </div>
+            </div>
+            <div class="col-6 col-xl-2 mb-3">
+              <div class="card card-partner p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/5.png"/>
+              </div>
+            </div>
+            <div class="col-6 col-xl-2 mb-3">
+              <div class="card card-partner p-2 text-center d-flex" style="min-height:80px;max-height:80px;"><img class="img-fluid m-auto" src="images/content/partners/6.png"/>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="section-lesson py-6">
+        <div class="container position-relative pt-4">
+          <div class="position-absolute top-0 right-0 bottom-0 left-0 fixed-top" style="z-index:-1;height:380px;"><img class="w-100 h-100 cover rounded-xl" src="images/bg/lesson-bg.png"/>
+          </div>
+          <div class="row pt-6 mx-n3">
+            <div class="col-xl-4 offset-1 d-flex flex-column">
+              <div class="mb-auto">
+                <div class="badge badge-light mb-4">Попробуйте сейчас</div>
+                <div class="h1 font-weight-bold mb-5 text-white o-100">Запишись на бесплатный урок</div>
+              </div>
+              <p class="mt-auto d-none d-xl-block">Пробное занятие в ЮниорКод — это первый шаг на пути к большим жизненным целям ребенка. Чем бы он ни занялся в дальнейшем — творчеством, бизнесом или написанием мобильных приложений.</p>
+            </div>
+            <div class="col-xl-5 offset-xl-1 px-0 px-xl-3">
+              <form class="card p-4 p-xl-5 mb-5 mb-xl-0">
+                <div class="h4 font-weight-medium mb-6">Заполните форму заявки</div>
+                <input class="form-control mb-4" type="text" placeholder="Ваше имя"/>
+                <input class="form-control mb-4" type="text" placeholder="Имя вашего ребенка"/>
+                <input class="form-control mb-4" type="text" placeholder="Ваш телефон"/>
+                <select class="mb-4 w-100">
+                  <option>Ваш город</option>
+                  <option>Москва</option>
+                  <option>Новосибирск</option>
+                  <option>Санкт-Петербург</option>
+                  <option>Барнаул</option>
+                </select>
+                <select class="mb-4 w-100">
+                  <option>Ваш город</option>
+                  <option>Москва</option>
+                  <option>Новосибирск</option>
+                  <option>Санкт-Петербург</option>
+                  <option>Барнаул</option>
+                </select>
+                <div class="mb-5">
+                  <div class="custom-checkbox custom-control">
+                    <input class="custom-control-input" type="checkbox" id="check-confirm-1" checked="checked"/>
+                    <label class="custom-control-label" for="check-confirm-1">Я подтверждаю, что согласен на обработку персональных данных
+                    </label>
+                  </div>
+                </div>
+                <div class="row align-items-center">
+                  <div class="col-auto">
+                    <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-success">Записаться
+                    </button>
+                  </div>
+                  <div class="col">
+                    <p class="mb-0 text-sm">Мы позвоним и согласуем время урока</p>
+                  </div>
+                </div>
+              </form>
+              <p class="mt-auto d-block d-xl-none">Пробное занятие в ЮниорКод — это первый шаг на пути к большим жизненным целям ребенка. Чем бы он ни занялся в дальнейшем — творчеством, бизнесом или написанием мобильных приложений.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+      <div class="container-xl my-6">
+        <div class="w-100 map rounded-lg overflow-hidden" id="map" style="height:280px;"></div>
+        <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
+        <script>
+          DG.then(function() {
+              DG.map('map', {
+                  center: [54.98, 82.89],
+                  zoom: 13
+              });
+          });
+          
+          
+          
+        </script>
       </div>
-    </section>
-    <div class="container-xl my-6">
-      <div class="w-100 map rounded-lg overflow-hidden" id="map" style="height:280px;"></div>
-      <script src="https://maps.api.2gis.ru/2.0/loader.js"></script>
-      <script>
-        DG.then(function() {
-            DG.map('map', {
-                center: [54.98, 82.89],
-                zoom: 13
-            });
-        });
-        
-        
-        
-      </script>
-    </div>
-    <section class="py-6">
-      <div class="container">
-        <div class="badge badge-primary mb-4">Блог</div>
-        <div class="h1 font-weight-bold mb-5">Новости школы</div>
-        <div class="row overflow-x-auto flex-nowrap flex-xl-wrap">
-          <div class="col-auto col-xl-3 mb-5">
-            <div class="card p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/2.jpg"/>
-              <div class="p-3 d-flex flex-column flex-grow-1">
-                <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
-                <div class="h5 font-weight-bold mb-3">The Crypto Valley Week Conference</div>
-                <p class="text-sm mt-auto">The Roobinium team has attended the Crypto Valley Week Conference lasted…</p>
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
+      <section class="section-news py-6">
+        <div class="container">
+          <div class="badge badge-primary mb-4">Блог</div>
+          <div class="h1 font-weight-bold mb-5">Новости школы</div>
+          <div class="slider-wrapper">
+            <div class="row flex-nowrap flex-xl-wrap slider">
+              <div class="col-auto col-xl-3 mb-5">
+                <div class="card card-new p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/2.jpg"/>
+                  <div class="p-3 d-flex flex-column flex-grow-1">
+                    <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
+                    <div class="h5 font-weight-bold mb-3">The Crypto Valley Week Conference</div>
+                    <p class="text-sm mt-auto">The Roobinium team has attended the Crypto Valley Week Conference lasted…</p>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
+                      </div>
+                      <div class="col-auto">
+                        <p class="mb-0 text-sm">Aug 15, 2019</p>
+                      </div>
+                    </div>
                   </div>
-                  <div class="col-auto">
-                    <p class="mb-0 text-sm">Aug 15, 2019</p>
+                </div>
+              </div>
+              <div class="col-auto col-xl-3 mb-5">
+                <div class="card card-new p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/3.jpg"/>
+                  <div class="p-3 d-flex flex-column flex-grow-1">
+                    <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
+                    <div class="h5 font-weight-bold mb-3">Agreements With Key SSPs</div>
+                    <p class="text-sm mt-auto">The Roobinium has successfully concluded 10 agreements with Supply…</p>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
+                      </div>
+                      <div class="col-auto">
+                        <p class="mb-0 text-sm">Jul 22, 2019</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto col-xl-3 mb-5">
+                <div class="card card-new p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/4.jpg"/>
+                  <div class="p-3 d-flex flex-column flex-grow-1">
+                    <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
+                    <div class="h5 font-weight-bold mb-3">The Long Path of the Roobinium Project если 3 строки</div>
+                    <p class="text-sm mt-auto">Revolutionizing the world of advertising is no simple task, especially if confronted with…</p>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
+                      </div>
+                      <div class="col-auto">
+                        <p class="mb-0 text-sm">May 21, 2018</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-auto col-xl-3 mb-5">
+                <div class="card card-new p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/5.jpg"/>
+                  <div class="p-3 d-flex flex-column flex-grow-1">
+                    <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
+                    <div class="h5 font-weight-bold mb-3">Roobinium First Year Anniversary</div>
+                    <p class="text-sm mt-auto">May 21st is not only the first day of spring, but the day also marks the first year…</p>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
+                      </div>
+                      <div class="col-auto">
+                        <p class="mb-0 text-sm">Mar 15, 2018</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div class="col-auto col-xl-3 mb-5">
-            <div class="card p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/3.jpg"/>
-              <div class="p-3 d-flex flex-column flex-grow-1">
-                <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
-                <div class="h5 font-weight-bold mb-3">Agreements With Key SSPs</div>
-                <p class="text-sm mt-auto">The Roobinium has successfully concluded 10 agreements with Supply…</p>
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
-                  </div>
-                  <div class="col-auto">
-                    <p class="mb-0 text-sm">Jul 22, 2019</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto col-xl-3 mb-5">
-            <div class="card p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/4.jpg"/>
-              <div class="p-3 d-flex flex-column flex-grow-1">
-                <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
-                <div class="h5 font-weight-bold mb-3">The Long Path of the Roobinium Project если 3 строки</div>
-                <p class="text-sm mt-auto">Revolutionizing the world of advertising is no simple task, especially if confronted with…</p>
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
-                  </div>
-                  <div class="col-auto">
-                    <p class="mb-0 text-sm">May 21, 2018</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-auto col-xl-3 mb-5">
-            <div class="card p-0 h-100 d-flex flex-column"><img class="w-100" src="images/content/news/5.jpg"/>
-              <div class="p-3 d-flex flex-column flex-grow-1">
-                <div class="text-uppercase font-weight-bold o-60 mb-3 text-sm">Partners</div>
-                <div class="h5 font-weight-bold mb-3">Roobinium First Year Anniversary</div>
-                <p class="text-sm mt-auto">May 21st is not only the first day of spring, but the day also marks the first year…</p>
-                <div class="row no-gutters align-items-center">
-                  <div class="col-auto mr-auto"><a class="btn btn-primary btn-ghost btn-sm" href="article.html">Read</a>
-                  </div>
-                  <div class="col-auto">
-                    <p class="mb-0 text-sm">Mar 15, 2018</p>
-                  </div>
-                </div>
-              </div>
+            <div class="slider-navs">
+              <button class="btn btn-action slider-prev" type="button"><i class="icon icon-angle-left text-primary"></i>
+              </button>
+              <button class="btn btn-action slider-next" type="button"><i class="icon icon-angle-right text-primary"></i>
+              </button>
             </div>
           </div>
         </div>
-      </div>
-    </section>
-    <header class="py-4 mt-6">
-      <div class="container pt-6">
-        <div class="row align-items-center justify-content-between mb-6">
-          <div class="col col-xl-auto"><img class="img-fluid" src="images/system/logo-color.svg" style="height:32px;"/>
-          </div>
-          <div class="col-auto order-1 order-xl-0">
-            <menu class="p-0 my-3 m-xl-0">
-              <div class="row list-unstyled list-inline mb-0 text-sm text-uppercase">
-                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="courses.html">Курсы <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+      </section>
+      <footer class="section-footer py-4 mt-6">
+        <div class="container pt-6">
+          <div class="row align-items-center justify-content-between mb-6">
+            <div class="col col-xl-auto"><img class="img-fluid" src="images/system/logo-color.svg" style="height:32px;"/>
+            </div>
+            <div class="col-auto order-1 order-xl-0">
+              <menu class="p-0 my-3 m-xl-0">
+                <div class="row list-unstyled list-inline mb-0 text-sm text-uppercase">
+                  <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="courses.html">Курсы <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+                  </div>
+                  <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="blog.html">Блог <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+                  </div>
+                  <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="fran.html">Франшиза <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+                  </div>
+                  <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="contscts.html">Контакты <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+                  </div>
                 </div>
-                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="blog.html">Блог <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+              </menu>
+            </div>
+            <div class="col-auto">
+              <div class="font-weight-medium text-lg">8 800 550-07-25</div>
+            </div>
+            <div class="col-auto order-2 order-xl-0">
+              <div class="row no-gutters">
+                <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-insta h5 mb-0 o-60"></i></a>
                 </div>
-                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="fran.html">Франшиза <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+                <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-vk h5 mb-0 o-60"></i></a>
                 </div>
-                <div class="col-xl-auto my-3 my-xl-0"><a class="d-flex" href="contscts.html">Контакты <i class="icon icon-angle-right ml-auto d-block d-xl-none o-40"></i></a>
+                <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-fb h5 mb-0 o-60"></i></a>
                 </div>
-              </div>
-            </menu>
-          </div>
-          <div class="col-auto">
-            <div class="font-weight-medium text-lg">8 800 550-07-25</div>
-          </div>
-          <div class="col-auto order-2 order-xl-0">
-            <div class="row no-gutters">
-              <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-insta h5 mb-0 o-60"></i></a>
-              </div>
-              <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-vk h5 mb-0 o-60"></i></a>
-              </div>
-              <div class="col-auto mr-4"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-fb h5 mb-0 o-60"></i></a>
-              </div>
-              <div class="col-auto"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-yt h5 mb-0 o-60"></i></a>
+                <div class="col-auto"><a class="badge badge-dark badge-pill p-3" href="/instagram.com"><i class="icon icon-yt h5 mb-0 o-60"></i></a>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row justify-content-between text-sm pt-3">
-          <div class="col-auto">
-            <div class="mb-0 o-60">© ЮниорКод, 2018-2019. Все права защищены.</div>
+          <div class="row justify-content-between text-sm pt-3">
+            <div class="col-auto">
+              <div class="mb-0 o-60">© ЮниорКод, 2018-2019. Все права защищены.</div>
+            </div>
+            <div class="col-auto d-none d-xl-block">
+              <div class="mb-0"><span class="o-60">made by</span> <span class="o-80">roobinium</span></div>
+            </div>
           </div>
-          <div class="col-auto d-none d-xl-block">
-            <div class="mb-0"><span class="o-60">made by</span> <span class="o-80">roobinium</span></div>
-          </div>
         </div>
-      </div>
-    </header>
+      </footer>
+    </main>
     <!--+footer-->
     <div class="modal modal-md card" id="modal-lesson">
       <div class="row no-gutters">
@@ -1204,10 +1505,10 @@
             <input class="form-control mb-4" type="text" placeholder="Ваше имя"/>
             <input class="form-control mb-4" type="text" placeholder="Имя вашего ребенка"/>
             <input class="form-control mb-4" type="text" placeholder="Ваш телефон"/>
-            <select class="custom-select mb-4">
+            <select class="mb-4">
               <option>Санкт-Петербург</option>
             </select>
-            <select class="custom-select mb-4">
+            <select class="mb-4">
               <option>Школа</option>
             </select>
             <div class="mb-5">
@@ -1362,10 +1663,11 @@
       </div>
     </div>
     <script src="js/jquery/dist/jquery.js"></script>
-    <script src="js/jquery.nice-number/dist/jquery.nice-number.js"></script>
+    <script src="js/nice-select/js/jquery.nice-select.js"></script>
     <script src="js/lighttabs/lighttabs.js"></script>
     <script src="js/noty/lib/noty.js"></script>
-    <script src="js/lightslider/js/lightslider.js"></script>
+    <script src="js/slick/slick.js"></script>
+    <!--script(src='js/flickity/flickity.pkgd.min.js')-->
     <script src="js/raty/jquery.raty.js"></script>
     <script src="js/tippy.js/tippy.js"></script>
     <script src="js/yall-js/dist/yall.js"></script>
