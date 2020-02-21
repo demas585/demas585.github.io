@@ -11617,11 +11617,11 @@ section {
 .map-info {
   position: absolute;
   z-index: 10;
+  pointer-events: none;
 }
 @media (max-width: 1199.98px) {
   .map-info {
     position: relative;
-    pointer-events: none;
     margin-bottom: -30px;
   }
 }
