@@ -647,13 +647,13 @@ pre code {
 }
 
 .no-gutters {
-  margin-right: 0 !important;
-  margin-left: 0 !important;
+  margin-right: 0;
+  margin-left: 0;
 }
 .no-gutters > .col,
 .no-gutters > [class*=col-] {
-  padding-right: 0 !important;
-  padding-left: 0 !important;
+  padding-right: 0;
+  padding-left: 0;
 }
 
 .col-xl,
@@ -11393,17 +11393,6 @@ h1:not(.icon), .h1:not(.icon) {
   background: #4579f5;
 }
 
-article img {
-  height: 400px;
-  object-fit: cover;
-  width: 100%;
-}
-@media (max-width: 1199.98px) {
-  article img {
-    height: 160px;
-  }
-}
-
 .slick-list {
   overflow: visible;
   order: -1;
@@ -11558,12 +11547,12 @@ header[stuck] .hc-nav-trigger span, header[stuck] .hc-nav-trigger span:before, h
 
 .section-courses {
   background-image: url("../images/blobs/blob-2.png"), url("../images/blobs/blob-6.png");
-  background-position: 18% 100%, 69% 60%;
+  background-position: 18% 100%, 69% 44%;
 }
 
 .section-lessons {
   background-image: url("../images/blobs/blob-4.png"), url("../images/blobs/blob-5.png");
-  background-position: 40% 67%, 80% 25%;
+  background-position: 40% 67%, 80% 0%;
 }
 
 .section-testimonials {
@@ -11573,7 +11562,7 @@ header[stuck] .hc-nav-trigger span, header[stuck] .hc-nav-trigger span:before, h
 
 .section-teachers {
   background-image: url("../images/blobs/blob-5.png"), url("../images/blobs/blob-8.png");
-  background-position: 19% 98%, 81% 28%;
+  background-position: 19% 98%, 81% 26%;
 }
 
 .section-partners {
@@ -11589,6 +11578,7 @@ header[stuck] .hc-nav-trigger span, header[stuck] .hc-nav-trigger span:before, h
 @media (max-width: 1199.98px) {
   .section-experience {
     background-position: 53% 88%;
+    background-size: 25%;
   }
 
   .section-skills {
@@ -11597,19 +11587,19 @@ header[stuck] .hc-nav-trigger span, header[stuck] .hc-nav-trigger span:before, h
   }
 
   .section-courses {
-    background-position: -5% 93%, right -140% top 74%;
+    background-position: -5% 93%, right -140% top 44%;
   }
 
   .section-lessons {
-    background-position: -40% 90%, 200% 50%;
+    background-position: -40% 97%, 200% 10%;
   }
 
   .section-testimonials {
-    background-position: -25% 90%, 100% 42%;
+    background-position: -25% 97%, 100% 42%;
   }
 
   .section-teachers {
-    background-position: -26% 40%, 105% 93%;
+    background-position: -26% 28%, 105% 100%;
   }
 
   .section-partners {
@@ -11617,7 +11607,7 @@ header[stuck] .hc-nav-trigger span, header[stuck] .hc-nav-trigger span:before, h
   }
 
   .section-news {
-    background-position: -20% 90%, 110% 30%;
+    background-position: -20% 90%, 110% 15%;
   }
 }
 section {
