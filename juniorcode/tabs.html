@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html class="no-js" lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title>Юниоркод</title>
+    <meta name="description" content="Школа программирования для детей">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="manifest" href="site.webmanifest">
+    <link rel="apple-touch-icon" href="icon.png">
+    <!-- Place favicon.ico in the root directory-->
+    <link rel="stylesheet" href="css/main.css">
+    <meta name="theme-color" content="#fafafa">
+  </head>
+  <body>
+    <!--+s-header-->
+    <main class="bg-header" style="background:url('images/bg/header-bg.png') no-repeat top center">
+      <div class="container">
+        <div class="lighttabs">
+          <div class="row lighttabs__titles mb-6">
+            <div class="col-auto p-5 bg-lightgray mr-3 lighttabs__title active">1</div>
+            <div class="col-auto p-5 bg-lightgray mr-3 lighttabs__title">2</div>
+            <div class="col-auto p-5 bg-lightgray mr-3 lighttabs__title">3</div>
+          </div>
+          <div class="lighttabs__contents">
+            <div class="lighttabs__content active">
+              <div class="carousel" data-flickity="{ &quot;cellAlign&quot;: &quot;left&quot;, &quot;contain&quot;: true }">
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">1</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">2</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">3</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">4</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">5</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">6</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">7</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">8</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">9</div>
+              </div>
+            </div>
+            <div class="lighttabs__content">
+              <div class="carousel" data-flickity="{ &quot;cellAlign&quot;: &quot;left&quot;, &quot;contain&quot;: true }">
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">4</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">5</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">6</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">4</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">5</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">6</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">7</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">8</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">9</div>
+              </div>
+            </div>
+            <div class="lighttabs__content">
+              <div class="carousel" data-flickity="{ &quot;cellAlign&quot;: &quot;left&quot;, &quot;contain&quot;: true }">
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">7</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">8</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">9</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">4</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">5</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">6</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">7</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">8</div>
+                <div class="slide p-6 bg-danger border border-dark" style="width:300px">9</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!--+footer-->
+    <div class="modal modal-md card" id="modal-lesson">
+      <div class="row no-gutters">
+        <div class="col-xl-6 d-none d-xl-block"><img class="w-100 h-100 cover" src="images/system/modal.jpg"/>
+        </div>
+        <div class="col-xl-6 p-4 p-xl-6">
+          <form>
+            <div class="h4 font-weight-medium mb-6 pr-4">Запишитесь на бесплатный урок</div>
+            <input class="form-control mb-4" type="text" placeholder="Ваше имя"/>
+            <input class="form-control mb-4" type="text" placeholder="Имя вашего ребенка"/>
+            <input class="form-control mb-4" type="text" placeholder="Ваш телефон"/>
+            <select class="mb-4">
+              <option>Санкт-Петербург</option>
+            </select>
+            <select class="mb-4">
+              <option>Школа</option>
+            </select>
+            <div class="mb-5">
+              <div class="custom-checkbox custom-control">
+                <input class="custom-control-input" type="checkbox" id="check-confirm-modal" checked="checked"/>
+                <label class="custom-control-label" for="check-confirm-modal">Я подтверждаю, что согласен на обработку персональных данных
+                </label>
+              </div>
+            </div>
+            <div class="row align-items-center">
+              <div class="col-auto">
+                <button class="btn btn-primary" type="button" data-fancybox="" data-src="#modal-success">Записаться
+                </button>
+              </div>
+              <div class="col">
+                <p class="mb-0 text-sm">Мы позвоним и согласуем время урока</p>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <div class="modal modal-md card" id="modal-content">
+      <div class="p-4 p-xl-6">
+        <div class="h4 font-weight-medium mb-6 pr-4">Заголовок статьи</div>
+        <p>Было приятно видеть оживленный диалог между сыном и преподавателем</p>
+      </div>
+    </div>
+    <div class="modal modal-md card" id="modal-success">
+      <div class="p-4 p-xl-6">
+        <div class="h4 font-weight-medium mb-6 pr-4">Ваша заявка принята</div>
+        <p>Мы скоро перезвонима вам по указанному номеру и обсудим все вопросы.</p>
+      </div>
+    </div>
+    <div class="modal modal-md card" id="modal-geo">
+      <div class="p-4 p-xl-6">
+        <div class="h4 font-weight-medium mb-6 pr-4">Выберите ваш город</div>
+        <div class="search-filter mb-6">
+          <div class="row mb-5">
+            <div class="col">
+              <input class="form-control" type="text" placeholder="Начните вводить город"/>
+            </div>
+            <!--.col-auto
+            +btn("primary").h-100 Выбрать
+            
+            -->
+          </div>
+          <div class="scroll" style="height:300px; overflow-y:auto; overflow-x:hidden;">
+            <div class="row">
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+              <div class="col-xl-4">
+                <div class="mb-3"><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="h4 font-weight-medium mb-4">Мы правильно угадали ваш город?</div>
+        <div class="mb-0"><span class="mr-3">Ваш город:</span><a class="btn btn-action active-text-primary font-weight-normal" href="index.html"><i class="icon icon-map-marker mr-2"></i><span>Название города</span></a>
+        </div>
+      </div>
+    </div>
+    <script src="js/jquery/dist/jquery.js"></script>
+    <script src="js/nice-select/js/jquery.nice-select.js"></script>
+    <script src="js/lighttabs/lighttabs.js"></script>
+    <script src="js/noty/lib/noty.js"></script>
+    <script src="js/slick/slick.js"></script>
+    <!--script(src='js/flickity/flickity.pkgd.min.js')-->
+    <script src="js/raty/jquery.raty.js"></script>
+    <script src="js/tippy.js/tippy.js"></script>
+    <script src="js/yall-js/dist/yall.js"></script>
+    <script src="js/fancybox/dist/jquery.fancybox.js"></script>
+    <script src="js/hc-offcanvas-nav/dist/hc-offcanvas-nav.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>
