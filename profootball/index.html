@@ -32,42 +32,34 @@
           </li>
         </ul>
       </nav>
-      <div class="bg-primary text-light small border-bottom border-light border-1">
-        <div class="container">
+      <div class="bg-primary-dark text-light small border-bottom border-light border-1">
+        <div class="container border-end border-1 border-light">
           <div class="row align-items-center">
             <div class="col-auto py-2"><a href="./index.html">
                 <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="site-logo" src="images//logo/profootball.svg"/></a>
             </div>
-            <div class="col d-flex align-self-stretch align-items-center justify-content-between border-start border-end border-light border-1 py-2">
+            <div class="col d-flex align-self-stretch justify-content-center border-start border-end border-light border-1 py-2">
               <div class="row align-items-center justify-content-around w-100 mx-n2">
-                <div class="col-auto d-block d-xl-none me-auto px-2"><a class="d-block text-white text-decoration-none h2 lh-1 mb-0" href="#mobile-menu"><i class="icon icon-bars"></i></a>
+                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none active-border-bottom active" href="./index.html#s-focus">Развитие футболиста</a>
                 </div>
-                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none" href="./index.html#s-focus">Развитие футболиста</a>
+                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none active-border-bottom" href="./index.html#s-growth">Личностный рост</a>
                 </div>
-                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none" href="./index.html#s-growth">Личностный рост</a>
+                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none active-border-bottom" href="./index.html#s-clients">Наши клиенты</a>
                 </div>
-                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none" href="./index.html#s-clients">Наши клиенты</a>
+                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none active-border-bottom" href="./index.html#s-news">Новости</a>
                 </div>
-                <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none" href="./index.html#s-news">Новости</a>
-                </div>
-                <div class="col-auto d-none d-sm-block px-2">
-                  <button type=button  class="btn btn-secondary-light btn-sm rounded-pill">Связаться с нами
+                <div class="col-auto px-2">
+                  <button type=button  class="btn btn-secondary-light btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modal-callback">Связаться с нами
                   </button type=button >
                 </div>
               </div>
             </div>
-            <div class="col-auto py-2">
-              <div class="dropdown-toggle p-2 bg-primary fw-bold" id="dropdown-languages" data-bs-toggle="dropdown" aria-expanded="false">RU</div>
-              <ul class="dropdown-menu fw-bold" aria-labelledby="dropdown-languages">
-                <li><a class="dropdown-item active" href="./ru.html">RU</a>
-                </li>
-                <li><a class="dropdown-item" href="./en.html">EN</a>
-                </li>
-                <li><a class="dropdown-item" href="./fr.html">FR</a>
-                </li>
-                <li><a class="dropdown-item" href="./es.html">ES</a>
-                </li>
-              </ul>
+            <div class="col-auto py-2 d-none d-xl-block dropdown-hover-wrapper position-relative">
+              <div class="p-2 bg-primary-dark fw-bold" id="dropdown-languages">RU</div>
+              <div class="dropdown-hover-menu position-absolute fw-bold start-0 end-0 closer"><a class="btn d-block btn-sm btn-primary-dark rounded-0 active" href="./ru.html">RU</a><a class="btn d-block btn-sm btn-primary-dark rounded-0" href="./en.html">EN</a><a class="btn d-block btn-sm btn-primary-dark rounded-0" href="./fr.html">FR</a><a class="btn d-block btn-sm btn-primary-dark rounded-0" href="./es.html">ES</a>
+              </div>
+            </div>
+            <div class="col-auto d-block d-xl-none me-auto px-2"><a class="d-block text-white text-decoration-none h2 lh-1 mb-0" href="#mobile-menu"><i class="icon icon-bars"></i></a>
             </div>
           </div>
         </div>
@@ -78,14 +70,15 @@
     <div class="position-relative" id="s-banner">
       <picture>
         <source srcset="./images/banners/header-banner-sm.jpg" media="(max-width:1280px)"/>
-        <source srcset="./images/banners/header-banner.jpg" media="(max-width:1920px)"/><img class="img-fluid" src="./images/banners/header-banner.jpg"/>
+        <source srcset="./images/banners/header-banner.jpg" media="(max-width:1920px)"/><img class="w-100" src="./images/banners/header-banner.jpg"/>
       </picture>
       <div class="container text-center text-light py-5 position-absolute top-0 start-0 end-0">
         <h1 class="h2 fw-bold text-secondary-light">Профессиональное футбольное агентство</h1>
         <p>Прозрачные контрактные обязательства и всесторонняя поддержка в развитии клиентов</p>
       </div>
     </div>
-    <div class="section-focus py-5" id="s-focus">
+    <div class="section-focus py-5 position-relative" id="s-focus">
+      <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute start-0 bottom-0 ms-n8 mb-7 farther" src="images/decor/decor.svg" width="500"/>
       <div class="container">
         <h2 class="h1 fw-extrabold text-uppercase fst-italic mb-5"><span class="d-block d-xl-inline">Фокус на развитие</span><span class="display-2 text-stroke stroke-secondary-light ms-xl-n6 position-relative farther">футболиста</span></h2>
         <div class="swiper-container text-light">
@@ -128,7 +121,9 @@
         </div>
       </div>
     </div>
-    <div class="py-5" id="s-growth">
+    <div class="py-5 position-relative" id="s-growth">
+      <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute end-0 top-0 mt-5 farther farther" src="images/decor/decor.svg" width="500"/>
+      <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute start-0 bottom-0 mb-5 farther farther" src="images/decor/decor.svg" width="500"/>
       <div class="container">
         <h2 class="h1 fw-extrabold text-uppercase fst-italic mb-5"><span class="d-block d-xl-inline">Личностный</span><span class="display-2 text-stroke stroke-secondary-light ms-xl-n6 position-relative farther">рост</span></h2>
         <div class="row counter-reset row-cols-md-1 row-cols-lg-2 mx-n6">
@@ -175,7 +170,7 @@
           <div class="col counter-increment mb-5 px-6">
             <div class="g-0 position-relative p-4 text-light">
               <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-fluid img-bg rounded" src="images/growth/bg.jpg"/>
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute bottom-0 end-0 me-sm-n4 me-lg-n7 me-xl-n4" src="images/growth/man.png"/>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute bottom-0 end-0 me-sm-n4 me-lg-n7 me-xl-n4" src="images/growth/man.png" width="250"/>
               <div class="row mb-8 pb-8 mb-sm-0 pb-sm-0">
                 <div class="col-sm-7 col-lg-9 col-xl-8 lh-sm">
                   <p>Наша задача: привлечь и отобрать талантливых игроков, которые с помощью усердной работы смогут сформировать компетенции профессионального спортсмена</p>
@@ -207,10 +202,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -240,10 +235,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -273,10 +268,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -306,10 +301,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Голкиперы</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -339,10 +334,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Голкиперы</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -372,10 +367,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Голкиперы</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -405,10 +400,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Защитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -438,10 +433,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Защитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -471,10 +466,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Защитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -504,10 +499,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Полузащитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -537,10 +532,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Полузащитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -570,10 +565,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Полузащитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -603,10 +598,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -636,10 +631,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -669,10 +664,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -695,9 +690,9 @@
               </div>
             </div>
             <div class="swiper-nav d-flex justify-content-end">
-              <button type=button  class="btn btn-primary swiper-button-prev rounded-0"><i class="icon icon-angle-left"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-prev rounded-0 position-absolute end-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-left m-auto"></i>
               </button type=button >
-              <button type=button  class="btn btn-primary swiper-button-next rounded-0"><i class="icon icon-angle-right"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-next rounded-0 position-absolute start-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-right m-auto"></i>
               </button type=button >
             </div>
           </div>
@@ -712,10 +707,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Голкиперы</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -745,10 +740,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Голкиперы</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -778,10 +773,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Голкиперы</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -804,9 +799,9 @@
               </div>
             </div>
             <div class="swiper-nav d-flex justify-content-end">
-              <button type=button  class="btn btn-primary swiper-button-prev rounded-0"><i class="icon icon-angle-left"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-prev rounded-0 position-absolute end-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-left m-auto"></i>
               </button type=button >
-              <button type=button  class="btn btn-primary swiper-button-next rounded-0"><i class="icon icon-angle-right"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-next rounded-0 position-absolute start-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-right m-auto"></i>
               </button type=button >
             </div>
           </div>
@@ -821,10 +816,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Защитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -854,10 +849,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Защитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -887,10 +882,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Защитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -913,9 +908,9 @@
               </div>
             </div>
             <div class="swiper-nav d-flex justify-content-end">
-              <button type=button  class="btn btn-primary swiper-button-prev rounded-0"><i class="icon icon-angle-left"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-prev rounded-0 position-absolute end-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-left m-auto"></i>
               </button type=button >
-              <button type=button  class="btn btn-primary swiper-button-next rounded-0"><i class="icon icon-angle-right"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-next rounded-0 position-absolute start-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-right m-auto"></i>
               </button type=button >
             </div>
           </div>
@@ -930,10 +925,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Полузащитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -963,10 +958,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Полузащитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -996,10 +991,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Полузащитники</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -1022,9 +1017,9 @@
               </div>
             </div>
             <div class="swiper-nav d-flex justify-content-end">
-              <button type=button  class="btn btn-primary swiper-button-prev rounded-0"><i class="icon icon-angle-left"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-prev rounded-0 position-absolute end-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-left m-auto"></i>
               </button type=button >
-              <button type=button  class="btn btn-primary swiper-button-next rounded-0"><i class="icon icon-angle-right"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-next rounded-0 position-absolute start-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-right m-auto"></i>
               </button type=button >
             </div>
           </div>
@@ -1039,10 +1034,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Иван Миронов</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -1072,10 +1067,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Максим Филатов</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -1105,10 +1100,10 @@
                   </div>
                   <div class="fw-bold text-uppercase fst-italic w-min mb-3">Антон Черняк</div>
                   <div class="text-uppercase mb-3">Нападающий</div>
-                  <div class="dropdown-hover-container mt-auto me-auto">
-                    <div class="h2 dropdown-hover-button d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
+                  <div class="dropdown-hover-wrapper mt-auto me-auto">
+                    <div class="h2 dropdown-hover-toggle d-inline-flex text-secondary-light"><i class="icon icon-angle-circle-down m-auto"></i>
                     </div>
-                    <div class="dropdown-hover-target position-absolute top-100 start-0 bg-secondary p-4">
+                    <div class="dropdown-hover-menu position-absolute top-100 start-0 bg-primary p-4">
                       <div class="mb-4">
                         <div class="h6 fw-bold text-uppercase">Образование</div>
                         <p>Сочинский Государственный Университет<br>Специальность — тренер-преподаватель по футболу.</p>
@@ -1131,16 +1126,18 @@
               </div>
             </div>
             <div class="swiper-nav d-flex justify-content-end">
-              <button type=button  class="btn btn-primary swiper-button-prev rounded-0"><i class="icon icon-angle-left"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-prev rounded-0 position-absolute end-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-left m-auto"></i>
               </button type=button >
-              <button type=button  class="btn btn-primary swiper-button-next rounded-0"><i class="icon icon-angle-right"></i>
+              <button type=button  class="btn btn-primary d-flex swiper-button-next rounded-0 position-absolute start-100 top-50 translate-middle-y closer py-3"><i class="icon icon-angle-right m-auto"></i>
               </button type=button >
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="py-5" id="s-news">
+    <div class="py-5 position-relative" id="s-news">
+      <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute start-0 top-0 farther" src="images/decor/decor.svg" width="500"/>
+      <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute end-0 top-0 farther" src="images/decor/decor.svg" width="500"/>
       <div class="container">
         <h2 class="h1 fw-extrabold text-uppercase fst-italic mb-4"><span class="d-block d-xl-inline">Последние</span><span class="display-2 text-stroke stroke-secondary-light ms-xl-n6 position-relative farther">новости</span></h2>
         <div class="mb-5"><a class="fw-semibold text-uppercase text-decoration-none" href="./news.html">Все новости</a>
@@ -1150,9 +1147,9 @@
         <div class="swiper-wrapper row flex-nowrap g-0" data-items-xxl="5" data-items-xl="4" data-items-lg="3" data-items-md="2" data-items-sm="1">
           <div class="swiper-slide col-auto">
             <div class="card-new-video position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/23.05.20.jpg"/>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Невероятный сейв нашего подопечного.jpg"/>
               <div class="d-flex flex-column p-3 text-light h-100">
-                <div class="col-lg-5 col-xxl-4 m-auto"><i class="icon icon-play display-2 text-secondary-light mb-3"></i>
+                <div class="col-lg-5 col-xxl-4 m-auto"><i class="icon icon-play d-block display-2 text-secondary-light mb-3"></i>
                   <div class="fw-bold flex-grow-1">Невероятный сейв нашего подопечного</div>
                 </div>
               </div>
@@ -1160,36 +1157,36 @@
           </div>
           <div class="swiper-slide col-auto">
             <div class="card-new-post position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/23.05.20.jpg"/>
-              <div class="d-flex flex-column p-3 bg-secondary-light-secondary-70 text-light mt-auto">
-                <div class="small ms-auto">23.05.20</div>
-                <div class="fw-bold flex-grow-1 my-3">Тренировочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Тренеровочные сборы в голландии.jpg"/>
+              <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto h-50">
+                <div class="small ms-auto fw-bold">23.05.20</div>
+                <div class="fw-bold flex-grow-1 my-3">Тренеровочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
               </div>
             </div>
           </div>
           <div class="swiper-slide col-auto">
             <div class="card-new-post position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/10.09.20.jpg"/>
-              <div class="d-flex flex-column p-3 bg-secondary-light-secondary-70 text-light mt-auto">
-                <div class="small ms-auto">23.05.20</div>
-                <div class="fw-bold flex-grow-1 my-3">Тренировочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/“Казахский метеор” занимает 3 место в списке бомбардиров.jpg"/>
+              <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto h-50">
+                <div class="small ms-auto fw-bold">23.05.20</div>
+                <div class="fw-bold flex-grow-1 my-3">“Казахский метеор” занимает 3 место в списке бомбардиров</div><a class="small ms-auto" href="./new.html">Подробности</a>
               </div>
             </div>
           </div>
           <div class="swiper-slide col-auto">
             <div class="card-new-post position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/13.09.20.jpg"/>
-              <div class="d-flex flex-column p-3 bg-secondary-light-secondary-70 text-light mt-auto">
-                <div class="small ms-auto">23.05.20</div>
-                <div class="fw-bold flex-grow-1 my-3">Тренировочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Сегодня прекрасный день для новой звезды футбола из Турции.jpg"/>
+              <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto h-50">
+                <div class="small ms-auto fw-bold">23.05.20</div>
+                <div class="fw-bold flex-grow-1 my-3">Сегодня прекрасный день для новой звезды футбола из Турции</div><a class="small ms-auto" href="./new.html">Подробности</a>
               </div>
             </div>
           </div>
           <div class="swiper-slide col-auto">
             <div class="card-new-video position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/23.05.20.jpg"/>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Невероятный сейв нашего подопечного.jpg"/>
               <div class="d-flex flex-column p-3 text-light h-100">
-                <div class="col-lg-5 col-xxl-4 m-auto"><i class="icon icon-play display-2 text-secondary-light mb-3"></i>
+                <div class="col-lg-5 col-xxl-4 m-auto"><i class="icon icon-play d-block display-2 text-secondary-light mb-3"></i>
                   <div class="fw-bold flex-grow-1">Невероятный сейв нашего подопечного</div>
                 </div>
               </div>
@@ -1197,28 +1194,28 @@
           </div>
           <div class="swiper-slide col-auto">
             <div class="card-new-post position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/23.05.20.jpg"/>
-              <div class="d-flex flex-column p-3 bg-secondary-light-secondary-70 text-light mt-auto">
-                <div class="small ms-auto">23.05.20</div>
-                <div class="fw-bold flex-grow-1 my-3">Тренировочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Тренеровочные сборы в голландии.jpg"/>
+              <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto h-50">
+                <div class="small ms-auto fw-bold">23.05.20</div>
+                <div class="fw-bold flex-grow-1 my-3">Тренеровочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
               </div>
             </div>
           </div>
           <div class="swiper-slide col-auto">
             <div class="card-new-post position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/10.09.20.jpg"/>
-              <div class="d-flex flex-column p-3 bg-secondary-light-secondary-70 text-light mt-auto">
-                <div class="small ms-auto">23.05.20</div>
-                <div class="fw-bold flex-grow-1 my-3">Тренировочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/“Казахский метеор” занимает 3 место в списке бомбардиров.jpg"/>
+              <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto h-50">
+                <div class="small ms-auto fw-bold">23.05.20</div>
+                <div class="fw-bold flex-grow-1 my-3">“Казахский метеор” занимает 3 место в списке бомбардиров</div><a class="small ms-auto" href="./new.html">Подробности</a>
               </div>
             </div>
           </div>
           <div class="swiper-slide col-auto">
             <div class="card-new-post position-relative d-flex flex-column border-end border-2 border-light">
-              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/13.09.20.jpg"/>
-              <div class="d-flex flex-column p-3 bg-secondary-light-secondary-70 text-light mt-auto">
-                <div class="small ms-auto">23.05.20</div>
-                <div class="fw-bold flex-grow-1 my-3">Тренировочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Сегодня прекрасный день для новой звезды футбола из Турции.jpg"/>
+              <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto h-50">
+                <div class="small ms-auto fw-bold">23.05.20</div>
+                <div class="fw-bold flex-grow-1 my-3">Сегодня прекрасный день для новой звезды футбола из Турции</div><a class="small ms-auto" href="./new.html">Подробности</a>
               </div>
             </div>
           </div>
@@ -1233,7 +1230,9 @@
         </div>
       </div>
     </div>
-    <div class="py-5" id="s-partners">
+    <div class="py-5 position-relative" id="s-partners">
+      <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute start-0 bottom-0 mb-n8 farther" src="images/decor/decor.svg" width="500"/>
+      <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute end-0 bottom-0 mb-n8 farther" src="images/decor/decor.svg" width="500"/>
       <div class="text-center">
         <h2 class="h1 fw-extrabold text-uppercase fst-italic mb-5"><span class="d-block d-xl-inline">Наши</span><span class="display-2 text-stroke stroke-secondary-light ms-xl-n6 position-relative farther">партнеры</span></h2>
       </div>
@@ -1247,7 +1246,7 @@
         <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="partner-logo mx-2 mx-lg-4" src="images/logo/gatorade.svg"/>
       </div>
     </div>
-    <div class="py-5" id="s-form">
+    <div class="py-5 position-relative" id="s-form">
       <div class="container">
         <div class="position-relative p-4 text-light overflow-hidden">
           <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute top-0 start-0 end-0 farther w-100 rounded" src="images/forms/bg.jpg"/>
@@ -1258,14 +1257,14 @@
               <div class="text-dark mt-4 mt-lg-auto">Мы даём шанс талантливым игрокам попасть в профессиональный футбол и предоставляем им все необходимые ресурсы для развития их мастерства</div>
             </div>
             <div class="col-lg">
-              <form class="bg-secondary text-light py-4 px-4 px-xl-5 rounded me-xl-4 text-center">
+              <form class="bg-primary-light text-light py-4 px-4 px-xl-5 rounded me-xl-4 text-center">
                 <div class="fw-semibold mb-4">Наш менеджер свяжется с вами</div>
                 <input class="form-control mb-3" type="text" placeholder="Ваше имя"/>
                 <input class="form-control mb-3" type="text" placeholder="Номер телефона" data-inputmask="'mask': '+7 (999) 999-99-99'"/>
                 <input class="form-control mb-3" type="text" placeholder="E-mail"/>
                 <textarea class="form-control mb-3" placeholder="Ваше сообщение"></textarea>
                 <div class="form-check small mb-3 text-start">
-                  <input class="form-check-input" type="checkbox" id="checkbox" checked="checked"/>
+                  <input class="form-check-input" type="checkbox" id="heckbox" checked="checked"/>
                   <label class="form-check-label" for="heckbox">Я принимаю условия соглашения об обработке персональных данных
                   </label>
                 </div>
@@ -1279,11 +1278,11 @@
     </div>
   </main>
   <footer>
-    <div class="bg-primary py-5 text-light small" id="s-footer">
+    <div class="bg-primary-dark py-5 text-light small" id="s-footer">
       <div class="position-relative">
         <hr class="bg-secondary-light"/>
         <div class="container">
-          <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute top-0 translate-middle-y border border-5 border-primary" src="images/logo/profootball.svg" style="height:75px;"/>
+          <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute top-0 translate-middle-y border border-5 border-primary-dark" src="images/logo/profootball.svg" style="height:75px;"/>
           <div class="row mt-6 text-center text-sm-start">
             <div class="col-sm-4 col-md-3">
               <div class="mb-2"><a href="#modal-politic">Политика конфиденциальности</a>
@@ -1297,7 +1296,7 @@
               <p>© Pro Football 2020</p>
             </div>
             <div class="col-sm-4 col-md-3 mt-sm-n6 text-sm-end">
-              <div class="bg-primary p-2 mt-sm-n3 d-sm-inline-block text-sm-start">
+              <div class="bg-primary-dark p-2 mt-sm-n3 d-sm-inline-block text-sm-start">
                 <div class="fw-bold fst-italic text-uppercase mb-3 w-auto">Сменить язык</div>
                 <div class="mb-2"><a href="./en.html">English</a>
                 </div>
@@ -1312,5 +1311,27 @@
       </div>
     </div>
   </footer>
+  <div class="modal fade" id="modal-callback">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content bg-primary-light text-light px-5 py-4">
+        <button type=button  class="btn btn-link btn-close btn-close-white btn-sm position-absolute top-0 end-0 text-light m-2" data-bs-dismiss="modal">
+        </button type=button >
+        <form class="text-center">
+          <div class="fw-semibold mb-4">Наш менеджер свяжется с вами</div>
+          <input class="form-control mb-3" type="text" placeholder="Ваше имя"/>
+          <input class="form-control mb-3" type="text" placeholder="Номер телефона" data-inputmask="'mask': '+7 (999) 999-99-99'"/>
+          <input class="form-control mb-3" type="text" placeholder="E-mail"/>
+          <textarea class="form-control mb-3" placeholder="Ваше сообщение"></textarea>
+          <div class="form-check small mb-3 text-start">
+            <input class="form-check-input" type="checkbox" id="form-checkbox" checked="checked"/>
+            <label class="form-check-label" for="form-checkbox">Я принимаю условия соглашения об обработке персональных данных
+            </label>
+          </div>
+          <button type=button  class="btn btn-secondary-light rounded-pill">Отправить
+          </button type=button >
+        </form>
+      </div>
+    </div>
+  </div>
 </body>
 <script src="themes/engine/js/main.js"></script>

@@ -108,16 +108,11 @@ swiper__WEBPACK_IMPORTED_MODULE_2__["Swiper"].use([swiper__WEBPACK_IMPORTED_MODU
 (function () {
 
 
-    const menu = new mmenu_light__WEBPACK_IMPORTED_MODULE_3__["default"](
-        document.querySelector( "#mobile-menu" ));
+    const menu = new mmenu_light__WEBPACK_IMPORTED_MODULE_3__["default"]( document.querySelector( "#mobile-menu" ) );
 
-    const navigator = menu.navigation({
-        // options
-    });
+    const navigator = menu.navigation({});
 
-    const drawer = menu.offcanvas({
-        // options
-    });
+    const drawer = menu.offcanvas({});
 
     document.querySelector( "a[href='#mobile-menu']" )
         .addEventListener( "click", ( event ) => {
