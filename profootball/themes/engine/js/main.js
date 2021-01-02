@@ -113,7 +113,7 @@ swiper__WEBPACK_IMPORTED_MODULE_2__["Swiper"].use([swiper__WEBPACK_IMPORTED_MODU
 
     function dropdownClick () {
         if ( jquery__WEBPACK_IMPORTED_MODULE_0___default()(".dropdown-click-wrapper").length ) {
-            jquery__WEBPACK_IMPORTED_MODULE_0___default()(".dropdown-click-toggle").click(function (){
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).on("click", ".dropdown-click-toggle", function () {
                 jquery__WEBPACK_IMPORTED_MODULE_0___default()(this).toggleClass("active").closest(".dropdown-click-wrapper").toggleClass("active").find(".dropdown-click-menu").toggleClass("active");
             })
         }
@@ -126,11 +126,17 @@ swiper__WEBPACK_IMPORTED_MODULE_2__["Swiper"].use([swiper__WEBPACK_IMPORTED_MODU
     inputmask__WEBPACK_IMPORTED_MODULE_4___default()().mask(document.querySelectorAll("input"));
 
 
-    const menu = new mmenu_light__WEBPACK_IMPORTED_MODULE_3__["default"]( document.querySelector( "#mobile-menu" ) );
+    const menu = new mmenu_light__WEBPACK_IMPORTED_MODULE_3__["default"](
+        document.querySelector( "#mobile-menu" )
+    );
 
-    const navigator = menu.navigation({});
+    const navigator = menu.navigation({
+        title: "Меню"
+    });
 
-    const drawer = menu.offcanvas({});
+    const drawer = menu.offcanvas({
+
+    });
 
     document.querySelector( "a[href='#mobile-menu']" )
         .addEventListener( "click", ( event ) => {
