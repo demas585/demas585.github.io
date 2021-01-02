@@ -18,7 +18,7 @@
 </head>
 <body>
   <header>
-    <div id="s-header">
+    <div class="fixed-top" id="s-header">
       <nav id="mobile-menu">
         <ul>
           <li><a class="text-decoration-none" href="./index.html#s-focus">Развитие футболиста</a>
@@ -36,7 +36,7 @@
       <div class="bg-primary-dark text-light small border-bottom border-light border-1">
         <div class="container border-end border-1 border-light">
           <div class="row align-items-center">
-            <div class="col-auto py-2"><a href="./index.html">
+            <div class="col-auto p-2 pe-sm-3"><a class="d-block py-1" href="./index.html">
                 <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="site-logo" src="images//logo/profootball.svg"/></a>
             </div>
             <div class="col d-flex align-self-stretch justify-content-center border-start border-end border-light border-1 py-2">
@@ -50,14 +50,14 @@
                 <div class="col-auto d-none d-xl-block px-2"><a class="text-white text-decoration-none active-border-bottom" href="./index.html#s-news">Новости</a>
                 </div>
                 <div class="col-auto px-2">
-                  <button type=button  class="btn btn-secondary-light btn-sm rounded-pill" data-bs-toggle="modal" data-bs-target="#modal-callback">Связаться с нами
+                  <button type=button  class="btn btn-secondary-light btn-sm rounded-pill px-sm-4" data-bs-toggle="modal" data-bs-target="#modal-callback">Связаться с нами
                   </button type=button >
                 </div>
               </div>
             </div>
-            <div class="col-auto py-2 d-none d-xl-block dropdown-hover-wrapper position-relative">
+            <div class="col-auto py-2 d-none d-xl-block dropdown-click-wrapper position-relative">
               <div class="p-2 bg-primary-dark fw-bold" id="dropdown-languages">RU</div>
-              <div class="dropdown-hover-menu position-absolute fw-bold start-0 end-0 closer"><a class="btn d-block btn-sm btn-primary-dark rounded-0 active" href="./ru.html">RU</a><a class="btn d-block btn-sm btn-primary-dark rounded-0" href="./en.html">EN</a><a class="btn d-block btn-sm btn-primary-dark rounded-0" href="./fr.html">FR</a><a class="btn d-block btn-sm btn-primary-dark rounded-0" href="./es.html">ES</a>
+              <div class="dropdown-click-menu position-absolute fw-bold start-0 end-0 closer"><a class="btn d-block btn-sm btn-primary-dark rounded-0 language active" href="./ru.html">RU</a><a class="btn d-block btn-sm btn-primary-dark rounded-0 language" href="./en.html">EN</a><a class="btn d-block btn-sm btn-primary-dark rounded-0 language" href="./fr.html">FR</a><a class="btn d-block btn-sm btn-primary-dark rounded-0 language" href="./es.html">ES</a>
               </div>
             </div>
             <div class="col-auto d-block d-xl-none me-auto px-2"><a class="d-block text-white text-decoration-none h2 lh-1 mb-0" href="#mobile-menu"><i class="icon icon-bars"></i></a>
@@ -67,11 +67,11 @@
       </div>
     </div>
   </header>
-  <main>
-    <div class="py-5 mb-5 position-relative border-bottom border-1" id="s-header-inner">
+  <main class="pt-6">
+    <div class="pt-4 pb-3 mb-5 position-relative border-bottom border-1" id="s-header-inner">
       <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/header.jpg"/>
-      <div class="container text-light">
-        <h2 class="h1 fw-extrabold text-uppercase fst-italic mb-4"><span class="d-block d-xl-inline">Последние</span><span class="display-2 text-stroke stroke-secondary-light ms-xl-n6 position-relative farther">новости</span></h2>
+      <div class="container text-light pt-2">
+        <h2 class="h1 section-title fw-extrabold text-uppercase fst-italic mb-4"><span class="d-block d-xl-inline">Последние</span><span class="display-2 text-stroke stroke-secondary-light position-relative farther">новости</span></h2>
       </div>
     </div>
     <div class="container mt-n5 mb-5">
@@ -91,7 +91,7 @@
             <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Тренеровочные сборы в голландии.jpg"/>
             <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto min-h-50">
               <div class="small ms-auto fw-bold">23.05.20</div>
-              <div class="fw-bold flex-grow-1 my-3">Тренеровочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <div class="fw-bold flex-grow-1 my-3">Тренеровочные сборы в голландии</div><a class="fw-bold small ms-auto text-decoration-none border-bottom border-2 border-secondary-light" href="./new.html">Подробности</a>
             </div>
           </div>
         </div>
@@ -100,7 +100,7 @@
             <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/“Казахский метеор” занимает 3 место в списке бомбардиров.jpg"/>
             <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto min-h-50">
               <div class="small ms-auto fw-bold">23.05.20</div>
-              <div class="fw-bold flex-grow-1 my-3">“Казахский метеор” занимает 3 место в списке бомбардиров</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <div class="fw-bold flex-grow-1 my-3">“Казахский метеор” занимает 3 место в списке бомбардиров</div><a class="fw-bold small ms-auto text-decoration-none border-bottom border-2 border-secondary-light" href="./new.html">Подробности</a>
             </div>
           </div>
         </div>
@@ -109,7 +109,7 @@
             <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Сегодня прекрасный день для новой звезды футбола из Турции.jpg"/>
             <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto min-h-50">
               <div class="small ms-auto fw-bold">23.05.20</div>
-              <div class="fw-bold flex-grow-1 my-3">Сегодня прекрасный день для новой звезды футбола из Турции</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <div class="fw-bold flex-grow-1 my-3">Сегодня прекрасный день для новой звезды футбола из Турции</div><a class="fw-bold small ms-auto text-decoration-none border-bottom border-2 border-secondary-light" href="./new.html">Подробности</a>
             </div>
           </div>
         </div>
@@ -128,7 +128,7 @@
             <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="img-bg" src="images/news/Тренеровочные сборы в голландии.jpg"/>
             <div class="d-flex flex-column p-3 bg-secondary-light-primary-light-70 text-light mt-auto min-h-50">
               <div class="small ms-auto fw-bold">23.05.20</div>
-              <div class="fw-bold flex-grow-1 my-3">Тренеровочные сборы в голландии</div><a class="small ms-auto" href="./new.html">Подробности</a>
+              <div class="fw-bold flex-grow-1 my-3">Тренеровочные сборы в голландии</div><a class="fw-bold small ms-auto text-decoration-none border-bottom border-2 border-secondary-light" href="./new.html">Подробности</a>
             </div>
           </div>
         </div>
@@ -143,13 +143,13 @@
           <!--#{ ratio ? "div class='ratio ratio-"+ratio+"'" : "img src="+src+ext }&attributes(attributes)--><img class="position-absolute top-0 translate-middle-y border border-5 border-primary-dark" src="images/logo/profootball.svg" style="height:75px;"/>
           <div class="row mt-6 text-center text-sm-start">
             <div class="col-sm-4 col-md-3">
-              <div class="mb-2"><a href="/index.html" data-bs-toggle="modal" data-bs-target="#modal-politic">Политика конфиденциальности</a>
+              <div class="mb-2"><a class="text-decoration-none" href="/index.html" data-bs-toggle="modal" data-bs-target="#modal-politic">Политика конфиденциальности</a>
               </div>
-              <div class="mb-2"><a href="/index.html" data-bs-toggle="modal" data-bs-target="#modal-agreement">Пользовательское соглашение</a>
+              <div class="mb-2"><a class="text-decoration-none" href="/index.html" data-bs-toggle="modal" data-bs-target="#modal-agreement">Пользовательское соглашение</a>
               </div>
             </div>
             <div class="col-sm text-center d-flex flex-column justify-content-between mb-3 mb-sm-0">
-              <p>Связаться с нами: <a href="mailto:office@pro-football.tech">office@pro-football.tech</a>
+              <p class="mt-lg-n4">Связаться с нами: <a href="mailto:office@pro-football.tech">office@pro-football.tech</a>
               </p>
               <p>© Pro Football 2020</p>
             </div>
