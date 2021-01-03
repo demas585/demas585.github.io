@@ -18301,6 +18301,10 @@ textarea.form-control-lg {
   justify-content: center;
 }
 @media (max-width: 575.98px) {
+  .swiper-button-prev, .swiper-button-next {
+    width: 48px;
+    height: 48px;
+  }
   .swiper-button-prev.position-absolute, .swiper-button-next.position-absolute {
     position: static !important;
     transform: none !important;
@@ -18766,6 +18770,9 @@ nav#mobile-menu:not(.mm-spn) {
 .card-client, .card-specialist, .card-base, .card-platform {
   height: 480px;
 }
+.card-client .position-absolute, .card-specialist .position-absolute, .card-base .position-absolute, .card-platform .position-absolute {
+  overflow: hidden;
+}
 @media (max-width: 991.98px) {
   .card-client, .card-specialist, .card-base, .card-platform {
     height: 400px;
@@ -18815,7 +18822,7 @@ nav#mobile-menu:not(.mm-spn) {
   }
   .card-specialist > .position-absolute img {
     position: relative;
-    right: -50px;
+    right: -20px;
   }
 }
 .card-platform img.position-absolute {
@@ -18825,6 +18832,8 @@ nav#mobile-menu:not(.mm-spn) {
 @media (max-width: 575.98px) {
   .card-platform img.position-absolute {
     width: 250px;
+    top: 60% !important;
+    bottom: 0 !important;
   }
 }
 
@@ -19128,20 +19137,42 @@ textarea.form-control {
   object-fit: cover;
 }
 
-@media (max-width: 991.98px) {
-  #s-banner img {
-    object-fit: cover;
-    object-position: center top;
+@media (max-width: 575.98px) {
+  .display-2 {
+    font-size: 1.7rem;
   }
+}
+#s-banner img {
+  object-fit: cover;
+  object-position: bottom center;
+  width: 100%;
+  min-height: 600px;
 }
 @media (max-width: 991.98px) {
   #s-banner img {
     min-height: 500px;
+    max-height: 650px;
+  }
+}
+@media (max-width: 767.98px) {
+  #s-banner img {
+    min-height: 400px;
+    max-height: 500px;
+  }
+}
+@media (max-width: 575.98px) {
+  #s-banner img {
+    min-height: 450px;
+    max-height: 500px;
   }
 }
 
-@media (max-width: 575.98px) {
-  .display-2 {
-    font-size: 1.7rem;
+header {
+  height: 100px;
+  background: #0a0957;
+}
+@media (max-width: 1199.98px) {
+  header {
+    height: 80px;
   }
 }
