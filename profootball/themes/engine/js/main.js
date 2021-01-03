@@ -179,7 +179,11 @@ swiper__WEBPACK_IMPORTED_MODULE_2__["Swiper"].use([swiper__WEBPACK_IMPORTED_MODU
                 prevEl: '.swiper-button-prev',
             },
 
-        })
+        });
+
+        mySwiper.on('slideChange', function () {
+            jquery__WEBPACK_IMPORTED_MODULE_0___default()(".dropdown-click-wrapper, .dropdown-click-menu, .dropdown-click-toggle").removeClass("active");
+        });
 
     })
 
