@@ -19684,7 +19684,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
   }
 }
 .text-stroke {
-  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-width: 1px;
   color: transparent;
 }
 
