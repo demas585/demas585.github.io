@@ -18300,6 +18300,12 @@ textarea.form-control-lg {
   align-items: center;
   justify-content: center;
 }
+@media (max-width: 575.98px) {
+  .swiper-button-prev.position-absolute, .swiper-button-next.position-absolute {
+    position: static !important;
+    transform: none !important;
+  }
+}
 
 .swiper-button-disabled {
   opacity: 0.7;
@@ -18853,11 +18859,11 @@ nav#mobile-menu:not(.mm-spn) {
 }
 @media (max-width: 575.98px) {
   .focus-slide {
-    width: 200px;
+    width: 210px;
     height: 280px;
   }
   .focus-slide .card-focus img {
-    width: 250px;
+    width: 270px;
   }
 }
 
@@ -19131,5 +19137,11 @@ textarea.form-control {
 @media (max-width: 991.98px) {
   #s-banner img {
     min-height: 500px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .display-2 {
+    font-size: 1.7rem;
   }
 }

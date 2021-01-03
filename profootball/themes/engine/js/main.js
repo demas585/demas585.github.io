@@ -131,7 +131,7 @@ swiper__WEBPACK_IMPORTED_MODULE_2__["Swiper"].use([swiper__WEBPACK_IMPORTED_MODU
     );
 
     const navigator = menu.navigation({
-        title: "Меню"
+        title: ""
     });
 
     const drawer = menu.offcanvas({
