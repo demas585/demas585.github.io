@@ -117,7 +117,8 @@ swiper__WEBPACK_IMPORTED_MODULE_2__["Swiper"].use([swiper__WEBPACK_IMPORTED_MODU
 (function () {
 
     aos__WEBPACK_IMPORTED_MODULE_5___default.a.init({
-        offset: 300
+        offset: 300,
+        once: true
     });
 
     function dropdownClick () {
