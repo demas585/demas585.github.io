@@ -98,11 +98,6 @@
 :root {
   font-size: 22px;
 }
-@media (prefers-reduced-motion: no-preference) {
-  :root {
-    scroll-behavior: smooth;
-  }
-}
 
 body {
   margin: 0;
@@ -19953,4 +19948,10 @@ header {
 }
 .animate__shakeY {
   animation: shakeY infinite 5s;
+}
+
+html {
+  scroll-snap-type: y proximity;
+  scroll-behavior: smooth;
+  scroll-padding-top: 100px;
 }
