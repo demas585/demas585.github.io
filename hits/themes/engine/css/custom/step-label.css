@@ -1,0 +1,6 @@
+.step-label {
+  width: 110px;
+  height: 110px;
+  border: 22px solid transparent;
+  border-image: linear-gradient(to right bottom, #6888fc, #3d61ac);
+}
