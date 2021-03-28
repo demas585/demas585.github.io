@@ -15898,6 +15898,11 @@ nav#mobile-menu:not(.mm-spn) {
   display: none;
 }
 
+.mm-spn.mm-spn--light {
+  background: #3d61aa;
+  color: #fff;
+}
+
 body[data-aos-duration="50"] [data-aos], [data-aos][data-aos][data-aos-duration="50"] {
   transition-duration: 50ms;
 }
@@ -16738,11 +16743,22 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
 }
 
 .bg-header {
-  background: url("../../../images/header/bg.jpg");
+  background: url("../../../images/header/bg.jpg") top center;
 }
 
 .bg-whyonline {
   background: url("../../../images/whyonline/bg.jpg");
+  height: 100%;
+}
+@media (max-width: 1449.98px) {
+  .bg-whyonline {
+    height: auto;
+  }
+}
+@media (max-width: 575.98px) {
+  .bg-whyonline {
+    min-height: 220px !important;
+  }
 }
 
 .bg-whyonline-alt {
@@ -16751,6 +16767,11 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
 @media (max-width: 1449.98px) {
   .bg-whyonline-alt {
     background-position: center;
+  }
+}
+@media (max-width: 575.98px) {
+  .bg-whyonline-alt {
+    background-position: right;
   }
 }
 
@@ -16826,13 +16847,31 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
     height: 150px;
   }
 }
+@media (max-width: 575.98px) {
+  .step-label {
+    padding: 10px;
+    width: 120px;
+    height: 120px;
+  }
+}
 
 .step-divider {
+  width: 4px;
+  height: 100px;
+  margin-left: 70px;
+  background: linear-gradient(to bottom, #6888fc, #3d61ac);
+}
+@media (max-width: 575.98px) {
+  .step-divider {
+    margin-left: 57px;
+  }
+}
+.step-divider-lg {
   width: 4px;
   background: linear-gradient(to bottom, #6888fc, #3d61ac);
 }
 @media (max-width: 767.98px) {
-  .step-divider {
+  .step-divider-lg {
     display: none;
   }
 }
@@ -16917,5 +16956,62 @@ header .btn {
   .fee-img {
     width: 150%;
     right: -470px;
+  }
+}
+@media (max-width: 575.98px) {
+  .fee-img {
+    width: 350px;
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+  }
+}
+
+.whyonline-img {
+  height: 330px;
+}
+@media (max-width: 1649.98px) {
+  .whyonline-img {
+    height: 300px;
+  }
+}
+@media (max-width: 1449.98px) {
+  .whyonline-img {
+    height: 330px;
+  }
+}
+@media (max-width: 767.98px) {
+  .whyonline-img {
+    height: 260px;
+  }
+}
+
+body {
+  min-width: 320px;
+}
+
+.logo {
+  width: 45px;
+}
+@media (max-width: 575.98px) {
+  .logo {
+    width: 35px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  :root {
+    font-size: 20px;
+  }
+}
+@media (max-width: 1449.98px) {
+  form.position-absolute {
+    position: static !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .btn-close {
+    filter: invert(0) grayscale(100%) brightness(0%);
   }
 }
