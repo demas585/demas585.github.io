@@ -16955,8 +16955,8 @@ header .btn {
 }
 @media (max-width: 1449.98px) {
   .fee-img {
-    width: 114%;
-    right: -400px;
+    width: 70%;
+    right: 0px;
     bottom: -110px !important;
   }
 }
