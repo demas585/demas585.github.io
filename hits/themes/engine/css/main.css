@@ -3179,7 +3179,7 @@ textarea.form-control-lg {
 
 .btn {
   display: inline-block;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.3;
   color: #0c1130;
   text-align: center;
@@ -3189,7 +3189,7 @@ textarea.form-control-lg {
   user-select: none;
   background-color: transparent;
   border: 1px solid transparent;
-  padding: 0.7rem 0.75rem;
+  padding: 0.7rem 2rem;
   font-size: 1rem;
   border-radius: 0.5rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4066,8 +4066,8 @@ textarea.form-control-lg {
 }
 
 .dropdown-toggle-split {
-  padding-right: 0.5625rem;
-  padding-left: 0.5625rem;
+  padding-right: 1.5rem;
+  padding-left: 1.5rem;
 }
 .dropdown-toggle-split::after, .dropup .dropdown-toggle-split::after, .dropend .dropdown-toggle-split::after {
   margin-left: 0;
@@ -16744,6 +16744,7 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
 
 .bg-header {
   background: url("../../../images/header/bg.jpg") top center;
+  background-size: cover;
 }
 
 .bg-whyonline {
@@ -16771,7 +16772,8 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
 }
 @media (max-width: 575.98px) {
   .bg-whyonline-alt {
-    background-position: right;
+    background-position: right top -50px;
+    background-size: 1100px !important;
   }
 }
 
@@ -16942,28 +16944,30 @@ header .btn {
 }
 @media (max-width: 1449.98px) {
   .fee-img {
-    width: 100%;
+    width: 114%;
     right: -400px;
+    bottom: -110px !important;
   }
 }
 @media (max-width: 991.98px) {
   .fee-img {
-    width: 120%;
-    right: -470px;
+    width: 140%;
+    right: -550px;
   }
 }
 @media (max-width: 767.98px) {
   .fee-img {
-    width: 150%;
+    width: 155%;
     right: -470px;
   }
 }
 @media (max-width: 575.98px) {
   .fee-img {
-    width: 350px;
+    width: 450px;
     right: 0;
     left: 0;
     margin: 0 auto;
+    bottom: -60px !important;
   }
 }
 

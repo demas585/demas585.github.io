@@ -19037,11 +19037,40 @@ swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE
     var scrollSpy = new bootstrap__WEBPACK_IMPORTED_MODULE_0__.ScrollSpy(document.body, {
         target: '#navbar',
         method: "position",
-        offset: 150
+        offset: 0
     })
 
+
+    // To Section
+    const navLinks = document.querySelectorAll("#navbar a");
+
+    Array.from(navLinks).forEach((navLink) => {
+        const href = navLink.getAttribute("href");
+        const section = document.querySelector(href);
+        const offset = 50 + 20; // nav and offset
+
+        navLink.onclick = (e) => {
+            // get body position
+            const bodyRect = document.body.getBoundingClientRect().top;
+            // get section position relative
+            const sectionRect = section.getBoundingClientRect().top;
+            // subtract the section from body
+            const sectionPosition = sectionRect - bodyRect;
+            // subtract offset
+            const offsetPosition = sectionPosition - offset;
+
+            e.preventDefault();
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        };
+    });
+
+
+
     // When the user scrolls the page, execute myFunction
-    window.onscroll = function() {myFunction()};
+    window.onscroll = function() {stickyMenu()};
 
     // Get the header
     var header = document.getElementById("s-header");
@@ -19049,7 +19078,7 @@ swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE
 
 
     // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
-    function myFunction() {
+    function stickyMenu() {
         if (window.pageYOffset > header.offsetTop) {
             sticky.classList.add("sticky");
         } else {
