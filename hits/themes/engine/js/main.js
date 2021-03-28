@@ -18974,7 +18974,7 @@ swiper__WEBPACK_IMPORTED_MODULE_1__.default.use([swiper__WEBPACK_IMPORTED_MODULE
     // smoothscroll.polyfill();
 
     aos__WEBPACK_IMPORTED_MODULE_7___default().init({
-        offset: 300,
+        offset: 100,
         once: true
     })
 
