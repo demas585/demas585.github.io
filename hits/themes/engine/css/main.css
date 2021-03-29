@@ -16767,12 +16767,13 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
 }
 @media (max-width: 1299.98px) {
   .bg-whyonline-alt {
-    background-position: center;
+    background-position: top -50px right -50px;
+    background-size: 1200px !important;
   }
 }
 @media (max-width: 899.98px) {
   .bg-whyonline-alt {
-    background-position: right center;
+    background-position: top -60px right -60px;
   }
 }
 @media (max-width: 767.98px) {
