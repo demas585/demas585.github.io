@@ -16795,7 +16795,8 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
 
 .bg-contacts {
   background: url("../../../images/contacts/bg.jpg") top center no-repeat;
-  background-size: contain;
+  background-size: cover;
+  height: 400px;
 }
 
 .linear-gradient-totop-white:after {
@@ -16900,6 +16901,10 @@ body[data-aos-easing=ease-in-out-quart] [data-aos], [data-aos][data-aos][data-ao
 
 .z-lg {
   z-index: 10;
+}
+
+.z-xs {
+  z-index: -10;
 }
 
 .counter-reset {
