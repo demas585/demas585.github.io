@@ -16975,7 +16975,7 @@ header .btn {
   height: 15rem;
 }
 
-body {
+body, html {
   min-width: 320px;
   overflow-x: hidden;
 }

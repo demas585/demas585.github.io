@@ -45,7 +45,7 @@
           </div>
           <div class="col d-none d-lg-block">
             <div class="row gx-6" id="navbar">
-              <div class="col-auto"><a class="text-decoration-none" href="#s-todo">Program</a>
+              <div class="col-auto"><a class="text-decoration-none" href="#s-why">Program</a>
               </div>
               <div class="col-auto"><a class="text-decoration-none" href="#s-admissions">Admissions</a>
               </div>
@@ -56,16 +56,8 @@
             </div>
           </div>
           <div class="col-auto">
-            <div class="row align-items-center gx-6">
-              <div class="col-auto">
-                <button type=button  class="btn btn-outline-light btn-sm text-uppercase fw-bold rounded-pill" data-bs-toggle="modal" data-bs-target="#modal-apply">Apply
-                </button type=button >
-              </div>
-              <div class="col-auto">
-                <div class="language dropdown"><a class="text-decoration-none border-bottom border-3" href="./ru.html">RU</a>
-                </div>
-              </div>
-            </div>
+            <button type=button  class="btn btn-outline-light btn-sm text-uppercase fw-bold rounded-pill" data-bs-toggle="modal" data-bs-target="#modal-apply">Apply
+            </button type=button >
           </div>
         </div>
       </div>
@@ -146,7 +138,7 @@
           </div>
           <div class="col offset-xl-1">
             <form class="bg-white p-4 p-sm-5 rounded text-center mx-auto" style="max-width:450px">
-              <div class="h4 fw-semibold mb-4">Whant to know more?</div>
+              <div class="h4 fw-semibold mb-4">Want to know more?</div>
               <input class="form-control mb-4" type="text" placeholder="Name *"/>
               <input class="form-control mb-4" type="text" placeholder="Country *"/>
               <input class="form-control mb-4" type="text" placeholder="Email *"/>
@@ -390,36 +382,46 @@
     </div>
   </footer>
   <div class="modal fade" id="modal-apply">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-md">
       <div class="modal-content p-4 p-sm-6">
         <button type=button  class="btn btn-link btn-close btn-close-white btn-sm position-absolute top-0 end-0 mt-3 mt-md-n6 me-3" data-bs-dismiss="modal" style="min-width:auto;">
         </button type=button >
-        <div class="row">
-          <div class="col-xl mb-5 mb-xl-0">
-            <p><b>1. Passport scan</b><br>(copy of the first two pages in high resolution).</p>
-            <p><b>2. High school diploma scan</b><br>(for those who are planning to graduate this year, please submit your last semester academic transcript and a confirmation letter from your school with the graduation date).</p>
-            <p><b>3. Language certificate</b><br>(if available).</p>
-            <p>* All scans have to be in colour and high resolution. Documents that are not of indicated<br>quality will be rejected by the Admission Team.</p>
-            <p>All documents must be duly legalized in accordance with Russian and international regulations and translated into the Russian language.</p>
+        <form class="bg-white rounded text-center">
+          <h5 class="fw-semibold mb-4">Become a student of Higher IT School of TSU right now!</h5>
+          <input class="form-control mb-4" type="text" placeholder="Name *"/>
+          <input class="form-control mb-4" type="text" placeholder="Country *"/>
+          <input class="form-control mb-4" type="text" placeholder="Phone Number *"/>
+          <input class="form-control mb-4" type="text" placeholder="Email *"/>
+          <textarea class="form-control mb-4" placeholder="Your message"></textarea>
+          <div class="form-check small mb-4 text-start">
+            <input class="form-check-input" type="checkbox" id="contacts" checked="checked"/>
+            <label class="form-check-label" for="contacts">I agree and consent to the <a href=":javascript;" data-bs-toggle="modal" data-bs-target="#modal-terms">Terms of Use</a> and <a href=":javascript;" data-bs-toggle="modal" data-bs-target="#modal-policy">the Privacy Policy</a>
+            </label>
           </div>
-          <div class="col-xl-3 offset-xxl-1 position-relative me-5 mt-xl-n9">
-            <form class="bg-white p-4 p-sm-5 rounded text-center fixed-top position-absolute shadow">
-              <h5 class="fw-semibold mb-4">Become a student of Higher IT School of TSU right now!</h5>
-              <input class="form-control mb-4" type="text" placeholder="Name *"/>
-              <input class="form-control mb-4" type="text" placeholder="Country *"/>
-              <input class="form-control mb-4" type="text" placeholder="Phone Number *"/>
-              <input class="form-control mb-4" type="text" placeholder="Email *"/>
-              <textarea class="form-control mb-4" placeholder="Your message"></textarea>
-              <div class="form-check small mb-4 text-start">
-                <input class="form-check-input" type="checkbox" id="contacts" checked="checked"/>
-                <label class="form-check-label" for="contacts">I agree and consent to the <a href=":javascript;" data-bs-toggle="modal" data-bs-target="#modal-terms">Terms of Use</a> and <a href=":javascript;" data-bs-toggle="modal" data-bs-target="#modal-policy">the Privacy Policy</a>
-                </label>
-              </div>
-              <button type=button  class="btn btn-primary rounded-pill">Apply
-              </button type=button >
-            </form>
-          </div>
-        </div>
+          <button type=button  class="btn btn-primary rounded-pill">Apply
+          </button type=button >
+        </form>
+        <!--
+        .row
+            .col-xl.mb-5.mb-xl-0
+                p <b>1. Passport scan</b><br>(copy of the first two pages in high resolution).
+                p <b>2. High school diploma scan</b><br>(for those who are planning to graduate this year, please submit your last semester academic transcript and a confirmation letter from your school with the graduation date).
+                p <b>3. Language certificate</b><br>(if available).
+                p * All scans have to be in colour and high resolution. Documents that are not of indicated<br>quality will be rejected by the Admission Team.
+                p All documents must be duly legalized in accordance with Russian and international regulations and translated into the Russian language.
+        
+            .col-xl-3.offset-xxl-1.position-relative.me-5.mt-xl-n9
+                form.bg-white.p-4.p-sm-5.rounded.text-center.fixed-top.position-absolute.shadow
+                    h5.fw-semibold.mb-4 Become a student of Higher IT School of TSU right now!
+                    +input(":Name *").mb-4
+                    +input(":Country *").mb-4
+                    +input(":Phone Number *").mb-4
+                    +input(":Email *").mb-4
+                    +textarea(":Your message").mb-4
+                    +agree("#contacts").small.mb-4.text-start
+                    +btn("primary").rounded-pill Apply
+        
+        -->
       </div>
     </div>
   </div>
