@@ -51,6 +51,9 @@ button{font:inherit;color:inherit;cursor:pointer}
   .rail-bg{position:fixed;inset:0;z-index:45;background:rgba(0,0,0,.35)}
   .rail-on .rail-bg{display:block}
   .rail-on .fab{display:none}
+  .fab{transition:opacity .2s,transform .2s}
+  .fab-hide .fab{opacity:0;transform:translateY(12px);pointer-events:none}
+  .app:has(.tabs:not([hidden])) .view{padding-bottom:56px}
   .rail-x{display:block;position:sticky;top:0;margin:-6px -4px 0 auto;width:36px;height:36px;border:0;border-radius:50%;background:rgba(0,0,0,.08);color:inherit;font-size:22px;line-height:36px;padding:0;cursor:pointer;float:right}
 }
 /* app chrome */
@@ -330,10 +333,10 @@ R.catalog=()=>{const fs=['Все','Совладение','Личный','Спо�
  return `<div class="pad stack"><div><div class="eyebrow">150 коней в табуне</div><h1 class="h1" style="margin-top:4px">Выберите коня</h1></div>
  <div class="chips" role="group" aria-label="Фильтры">${fs.map(f=>`<button class="chip ${S.filter===f?'on':''}" data-filter="${f}">${f}</button>`).join('')}</div>
  ${list.map(h=>`<button class="tap card horse-row" data-horse="${h.id}">${pic('portrait',h.v,192,192)}<div style="min-width:0"><div class="row between"><b style="font-size:17px">${h.name}</b><span class="small mute">${h.age} лет</span></div>
- <div class="small mute">${h.breed} · ${h.color} · ${h.temper.toLowerCase()}</div><div class="row" style="margin-top:8px;flex-wrap:wrap;gap:6px">${h.places?`<span class="tag">Совладение: ${h.places} места</span>`:'<span class="tag g">Личный конь</span>'}<span class="small" style="font-weight:600">от ${rub(h.places?h.price:89000)}/мес</span></div></div></button>`).join('')}
+ <div class="small mute">${h.breed} · ${h.color} · ${h.temper.toLowerCase()}</div><div class="row" style="margin-top:8px;flex-wrap:wrap;gap:6px">${h.places?`<span class="tag">Совладение: ${h.places} ${h.places===1?'место':'места'}</span>`:'<span class="tag g">Личный конь</span>'}<span class="small" style="font-weight:600">от ${rub(h.places?h.price:89000)}/мес</span></div></div></button>`).join('')}
  ${list.length?'':'<p class="mute">По этому фильтру сейчас нет свободных коней.</p>'}</div>`};
 R.horse=()=>{const h=S.horse;return `<div style="position:relative">${pic('portrait',h.v,780,600,'height:300px;border-radius:0')}<button class="back" data-back aria-label="Назад" style="position:absolute;top:52px;left:16px">${I.back}</button><span class="badge-live" style="top:auto;bottom:14px;left:16px">LIVE · пастбище</span></div>
- <div class="pad stack" style="padding-top:18px"><div class="row between"><h1 class="h1">${h.name}</h1><span class="tag ${h.places?'':'g'}">${h.places?'Совладение: '+h.places+' места':'Личный конь'}</span></div>
+ <div class="pad stack" style="padding-top:18px"><div class="row between"><h1 class="h1">${h.name}</h1><span class="tag ${h.places?'':'g'}">${h.places?'Совладение: '+h.places+(h.places===1?' место':' места'):'Личный конь'}</span></div>
  <div class="mute">${h.breed} порода · ${h.color} · ${h.age} лет</div><p style="margin:0">${h.about}</p>
  <div class="grid3"><div class="metric"><span>Рост в холке</span><b>${h.h} см</b></div><div class="metric"><span>Характер</span><b style="font-size:14px;font-family:var(--f-body)">${h.temper}</b></div><div class="metric"><span>Уровень</span><b>3</b></div></div>
  <div class="card"><div class="h2" style="margin-bottom:8px">Умеет</div><div class="row" style="flex-wrap:wrap;gap:6px"><span class="tag g">Шаг по команде</span><span class="tag g">${h.walk}</span><span class="tag n">Рысь на корде · учится</span></div></div>
@@ -462,6 +465,7 @@ $('#resetBtn').addEventListener('click',()=>{location.reload()});
 const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['tariff','Выбор тарифа'],['pay','Оплата']]],['Мой конь',[['home','Главная и лента'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта']]],['Развитие',[['skills','Скиллы и ачивки']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления']]]];
 $('#scen').innerHTML=SC.map(g=>`<b>${g[0]}</b>${g[1].map(x=>`<button data-s="${x[0]}">${x[1]}</button>`).join('')}`).join('');
 $('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;const s=b.dataset.s;if(['home','cams','report','stats','health','skills'].includes(s))S.owned=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';app.querySelector('.sheet-bg')?.remove();S.stack=TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[];go(s,false);setRail(false)});
+let lastY=0;view.addEventListener('scroll',()=>{const y=view.scrollTop;if(Math.abs(y-lastY)<6)return;document.body.classList.toggle('fab-hide',y>lastY&&y>40);lastY=y},{passive:true});
 const setRail=o=>{$('#rail').classList.toggle('open',o);document.body.classList.toggle('rail-on',o)};
 $('#fab').addEventListener('click',()=>setRail(!$('#rail').classList.contains('open')));
 $('#railX').addEventListener('click',()=>setRail(false));
