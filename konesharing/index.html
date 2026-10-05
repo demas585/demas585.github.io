@@ -113,10 +113,10 @@ button{font:inherit;color:inherit;cursor:pointer}
 .tag.g{background:var(--mint);color:var(--pine2)}
 .tag.r{background:#F6DEDA;color:var(--red)}
 .tag.n{background:#EEF0EC;color:var(--stone)}
-canvas.pic{display:block;width:100%;border-radius:14px;background:#DDE3DA}
+canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-radius:14px;background:#DDE3DA}
 .tap{all:unset;display:block;cursor:pointer;box-sizing:border-box}
 .horse-row{display:grid;grid-template-columns:96px 1fr;gap:12px;align-items:center}
-.horse-row canvas{width:96px;height:96px;border-radius:14px}
+.horse-row canvas,.horse-row img{width:96px;height:96px;border-radius:14px}
 .price{font-family:var(--f-display);font-weight:700}
 .kv{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-size:14.5px}
 .kv:last-child{border-bottom:0}
@@ -130,7 +130,7 @@ canvas.pic{display:block;width:100%;border-radius:14px;background:#DDE3DA}
 .bar i{display:block;height:100%;background:var(--pine2);border-radius:4px;transition:width .8s ease}
 .bar.o i{background:var(--ochre)}
 .live{position:relative;border-radius:18px;overflow:hidden;background:#000}
-.live canvas{display:block;width:100%;height:210px;object-fit:cover}
+.live canvas,.live video,.live img{display:block;width:100%;height:210px;object-fit:cover}
 .live .pan{animation:pan 18s ease-in-out infinite alternate;transform-origin:center}
 @keyframes pan{from{transform:scale(1.12) translateX(-4%)}to{transform:scale(1.12) translateX(4%)}}
 .badge-live{position:absolute;top:10px;left:10px;background:#C0392B;color:#fff;font-size:11px;font-weight:700;letter-spacing:.08em;padding:3px 8px;border-radius:8px;display:flex;gap:6px;align-items:center}
@@ -333,7 +333,9 @@ const TAB_OF={home:'home',cams:'home',report:'home',stats:'home',health:'home',c
 const NO_TABS=['welcome','login','code','pay','paying','meet','book','chat'];
 
 function top(title,sub){return `<div class="top"><button class="back" data-back aria-label="Назад">${I.back}</button><div style="min-width:0"><h1 class="h1" style="font-size:20px">${title}</h1>${sub?`<div class="small mute">${sub}</div>`:''}</div></div>`}
-function pic(scene,v,w,h,style,cls){return `<canvas class="${cls||'pic'}" data-scene="${scene}" data-v="${v||0}" width="${w}" height="${h}" style="${style||''}"></canvas>`}
+const PHOTOS=['grom','buran','laska','shaman','aina','kedr'];
+function vid(n,style,cls){return `<video class="${cls||'vid'}" src="media/${n}.mp4" poster="media/${n}.jpg" autoplay muted loop playsinline preload="metadata" style="${style||''}"></video>`}
+function pic(scene,v,w,h,style,cls){if(scene==='portrait')return `<img class="${cls||'pic'}" src="media/${PHOTOS[v||0]}.jpg" alt="" loading="lazy" style="aspect-ratio:${w}/${h};object-fit:cover;${style||''}">`;return `<canvas class="${cls||'pic'}" data-scene="${scene}" data-v="${v||0}" width="${w}" height="${h}" style="${style||''}"></canvas>`}
 
 function mapSVG(){const tree=(x,y,r)=>`<circle cx="${x}" cy="${y}" r="${r}" fill="#9DB78C"/><circle cx="${x-r*.3}" cy="${y-r*.3}" r="${r*.45}" fill="#B3C9A3"/>`;
  const trees=[[18,70,6],[30,62,7],[12,90,5],[44,52,6],[60,40,7],[118,20,6],[24,110,6],[300,215,7],[318,200,6],[326,222,7],[132,214,5],[330,140,6],[326,160,5]].map(a=>tree(...a)).join('');
@@ -400,17 +402,17 @@ R.meet=()=>`<div class="hero" style="background-image:url(${PHOTO['2']})"><div c
  <button class="btn light" data-act="toHome">Перейти к ${S.horse.name==='Ласка'||S.horse.name==='Айна'?'ней':'нему'}</button></div>`;
 R.home=()=>{if(!S.owned)return noHorse('Здесь будет ваш конь','Выберите коня в каталоге. После оплаты здесь появятся камеры, лента событий и отчёты.');
  const h=S.horse;return `<div class="pad stack"><div class="row between"><div><div class="eyebrow">${S.plan.name}</div><h1 class="h1" style="margin-top:3px">${h.name}</h1></div><span class="tag g">● Отдыхает на пастбище</span></div>
- <button class="tap live" data-go="cams">${pic('meadow',0,780,420,'','pan')}<span class="badge-live">LIVE</span><span class="ov">Пастбище у Катуни · камера 2</span></button>
+ <button class="tap live" data-go="cams">${vid('pasture')}<span class="badge-live">LIVE</span><span class="ov">Пастбище у Катуни · камера 2</span></button>
  <div class="grid3"><div class="metric"><span>Шаги</span><b id="mSteps">8 420</b></div><div class="metric"><span>Пройдено</span><b>6,3 км</b></div><div class="metric"><span>Настроение</span><b style="font-size:15px;font-family:var(--f-body)">Бодрое</b></div></div>
  <div class="qa"><button data-go="cams">${I.cam}Камеры</button><button data-go="report">${I.doc}Отчёт</button><button data-go="stats">${I.chart}Статистика</button><button data-go="health">${I.heart}Здоровье</button></div>
  ${treatRow()}
  <div class="card"><div class="row between" style="margin-bottom:4px"><div class="h2">Сегодня</div><span class="small mute">5 октября</span></div><div class="feed" id="feed">${S.feed.slice().reverse().map((f,i)=>`<div class="fe ${i===0&&S.feedNew?'new':''}"><time>${f[0]}</time><div>${f[1]}</div></div>`).join('')}</div></div></div>`};
-R.cams=()=>{const c=S.cam||'pasture';const cams=[['stall','Денник','portrait',4],['pasture','Пастбище','meadow',0],['arena','Плац','portrait',5],['pov','Глазами коня','pov',0]];const cur=cams.find(x=>x[0]===c);
- return `<div class="pad stack">${top('Камеры',S.horse.name)}<div class="live">${pic(cur[2],cur[3],780,520,'height:260px'+(c==='pov'?';animation:bob 1.1s ease-in-out infinite':''),'pan')}<span class="badge-live">LIVE</span><span class="ov">${cur[1]}${c==='pov'?' · камера на уздечке':''}</span></div>
+R.cams=()=>{const c=S.cam||'pasture';const cams=[['stall','Денник'],['pasture','Пастбище'],['arena','Плац'],['pov','Глазами коня']];const cur=cams.find(x=>x[0]===c);
+ return `<div class="pad stack">${top('Камеры',S.horse.name)}<div class="live">${vid(c,'height:260px')}<span class="badge-live">LIVE</span><span class="ov">${cur[1]}${c==='pov'?' · камера на уздечке':''}</span></div>
  <style>@keyframes bob{50%{transform:translateY(-6px) rotate(.4deg)}}</style>
- <div class="grid2">${cams.map(x=>`<button class="tap" data-cam="${x[0]}" style="position:relative;border-radius:14px;overflow:hidden;outline:${x[0]===c?'3px solid var(--ochre)':'0'}">${pic(x[2],x[3],360,240,'height:96px;border-radius:0')}<span class="ov" style="font-size:12px">${x[1]}</span></button>`).join('')}</div>
+ <div class="grid2">${cams.map(x=>`<button class="tap" data-cam="${x[0]}" style="position:relative;border-radius:14px;overflow:hidden;outline:${x[0]===c?'3px solid var(--ochre)':'0'}"><img src="media/${x[0]}.jpg" alt="" style="display:block;width:100%;height:96px;object-fit:cover"><span class="ov" style="font-size:12px">${x[1]}</span></button>`).join('')}</div>
  <p class="small mute" style="margin:0">«Глазами коня» включается во время прогулок и занятий. Запись последних 7 дней хранится в архиве.</p></div>`};
-R.report=()=>`<div class="pad stack">${top('Отчёт за 4 октября',S.horse.name)}<div style="position:relative">${pic('meadow',0,780,460,'height:220px')}<span class="ov">Фото дня · 09:40</span></div>
+R.report=()=>`<div class="pad stack">${top('Отчёт за 4 октября',S.horse.name)}<div style="position:relative">${pic('portrait',S.horse.v,780,460,'height:220px')}<span class="ov">Фото дня · 09:40</span></div>
  <div class="card"><div class="h2" style="margin-bottom:6px">От конюха Алексея</div><p style="margin:0">Гром отлично отработал рысь, после занятия был спокоен. Съел всё, особенно обрадовался вашим яблокам. Копыта почистили, подковы в порядке.</p></div>
  <div class="card"><div class="kv"><span>Корм</span><span>овёс 4 кг, сено 9 кг</span></div><div class="kv"><span>Вода</span><span>38 л</span></div><div class="kv"><span>Тренировка</span><span>40 мин</span></div><div class="kv"><span>Прогулка</span><span>6,3 км</span></div><div class="kv"><span>Сон</span><span>3 ч 40 мин</span></div><div class="kv"><span>Самочувствие</span><span style="color:var(--pine2)">отличное</span></div></div></div>`;
 R.stats=()=>{const d=[[5.1,'Пн'],[6.8,'Вт'],[4.2,'Ср'],[7.4,'Чт'],[6.0,'Пт'],[8.9,'Сб'],[6.3,'Вс']];
@@ -568,7 +570,7 @@ view.addEventListener('click',e=>{const t=e.target.closest('button,[data-prod]')
 view.addEventListener('input',e=>{if(e.target.id==='giftTo'){S.gift.to=e.target.value;const n=$('#gcTo');if(n)n.textContent=S.gift.to||'Для вас'}
  if(e.target.id==='giftMsg'){S.gift.msg=e.target.value;const n=$('#gcMsg');if(n)n.textContent=S.gift.msg}});
 
-function paint(){view.querySelectorAll('canvas[data-scene]').forEach(cv=>{try{scenes[cv.dataset.scene](cv.getContext('2d'),cv.width,cv.height,cv)}catch(e){}})}
+function paint(){view.querySelectorAll('video').forEach(v=>{v.muted=true;const p=v.play();if(p)p.catch(()=>{})});view.querySelectorAll('canvas[data-scene]').forEach(cv=>{try{scenes[cv.dataset.scene](cv.getContext('2d'),cv.width,cv.height,cv)}catch(e){}})}
 function render(){const s=S.screen;view.innerHTML=R[s]();scr().scrollTop=0;paint();
  const showTabs=!NO_TABS.includes(s);tabsEl.hidden=!showTabs;
  if(showTabs){const cur=TAB_OF[s];tabsEl.innerHTML=TABS.map(t=>`<button class="${cur===t[0]?'on':''}" data-tab="${t[0]}" aria-current="${cur===t[0]?'page':'false'}">${t[2]}${t[1]}</button>`).join('')}
