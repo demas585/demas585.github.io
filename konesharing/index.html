@@ -46,6 +46,20 @@ button{font:inherit;color:inherit;cursor:pointer}
   .fab{display:block;position:fixed;z-index:40;right:12px;bottom:calc(86px + env(safe-area-inset-bottom,0px));background:#1C2622;color:#fff;border:0;border-radius:999px;padding:8px 13px;font-size:12px;opacity:.85}
 }
 .tabs[hidden]{display:none!important}
+/* phones: the page itself scrolls, so the browser's own bars (address bar, in-app browser toolbar) can collapse and never hide content */
+@media (max-width:760px){
+  html,body{height:auto}
+  .stage,.phone{height:auto!important}
+  .app{height:auto;min-height:100vh;min-height:100svh;overflow:visible}
+  .view{flex:1 0 auto;overflow:visible}
+  .tabs{position:sticky;bottom:0;z-index:15}
+  .sheet-bg,.push,.confetti{position:fixed}
+  .view .hero{min-height:100vh;min-height:100svh;padding-bottom:calc(max(34px,11svh) + env(safe-area-inset-bottom,0px))}
+  .view>[style*="height:100%"]{min-height:100vh;min-height:100svh}
+  #chatf{position:sticky;bottom:0}
+  #msgs{overflow:visible!important}
+}
+
 .rail-x,.rail-bg{display:none}
 @media (max-width:760px){
   .rail-bg{position:fixed;inset:0;z-index:45;background:rgba(0,0,0,.35)}
@@ -257,6 +271,7 @@ const PHOTO={"1":"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1B
 <script>
 (function(){
 const $=s=>document.querySelector(s);
+const MOB=matchMedia('(max-width:760px)'),scr=()=>MOB.matches?document.scrollingElement:view;
 const view=$('#view'),tabsEl=$('#tabs'),app=$('#app'),sb=$('#sb');
 const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const rub=n=>n.toLocaleString('ru-RU').replace(/,/g,' ')+' ₽';
@@ -404,12 +419,12 @@ R.chat=()=>`<div style="display:flex;flex-direction:column;height:100%"><div cla
  <form id="chatf" class="row" style="padding:10px 14px calc(14px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--line)"><input class="input" id="chatIn" placeholder="Сообщение" autocomplete="off" style="padding:12px"><button class="btn" style="width:auto;padding:12px 16px">Отправить</button></form></div>`;
 
 function paint(){view.querySelectorAll('canvas[data-scene]').forEach(cv=>{try{scenes[cv.dataset.scene](cv.getContext('2d'),cv.width,cv.height,cv)}catch(e){}})}
-function render(){const s=S.screen;view.innerHTML=R[s]();view.scrollTop=0;paint();
+function render(){const s=S.screen;view.innerHTML=R[s]();scr().scrollTop=0;paint();
  const showTabs=!NO_TABS.includes(s);tabsEl.hidden=!showTabs;
  if(showTabs){const cur=TAB_OF[s];tabsEl.innerHTML=TABS.map(t=>`<button class="${cur===t[0]?'on':''}" data-tab="${t[0]}" aria-current="${cur===t[0]?'page':'false'}">${t[2]}${t[1]}</button>`).join('')}
  sb.classList.toggle('light',['welcome','meet'].includes(s));
  document.querySelectorAll('#scen button').forEach(b=>b.classList.toggle('on',b.dataset.s===s));
- if(s==='code')runOtp(); if(s==='chat'){const m=$('#msgs');m.scrollTop=m.scrollHeight}
+ if(s==='code')runOtp(); if(s==='chat'){const m=$('#msgs');m.scrollTop=m.scrollHeight;if(MOB.matches)scr().scrollTop=scr().scrollHeight}
  S.feedNew=false;}
 function go(s,push=true){if(push&&S.screen!==s)S.stack.push(S.screen);S.screen=s;render()}
 function back(){S.screen=S.stack.pop()||'home';render()}
@@ -430,7 +445,7 @@ function learnSheet(){const bg=document.createElement('div');bg.className='sheet
  <button class="btn ochre" data-yes>Начать обучение · 6 000 ₽</button><button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Отмена</button></div>`;app.appendChild(bg);
  bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove();if(e.target.closest('[data-yes]')){bg.remove();S.learning='bow';render();
   setTimeout(()=>notify('Конешеринг',`Тренер Марина записала ${S.horse.name} на обучение «Поклон». Первое занятие завтра в 10:00.`),400);
-  setTimeout(()=>{S.badgeNew=true;if(S.screen==='skills'){render();view.scrollTop=view.scrollHeight}notify('Новая ачивка','«Первый скилл»: скидка 10% на День с конём');confetti()},3200)}})}
+  setTimeout(()=>{S.badgeNew=true;if(S.screen==='skills'){render();scr().scrollTop=scr().scrollHeight}notify('Новая ачивка','«Первый скилл»: скидка 10% на День с конём');confetti()},3200)}})}
 
 view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');if(!t||t.disabled)return;const d=t.dataset;
  if('back' in d)return back();
@@ -465,7 +480,7 @@ $('#resetBtn').addEventListener('click',()=>{location.reload()});
 const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['tariff','Выбор тарифа'],['pay','Оплата']]],['Мой конь',[['home','Главная и лента'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта']]],['Развитие',[['skills','Скиллы и ачивки']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления']]]];
 $('#scen').innerHTML=SC.map(g=>`<b>${g[0]}</b>${g[1].map(x=>`<button data-s="${x[0]}">${x[1]}</button>`).join('')}`).join('');
 $('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;const s=b.dataset.s;if(['home','cams','report','stats','health','skills'].includes(s))S.owned=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';app.querySelector('.sheet-bg')?.remove();S.stack=TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[];go(s,false);setRail(false)});
-let lastY=0;view.addEventListener('scroll',()=>{const y=view.scrollTop;if(Math.abs(y-lastY)<6)return;document.body.classList.toggle('fab-hide',y>lastY&&y>40);lastY=y},{passive:true});
+let lastY=0;const onScr=()=>{const y=scr().scrollTop;if(Math.abs(y-lastY)<6)return;document.body.classList.toggle('fab-hide',y>lastY&&y>40);lastY=y};view.addEventListener('scroll',onScr,{passive:true});addEventListener('scroll',onScr,{passive:true});
 const setRail=o=>{$('#rail').classList.toggle('open',o);document.body.classList.toggle('rail-on',o)};
 $('#fab').addEventListener('click',()=>setRail(!$('#rail').classList.contains('open')));
 $('#railX').addEventListener('click',()=>setRail(false));
