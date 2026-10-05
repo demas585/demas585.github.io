@@ -46,6 +46,8 @@ button{font:inherit;color:inherit;cursor:pointer}
   .fab{display:block;position:fixed;z-index:40;right:12px;bottom:calc(86px + env(safe-area-inset-bottom,0px));background:#1C2622;color:#fff;border:0;border-radius:999px;padding:8px 13px;font-size:12px;opacity:.85}
 }
 .tabs[hidden]{display:none!important}
+.gift-card{position:relative;overflow:hidden;border-radius:22px;padding:20px 18px 22px;color:#fff;background:linear-gradient(135deg,#1F3B33 0%,#2F6B55 60%,#B7832F 140%);min-height:180px;box-shadow:0 10px 30px rgba(31,59,51,.25)}
+.grid3 .tap svg{border-radius:12px}
 /* phones: the page itself scrolls, so the browser's own bars (address bar, in-app browser toolbar) can collapse and never hide content */
 @media (max-width:760px){
   html,body{height:auto}
@@ -372,6 +374,7 @@ R.home=()=>{if(!S.owned)return `<div class="pad"><div class="empty stack" style=
  <button class="tap live" data-go="cams">${pic('meadow',0,780,420,'','pan')}<span class="badge-live">LIVE</span><span class="ov">Пастбище у Катуни · камера 2</span></button>
  <div class="grid3"><div class="metric"><span>Шаги</span><b id="mSteps">8 420</b></div><div class="metric"><span>Пройдено</span><b>6,3 км</b></div><div class="metric"><span>Настроение</span><b style="font-size:15px;font-family:var(--f-body)">Бодрое</b></div></div>
  <div class="qa"><button data-go="cams">${I.cam}Камеры</button><button data-go="report">${I.doc}Отчёт</button><button data-go="stats">${I.chart}Статистика</button><button data-go="health">${I.heart}Здоровье</button></div>
+ ${treatRow()}
  <div class="card"><div class="row between" style="margin-bottom:4px"><div class="h2">Сегодня</div><span class="small mute">5 октября</span></div><div class="feed" id="feed">${S.feed.slice().reverse().map((f,i)=>`<div class="fe ${i===0&&S.feedNew?'new':''}"><time>${f[0]}</time><div>${f[1]}</div></div>`).join('')}</div></div></div>`};
 R.cams=()=>{const c=S.cam||'pasture';const cams=[['stall','Денник','portrait',4],['pasture','Пастбище','meadow',0],['arena','Плац','portrait',5],['pov','Глазами коня','pov',0]];const cur=cams.find(x=>x[0]===c);
  return `<div class="pad stack">${top('Камеры',S.horse.name)}<div class="live">${pic(cur[2],cur[3],780,520,'height:260px'+(c==='pov'?';animation:bob 1.1s ease-in-out infinite':''),'pan')}<span class="badge-live">LIVE</span><span class="ov">${cur[1]}${c==='pov'?' · камера на уздечке':''}</span></div>
@@ -411,12 +414,130 @@ R.bookings=()=>`<div class="pad stack">${top('Мои брони')}${S.bookings.m
 R.profile=()=>`<div class="pad stack"><div class="row" style="gap:14px"><div class="bdg g" style="margin:0;width:56px;height:56px">ДМ</div><div><h1 class="h1" style="font-size:20px">Дмитрий</h1><div class="small mute">+7 913 245-18-07</div></div></div>
  <div class="card"><div class="eyebrow">Подписка</div>${S.owned?`<div class="row between" style="margin-top:6px"><b>${S.plan.name} · ${S.horse.name}</b><span class="price">${rub(S.plan.price)}</span></div><div class="small mute">Следующее списание 5 ноября · СБП</div>`:'<div class="small mute" style="margin-top:6px">Пока нет подписки</div>'}</div>
  <div class="card" style="padding:2px 14px"><button class="lrow" data-go="chat"><span>Чат с менеджером</span><span class="tag">1 новое</span></button><button class="lrow" data-go="notif"><span>Уведомления</span><span class="chev">›</span></button><button class="lrow" data-go="bookings"><span>Мои брони</span><span class="chev">›</span></button><div class="lrow"><span>История платежей</span><span class="chev">›</span></div></div>
- <div class="eyebrow" style="margin-top:4px">Скоро</div><div class="card" style="padding:2px 14px;opacity:.7"><div class="lrow"><span>Магазин: корм, амуниция</span><span class="tag n">v2</span></div><div class="lrow"><span>Подарочный сертификат</span><span class="tag n">v2</span></div><div class="lrow"><span>Выкуп коня · 1 200 000 ₽</span><span class="tag n">v2</span></div></div></div>`;
+ <div class="eyebrow" style="margin-top:4px">Вторая версия</div><div class="card" style="padding:2px 14px"><button class="lrow" data-go="shop"><span>Магазин: угощения, уход, снаряжение</span><span class="tag n">v2</span></button><button class="lrow" data-go="club"><span>Клуб владельцев</span><span class="tag n">v2</span></button><button class="lrow" data-go="gift"><span>Подарочный сертификат</span><span class="tag n">v2</span></button><button class="lrow" data-go="buyout"><span>Выкуп коня</span><span class="tag n">v2</span></button></div></div>`;
 R.notif=()=>{const n=S.notif,rows=[['daily','Ежедневный отчёт','Вечером, около 20:00'],['train','Тренировки и скиллы','Начало и итог занятий'],['cam','Конь в кадре','Когда конь на пастбище у камеры'],['promo','Акции Marali','Не чаще раза в неделю']];
  return `<div class="pad stack">${top('Уведомления')}<div class="card" style="padding:2px 14px">${rows.map(r=>`<div class="lrow"><div><div>${r[1]}</div><div class="small mute">${r[2]}</div></div><button class="tog" role="switch" aria-checked="${n[r[0]]}" aria-label="${r[1]}" data-tog="${r[0]}"></button></div>`).join('')}</div></div>`};
 R.chat=()=>`<div style="display:flex;flex-direction:column;height:100%"><div class="pad" style="padding-bottom:8px">${top('Ольга, менеджер','обычно отвечает за 5 минут')}</div>
  <div id="msgs" style="flex:1;overflow:auto;padding:0 18px 10px;display:flex;flex-direction:column;gap:8px">${S.chat.map(m=>`<div class="bub ${m[0]}">${esc(m[1])}</div>`).join('')}</div>
  <form id="chatf" class="row" style="padding:10px 14px calc(14px + env(safe-area-inset-bottom,0px));background:#fff;border-top:1px solid var(--line)"><input class="input" id="chatIn" placeholder="Сообщение" autocomplete="off" style="padding:12px"><button class="btn" style="width:auto;padding:12px 16px">Отправить</button></form></div>`;
+
+// ---- v2: shop, owners club, gift certificate, buyout ----
+const ART={
+ apple:'<circle cx="40" cy="46" r="17" fill="#C0392B"/><circle cx="58" cy="48" r="15" fill="#D14B36"/><path d="M48 28c2-7 7-10 13-10-1 7-6 10-13 10z" fill="#2F6B55"/><path d="M47 30v-6" stroke="#5B3A1E" stroke-width="3" stroke-linecap="round"/>',
+ carrot:'<path d="M26 64L60 26l8 8-38 34z" fill="#E07B24"/><path d="M60 26l6-12M64 30l12-4M62 28l10-10" stroke="#2F6B55" stroke-width="4" stroke-linecap="round"/><path d="M40 52l5 4M48 44l5 4" stroke="#B5591A" stroke-width="2" stroke-linecap="round"/>',
+ cookie:'<rect x="20" y="24" width="56" height="40" rx="14" fill="#B98A4E"/><circle cx="34" cy="38" r="3" fill="#6E4A22"/><circle cx="50" cy="48" r="3" fill="#6E4A22"/><circle cx="62" cy="36" r="3" fill="#6E4A22"/><circle cx="40" cy="54" r="2.5" fill="#6E4A22"/>',
+ brush:'<rect x="18" y="30" width="60" height="18" rx="9" fill="#8A5A2B"/><rect x="22" y="48" width="52" height="16" rx="4" fill="#3B3A36"/><path d="M28 64v6M36 64v6M44 64v6M52 64v6M60 64v6M68 64v6" stroke="#3B3A36" stroke-width="3"/>',
+ drop:'<path d="M48 16c10 16 20 26 20 38a20 20 0 0 1-40 0c0-12 10-22 20-38z" fill="#3E7CA6"/><path d="M40 52a9 9 0 0 0 8 10" stroke="#fff" stroke-width="4" stroke-linecap="round" fill="none" opacity=".7"/>',
+ halter:'<path d="M30 22c-6 16-6 32 4 44h28c10-12 10-28 4-44" fill="none" stroke="#7E5716" stroke-width="7" stroke-linecap="round"/><path d="M30 44h36" stroke="#7E5716" stroke-width="7" stroke-linecap="round"/><circle cx="48" cy="66" r="6" fill="none" stroke="#C9A24A" stroke-width="4"/>',
+ blanket:'<path d="M16 30h64l-6 36H22z" fill="#1F3B33"/><path d="M18 40h60M20 52h56" stroke="#B7832F" stroke-width="4"/><path d="M16 30c10-8 54-8 64 0" fill="#2F6B55"/>',
+ plate:'<rect x="14" y="30" width="68" height="30" rx="5" fill="#C9A24A"/><rect x="18" y="34" width="60" height="22" rx="3" fill="none" stroke="#8A6A22" stroke-width="2"/><text x="48" y="50" text-anchor="middle" font-family="Unbounded,Onest,sans-serif" font-weight="700" font-size="12" fill="#5B4512">ГРОМ</text>',
+};
+const art=(k,bg,h)=>`<svg viewBox="0 0 96 86" style="width:100%;height:${h||96}px;display:block;background:${bg};border-radius:14px" aria-hidden="true">${ART[k]}</svg>`;
+const SHOP=[
+ {id:'apples',cat:'Лакомства',name:'Яблоки, 1 кг',price:350,art:'apple',bg:'#F6E4DA',treat:true,info:'Алтайские яблоки из сада Marali. Конюх вручит сегодня и снимет видео.'},
+ {id:'carrot',cat:'Лакомства',name:'Морковь, 2 кг',price:300,art:'carrot',bg:'#F7E8D3',treat:true,info:'Сладкая морковь, режем кружками, как любит конь.'},
+ {id:'treats',cat:'Лакомства',name:'Травяные печенья',short:'Печенье',price:890,art:'cookie',bg:'#F2E7D7',treat:true,info:'Лакомство из овса, льна и алтайских трав. Ветеринар одобрил.'},
+ {id:'spa',cat:'Уход',name:'СПА-день',price:4500,art:'drop',bg:'#E1EBF2',info:'Мойка с шампунем, расчёсывание гривы и массаж. Видео приходит вечером.'},
+ {id:'brush',cat:'Уход',name:'Именной набор щёток',price:2400,art:'brush',bg:'#EEE6DC',named:true,info:'Щётки останутся в деннике, на ручках гравировка с именем.'},
+ {id:'halter',cat:'Снаряжение',name:'Недоуздок с гравировкой',price:6900,art:'halter',bg:'#F1E9D8',named:true,info:'Кожаный недоуздок ручной работы, латунная пластина с именем.'},
+ {id:'blanket',cat:'Снаряжение',name:'Зимняя попона',price:14500,art:'blanket',bg:'#E3ECE7',named:true,info:'Тёплая попона в цветах Marali, вышивка с именем коня.'},
+ {id:'plate',cat:'Именное',name:'Табличка на денник',price:3900,art:'plate',bg:'#F4EBD2',named:true,info:'Латунная табличка с именем коня и владельца на двери денника.'},
+];
+const her=()=>S.horse.name==='Ласка'||S.horse.name==='Айна';
+const gen=n=>({Ласка:'Ласки',Айна:'Айны'}[n]||n+'а'),dat=n=>({Ласка:'Ласке',Айна:'Айне'}[n]||n+'у');
+const CLUB_NEWS=[
+ [PHOTO['2'],'В табуне пополнение','Кобыла Майра принесла жеребёнка. Владельцы выбирают ему имя голосованием до 15 октября.','3 октября'],
+ [PHOTO['3'],'Ранняя бронь «Кержаков» 2027','Для владельцев коней скидка 15% до 1 декабря. Можно ехать на своём коне.','1 октября'],
+ [PHOTO['4'],'Ветеринарный день','Игорь Сабашкин осмотрел зубы всем 150 коням. Отчёты уже в медкартах.','28 сентября'],
+];
+const CLUB_EVENTS=[
+ {id:'meet',t:'Встреча владельцев в Marali',d:'14 ноября, суббота',p:'Ужин у камина, прогулка с конями, знакомство с тренерами',n:23},
+ {id:'live',t:'Эфир с тренером Мариной',d:'20 октября, 19:00 · онлайн',p:'Как идёт обучение скиллам и чему научить коня зимой',n:58},
+ {id:'race',t:'Скачки на Чуйском тракте',d:'июнь 2027',p:'Болеем за коней Marali, трансфер и места на трибуне',n:11},
+];
+const RATING=[['Шаман',1840,3],['Буран',1610,1],['Ласка',1220,2],['Гром',980,0],['Кедр',870,5],['Айна',640,4]];
+Object.assign(TAB_OF,{shop:'home',club:'profile',gift:'profile',buyout:'profile'});
+Object.assign(S,{shopCat:'Все',orders:0,clubTab:'Новости',rsvp:{},gift:{to:'Анна',plan:'co',months:3,horse:'any',msg:'С днём рождения! Теперь у тебя есть свой конь на Алтае.',done:false},bo:{keep:true,plan:'full',sent:false}});
+
+function treatRow(){const h=S.horse;return `<div class="card"><div class="row between" style="margin-bottom:10px"><div class="h2">Угостить ${h.name==='Ласка'||h.name==='Айна'?'её':'его'}</div><button class="tap small" data-go="shop" style="color:var(--pine2);font-weight:600">Магазин ›</button></div>
+ <div class="grid3">${SHOP.filter(p=>p.treat).map(p=>`<button class="tap" data-prod="${p.id}" style="text-align:left">${art(p.art,p.bg,64)}<div class="small" style="margin-top:6px;font-weight:600">${p.short||p.name.split(',')[0]}</div><div class="small mute">${rub(p.price)}</div></button>`).join('')}</div>
+ <div class="small mute" style="margin-top:10px">Конюх вручит угощение сегодня и пришлёт видео в ленту.</div></div>`}
+
+R.shop=()=>{const cats=['Все','Лакомства','Уход','Снаряжение','Именное'];const list=SHOP.filter(p=>S.shopCat==='Все'||p.cat===S.shopCat);
+ return `<div class="pad stack">${top('Магазин','угощения и вещи для '+gen(S.horse.name))}
+ <div class="chips" role="group" aria-label="Категории">${cats.map(c=>`<button class="chip ${S.shopCat===c?'on':''}" data-shopcat="${c}">${c}</button>`).join('')}</div>
+ <div class="grid2">${list.map(p=>`<button class="tap card" data-prod="${p.id}" style="text-align:left;padding:10px">${art(p.art,p.bg)}<div style="font-weight:600;margin-top:8px;line-height:1.25">${p.name}</div><div class="row between" style="margin-top:6px"><span class="price" style="font-size:14px">${rub(p.price)}</span>${p.named?'<span class="tag n">именное</span>':''}</div></button>`).join('')}</div>
+ ${S.orders?`<div class="card row between"><span>Заказов сегодня: <b>${S.orders}</b></span><span class="tag g">видео придёт в ленту</span></div>`:''}
+ <p class="small mute" style="margin:0">Всё вручает конюх в Marali, доставка не нужна. Ветеринар проверяет, чтобы лакомств не было слишком много.</p></div>`};
+
+function prodSheet(id){const p=SHOP.find(x=>x.id===id),h=S.horse;const bg=document.createElement('div');bg.className='sheet-bg';
+ bg.innerHTML=`<div class="sheet" role="dialog" aria-label="${p.name}"><div class="grab"></div>${art(p.art,p.bg,130)}
+ <h2 class="h1" style="font-size:20px;margin-top:12px">${p.name}</h2><p class="mute" style="margin:6px 0 12px">${p.info}</p>
+ ${p.named?`<label class="small mute" for="engr">Надпись</label><input class="input" id="engr" value="${h.name.toUpperCase()} · MARALI" style="margin:4px 0 12px;font-size:15px;padding:12px">`:''}
+ <div class="card" style="margin-bottom:14px"><div class="kv"><span>Для кого</span><span>${h.name}</span></div><div class="kv"><span>Когда</span><span>${p.treat?'сегодня до 18:00':p.named?'через 7–10 дней':'в ближайшие 2 дня'}</span></div><div class="kv"><span>Стоимость</span><span>${rub(p.price)}</span></div></div>
+ <button class="btn ochre" data-yes>${p.treat?'Угостить':'Купить'} · ${rub(p.price)}</button><button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Отмена</button></div>`;
+ app.appendChild(bg);
+ bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))return bg.remove();if(!e.target.closest('[data-yes]'))return;bg.remove();S.orders++;if(S.screen==='shop')render();
+  notify('Заказ принят',p.treat?`Алексей угостит ${her()?'её':gen(h.name)} сегодня и пришлёт видео.`:`${p.name}: передали в работу, сообщим, когда будет готово.`);
+  if(p.treat)setTimeout(()=>{S.feed.push(['16:20',`Угощение от вас: ${p.name.toLowerCase()} · видео`]);S.feedNew=true;if(S.screen==='home')render();notify('Конешеринг',`${h.name} съел${her()?'а':''} ваше угощение! Видео уже в ленте.`)},3600)})}
+
+R.club=()=>{const tabs=['Новости','События','Рейтинг'];let body='';
+ if(S.clubTab==='Новости')body=CLUB_NEWS.map(n=>`<div class="card" style="padding:0;overflow:hidden"><div style="height:130px;background:url(${n[0]}) center/cover"></div><div style="padding:12px 14px"><div class="small mute">${n[3]}</div><b style="font-size:16px;display:block;margin-top:2px">${n[1]}</b><div class="small" style="margin-top:4px;color:var(--stone)">${n[2]}</div></div></div>`).join('');
+ if(S.clubTab==='События')body=CLUB_EVENTS.map(e=>{const on=!!S.rsvp[e.id];return `<div class="card"><div class="eyebrow" style="color:var(--ochre)">${e.d}</div><b style="font-size:16px;display:block;margin-top:4px">${e.t}</b><div class="small mute" style="margin-top:4px">${e.p}</div>
+  <div class="row between" style="margin-top:12px"><span class="small mute">Идут ${e.n+(on?1:0)} человек</span><button class="btn ${on?'ghost':''}" style="width:auto;padding:9px 16px" data-rsvp="${e.id}">${on?'Вы идёте ✓':'Пойду'}</button></div></div>`}).join('');
+ if(S.clubTab==='Рейтинг')body=`<div class="card" style="padding:4px 14px"><div class="small mute" style="padding:8px 0 4px">Опыт за октябрь: занятия, прогулки и скиллы</div>${RATING.map((r,i)=>{const me=r[0]===S.horse.name;return `<div class="lrow" style="${me?'background:var(--ochre-soft);margin:0 -14px;padding-left:14px;padding-right:14px;width:calc(100% + 28px)':''}"><div class="row" style="gap:12px"><b style="width:18px;color:${i<3?'var(--ochre)':'var(--stone)'}">${i+1}</b>${pic('portrait',r[2],80,80,'width:36px;height:36px;border-radius:10px')}<span>${r[0]}${me?' · ваш':''}</span></div><b>${r[1].toLocaleString('ru-RU')} XP</b></div>`}).join('')}</div>
+  <div class="small mute">Тройка лидеров месяца получает фотосессию с конём. До 3 места ${dat(S.horse.name)} не хватает ${Math.max(0,1220-980)} XP.</div>`;
+ return `<div class="pad stack">${top('Клуб владельцев','112 владельцев · 150 коней')}<div class="chips" role="group" aria-label="Разделы клуба">${tabs.map(t=>`<button class="chip ${S.clubTab===t?'on':''}" data-clubtab="${t}">${t}</button>`).join('')}</div>${body}</div>`};
+
+function giftSum(){const g=S.gift,p=PLANS.find(x=>x.id===g.plan);const disc=g.months>=12?.85:g.months>=6?.9:1;return Math.round(p.price*g.months*disc/100)*100}
+R.gift=()=>{const g=S.gift,p=PLANS.find(x=>x.id===g.plan);
+ if(g.done)return `<div class="pad stack">${top('Сертификат готов')}${giftCard()}
+ <div class="card"><div class="small mute">Ссылка для ${esc(g.to)}</div><div class="row between" style="margin-top:6px"><b style="font-size:15px">konesharing.ru/gift/AX7K-29QF</b></div></div>
+ <button class="btn" data-act2="copyGift">Скопировать ссылку</button><button class="btn ghost" data-act2="sendGift">Отправить в мессенджер</button>
+ <p class="small mute" style="margin:0">Получатель откроет ссылку, войдёт по номеру телефона и ${g.horse==='any'?'выберет коня сам':'увидит своего коня'}. Подписка начнётся с первого входа, сертификат действует год.</p></div>`;
+ return `<div class="pad stack">${top('Подарочный сертификат','Конь на Алтае в подарок')}${giftCard()}
+ <label class="small mute" for="giftTo">Кому</label><input class="input" id="giftTo" value="${esc(g.to)}" style="margin-top:-8px;font-size:16px;padding:12px">
+ <div class="eyebrow">Тариф</div><div class="chips">${PLANS.map(x=>`<button class="chip ${g.plan===x.id?'on':''}" data-gplan="${x.id}">${x.name}</button>`).join('')}</div>
+ <div class="eyebrow">Срок</div><div class="chips">${[1,3,6,12].map(m=>`<button class="chip ${g.months===m?'on':''}" data-gmon="${m}">${m} мес${m>=6?(m>=12?' · −15%':' · −10%'):''}</button>`).join('')}</div>
+ <div class="eyebrow">Конь</div><div class="chips"><button class="chip ${g.horse==='any'?'on':''}" data-ghorse="any">Выберет сам</button>${HORSES.filter(h=>h.places||g.plan!=='co').slice(0,4).map(h=>`<button class="chip ${g.horse===h.id?'on':''}" data-ghorse="${h.id}">${h.name}</button>`).join('')}</div>
+ <label class="small mute" for="giftMsg">Пожелание на открытке</label><textarea class="input" id="giftMsg" rows="3" style="margin-top:-8px;font-size:15px;padding:12px;resize:none">${esc(g.msg)}</textarea>
+ <div class="card"><div class="kv"><span>${p.name} × ${g.months} мес</span><span>${rub(giftSum())}</span></div></div>
+ <button class="btn ochre" data-act2="buyGift">Оплатить · ${rub(giftSum())}</button><p class="small mute" style="margin:0;text-align:center">Это прототип: деньги не списываются.</p></div>`};
+function giftCard(){const g=S.gift,p=PLANS.find(x=>x.id===g.plan),h=HORSES.find(x=>x.id===g.horse);
+ return `<div class="gift-card"><div style="position:relative;z-index:1"><div class="eyebrow" style="color:#F2C89A">Подарок · Конешеринг</div><div class="logo" style="font-size:22px;margin:10px 0 6px" id="gcTo">${esc(g.to||'Для вас')}</div>
+ <div style="font-size:14px;opacity:.92;max-width:220px" id="gcMsg">${esc(g.msg)}</div><div class="row" style="gap:6px;margin-top:14px;flex-wrap:wrap"><span class="tag" style="background:rgba(255,255,255,.16);color:#fff">${p.name}</span><span class="tag" style="background:rgba(255,255,255,.16);color:#fff">${g.months} мес</span><span class="tag" style="background:rgba(255,255,255,.16);color:#fff">${h?h.name:'конь на выбор'}</span></div></div>
+ ${pic('portrait',h?h.v:0,240,240,'position:absolute;right:-18px;bottom:-18px;width:130px;height:130px;border-radius:50%;opacity:.95')}</div>`}
+
+R.buyout=()=>{const h=S.horse,b=S.bo,months=14,paid=months*S.plan.price,credit=Math.round(paid*.5),base=1200000,price=base-credit,extra=b.keep?0:85000,total=price+extra;
+ if(b.sent)return `<div class="pad stack">${top('Заявка на выкуп',h.name)}<div class="card" style="background:var(--mint)"><b>Заявка отправлена</b><div class="small" style="margin-top:4px">Менеджер Ольга свяжется с вами сегодня. Цена зафиксирована на 14 дней.</div></div>
+ <div class="card"><div class="h2" style="margin-bottom:6px">Что дальше</div>${[['Заявка','сегодня',1],['Осмотр ветеринаром и оценка','1–3 дня',0],['Договор купли-продажи','онлайн, через Госуслуги',0],['Оплата',b.plan==='full'?'одним платежом':'12 платежей',0],['Передача паспорта коня',b.keep?'конь остаётся в Marali':'доставка коневозом',0]].map((s,i)=>`<div class="fe"><time style="color:${s[2]?'var(--pine2)':'var(--stone)'}">${s[2]?'✓':i+1}</time><div><b style="font-weight:600">${s[0]}</b><div class="small mute">${s[1]}</div></div></div>`).join('')}</div>
+ <button class="btn ghost" data-tab="home">Вернуться к ${her()?'ней':'нему'}</button></div>`;
+ return `<div class="pad stack">${top('Выкуп коня',h.name)}<div style="position:relative">${pic('portrait',h.v,780,440,'height:190px')}<span class="ov">${h.name} · ${h.breed.toLowerCase()} · ${h.age} лет</span></div>
+ <div class="card"><div class="kv"><span>Оценка коня</span><span>${rub(base)}</span></div><div class="kv"><span>Уплачено подписок за ${months} мес</span><span>${rub(paid)}</span></div><div class="kv"><span>Зачитываем 50% подписок</span><span style="color:var(--pine2)">− ${rub(credit)}</span></div>${extra?`<div class="kv"><span>Доставка коневозом</span><span>${rub(extra)}</span></div>`:''}<div class="kv"><span><b>Итого</b></span><span class="price">${rub(total)}</span></div></div>
+ <div class="eyebrow">После выкупа</div>
+ <button class="opt ${b.keep?'on':''}" data-bkeep="1"><div class="row between"><b>Оставить в Marali</b><span class="small mute">45 000 ₽/мес</span></div><div class="small mute" style="margin-top:4px">Постой, уход и тренер. Камеры, лента и отчёты остаются в приложении.</div></button>
+ <button class="opt ${!b.keep?'on':''}" data-bkeep="0"><div class="row between"><b>Забрать домой</b><span class="small mute">+85 000 ₽</span></div><div class="small mute" style="margin-top:4px">Коневоз до вашей конюшни, ветеринарные документы в дорогу.</div></button>
+ <div class="eyebrow">Оплата</div><div class="chips"><button class="chip ${b.plan==='full'?'on':''}" data-bplan="full">Сразу</button><button class="chip ${b.plan==='inst'?'on':''}" data-bplan="inst">Рассрочка 12 мес · ${rub(Math.round(total/12/100)*100)}/мес</button></div>
+ <button class="btn ochre" data-act2="buyout">Отправить заявку</button><p class="small mute" style="margin:0;text-align:center">Заявка ни к чему не обязывает: цену подтвердит ветеринарный осмотр.</p></div>`};
+
+view.addEventListener('click',e=>{const t=e.target.closest('button,[data-prod]');if(!t||t.disabled)return;const d=t.dataset;
+ if(d.prod)return prodSheet(d.prod);
+ if(d.shopcat){S.shopCat=d.shopcat;return render()}
+ if(d.clubtab){S.clubTab=d.clubtab;return render()}
+ if(d.rsvp){const on=S.rsvp[d.rsvp]=!S.rsvp[d.rsvp];render();if(on){const ev=CLUB_EVENTS.find(x=>x.id===d.rsvp);notify('Вы записаны',`${ev.t}, ${ev.d}. Напомним за день.`)}return}
+ if(d.gplan){S.gift.plan=d.gplan;if(d.gplan==='co'){const h=HORSES.find(x=>x.id===S.gift.horse);if(h&&!h.places)S.gift.horse='any'}return render()}
+ if(d.gmon){S.gift.months=+d.gmon;return render()}
+ if(d.ghorse){S.gift.horse=d.ghorse;return render()}
+ if(d.bkeep){S.bo.keep=d.bkeep==='1';return render()}
+ if(d.bplan){S.bo.plan=d.bplan;return render()}
+ const a=d.act2;
+ if(a==='buyGift'){go('paying');setTimeout(()=>{S.gift.done=true;S.stack=['profile'];go('gift',false);confetti()},1400);return}
+ if(a==='copyGift'){try{navigator.clipboard.writeText('https://konesharing.ru/gift/AX7K-29QF')}catch(_){}notify('Ссылка скопирована','Отправьте её получателю любым удобным способом.');return}
+ if(a==='sendGift'){notify('Готово',`Открытка для ${S.gift.to} отправлена. Мы сообщим, когда подарок откроют.`);return}
+ if(a==='buyout'){S.bo.sent=true;render();notify('Заявка на выкуп',`Ольга свяжется с вами сегодня, чтобы назначить осмотр ${gen(S.horse.name)}.`);return}
+});
+view.addEventListener('input',e=>{if(e.target.id==='giftTo'){S.gift.to=e.target.value;const n=$('#gcTo');if(n)n.textContent=S.gift.to||'Для вас'}
+ if(e.target.id==='giftMsg'){S.gift.msg=e.target.value;const n=$('#gcMsg');if(n)n.textContent=S.gift.msg}});
 
 function paint(){view.querySelectorAll('canvas[data-scene]').forEach(cv=>{try{scenes[cv.dataset.scene](cv.getContext('2d'),cv.width,cv.height,cv)}catch(e){}})}
 function render(){const s=S.screen;view.innerHTML=R[s]();scr().scrollTop=0;paint();
@@ -477,9 +598,9 @@ $('#liveBtn').addEventListener('click',e=>{S.live=!S.live;e.currentTarget.setAtt
 $('#resetBtn').addEventListener('click',()=>{location.reload()});
 
 // scenario rail
-const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['tariff','Выбор тарифа'],['pay','Оплата']]],['Мой конь',[['home','Главная и лента'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта']]],['Развитие',[['skills','Скиллы и ачивки']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления']]]];
+const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['tariff','Выбор тарифа'],['pay','Оплата']]],['Мой конь',[['home','Главная и лента'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта']]],['Развитие',[['skills','Скиллы и ачивки']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления']]],['Вторая версия',[['shop','Магазин и «Угостить»'],['club','Клуб владельцев'],['gift','Подарочный сертификат'],['buyout','Выкуп коня']]]];
 $('#scen').innerHTML=SC.map(g=>`<b>${g[0]}</b>${g[1].map(x=>`<button data-s="${x[0]}">${x[1]}</button>`).join('')}`).join('');
-$('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;const s=b.dataset.s;if(['home','cams','report','stats','health','skills'].includes(s))S.owned=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';app.querySelector('.sheet-bg')?.remove();S.stack=TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[];go(s,false);setRail(false)});
+$('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;const s=b.dataset.s;if(['home','cams','report','stats','health','skills','shop','club','buyout'].includes(s))S.owned=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';app.querySelector('.sheet-bg')?.remove();S.stack=TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[];go(s,false);setRail(false)});
 let lastY=0;const onScr=()=>{const y=scr().scrollTop;if(Math.abs(y-lastY)<6)return;document.body.classList.toggle('fab-hide',y>lastY&&y>40);lastY=y};view.addEventListener('scroll',onScr,{passive:true});addEventListener('scroll',onScr,{passive:true});
 const setRail=o=>{$('#rail').classList.toggle('open',o);document.body.classList.toggle('rail-on',o)};
 $('#fab').addEventListener('click',()=>setRail(!$('#rail').classList.contains('open')));
