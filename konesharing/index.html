@@ -46,6 +46,13 @@ button{font:inherit;color:inherit;cursor:pointer}
   .fab{display:block;position:fixed;z-index:40;right:12px;bottom:calc(86px + env(safe-area-inset-bottom,0px));background:#1C2622;color:#fff;border:0;border-radius:999px;padding:8px 13px;font-size:12px;opacity:.85}
 }
 .tabs[hidden]{display:none!important}
+.rail-x,.rail-bg{display:none}
+@media (max-width:760px){
+  .rail-bg{position:fixed;inset:0;z-index:45;background:rgba(0,0,0,.35)}
+  .rail-on .rail-bg{display:block}
+  .rail-on .fab{display:none}
+  .rail-x{display:block;position:sticky;top:0;margin:-6px -4px 0 auto;width:36px;height:36px;border:0;border-radius:50%;background:rgba(0,0,0,.08);color:inherit;font-size:22px;line-height:36px;padding:0;cursor:pointer;float:right}
+}
 /* app chrome */
 .sb{height:44px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 26px;font-size:14px;font-weight:600;position:absolute;top:0;left:0;right:0;z-index:5;pointer-events:none}
 .sb.light{color:#fff}
@@ -175,7 +182,9 @@ canvas.pic{display:block;width:100%;border-radius:14px;background:#DDE3DA}
 </style>
 
 <div class="stage">
+  <div class="rail-bg" id="railBg"></div>
   <aside class="rail" id="rail" aria-label="Сценарии прототипа">
+    <button class="rail-x" id="railX" aria-label="Закрыть меню">×</button>
     <h1>Конешеринг</h1>
     <p>Кликабельный прототип PWA для парк-отеля Marali. Нажимайте прямо на экране телефона или перейдите к сценарию из списка.</p>
     <div class="grp" id="scen"></div>
@@ -452,8 +461,12 @@ $('#resetBtn').addEventListener('click',()=>{location.reload()});
 // scenario rail
 const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['tariff','Выбор тарифа'],['pay','Оплата']]],['Мой конь',[['home','Главная и лента'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта']]],['Развитие',[['skills','Скиллы и ачивки']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления']]]];
 $('#scen').innerHTML=SC.map(g=>`<b>${g[0]}</b>${g[1].map(x=>`<button data-s="${x[0]}">${x[1]}</button>`).join('')}`).join('');
-$('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;const s=b.dataset.s;if(['home','cams','report','stats','health','skills'].includes(s))S.owned=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';app.querySelector('.sheet-bg')?.remove();S.stack=TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[];go(s,false);$('#rail').classList.remove('open')});
-$('#fab').addEventListener('click',()=>$('#rail').classList.toggle('open'));
+$('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;const s=b.dataset.s;if(['home','cams','report','stats','health','skills'].includes(s))S.owned=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';app.querySelector('.sheet-bg')?.remove();S.stack=TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[];go(s,false);setRail(false)});
+const setRail=o=>{$('#rail').classList.toggle('open',o);document.body.classList.toggle('rail-on',o)};
+$('#fab').addEventListener('click',()=>setRail(!$('#rail').classList.contains('open')));
+$('#railX').addEventListener('click',()=>setRail(false));
+$('#railBg').addEventListener('click',()=>setRail(false));
+$('#liveBtn').addEventListener('click',()=>setRail(false));
 render();
 })();
 </script>
