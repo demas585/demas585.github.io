@@ -58,7 +58,7 @@ button{font:inherit;color:inherit;cursor:pointer}
   .app{height:auto;min-height:100vh;min-height:100svh;overflow:visible}
   .view{flex:1 0 auto;overflow:visible}
   .tabs{position:sticky;bottom:0;z-index:15}
-  .sheet-bg,.push,.confetti{position:fixed}
+  .app .sheet-bg,.app .push,.app .confetti{position:fixed}
   .view .hero{min-height:100vh;min-height:100svh;padding-bottom:calc(max(34px,11svh) + env(safe-area-inset-bottom,0px))}
   .view>[style*="height:100%"]{min-height:100vh;min-height:100svh}
   #chatf{position:sticky;bottom:0}
@@ -124,6 +124,9 @@ canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-ra
 .kv:last-child{border-bottom:0}
 .kv span:last-child{font-weight:600;font-variant-numeric:tabular-nums}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.rings{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 4px}.rg{width:32%;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px}.rg b{font-size:12.5px;margin-top:2px}.rg span{font-size:11.5px;color:var(--stone);line-height:1.25}
+.ring{display:block;flex:none}.pass{display:grid;grid-template-columns:auto 1fr;gap:7px 14px;font-size:14px}.pass span:nth-child(odd){color:var(--stone)}
+.seg{display:grid;grid-template-columns:1fr 1fr;background:#E9ECE6;border-radius:12px;padding:3px}.seg button{border:0;background:none;padding:9px;border-radius:10px;font-weight:600;font-size:14px;color:var(--stone)}.seg button.on{background:#fff;color:var(--pine);box-shadow:0 1px 3px rgba(0,0,0,.08)}
 .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .metric{background:#fff;border-radius:16px;padding:12px;box-shadow:0 1px 0 var(--line)}
 .metric b{display:block;font-family:var(--f-display);font-size:19px;font-variant-numeric:tabular-nums;margin-top:2px}
@@ -302,17 +305,40 @@ const HORSES=[
  {id:'aina',name:'Айна',age:4,breed:'Алтайская',color:'буланая',v:4,temper:'Мягкая',h:146,walk:'Прогулки',places:4,price:29000,tags:['Совладение','Спокойные','Алтайская'],about:'Самая молодая в табуне. Мягкая, доверчивая, хорошо идёт в поводу.'},
  {id:'kedr',name:'Кедр',age:9,breed:'Тракененская',color:'караковый',v:5,temper:'Спокойный',h:166,walk:'Выездка',places:1,price:29000,tags:['Совладение','Спокойные'],about:'Крупный и очень спокойный конь. Любимец детей на конных прогулках.'},
 ];
+
+// Паспорт и физическая форма. 100% = норма породы (типичный максимум подготовленного взрослого коня), cap = потолок от ветеринара
+const STATS=[['speed','Скорость','км/ч','на галопе'],['jump','Прыжок','см','высота барьера'],['load','Грузоподъёмность','кг','всадник с грузом'],['power','Сила','кг','тяговое усилие'],['stamina','Выносливость','км','без отдыха']];
+const NORM={'Алтайская':{speed:45,jump:90,load:110,power:350,stamina:60},'Орловская':{speed:55,jump:110,load:100,power:400,stamina:40},'Новоалтайская':{speed:45,jump:90,load:130,power:500,stamina:60},'Тракененская':{speed:55,jump:140,load:110,power:420,stamina:40}};
+const PASS={
+ grom:{sex:'Мерин',w:470,born:'2020, конюшня Marali',par:'Алмаз × Тайга',f:{speed:[72,90],jump:[55,85],load:[80,95],power:[70,95],stamina:[85,100]}},
+ buran:{sex:'Мерин',w:540,born:'2018, Хреновской конный завод',par:'Бриз × Вьюга',f:{speed:[88,95],jump:[70,90],load:[65,85],power:[62,85],stamina:[66,85]}},
+ laska:{sex:'Кобыла',w:430,born:'2021, конюшня Marali',par:'Алмаз × Зорька',f:{speed:[76,95],jump:[62,95],load:[48,80],power:[52,85],stamina:[70,100]}},
+ shaman:{sex:'Жеребец',w:520,born:'2019, Чемальский район',par:'Байкал × Ночка',f:{speed:[70,85],jump:[50,80],load:[96,105],power:[104,110],stamina:[98,110]}},
+ aina:{sex:'Кобыла',w:410,born:'2022, конюшня Marali',par:'Кайрат × Ласточка',f:{speed:[60,95],jump:[45,90],load:[40,80],power:[45,85],stamina:[58,95]}},
+ kedr:{sex:'Мерин',w:600,born:'2017, Кировский конный завод',par:'Кристалл × Купава',f:{speed:[74,85],jump:[92,95],load:[78,90],power:[75,85],stamina:[60,80]}},
+};
+const TRICKS=[
+ {id:'step',name:'Шаг по команде',done:true},
+ {id:'trot',name:'Рысь на корде',p:72,lvl:'Занятие 5 из 7'},
+ {id:'bow',name:'Поклон',price:6000,lessons:4},
+ {id:'pole',name:'Прыжок через жердь',need:['jump',65]},
+ {id:'spanish',name:'Испанский шаг',need:['power',75]},
+];
+function fpct(h,id){return (PASS[h.id].f[id][0])+((S.boost&&S.boost[h.id+id])||0)}
+function fcap(h,id){return PASS[h.id].f[id][1]}
+function fval(h,id,pc){return Math.round(NORM[h.breed][id]*(pc==null?fpct(h,id):pc)/100)}
+function ring(pc,cap,size,gain){const r=15.5,C=2*Math.PI*r,over=pc>100,main=Math.min(pc,100),ang=a=>{const t=(a/100)*2*Math.PI-Math.PI/2;return [18+r*Math.cos(t),18+r*Math.sin(t)]};
+ const capOk=cap<=100;const [x1,y1]=capOk?ang(cap):[0,0];const tk=capOk?(()=>{const t=(cap/100)*2*Math.PI-Math.PI/2;return `<line x1="${18+12*Math.cos(t)}" y1="${18+12*Math.sin(t)}" x2="${18+19.5*Math.cos(t)}" y2="${18+19.5*Math.sin(t)}" stroke="var(--ink)" stroke-width="1.6" stroke-linecap="round"/>`})():'';
+ const g=gain?`<circle cx="18" cy="18" r="${r}" fill="none" stroke="var(--ochre)" stroke-opacity=".55" stroke-width="3.6" pathLength="100" stroke-dasharray="0 ${main} ${Math.min(gain,100-main)} 100" style="transform:rotate(-90deg);transform-origin:center"/>`:'';
+ return `<svg viewBox="0 0 36 36" width="${size}" height="${size}" class="ring" aria-hidden="true"><circle cx="18" cy="18" r="${r}" fill="none" stroke="#E5E8E2" stroke-width="3.6"/>
+ <circle cx="18" cy="18" r="${r}" fill="none" stroke="${over?'var(--ochre)':'var(--pine2)'}" stroke-width="3.6" stroke-linecap="round" pathLength="100" stroke-dasharray="${main} 100" style="transform:rotate(-90deg);transform-origin:center"/>${g}${tk}
+ <text x="18" y="18" text-anchor="middle" dominant-baseline="central" font-size="${size<60?8:8.5}" font-weight="700" fill="${over?'#7E5716':'var(--ink)'}" font-family="var(--f-display)">${pc}%</text></svg>`}
+function formRings(h){return `<div class="rings">${STATS.map(([id,n,u])=>{const pc=fpct(h,id),cap=fcap(h,id);return `<div class="rg">${ring(pc,cap,74)}<b>${n}</b><span>${fval(h,id)} из ${NORM[h.breed][id]} ${u}</span></div>`}).join('')}</div>`}
+function trickState(h,t){if(t.done)return 'done';if(t.p)return 'learning';if(S.learning===t.id)return 'learning';if(t.need&&fpct(h,t.need[0])<t.need[1])return 'locked';return 'open'}
 const PLANS=[
  {id:'friend',name:'Друг коня',price:4900,pts:['Камеры и лента событий','Еженедельный отчёт','Скидка 5% на визиты']},
  {id:'co',name:'Совладелец',price:29000,pts:['Конь на 2–4 владельцев','Ежедневный отчёт и статистика','Изучение скиллов','Скидка 10% на визиты и тур']},
  {id:'own',name:'Личный конь',price:89000,pts:['Конь только ваш','Все камеры, включая «глазами коня»','Личный конюх и чат 24/7','2 визита в год включены']},
-];
-const SKILLS=[
- {id:'step',name:'Шаг по команде',p:100,lvl:'Освоен'},
- {id:'trot',name:'Рысь на корде',p:72,lvl:'Занятие 5 из 7'},
- {id:'bow',name:'Поклон',p:0,lvl:'Доступен',price:6000,lessons:4},
- {id:'jump',name:'Прыжок через жердь',p:0,lvl:'Нужен уровень 4',locked:true},
- {id:'spanish',name:'Испанский шаг',p:0,lvl:'Нужен уровень 5',locked:true},
 ];
 const FEED0=[
  ['07:30','Утренний осмотр: всё в порядке, температура 37,6°'],
@@ -388,8 +414,10 @@ R.catalog=()=>{const fs=['Все','Совладение','Личный','Спо�
 R.horse=()=>{const h=S.horse;return `<div style="position:relative">${pic('portrait',h.v,780,600,'height:300px;border-radius:0')}<button class="back" data-back aria-label="Назад" style="position:absolute;top:52px;left:16px">${I.back}</button><span class="badge-live" style="top:auto;bottom:14px;left:16px">LIVE · пастбище</span></div>
  <div class="pad stack" style="padding-top:18px"><div class="row between"><h1 class="h1">${h.name}</h1><span class="tag ${h.places?'':'g'}">${h.places?'Совладение: '+h.places+(h.places===1?' место':' места'):'Личный конь'}</span></div>
  <div class="mute">${h.breed} порода · ${h.color} · ${h.age} лет</div><p style="margin:0">${h.about}</p>
- <div class="grid3"><div class="metric"><span>Рост в холке</span><b>${h.h} см</b></div><div class="metric"><span>Характер</span><b style="font-size:14px;font-family:var(--f-body)">${h.temper}</b></div><div class="metric"><span>Уровень</span><b>3</b></div></div>
- <div class="card"><div class="h2" style="margin-bottom:8px">Умеет</div><div class="row" style="flex-wrap:wrap;gap:6px"><span class="tag g">Шаг по команде</span><span class="tag g">${h.walk}</span><span class="tag n">Рысь на корде · учится</span></div></div>
+ <div class="card"><div class="h2" style="margin-bottom:10px">Паспорт</div><div class="pass">${(()=>{const P=PASS[h.id];return [['Порода',h.breed],['Пол',P.sex],['Возраст',h.age+' лет'],['Масть',h.color[0].toUpperCase()+h.color.slice(1)],['Рост в холке',h.h+' см'],['Вес',P.w+' кг'],['Характер',h.temper],['Родился',P.born],['Родители',P.par]].map(x=>`<span>${x[0]}</span><span>${x[1]}</span>`).join('')})()}</div></div>
+ <div class="card"><div class="row between" style="margin-bottom:12px"><div class="h2">Физическая форма</div><span class="small mute">от нормы породы</span></div>${formRings(h)}
+ <div class="small mute" style="margin-top:12px;line-height:1.45">100% — то, что показывает хорошо подготовленный взрослый конь этой породы. Чёрная засечка на кольце — потолок, который определил ветеринар. Золотое кольцо — конь сильнее нормы.</div></div>
+ <div class="card"><div class="h2" style="margin-bottom:8px">Трюки</div><div class="row" style="flex-wrap:wrap;gap:6px">${TRICKS.filter(t=>trickState(h,t)==='done').map(t=>`<span class="tag g">✓ ${t.name}</span>`).join('')}${TRICKS.filter(t=>trickState(h,t)==='learning').map(t=>`<span class="tag n">${t.name} · учится</span>`).join('')}</div></div>
  <div class="card"><div class="h2" style="margin-bottom:6px">Конюх и тренер</div><div class="small mute">Алексей Тойбоев ухаживает за ${h.name==='Ласка'||h.name==='Айна'?'ней':'ним'} 3 года. Тренер Марина Кыпчакова ведёт обучение скиллам.</div></div>
  <button class="btn ochre" data-go="tariff">Выбрать тариф</button></div>`};
 R.tariff=()=>`<div class="pad stack">${top('Тариф',S.horse.name)}
@@ -424,15 +452,27 @@ R.stats=()=>{const d=[[5.1,'Пн'],[6.8,'Вт'],[4.2,'Ср'],[7.4,'Чт'],[6.0,'
 R.health=()=>`<div class="pad stack">${top('Здоровье',S.horse.name)}<div class="card"><div class="row between"><div class="h2">Последний осмотр</div><span class="tag g">Здоров</span></div><p class="small mute" style="margin:6px 0 0">28 сентября · ветеринар Игорь Сабашкин. Вес 452 кг, пульс 36, зубы и копыта в норме.</p></div>
  <div class="card"><div class="kv"><span>Вакцинация от гриппа</span><span>до 12.03.2027</span></div><div class="kv"><span>Сибирская язва</span><span>до 20.05.2027</span></div><div class="kv"><span>Расчистка копыт</span><span>через 9 дней</span></div><div class="kv"><span>Стоматолог</span><span>апрель 2027</span></div></div>
  <div class="card"><div class="h2" style="margin-bottom:6px">Лимит нагрузки</div><div class="small mute" style="margin-bottom:8px">Ветеринар разрешил до 12 часов занятий в неделю. Использовано 7 ч.</div><div class="bar o"><i style="width:58%"></i></div></div></div>`;
-R.skills=()=>{if(!S.owned)return noHorse('Здесь будет развитие коня','Когда выберете коня, здесь появятся его уровень, скиллы и ачивки. Вы выбираете навык, тренер Marali проводит занятия, а вам приходят видео и бонусы.',`<div class="card" style="text-align:left;width:100%"><div class="eyebrow" style="margin-bottom:8px">Чему можно научить коня</div><div class="row" style="flex-wrap:wrap;gap:6px">${['Шаг по команде','Рысь на корде','Поклон','Прыжок через жердь','Испанский шаг'].map(n=>`<span class="tag n">${n}</span>`).join('')}</div></div>`,I.star);const lv=S.learning?'Учит «Поклон»':'Уровень 3';return `<div class="pad stack"><div><div class="eyebrow">Развитие</div><h1 class="h1" style="margin-top:4px">${S.horse.name}: ${lv}</h1></div>
- <div class="card"><div class="row between small"><span>До уровня 4</span><b>620 / 1000 XP</b></div><div class="bar o" style="margin-top:8px"><i style="width:62%"></i></div><div class="small mute" style="margin-top:8px">На уровне 4 откроется «Прыжок через жердь» и скидка 15% на визиты.</div></div>
- <div class="h2">Скиллы</div>${SKILLS.map(s=>{const learning=S.learning===s.id;return `<div class="card"><div class="row between"><b>${s.name}</b><span class="tag ${s.p===100?'g':s.locked?'n':learning?'':'g'}">${learning?'Учится':s.lvl}</span></div>
- ${s.p>0||learning?`<div class="bar" style="margin-top:10px"><i style="width:${learning?8:s.p}%"></i></div>`:''}
- ${s.id==='bow'&&!learning?`<button class="btn" style="margin-top:12px;padding:12px" data-act="learn">Изучить скилл · ${rub(s.price)}</button>`:''}
- ${learning?'<div class="small mute" style="margin-top:8px">Занятие 1 из 4 · тренер Марина · следующее завтра в 10:00</div>':''}</div>`}).join('')}
+R.skills=()=>{if(!S.owned)return noHorse('Здесь будет развитие коня','Когда выберете коня, здесь появятся его физическая форма, трюки и ачивки. Вы выбираете тренировку или трюк, тренер Marali проводит занятия, а вам приходят видео и бонусы.',`<div class="card" style="text-align:left;width:100%"><div class="eyebrow" style="margin-bottom:8px">Что можно тренировать</div><div class="row" style="flex-wrap:wrap;gap:6px">${STATS.map(x=>`<span class="tag n">${x[1]}</span>`).join('')}</div><div class="eyebrow" style="margin:12px 0 8px">Каким трюкам научить</div><div class="row" style="flex-wrap:wrap;gap:6px">${TRICKS.map(t=>`<span class="tag n">${t.name}</span>`).join('')}</div></div>`,I.star);
+ const h=S.horse,tab=S.devTab||'Тренировки';const lv=S.training?'Идёт тренировка':S.learning?'Учит «Поклон»':'Уровень 3';
+ let body='';
+ if(tab==='Тренировки')body=`<div class="small mute" style="margin:-2px 2px 0">Курс тренировок длится 3 недели и поднимает характеристику на несколько процентов. Выше потолка от ветеринара тренировать нельзя.</div>`+STATS.map(([id,n,u,d])=>{const pc=fpct(h,id),cap=fcap(h,id),run=S.training===id,left=cap-pc;
+  return `<div class="card row" style="gap:14px;align-items:center">${ring(pc,cap,64,run?Math.min(6,left):0)}<div style="flex:1;min-width:0"><div class="row between"><b>${n}</b>${pc>100?'<span class="tag">выше нормы</span>':''}</div><div class="small mute" style="margin-top:2px">${fval(h,id)} ${u} ${d} · норма ${NORM[h.breed][id]} ${u}</div><div class="small mute">Потолок ${cap}% · ${fval(h,id,cap)} ${u}</div>
+  ${run?`<div class="small" style="margin-top:8px;color:var(--pine2);font-weight:600">Идёт курс · неделя 1 из 3</div>`:left<=0?`<div class="small" style="margin-top:8px;color:var(--stone)">Потолок достигнут</div>`:`<button class="btn ghost" style="margin-top:9px;padding:9px;font-size:14px;${S.training?'opacity:.45':''}" data-train="${id}" ${S.training?'disabled':''}>Тренировать · +${Math.min(6,left)}%</button>`}</div></div>`}).join('');
+ else body=TRICKS.map(t=>{const st=trickState(h,t);const need=t.need?STATS.find(x=>x[0]===t.need[0]):null;
+  return `<div class="card"><div class="row between"><b>${t.name}</b><span class="tag ${st==='done'?'g':st==='locked'?'n':st==='learning'?'':'g'}">${st==='done'?'Освоен':st==='learning'?(t.lvl||'Учится'):st==='locked'?'Закрыт':'Доступен'}</span></div>
+  ${st==='learning'?`<div class="bar" style="margin-top:10px"><i style="width:${t.p||8}%"></i></div>`:''}
+  ${st==='locked'?`<div class="small mute" style="margin-top:6px">Нужно: ${need[1].toLowerCase()} ${t.need[1]}% · сейчас ${fpct(h,t.need[0])}%. Потренируйте на вкладке «Тренировки».</div>`:''}
+  ${t.id==='bow'&&st==='open'?`<button class="btn" style="margin-top:12px;padding:12px" data-act="learn">Изучить трюк · ${rub(t.price)}</button>`:''}
+  ${t.id==='bow'&&st==='learning'?'<div class="small mute" style="margin-top:8px">Занятие 1 из 4 · тренер Марина · следующее завтра в 10:00</div>':''}
+  ${t.id==='pole'&&st==='open'?'<div class="small mute" style="margin-top:6px">Можно записать после «Поклона»: тренер ведёт один трюк за раз.</div>':''}
+  ${t.id==='spanish'&&st==='open'?'<div class="small mute" style="margin-top:6px">Можно записать после «Поклона»: тренер ведёт один трюк за раз.</div>':''}</div>`}).join('');
+ return `<div class="pad stack"><div><div class="eyebrow">Развитие</div><h1 class="h1" style="margin-top:4px">${h.name}: ${lv}</h1></div>
+ <div class="card"><div class="row between small"><span>До уровня 4</span><b>620 / 1000 XP</b></div><div class="bar o" style="margin-top:8px"><i style="width:62%"></i></div><div class="small mute" style="margin-top:8px">XP дают тренировки, трюки и визиты. На уровне 4 скидка 15% на визиты.</div></div>
+ <div class="seg" role="tablist">${['Тренировки','Трюки'].map(x=>`<button role="tab" aria-selected="${tab===x}" class="${tab===x?'on':''}" data-devtab="${x}">${x}</button>`).join('')}</div>
+ ${body}
  <div class="h2" style="margin-top:6px">Ачивки</div><div class="card badges">
  <div><div class="bdg g">7</div>Неделя вместе</div><div><div class="bdg">5</div>5 визитов камер</div><div><div class="bdg ${S.badgeNew?'pop':'off'}" ${S.badgeNew?'style="background:var(--ochre)"':''}>★</div>Первый скилл</div>
- <div><div class="bdg off">30</div>Месяц вместе</div><div><div class="bdg off">⛰</div>Тур «Кержаки»</div><div><div class="bdg off">100</div>100 км</div></div>
+ <div><div class="bdg off">30</div>Месяц вместе</div><div><div class="bdg off">⛰</div>Тур «Кержаки»</div><div><div class="bdg off">100</div>100 км</div><div><div class="bdg ${STATS.some(x=>fpct(S.horse,x[0])>100)?'':'off'}" ${STATS.some(x=>fpct(S.horse,x[0])>100)?'style="background:var(--ochre)"':''}>%</div>Выше нормы породы</div></div>
  ${S.badgeNew?'<div class="card" style="background:var(--ochre-soft)"><b>Бонус: −10% на визит</b><div class="small" style="margin-top:4px">Ачивка «Первый скилл» даёт скидку на «День с конём». Действует 60 дней.</div></div>':''}</div>`};
 R.trips=()=>`<div class="pad stack"><div><div class="eyebrow">Поездки в Marali</div><h1 class="h1" style="margin-top:4px">Приезжайте к ${S.owned?(S.horse.name==='Ласка'||S.horse.name==='Айна'?'ней':'нему'):'коню'}</h1></div>
  ${[['visit','День с конём','от 25 000 ₽','Уход, кормление и прогулка с конюхом',PHOTO['2']],['vip','Визит под ключ','от 120 000 ₽','Трансфер из Горно-Алтайска, 2 ночи, занятия с тренером',PHOTO['4']],['tour','Тур «Кержаки»','150 000 ₽ с человека','4 дня верхом по старообрядческим тропам Алтая',PHOTO['3']]].map(t=>`<button class="tap card" style="padding:0;overflow:hidden" data-trip="${t[0]}"><div style="height:150px;background:url(${t[4]}) center/cover"></div><div style="padding:12px 14px"><div class="row between"><b style="font-size:16px">${t[1]}</b><span class="price" style="font-size:14px">${t[2]}</span></div><div class="small mute" style="margin-top:3px">${t[3]}</div></div></button>`).join('')}
@@ -593,14 +633,24 @@ function installSheet(){if(app.querySelector('.sheet-bg'))return;const bg=docume
  <p class="mute" style="margin:8px 0 14px">Так приложение будет открываться как обычное и присылать уведомления о вашем коне.</p><div class="card stack" style="gap:10px;margin-bottom:14px"><div class="row"><span class="tag">1</span>Нажмите «Поделиться» внизу Safari</div><div class="row"><span class="tag">2</span>Выберите «На экран Домой»</div><div class="row"><span class="tag">3</span>Нажмите «Добавить»</div></div>
  <button class="btn" data-close>Понятно</button><button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Позже</button></div>`;app.appendChild(bg);
  bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove()})}
-function learnSheet(){const bg=document.createElement('div');bg.className='sheet-bg';bg.innerHTML=`<div class="sheet" role="dialog" aria-label="Изучить скилл"><div class="grab"></div><h2 class="h1" style="font-size:20px">Научить ${S.horse.name==='Ласка'||S.horse.name==='Айна'?'её':'его'} кланяться?</h2>
- <p class="mute" style="margin:8px 0 14px">4 занятия с тренером Мариной Кыпчаковой. Вы будете получать видео с каждого занятия, а после экзамена ${S.horse.name} получит скилл «Поклон» и +250 XP.</p>
+function learnSheet(){const bg=document.createElement('div');bg.className='sheet-bg';bg.innerHTML=`<div class="sheet" role="dialog" aria-label="Изучить трюк"><div class="grab"></div><h2 class="h1" style="font-size:20px">Научить ${S.horse.name==='Ласка'||S.horse.name==='Айна'?'её':'его'} кланяться?</h2>
+ <p class="mute" style="margin:8px 0 14px">4 занятия с тренером Мариной Кыпчаковой. Вы будете получать видео с каждого занятия, а после экзамена ${S.horse.name} освоит трюк «Поклон» и +250 XP.</p>
  <div class="card" style="margin-bottom:14px"><div class="kv"><span>Занятия</span><span>4 × 30 мин</span></div><div class="kv"><span>Начало</span><span>завтра, 10:00</span></div><div class="kv"><span>Стоимость</span><span>6 000 ₽</span></div></div>
  <button class="btn ochre" data-yes>Начать обучение · 6 000 ₽</button><button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Отмена</button></div>`;app.appendChild(bg);
  bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove();if(e.target.closest('[data-yes]')){bg.remove();S.learning='bow';render();
   setTimeout(()=>notify('Конешеринг',`Тренер Марина записала ${S.horse.name} на обучение «Поклон». Первое занятие завтра в 10:00.`),400);
   setTimeout(()=>{S.badgeNew=true;if(S.screen==='skills'){render();scr().scrollTop=scr().scrollHeight}notify('Новая ачивка','«Первый скилл»: скидка 10% на День с конём');confetti()},3200)}})}
 
+function trainSheet(id){const h=S.horse,st=STATS.find(x=>x[0]===id),pc=fpct(h,id),cap=fcap(h,id),gain=Math.min(6,cap-pc);const bg=document.createElement('div');bg.className='sheet-bg';
+ bg.innerHTML=`<div class="sheet" role="dialog" aria-label="Тренировка"><div class="grab"></div><h2 class="h1" style="font-size:20px">Тренировать: ${st[1].toLowerCase()}</h2>
+ <div class="row" style="gap:16px;margin:12px 0 14px;align-items:center">${ring(pc,cap,84,gain)}<div><div><b>${pc}% → ${pc+gain}%</b></div><div class="small mute" style="margin-top:3px">${fval(h,id)} → ${fval(h,id,pc+gain)} ${st[2]} ${st[3]}</div><div class="small mute">Потолок ${cap}%</div></div></div>
+ <p class="mute" style="margin:0 0 14px">9 занятий за 3 недели с тренером Мариной Кыпчаковой. Видео с каждого занятия придёт в ленту, замеры после каждой недели.</p>
+ <div class="card" style="margin-bottom:14px"><div class="kv"><span>Занятия</span><span>9 × 40 мин</span></div><div class="kv"><span>Начало</span><span>завтра, 09:00</span></div><div class="kv"><span>Стоимость</span><span>${S.plan.id==='own'?'входит в тариф':'18 000 ₽'}</span></div></div>
+ <button class="btn ochre" data-yes>Начать курс${S.plan.id==='own'?'':' · 18 000 ₽'}</button><button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Отмена</button></div>`;app.appendChild(bg);
+ bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove();if(e.target.closest('[data-yes]')){bg.remove();S.training=id;render();
+  setTimeout(()=>notify('Конешеринг',`Курс «${st[1]}» начнётся завтра в 09:00. Тренер Марина пришлёт видео с первого занятия.`),400);
+  setTimeout(()=>{S.boost=S.boost||{};S.boost[h.id+id]=(S.boost[h.id+id]||0)+gain;S.training=null;if(S.screen==='skills')render();const np=fpct(h,id);notify('Курс завершён',`${h.name}: ${st[1].toLowerCase()} ${id==='jump'?'вырос':'выросла'} до ${np}%: ${fval(h,id)} ${st[2]}. +300 XP`);confetti()},4200)}})}
+view.addEventListener('click',e=>{const t=e.target.closest('[data-devtab],[data-train]');if(!t||t.disabled)return;if(t.dataset.devtab){S.devTab=t.dataset.devtab;return render()}if(t.dataset.train)return trainSheet(t.dataset.train)});
 view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');if(!t||t.disabled)return;const d=t.dataset;
  if('back' in d)return back();
  if(d.go)return go(d.go);
@@ -631,7 +681,7 @@ $('#liveBtn').addEventListener('click',e=>{S.live=!S.live;e.currentTarget.setAtt
 $('#resetBtn').addEventListener('click',()=>{location.reload()});
 
 // scenario rail
-const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['tariff','Выбор тарифа'],['pay','Оплата']]],['Мой конь',[['home','Главная и лента'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта']]],['Развитие',[['skills','Скиллы и ачивки']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления']]],['Вторая версия',[['shop','Магазин и «Угостить»'],['club','Клуб владельцев'],['gift','Подарочный сертификат'],['buyout','Выкуп коня']]]];
+const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['tariff','Выбор тарифа'],['pay','Оплата']]],['Мой конь',[['home','Главная и лента'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта']]],['Развитие',[['skills','Тренировки, трюки, ачивки']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления']]],['Вторая версия',[['shop','Магазин и «Угостить»'],['club','Клуб владельцев'],['gift','Подарочный сертификат'],['buyout','Выкуп коня']]]];
 $('#scen').innerHTML=SC.map(g=>`<b>${g[0]}</b>${g[1].map(x=>`<button data-s="${x[0]}">${x[1]}</button>`).join('')}`).join('');
 $('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;const s=b.dataset.s;if(['home','cams','report','stats','health','skills','shop','buyout'].includes(s))S.owned=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';app.querySelector('.sheet-bg')?.remove();S.stack=TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[];go(s,false);setRail(false)});
 let lastY=0;const onScr=()=>{const y=scr().scrollTop;if(Math.abs(y-lastY)<6)return;document.body.classList.toggle('fab-hide',y>lastY&&y>40);lastY=y};view.addEventListener('scroll',onScr,{passive:true});addEventListener('scroll',onScr,{passive:true});
