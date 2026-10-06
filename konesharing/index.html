@@ -119,6 +119,7 @@ body:has(.sheet-bg) #fab{display:none}
 .btn.light{background:rgba(255,255,255,.95);color:var(--pine)}
 .btn:disabled{opacity:.45}
 .btn:focus-visible,.chip:focus-visible,.tabs button:focus-visible,.back:focus-visible,.tap:focus-visible{outline:3px solid var(--ochre);outline-offset:2px}
+.gearrow{margin:0 -14px;padding:0 14px 2px}.chips.gearrow .gearc{flex:none;width:136px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:8px;text-align:left;display:flex;flex-direction:column;gap:6px}.chips.gearrow .gearc b{display:block;font-size:13px;line-height:1.25;font-weight:600;min-height:32px}.chips.gearrow .gearc .tag{align-self:flex-start;font-size:11px}
 .chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -18px;padding:0 18px}
 .chips::-webkit-scrollbar{display:none}
 .chip{flex:none;border:1px solid var(--line);background:#fff;border-radius:999px;padding:10px 15px;font-size:14px;min-height:40px}
@@ -514,6 +515,7 @@ R.home=()=>{if(!S.owned)return noHorse('Здесь будет ваш конь','
   ${on?'':`<button class="callcam" data-camact="groom">Позвать к камере</button>`}</div>
  <button class="tap card strow" data-go="health"><div><span>Самочувствие</span><b>${t.hl}</b></div><div><span>Настроение</span><b>${t.m}</b></div><div><span>Еда</span><b>${t.f.split(' · ')[0]} ${(t.f.split(' · ')[1]||'').split(',')[0]}</b></div></button>
  <div class="card row between treat1"><span class="row" style="gap:10px"><span class="ap">${art('apple','#F6E1DA',40)}</span><span><b>Угостить ${f?'её':'его'}</b><span class="small mute" style="display:block">Яблоки · ${rub(350)}</span></span></span><span class="row" style="gap:6px"><button class="btn ghost" style="width:auto;padding:8px 14px;font-size:14px" data-prod="apples">Угостить</button><button class="small" data-go="shop" style="color:var(--pine2);font-weight:600;background:none;border:0;padding:8px 2px">Ещё ›</button></span></div>
+ ${gearHome(h)}
  ${devHome(h)}
  <div class="card next"><div class="row between" style="margin-bottom:8px;gap:10px"><div class="h2">События</div><div class="seg evseg" role="tablist">${[['up','Ближайшие'],['past','Прошедшие']].map(([k,n])=>`<button role="tab" aria-selected="${et===k}" class="${et===k?'on':''}" data-evtab="${k}">${n}${k==='past'&&et!=='past'&&S.feed.some(x=>x[3])?'<i class="evdot"></i>':''}</button>`).join('')}</div></div>
   ${et==='up'?`<div class="nx"><time>16:00</time><div><b>${S.training?'Курс: '+STATS.find(x=>x[0]===S.training)[1].toLowerCase():'Тренировка на плацу'}</b><span>С Мариной, включим камеру «Плац»</span></div><button class="rem ${S.remind?'on':''}" data-act="remind">${S.remind?'✓ Напомним':'Напомнить'}</button></div>
@@ -523,6 +525,9 @@ R.home=()=>{if(!S.owned)return noHorse('Здесь будет ваш конь','
  <div class="qa"><button data-go="chat">${I.chat}Конюху</button><button data-go="report">${I.doc}Отчёт</button><button data-go="stats">${I.chart}Статистика</button><button data-go="health">${I.heart}Здоровье</button></div>
  <button class="tap card row between" data-go="buyout" style="display:flex;align-items:center;background:#fff;padding:14px 16px;border-radius:18px;text-align:left;gap:12px;width:100%"><span><b>Выкупить ${nm('a',h)}</b><span class="small mute" style="display:block;margin-top:2px">Сделать ${f?'её':'его'} полностью своим: в цену засчитаем подписку</span></span><span class="chev">›</span></button>
 </div>`};
+function gearHome(h){const g=bought(h).map(o=>({o,p:SHOP.find(x=>x.id===o.id)})).filter(x=>x.p&&GEAR(x.p));
+ return `<div class="card"><div class="row between" style="margin-bottom:10px"><div class="h2">Снаряжение</div><button class="rem" data-addgear>+ Добавить</button></div>
+ ${g.length?`<div class="chips gearrow">${g.map(({o,p})=>{const t=BST(o,p);return `<button class="tap gearc" data-go="purchases">${art(p.art,p.bg,78)}<b>${p.name}</b><span class="tag ${t[0]}">${t[1].replace('гравировка · ','')}</span></button>`}).join('')}</div>`:`<div class="small mute">Пока пусто. Недоуздок, попона или табличка на денник появятся здесь после покупки.</div>`}</div>`}
 function devHome(h){const L=lvl(),fr=S.plan.id==='friend',lt=S.learning?TRICKS.find(x=>x.id===S.learning):null,stt=S.training?STATS.find(x=>x[0]===S.training):null,kn=TRICKS.filter(x=>trickState(h,x)==='done').length,ov=STATS.some(x=>fpct(h,x[0])>100);
  const rings=`<div class="rings">${STATS.map(([id,n,u])=>{const pc=fpct(h,id),cap=fcap(h,id),run=S.training===id;return `<button class="rg tap" data-train="${id}" aria-label="${n}: ${fval(h,id)} ${u}">${ring(pc,cap,74,run?Math.min(6,cap-pc):0,fval(h,id),u)}<b>${n.replace('Грузоподъёмность','Грузо­подъём­ность').replace('Вынос','Вынос­').replace('Прохо','Прохо­')}</b>${run?'<span class="run">идёт курс</span>':fmax(h,id)?'<span class="mx">✓ прокачано</span>':''}</button>`}).join('')}</div>`;
  const tricks=TRICKS.map(t=>{const st=trickState(h,t),need=t.need?STATS.find(x=>x[0]===t.need[0]):null;
@@ -695,7 +700,7 @@ R.shop=()=>{if(!S.owned)return noHorse('Магазин для вашего ко�
 
 
 const GEAR=p=>p.cat==='Снаряжение'||p.cat==='Именное'||p.id==='brush';
-function bought(h){if(!S.bought[h.name])S.bought[h.name]=[{id:'halter',d:'5 октября',st:'work',engr:h.name.toUpperCase()+' · MARALI',seed:1},{id:'spa',d:'5 октября',st:'work',seed:1}];return S.bought[h.name]}
+function bought(h){if(!S.bought[h.name])S.bought[h.name]=[{id:'halter',d:'5 октября',st:'work',engr:h.name.toUpperCase()+' · MARALI',seed:1},{id:'spa',d:'5 октября',st:'work',seed:1},{id:'brush',d:'28 сентября',st:'done',seed:1},{id:'blanket',d:'20 сентября',st:'done',seed:1},{id:'plate',d:'14 сентября',st:'done',seed:1}];return S.bought[h.name]}
 const BST=(o,p)=>o.st==='done'?(GEAR(p)?['g','у коня']:['g','выполнено']):o.st==='vet'?['n','у ветеринара']:o.st==='today'?['n','сегодня до 18:00']:['n',p.named?'гравировка · 7–10 дней':'в работе'];
 R.purchases=()=>{if(!S.owned)return noHorse('Мои покупки','Здесь будут снаряжение и вещи вашего коня и история заказов из магазина. Сначала выберите коня.');const h=S.horse,all=bought(h).map(o=>({o,p:SHOP.find(x=>x.id===o.id)})).filter(x=>x.p),gear=all.filter(x=>GEAR(x.p)),total=all.reduce((a,x)=>a+x.p.price,0);
  const tag=(o,p,sh)=>{const t=BST(o,p);return `<span class="tag ${t[0]}" style="flex:none">${sh?t[1].replace('гравировка · ',''):t[1]}</span>`};
@@ -761,6 +766,7 @@ R.buyout=()=>{if(!S.owned)return noHorse('Выкуп коня','Выкупить
 view.addEventListener('click',e=>{const t=e.target.closest('button,[data-prod]');if(!t||t.disabled)return;const d=t.dataset;
  if(d.prod)return prodSheet(d.prod);
  if(d.shopcat){S.shopCat=d.shopcat;return render()}
+ if('addgear' in d){S.shopCat='Снаряжение';return go('shop')}
  if(d.clubtab){S.clubTab=d.clubtab;return render()}
  if(d.rsvp){const on=S.rsvp[d.rsvp]=!S.rsvp[d.rsvp];render();if(on){const ev=CLUB_EVENTS.find(x=>x.id===d.rsvp);notify('Вы записаны',`${ev.t}, ${ev.d}. Напомним за день.`)}return}
  if(d.gplan){S.gift.plan=d.gplan;const h=HORSES.find(x=>x.id===S.gift.horse);if(h&&!planOk(PLANS.find(x=>x.id===d.gplan),h))S.gift.horse='any';return render()}
