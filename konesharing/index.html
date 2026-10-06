@@ -32,8 +32,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 .rail .ctl{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
 .rail .ctl button{border:1px solid var(--stage-line);background:var(--stage-card);border-radius:999px;padding:7px 12px;font-size:13px}
 .rail .ctl button[aria-pressed="true"]{border-color:var(--stage-accent);color:var(--stage-accent);font-weight:600}
-.phone{width:390px;height:min(844px,calc(100vh - 48px));min-height:640px;flex:none;border-radius:48px;background:#0E1311;padding:11px;box-shadow:0 30px 70px rgba(10,25,18,.28)}
-@media (min-width:761px) and (min-height:501px){html,body{overflow:hidden}.stage{height:100vh;height:100dvh;min-height:0;align-items:center}.rail{align-self:stretch;max-height:100%;overflow-y:auto;overscroll-behavior:contain;padding-right:8px;scrollbar-width:thin}.rail>:first-child{margin-top:auto}.rail>:last-child{margin-bottom:auto}.phone{height:min(844px,calc(100dvh - 48px));min-height:0}}
+.phone{width:413px;height:872px;flex:none;position:relative;border-radius:68px;background:#111214;padding:10px;transform:scale(var(--k,1));transform-origin:center;box-shadow:inset 0 0 0 2px #2E3033,0 0 0 2px #9A9CA0,0 0 0 4px #5C5E62,0 34px 80px rgba(10,25,18,.32)}
+.phone:before,.phone:after{content:"";position:absolute;width:4px;border-radius:2px}
+.phone:before{left:-7px;top:150px;height:212px;background:linear-gradient(#8E9094 0 32px,transparent 32px 72px,#8E9094 72px 134px,transparent 134px 150px,#8E9094 150px 212px)}
+.phone:after{right:-7px;top:236px;height:100px;background:#8E9094}
+.phone .app{border-radius:58px}
+.island{position:absolute;top:11px;left:50%;transform:translateX(-50%);width:124px;height:36px;border-radius:20px;background:#000;z-index:60;pointer-events:none}
+.app:after{content:"";position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:136px;height:5px;border-radius:3px;background:#1C2622;z-index:60;pointer-events:none}
+.app:has(.view>.hero):after{background:#fff}
+.sb .ic{display:flex;gap:6px;align-items:center}.sb .ic svg{height:12px;width:auto;display:block}
+@media (min-width:761px) and (min-height:501px){html,body{overflow:hidden}.stage{height:100vh;height:100dvh;min-height:0;align-items:center}.rail{align-self:stretch;max-height:100%;overflow-y:auto;overscroll-behavior:contain;padding-right:8px;scrollbar-width:thin}.rail>:first-child{margin-top:auto}.rail>:last-child{margin-bottom:auto}.tabs{padding-bottom:22px}}
 @media (min-width:1040px) and (min-height:501px){.stage{position:relative}.rail{position:absolute;left:max(24px,calc(25% - 250px));top:0;bottom:0;padding-block:24px}}
 .app{position:relative;width:100%;height:100%;border-radius:38px;overflow:hidden;background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.4;display:flex;flex-direction:column;isolation:isolate}
 .fab{display:none}
@@ -43,7 +51,9 @@ button{font:inherit;color:inherit;cursor:pointer}
   .phone:has(.tabs[hidden]) ~ .fab{bottom:auto;top:calc(12px + env(safe-area-inset-top,0px))}
   .rail{display:none}
   .rail.open{display:flex;position:fixed;z-index:50;left:0;right:0;bottom:0;max-height:80%;overflow:auto;background:var(--stage);padding:20px 16px calc(20px + env(safe-area-inset-bottom,0px));border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.25);width:auto}
-  .phone{width:100%;height:100%;min-height:0;border-radius:0;padding:0;box-shadow:none}
+  .phone{width:100%;height:100%;min-height:0;border-radius:0;padding:0;box-shadow:none;transform:none}
+  .phone:before,.phone:after,.island,.app:after{display:none}
+  .phone .app{border-radius:0}
   .app{border-radius:0}
   .fab{display:block;position:fixed;z-index:40;right:12px;bottom:calc(86px + env(safe-area-inset-bottom,0px));background:#1C2622;color:#fff;border:0;border-radius:999px;padding:8px 13px;font-size:12px;opacity:.85}
 }
@@ -76,14 +86,14 @@ button{font:inherit;color:inherit;cursor:pointer}
   .rail-x{display:block;position:sticky;top:0;margin:-6px -4px 0 auto;width:36px;height:36px;border:0;border-radius:50%;background:rgba(0,0,0,.08);color:inherit;font-size:22px;line-height:36px;padding:0;cursor:pointer;float:right}
 }
 /* app chrome */
-.sb{height:44px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:0 26px;font-size:14px;font-weight:600;position:absolute;top:0;left:0;right:0;z-index:5;pointer-events:none}
+.sb{height:54px;flex:none;display:flex;justify-content:space-between;align-items:center;padding:4px 30px 0 46px;font-size:16px;font-weight:600;position:absolute;top:0;left:0;right:0;z-index:5;pointer-events:none}
 .sb.light{color:#fff}
 .sb .bat{width:24px;height:11px;border:1.5px solid currentColor;border-radius:3px;position:relative;opacity:.9}
 .sb .bat:after{content:"";position:absolute;inset:1.5px;right:5px;background:currentColor;border-radius:1px}
 @media (max-width:760px),(max-height:500px){.sb{display:none}}
 .view{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;scrollbar-width:none}
 .view::-webkit-scrollbar{display:none}
-.pad{padding:52px 18px 24px}
+.pad{padding:60px 18px 24px}
 @media (max-width:760px),(max-height:500px){.pad{padding-top:calc(14px + env(safe-area-inset-top,0px))}}
 .tabs{flex:none;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-top:1px solid var(--line);padding:6px 4px calc(8px + env(safe-area-inset-bottom,0px))}
 .tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:#66706B;padding:4px 0}
@@ -161,7 +171,7 @@ canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-ra
 .sheet .grab{width:40px;height:5px;border-radius:3px;background:#CDD2CC;margin:0 auto 14px}
 @keyframes up{from{transform:translateY(40px);opacity:.4}}
 @keyframes fade{from{opacity:0}}
-.push{position:absolute;left:10px;right:10px;top:48px;z-index:30;background:rgba(250,250,247,.97);backdrop-filter:blur(10px);border-radius:20px;padding:12px 14px;box-shadow:0 12px 34px rgba(0,0,0,.18);display:grid;grid-template-columns:36px 1fr;gap:10px;animation:drop .45s cubic-bezier(.2,.9,.3,1.2)}
+.push{position:absolute;left:10px;right:10px;top:56px;z-index:30;background:rgba(250,250,247,.97);backdrop-filter:blur(10px);border-radius:20px;padding:12px 14px;box-shadow:0 12px 34px rgba(0,0,0,.18);display:grid;grid-template-columns:36px 1fr;gap:10px;animation:drop .45s cubic-bezier(.2,.9,.3,1.2)}
 @media (max-width:760px),(max-height:500px){.push{top:calc(10px + env(safe-area-inset-top,0px))}}
 .push .ic{width:36px;height:36px;border-radius:10px;background:var(--pine);display:grid;place-items:center;color:#fff;font-family:var(--f-display);font-size:13px}
 .push b{font-size:14px}.push p{margin:2px 0 0;font-size:13.5px;line-height:1.35}
@@ -222,7 +232,7 @@ canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-ra
     <p class="small">«Живой день» показывает, как лента событий и пуш-уведомления приходят в течение дня. Все данные в прототипе примерные.</p>
   </aside>
   <div class="phone"><div class="app" id="app">
-    <div class="sb" id="sb"><span>9:41</span><span class="bat"></span></div>
+    <div class="island" aria-hidden="true"></div><div class="sb" id="sb"><span>9:41</span><span class="ic"><svg viewBox="0 0 18 12" fill="currentColor"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg><svg viewBox="0 0 16 12" fill="currentColor"><path d="M8 2.2c2.4 0 4.6.9 6.2 2.5l1.2-1.2A10.4 10.4 0 0 0 8 .5 10.4 10.4 0 0 0 .6 3.5l1.2 1.2A8.7 8.7 0 0 1 8 2.2z"/><path d="M8 5.6c1.5 0 2.8.6 3.8 1.5L13 5.9A7 7 0 0 0 8 3.9 7 7 0 0 0 3 5.9l1.2 1.2c1-.9 2.3-1.5 3.8-1.5z"/><path d="M8 9c.6 0 1.1.2 1.5.6L8 11.2 6.5 9.6c.4-.4.9-.6 1.5-.6z"/></svg><span class="bat"></span></span></div>
     <main class="view" id="view"></main>
     <nav class="tabs" id="tabs" hidden></nav>
   </div></div>
@@ -435,7 +445,7 @@ R.catalog=()=>{const fs=['Все','Совладение','Личный','Спо�
  ${list.map(h=>`<button class="tap card horse-row" data-horse="${h.id}">${pic('portrait',h.v,192,192)}<div style="min-width:0"><div class="row between"><b style="font-size:17px">${h.name}</b><span class="small mute">${yrs(h.age)}</span></div>
  <div class="small mute">${h.breed} · ${h.color} · ${h.temper.toLowerCase()}</div><div class="row" style="margin-top:8px;flex-wrap:wrap;gap:6px">${mine(h)?'<span class="tag g">★ Ваш конь</span>':h.places?`<span class="tag">Совладение: ${h.places} ${h.places===1?'место':'места'}</span>`:'<span class="tag g">Личный конь</span>'}<span class="small" style="font-weight:600">от ${rub(PLANS[0].price)}/мес</span></div></div></button>`).join('')}
  ${list.length?'':'<p class="mute">По этому фильтру сейчас нет свободных коней.</p>'}<button class="btn ghost" data-act="more">Показать ещё 144 коня</button></div>`};
-R.horse=()=>{const h=ph();return `<div style="position:relative">${pic('portrait',h.v,780,600,'height:300px;border-radius:0')}<button class="back" data-back aria-label="Назад" style="position:absolute;top:52px;left:16px">${I.back}</button></div>
+R.horse=()=>{const h=ph();return `<div style="position:relative">${pic('portrait',h.v,780,600,'height:300px;border-radius:0')}<button class="back" data-back aria-label="Назад" style="position:absolute;top:60px;left:16px">${I.back}</button></div>
  <div class="pad stack" style="padding-top:18px"><div class="row between"><h1 class="h1">${h.name}</h1><span class="tag ${h.places?'':'g'}">${h.places?'Совладение: '+h.places+(h.places===1?' место':' места'):'Личный конь'}</span></div>
  <div class="mute">${h.breed} порода · ${h.color} · ${yrs(h.age)}</div><p style="margin:0">${h.about}</p>
  <div class="live" style="position:relative">${vid('pasture','height:200px')}<span class="badge-live">LIVE</span><span class="ov">Пастбище у Катуни · ${h.name} сейчас здесь</span></div>
@@ -509,7 +519,7 @@ function bookCalc(){const k=S.tripSel,t={visit:['День с конём',25000],
  if(S.owned){if(k==='tour')ds.push([15,'ранняя бронь']);else ds.push([S.plan.disc,'тариф «'+S.plan.name+'»'])}
  if(S.badgeNew&&k==='visit')ds.push([10,'ачивка «Первый трюк»']);const best=ds.sort((a,b)=>b[0]-a[0])[0];
  const incl=k==='visit'&&S.owned&&S.plan.id==='own'&&!S.bookings.some(b=>b.incl);const base=t[1]*n,sum=incl?0:best?Math.round(base*(100-best[0])/100):base;return {t,n,best,incl,base,sum}}
-R.tour=()=>{const h=S.horse,cl=S.owned?fval(h,'climb'):0,ok=cl>=900;return `<div style="position:relative"><div style="height:260px;background:url(${PHOTO['3']}) center/cover"></div><button class="back" data-back aria-label="Назад" style="position:absolute;top:52px;left:16px">${I.back}</button><div class="ov" style="bottom:16px;left:18px"><div class="eyebrow" style="color:rgba(255,255,255,.85)">4 дня верхом · с 14 лет</div><div class="logo" style="font-size:26px;margin-top:4px">Тур «Кержаки»</div></div></div>
+R.tour=()=>{const h=S.horse,cl=S.owned?fval(h,'climb'):0,ok=cl>=900;return `<div style="position:relative"><div style="height:260px;background:url(${PHOTO['3']}) center/cover"></div><button class="back" data-back aria-label="Назад" style="position:absolute;top:60px;left:16px">${I.back}</button><div class="ov" style="bottom:16px;left:18px"><div class="eyebrow" style="color:rgba(255,255,255,.85)">4 дня верхом · с 14 лет</div><div class="logo" style="font-size:26px;margin-top:4px">Тур «Кержаки»</div></div></div>
  <div class="pad stack" style="padding-top:18px"><p style="margin:0">Конный переход по старообрядческим тропам Алтая: заимки кержаков, перевал с видом на хребты, ночёвки в доме и в юртах. Опыт верховой езды не обязателен, в первый день учим.</p>
  <div class="row between"><span class="price" style="font-size:20px">150 000 ₽</span><span class="small mute">с человека, всё включено</span></div>
  ${S.owned?`<div class="card" style="background:${ok?'var(--mint)':'var(--ochre-soft)'}"><b>Можно поехать на ${h.name==='Ласка'?'Ласке':h.name==='Айна'?'Айне':h.name+'е'}</b><div class="small" style="margin-top:4px">Для перевала нужна проходимость от 900 м. У ${nm('g',h)} сейчас ${cl} м: ${ok?'готов'+(fem(h)?'а':'')+' к туру.':'стоит пройти курс тренировок до сезона.'}</div></div>`:''}
@@ -778,6 +788,7 @@ $('#fab').addEventListener('click',()=>setRail(!$('#rail').classList.contains('o
 $('#railX').addEventListener('click',()=>setRail(false));
 $('#railBg').addEventListener('click',()=>setRail(false));
 $('#liveBtn').addEventListener('click',()=>setRail(false));
+const fit=()=>document.documentElement.style.setProperty('--k',Math.min(1,(innerHeight-40)/872).toFixed(4));fit();addEventListener('resize',fit);
 render();
 })();
 </script>
