@@ -160,6 +160,20 @@ canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-ra
 .fe time{color:#9A6A1F;font-weight:700;font-size:13px;font-variant-numeric:tabular-nums}
 .fe.new{animation:slidein .6s ease}
 @keyframes slidein{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.inframe{position:absolute;left:10px;bottom:10px;background:rgba(0,0,0,.55);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:10px;backdrop-filter:blur(4px)}
+.inframe.on{background:rgba(35,90,64,.85)}
+.callcam{position:absolute;right:10px;bottom:8px;background:#fff;color:var(--pine);border:0;border-radius:12px;padding:8px 12px;font:inherit;font-size:13px;font-weight:700;cursor:pointer}
+.strow{display:grid!important;grid-template-columns:repeat(3,1fr);gap:8px;background:#fff;border-radius:16px;padding:12px 14px;text-align:left}
+.strow span{display:block;font-size:11.5px;color:var(--stone)}.strow b{display:block;font-size:14px;margin-top:2px;line-height:1.25}
+.next .nx{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line);width:100%;text-align:left}
+.next .nx time{flex:none;width:44px;color:#9A6A1F;font-weight:700;font-size:13px}
+.next .nx>div{flex:1;min-width:0}.next .nx b{display:block;font-size:14.5px}.next .nx div span{display:block;font-size:12.5px;color:var(--stone);margin-top:1px}
+.rem{flex:none;border:1px solid var(--pine);background:none;color:var(--pine);border-radius:12px;padding:7px 11px;font:inherit;font-size:13px;font-weight:600;cursor:pointer}.rem.on{background:var(--mint);border-color:transparent}
+.fe .dot{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--ochre);margin-right:6px;vertical-align:1px}
+.fmedia{display:block;position:relative;margin-top:8px;width:100%;max-width:240px;aspect-ratio:16/10;border:0;padding:0;border-radius:12px;overflow:hidden;cursor:pointer;background:#ddd}
+.fmedia img{width:100%;height:100%;object-fit:cover;display:block}
+.fmedia .pl{position:absolute;inset:0;margin:auto;width:40px;height:40px;border-radius:50%;background:rgba(0,0,0,.45);display:grid;place-items:center}.fmedia .pl svg{width:18px;height:18px;margin-left:2px}
+.treat1 .ap{display:block;width:44px}
 .qa{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .qa button{background:#fff;border:0;border-radius:16px;padding:12px 4px 10px;box-shadow:0 1px 0 var(--line);display:flex;flex-direction:column;align-items:center;gap:6px;font-size:12px}
 .qa svg{width:24px;height:24px;color:var(--pine2)}
@@ -297,6 +311,8 @@ const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',
 const rub=n=>n.toLocaleString('ru-RU').replace(/,/g,' ')+'\u00a0₽';
 
 const I={
+ chat:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/></svg>',
+ play:'<svg viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>',
  horse:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 20v-5c0-3 2-5 5-6l2-5 2 2 3 1-1 3-3 1v9"/><path d="M9 20v-4"/></svg>',
  grid:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>',
  star:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1L3.2 9.5l6.1-.9z"/></svg>',
@@ -364,14 +380,14 @@ const PLANS=[
 const FEED0=[
  ['07:30','Утренний осмотр: всё в порядке, температура 37,6°'],
  ['08:05','Завтрак: овёс 2 кг и сено'],
- ['09:40','Конюх Алексей прислал фото с пастбища'],
+ ['09:40','Конюх Алексей прислал фото с пастбища','photo',1],
 ];
 const FEED_LIVE=[
- ['11:15','Занятие с тренером Мариной: работа на корде, 25 минут','Тренировка',{w:'Плац, занятие',m:'Сосредоточенное'},h=>`${h.name} закончил${fem(h)?'а':''} занятие на корде, 25 минут`],
+ ['11:15','Занятие с тренером Мариной: работа на корде, 25 минут','Тренировка',{w:'Плац, занятие',m:'Сосредоточенное'},h=>`${h.name} закончил${fem(h)?'а':''} занятие на корде, 25 минут`,'arena'],
  ['12:30','Купание в реке и чистка','Уход',{w:'Река, купание',m:'Довольное'},h=>`Алексей искупал ${nm('a',h)} после занятия`],
  ['13:10','Обед: сено и запаренный овёс, всё съедено','Конь поел',{w:'Денник, обед',f:'13:10 · обед, всё съел'},h=>`${h.name} пообедал${fem(h)?'а':''} и всё съел${fem(h)?'а':''}`],
- ['14:00','Прогулка по пастбищу: 2,4 км','Прогулка',{w:'Пастбище у Катуни',m:'Бодрое'},h=>`${h.name} вышел${fem(h)?'ла':''} на пастбище, включите камеру`],
- ['15:30','Играл с табуном у реки 20 минут','Конь поиграл',{w:'Пастбище, с табуном',m:'Игривое'},h=>`${h.name} поиграл${fem(h)?'а':''} с табуном у Катуни`],
+ ['14:00','Прогулка по пастбищу: 2,4 км','Прогулка',{w:'Пастбище у Катуни',m:'Бодрое'},h=>`${h.name} вышел${fem(h)?'ла':''} на пастбище, включите камеру`,'pasture'],
+ ['15:30','Играл с табуном у реки 20 минут','Конь поиграл',{w:'Пастбище, с табуном',m:'Игривое'},h=>`${h.name} поиграл${fem(h)?'а':''} с табуном у Катуни`,'pasture'],
  ['18:40','Немного грустит: табун ушёл на дальнее пастбище','Конь грустит',{w:'Левада у конюшни',m:'Скучает'},h=>`${h.name} скучает без табуна. Алексей рядом, угостите ${pron('a',h)} яблоком?`],
  ['20:30','Отчёт за день готов','Отчёт',{w:'Денник, отдых',m:'Спокойное',f:'19:00 · ужин'},h=>`Ежедневный отчёт о ${h.name==='Ласка'?'Ласке':h.name==='Айна'?'Айне':h.name+'е'} готов`],
 ];
@@ -482,15 +498,27 @@ R.meet=()=>`<div class="hero" style="background-image:url(${PHOTO['2']})"><div c
  <p style="margin:0 0 20px;font-size:16px;line-height:1.45">Алексей уже записывает для вас видео-приветствие. Оно появится в ленте в течение часа, а первый отчёт придёт вечером.</p>
  <button class="btn light" data-act="toHome">Перейти к ${S.horse.name==='Ласка'||S.horse.name==='Айна'?'ней':'нему'}</button></div>`;
 R.home=()=>{if(!S.owned)return noHorse('Здесь будет ваш конь','Выберите коня в каталоге. После оплаты здесь появятся камеры, лента событий и отчёты.');
- const h=S.horse,t=S.st;return `<div class="pad stack">${herdChips()}<div class="row between"><div><div class="eyebrow">${S.plan.name}</div><h1 class="h1" style="margin-top:3px">${h.name}</h1></div><span class="tag g">● Сейчас: ${t.w.split(/[ ,]/)[0].toLowerCase()}</span></div>
- <button class="tap live" data-go="cams">${vid('pasture')}<span class="badge-live">LIVE</span><span class="ov">Пастбище у Катуни · камера 2</span></button>
- <div class="grid2 st">${[['Где сейчас',t.w],['Самочувствие',t.hl],['Настроение',t.m],['Последняя еда',t.f]].map(x=>`<div class="metric"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div>
- <div class="qa"><button data-go="cams">${I.cam}Камеры</button><button data-go="report">${I.doc}Отчёт</button><button data-go="stats">${I.chart}Статистика</button><button data-go="health">${I.heart}Здоровье</button></div>
+ const h=S.horse,t=S.st,cam=camFor(t.w),on=!!cam,f=fem(h);
+ const feed=S.feed.map((x,i)=>[x,i]).reverse();
+ return `<div class="pad stack">${herdChips()}<div class="row between" style="align-items:flex-end"><div><div class="eyebrow">${S.plan.name}</div><h1 class="h1" style="margin-top:3px">${h.name}</h1><div class="small mute" style="margin-top:2px">Marali, Алтай · +8°, ясно</div></div><span class="tag g">● ${t.w.split(/[ ,]/)[0]}</span></div>
+ <div class="live"><button class="tap" data-go="cams" data-cam="${cam||'pasture'}" style="display:block;width:100%">${vid(cam||'pasture')}</button><span class="badge-live">LIVE</span>
+  <span class="inframe ${on?'on':''}">${on?`● ${h.name} в кадре · ${{pasture:'пастбище',stall:'денник',arena:'плац'}[cam]}`:`Вне кадра · 12 мин назад`}</span>
+  ${on?'':`<button class="callcam" data-camact="groom">Позвать к камере</button>`}</div>
+ <button class="tap card strow" data-go="health"><div><span>Самочувствие</span><b>${t.hl}</b></div><div><span>Настроение</span><b>${t.m}</b></div><div><span>Еда</span><b>${t.f.split(' · ')[0]} ${(t.f.split(' · ')[1]||'').split(',')[0]}</b></div></button>
+ <div class="card next"><div class="h2" style="margin-bottom:6px">Что дальше</div>
+  <div class="nx"><time>16:00</time><div><b>${S.training?'Курс: '+STATS.find(x=>x[0]===S.training)[1].toLowerCase():'Тренировка на плацу'}</b><span>С Мариной, включим камеру «Плац»</span></div><button class="rem ${S.remind?'on':''}" data-act="remind">${S.remind?'✓ Напомним':'Напомнить'}</button></div>
+  ${S.bookings.length?`<div class="nx"><time>${esc(S.bookings[0].d||'скоро')}</time><div><b>${esc(S.bookings[0].t||'Ваш визит')}</b><span>Мои брони</span></div></div>`:`<button class="tap nx" data-go="tour"><time>2027</time><div><b>Тур «Кержаки»</b><span>${h.name} может поехать с вами · ранняя бронь −15%</span></div><span class="chev">›</span></button>`}</div>
+ <div class="card"><div class="row between" style="margin-bottom:4px"><div class="h2">Сегодня</div><span class="small mute">5 октября</span></div><div class="feed" id="feed">${feed.map(([x,i],k)=>`<div class="fe ${k===0&&S.feedNew?'new':''}"><time>${x[0]}</time><div>${x[3]?'<i class="dot"></i>':''}${x[1]}${x[2]?`<button class="fmedia" data-fm="${i}">${x[2]==='photo'?pic('portrait',h.v,160,100,'width:100%;height:100%'):`<img src="media/${x[2]}.jpg" alt="">`}${x[2]==='photo'?'':`<span class="pl">${I.play}</span>`}</button>`:''}</div></div>`).join('')}</div></div>
+ <div class="qa"><button data-go="chat">${I.chat}Конюху</button><button data-go="report">${I.doc}Отчёт</button><button data-go="stats">${I.chart}Статистика</button><button data-go="health">${I.heart}Здоровье</button></div>
  ${(()=>{const L=lvl(),lt=S.learning?TRICKS.find(x=>x.id===S.learning):null,stt=S.training?STATS.find(x=>x[0]===S.training):null,kn=TRICKS.filter(x=>trickState(h,x)==='done').length;return `<button class="tap card" data-go="skills" style="background:#fff;padding:14px 16px;border-radius:18px;text-align:left"><div class="row between"><div class="h2">Развитие</div><span class="chev">›</span></div>
  <div class="row between small" style="margin-top:8px"><span>Уровень ${L.n} «${L.name}»</span><b>${S.xp.toLocaleString('ru-RU')} / ${L.to.toLocaleString('ru-RU')} XP</b></div><div class="bar o" style="margin-top:8px"><i style="width:${Math.min(100,Math.round((S.xp-L.from)/(L.to-L.from)*100))}%"></i></div>
  <div class="small" style="margin-top:10px;color:${stt||lt?'var(--pine2)':'var(--stone)'};font-weight:${stt||lt?600:400}">${stt?`Идёт курс «${stt[1]}» · неделя 1 из 3`:lt?`Учит трюк «${lt.name}»`:`Трюков освоено: ${kn}. Тренировки, трюки и ачивки внутри.`}</div></button>`})()}
- ${treatRow()}
- <div class="card"><div class="row between" style="margin-bottom:4px"><div class="h2">Сегодня</div><span class="small mute">5 октября</span></div><div class="feed" id="feed">${S.feed.slice().reverse().map((f,i)=>`<div class="fe ${i===0&&S.feedNew?'new':''}"><time>${f[0]}</time><div>${f[1]}</div></div>`).join('')}</div></div></div>`};
+ <div class="card row between treat1"><span class="row" style="gap:10px"><span class="ap">${art('apple','#F6E1DA',40)}</span><span><b>Угостить ${f?'её':'его'}</b><span class="small mute" style="display:block">Яблоки · ${rub(350)}</span></span></span><span class="row" style="gap:6px"><button class="btn ghost" style="width:auto;padding:8px 14px;font-size:14px" data-prod="apples">Угостить</button><button class="small" data-go="shop" style="color:var(--pine2);font-weight:600;background:none;border:0;padding:8px 2px">Ещё ›</button></span></div></div>`};
+const camFor=w=>/^Плац/.test(w)?'arena':/^Денник/.test(w)?'stall':/^Пастбище/.test(w)?'pasture':null;
+function feedSheet(i){const x=S.feed[i],h=S.horse;if(!x)return;x[3]=0;const bg=document.createElement('div');bg.className='sheet-bg';
+ bg.innerHTML=`<div class="sheet" role="dialog" aria-label="${esc(x[1])}"><div class="grab"></div><div style="border-radius:16px;overflow:hidden;background:#000">${x[2]==='photo'?pic('portrait',h.v,400,300,'width:100%;display:block'):vid(x[2],'width:100%;height:240px;object-fit:cover;display:block')}</div>
+ <div class="small mute" style="margin-top:12px">${x[0]} · ${x[2]==='photo'?'фото от Алексея':'видео'}</div><p style="margin:4px 0 14px">${esc(x[1])}</p><button class="btn" data-close>Закрыть</button></div>`;
+ app.appendChild(bg);bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]')){bg.remove();if(S.screen==='home')render()}})}
 R.cams=()=>{const c=S.cam==='pov'&&S.plan.id!=='own'?'pasture':(S.cam||'pasture');const cams=[['stall','Денник'],['pasture','Пастбище'],['arena','Плац'],['pov','Глазами коня']];const cur=cams.find(x=>x[0]===c);
  return `<div class="pad stack">${top('Камеры',S.horse.name)}<div class="live">${vid(c,'height:260px')}<span class="badge-live">LIVE</span><span class="ov">${cur[1]}${c==='pov'?' · камера на уздечке':''}</span></div>
  <style>@keyframes bob{50%{transform:translateY(-6px) rotate(.4deg)}}</style>
@@ -764,7 +792,9 @@ function trainSheet(id){const h=S.horse,st=STATS.find(x=>x[0]===id),pc=fpct(h,id
 view.addEventListener('click',e=>{const t=e.target.closest('[data-devtab],[data-train]');if(!t||t.disabled)return;if(t.dataset.devtab){S.devTab=t.dataset.devtab;return render()}if(t.dataset.train)return trainSheet(t.dataset.train)});
 view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');if(!t||t.disabled)return;const d=t.dataset;
  if('back' in d)return back();
- if(d.go)return go(d.go);
+ if(d.fm!==undefined)return feedSheet(+d.fm);
+ if(d.act==='remind'){S.remind=!S.remind;render();return S.remind&&notify('Напомним в 15:55','Пришлём пуш перед тренировкой и сразу откроем камеру «Плац».')}
+ if(d.go){if(d.cam)S.cam=d.cam;return go(d.go)}
  if(d.tab){S.stack=[];return go(d.tab,false)}
  if(d.filter){S.filter=d.filter;return render()}
  if(d.horse){S.pick=HORSES.find(h=>h.id===d.horse);S.pickPlan=PLANS[1];return go('horse')}
@@ -804,7 +834,7 @@ view.addEventListener('submit',e=>{if(e.target.id!=='chatf')return;e.preventDefa
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){const sh=app.querySelector('.sheet-bg');if(sh)sh.remove();else if($('#rail').classList.contains('open'))setRail(false)}});
 
 // live day
-let liveT=null;function liveTick(){if(!S.owned){S.owned=true}const ev=FEED_LIVE[S.liveIdx%FEED_LIVE.length];S.liveIdx++;S.feed.push([ev[0],ev[1]]);S.feedNew=true;if(S.screen==='home')render();Object.assign(S.st,ev[3]);notify(ev[2],ev[4](S.horse));
+let liveT=null;function liveTick(){if(!S.owned){S.owned=true}const ev=FEED_LIVE[S.liveIdx%FEED_LIVE.length];S.liveIdx++;S.feed.push([ev[0],ev[1],ev[5]||null,1]);S.feedNew=true;if(S.screen==='home')render();Object.assign(S.st,ev[3]);notify(ev[2],ev[4](S.horse));
  }
 $('#liveBtn').addEventListener('click',e=>{S.live=!S.live;e.currentTarget.setAttribute('aria-pressed',S.live);clearInterval(liveT);if(S.live){if(!S.owned)S.owned=true;S.stack=[];go('home',false);setTimeout(liveTick,1200);liveT=setInterval(liveTick,6500)}});
 $('#resetBtn').addEventListener('click',()=>{location.reload()});
