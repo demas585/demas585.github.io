@@ -213,7 +213,7 @@ canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-ra
 .trk .rem svg{width:14px;height:14px;vertical-align:-2px;fill:currentColor;color:var(--pine2)}.trk{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.trk b{display:block;font-size:14.5px}.trk span{display:block;font-size:12.5px;color:var(--stone);margin-top:1px}
 .ti{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--ochre-soft);color:#9A6A1F}.ti.done{background:var(--pine2);color:#fff}.ti.locked{background:#ECEEE9;font-size:12px}.ti.learning{background:var(--ochre);color:#fff}
 .mbtn{background:none;border:0;padding:4px 0;border-radius:12px;color:inherit}.mbtn:active{background:#F1F3EE}.medal.big{font-size:16px;font-weight:700;gap:6px}.medal.big span{font-size:18px;font-family:var(--f-display)}.medal.big svg{width:96px;height:114px}
-.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 4px;text-align:center}.medal{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11.5px;line-height:1.2}.medal svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.14))}.medal.off{color:var(--stone)}.medal.off svg{filter:none}.medal.pop svg{animation:pop .9s cubic-bezier(.2,1.6,.4,1)}
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 4px;text-align:center}.medal{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:12px;line-height:1.2;white-space:nowrap}.medal svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.14))}.medal.off{color:var(--stone)}.medal.off svg{filter:none}.medal.pop svg{animation:pop .9s cubic-bezier(.2,1.6,.4,1)}
 .badges{display:grid;grid-template-columns:repeat(3,1fr);gap:14px 8px;text-align:center;font-size:12px;line-height:1.3}
 .bdg{width:64px;height:64px;border-radius:50%;margin:0 auto 6px;display:grid;place-items:center;font-family:var(--f-display);font-weight:700;font-size:15px;color:#fff;background:var(--ochre)}
 .bdg.g{background:var(--pine2)}
@@ -535,21 +535,21 @@ function devHome(h){const L=lvl(),fr=S.plan.id==='friend',lt=S.learning?TRICKS.f
  <div class="card"><div class="row between" style="margin-bottom:4px"><div class="h2">Трюки</div><span class="small mute">освоено ${kn} из ${TRICKS.length}</span></div>${tricks}
  ${fr?'<button class="btn ghost" style="margin-top:10px;padding:10px;font-size:14px" data-act="subSheet">Сменить тариф</button>':''}</div>
  <div class="card"><div class="row between" style="margin-bottom:10px"><div class="h2">Ачивки</div><span class="small mute">${M.filter(x=>x[3]).length} из ${M.length}</span></div><div class="medals">${M.map((x,i)=>`<button class="tap mbtn" data-ach="${i}" aria-label="Ачивка ${x[1]}">${medal(...x)}</button>`).join('')}</div>
- ${S.badgeNew?'<div class="small" style="margin-top:12px;background:var(--ochre-soft);border-radius:12px;padding:10px 12px"><b>Бонус: −10% на «День с конём»</b> за ачивку «Первый трюк». Действует 60 дней, скидки не суммируются.</div>':''}</div>`}
+ ${S.badgeNew?'<div class="small" style="margin-top:12px;background:var(--ochre-soft);border-radius:12px;padding:10px 12px"><b>Бонус: −10% на «День с конём»</b> за ачивку Артист. Действует 60 дней, скидки не суммируются.</div>':''}</div>`}
 function trickVid(id){const t=TRICKS.find(x=>x.id===id),h=S.horse;const bg=document.createElement('div');bg.className='sheet-bg';
  bg.innerHTML=`<div class="sheet" role="dialog" aria-label="Видео трюка ${t.name}"><div class="grab"></div><div style="position:relative;border-radius:16px;overflow:hidden;background:#000">${vid('arena','width:100%;height:260px;object-fit:cover;display:block')}<span class="ov">${h.name} · ${t.name}</span></div>
  <div class="row between" style="margin-top:12px"><b style="font-size:17px">${t.name}</b><span class="tag g">Освоен</span></div><p class="small mute" style="margin:4px 0 14px">Запись с экзамена на плацу · тренер Марина Кыпчакова. Видео сохранено в профиле коня.</p><button class="btn" data-close>Закрыть</button></div>`;
  app.appendChild(bg);paintSheet(bg);bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove()})}
 function paintSheet(bg){bg.querySelectorAll('video').forEach(v=>{v.muted=true;v.loop=true;const p=v.play();if(p)p.catch(()=>{})})}
 function achList(h){const ov=STATS.some(x=>fpct(h,x[0])>100),kn=TRICKS.filter(x=>trickState(h,x)==='done').length,best=STATS.map(x=>[x,fpct(h,x[0])]).sort((a,b)=>b[1]-a[1])[0];
- return [['✓','Знакомство','g',1,'Оформите подписку на коня и посмотрите видео-приветствие от конюха.','+100 XP',[1,1],'Получена 5 октября'],
- ['7','Неделя вместе','o',0,'Будьте с конём 7 дней подряд: заходите в приложение хотя бы раз в день.','+150 XP и фото-открытка от конюха',[2,7],'дней подряд'],
- ['5','5 дней у камер','o',0,'Смотрите камеры 5 дней, хотя бы по 5 минут в день.','+100 XP',[1,5],'дней'],
- ['★','Первый трюк','o',S.badgeNew,'Научите коня первому трюку: выберите трюк в блоке «Трюки» и пройдите все занятия с тренером.','+250 XP и −10% на «День с конём»',[S.badgeNew?1:0,1],'трюк'],
- ['30','Месяц вместе','o',0,'Сохраняйте подписку 30 дней без перерыва.','+400 XP и бесплатный набор угощений',[2,30],'дней'],
- ['⛰','Тур «Кержаки»','o',0,'Пройдите 4-дневный тур «Кержаки» верхом на своём коне.','+1 000 XP и именная уздечка',[0,1],'тур'],
- ['100','100 км','o',0,'Конь должен пройти 100 км на прогулках и тренировках с момента подписки. Километры считает GPS-трекер.','+300 XP',[44.7,100],'км'],
- ['↑','Выше нормы породы','o',ov,'Натренируйте любую характеристику выше нормы породы: нажмите на кольцо в блоке «Развитие» и запишите коня на курс.','+500 XP и золотое кольцо в профиле коня',[Math.min(100,best[1]),100],best[0][1].toLowerCase()]]}
+ return [['✓','Начало','g',1,'Оформите подписку на коня и посмотрите видео-приветствие от конюха.','+100 XP',[1,1],'Получена 5 октября'],
+ ['7','Неделя','o',0,'Будьте с конём 7 дней подряд: заходите в приложение хотя бы раз в день.','+150 XP и фото-открытка от конюха',[2,7],'дней подряд'],
+ ['5','Зритель','o',0,'Смотрите камеры 5 дней, хотя бы по 5 минут в день.','+100 XP',[1,5],'дней'],
+ ['★','Артист','o',S.badgeNew,'Научите коня первому трюку: выберите трюк в блоке «Трюки» и пройдите все занятия с тренером.','+250 XP и −10% на «День с конём»',[S.badgeNew?1:0,1],'трюк'],
+ ['30','Месяц','o',0,'Сохраняйте подписку 30 дней без перерыва.','+400 XP и бесплатный набор угощений',[2,30],'дней'],
+ ['⛰','Кержак','o',0,'Пройдите 4-дневный тур «Кержаки» верхом на своём коне.','+1 000 XP и именная уздечка',[0,1],'тур'],
+ ['100','Путник','o',0,'Конь должен пройти 100 км на прогулках и тренировках с момента подписки. Километры считает GPS-трекер.','+300 XP',[44.7,100],'км'],
+ ['↑','Чемпион','o',ov,'Натренируйте любую характеристику выше нормы породы: нажмите на кольцо в блоке «Развитие» и запишите коня на курс.','+500 XP и золотое кольцо в профиле коня',[Math.min(100,best[1]),100],best[0][1].toLowerCase()]]}
 function achSheet(i){const h=S.horse,a=achList(h)[i],[sym,name,tone,on,how,prize,[v,mx],unit]=a,pc=Math.min(100,Math.round(v/mx*100));const bg=document.createElement('div');bg.className='sheet-bg';
  bg.innerHTML=`<div class="sheet" role="dialog" aria-label="Ачивка ${name}"><div class="grab"></div><div style="text-align:center"><div class="medal big">${medal(sym,name,tone,on)}</div>
  <div class="tag ${on?'g':'n'}" style="margin-top:6px">${on?'Получена':'Ещё не получена'}</div></div>
@@ -558,7 +558,7 @@ function achSheet(i){const h=S.horse,a=achList(h)[i],[sym,name,tone,on,how,prize
  <div class="kv" style="margin-bottom:14px"><span>Награда</span><span>${prize}</span></div><button class="btn" data-close>Понятно</button></div>`;
  app.appendChild(bg);bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove()})}
 function medal(sym,name,tone,on){const c=on?(tone==='g'?['#3E8A6C','#1F4F3D','#9FD3BC']:['#E2B866','#A8741F','#FBE6B4']):['#E4E7E1','#C3C8C1','#F4F5F2'],id='m'+name.length+sym.charCodeAt(0);
- return `<div class="medal ${on?'':'off'} ${on&&name==='Первый трюк'?'pop':''}"><svg viewBox="0 0 64 76" width="58" height="69" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c[0]}"/><stop offset="1" stop-color="${c[1]}"/></linearGradient></defs>
+ return `<div class="medal ${on?'':'off'} ${on&&name==='Артист'?'pop':''}"><svg viewBox="0 0 64 76" width="58" height="69" aria-hidden="true"><defs><linearGradient id="${id}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${c[0]}"/><stop offset="1" stop-color="${c[1]}"/></linearGradient></defs>
  <path d="M20 2h10l6 22h-10z" fill="${on?'#C0392B':'#D3D7D0'}"/><path d="M44 2H34l-6 22h10z" fill="${on?'#2F6B55':'#C9CEC7'}"/>
  <circle cx="32" cy="46" r="24" fill="url(#${id})"/><circle cx="32" cy="46" r="18.5" fill="none" stroke="${c[2]}" stroke-width="1.6" stroke-dasharray="2 2.4"/>
  <text x="32" y="47" text-anchor="middle" dominant-baseline="central" font-family="var(--f-display)" font-weight="800" font-size="${sym.length>2?13:16}" fill="${on?'#fff':'#9AA19C'}">${sym}</text></svg><span>${name}</span></div>`}
@@ -588,7 +588,7 @@ R.trips=()=>`<div class="pad stack"><div><div class="eyebrow">Поездки в 
 const DEPS=[['12–15 июня',8],['3–6 июля',5],['24–27 июля',0],['14–17 августа',11]];
 function bookCalc(){const k=S.tripSel,t={visit:['День с конём',25000],vip:['Визит под ключ',120000],tour:['Тур «Кержаки»',150000]}[k];const n=k==='tour'?S.ppl:1;const ds=[];
  if(S.owned){if(k==='tour')ds.push([15,'ранняя бронь']);else ds.push([S.plan.disc,'тариф «'+S.plan.name+'»'])}
- if(S.badgeNew&&k==='visit')ds.push([10,'ачивка «Первый трюк»']);const best=ds.sort((a,b)=>b[0]-a[0])[0];
+ if(S.badgeNew&&k==='visit')ds.push([10,'ачивка Артист']);const best=ds.sort((a,b)=>b[0]-a[0])[0];
  const incl=k==='visit'&&S.owned&&S.plan.id==='own'&&!S.bookings.some(b=>b.incl);const base=t[1]*n,sum=incl?0:best?Math.round(base*(100-best[0])/100):base;return {t,n,best,incl,base,sum}}
 R.tour=()=>{const h=S.horse,cl=S.owned?fval(h,'climb'):0,ok=cl>=900;return `<div style="position:relative"><div style="height:260px;background:linear-gradient(180deg,rgba(0,0,0,0) 40%,rgba(0,0,0,.6)),url(${PHOTO['3']}) center/cover"></div><button class="back" data-back aria-label="Назад" style="position:absolute;top:60px;left:16px">${I.back}</button><div class="ov" style="bottom:16px;left:18px"><div class="eyebrow" style="color:rgba(255,255,255,.85)">4 дня верхом · с 14 лет</div><div class="logo" style="font-size:26px;margin-top:4px">Тур «Кержаки»</div></div></div>
  <div class="pad stack" style="padding-top:18px"><p style="margin:0">Конный переход по старообрядческим тропам Алтая: заимки кержаков, перевал с видом на хребты, ночёвки в доме и в юртах. Опыт верховой езды не обязателен, в первый день учим.</p>
@@ -803,7 +803,7 @@ function learnSheet(id){const t=TRICKS.find(x=>x.id===id),h=S.horse;const bg=doc
  bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))return bg.remove();if(!e.target.closest('[data-yes]'))return;bg.remove();S.learning=id;addPay(`Трюк «${t.name}» · ${h.name}`,t.price);render();
   setTimeout(()=>notify('Конешеринг',`Тренер Марина записала ${nm('a',h)} на трюк «${t.name}». Первое занятие завтра в 10:00.`),400);
   setTimeout(()=>{const o=hs(h);if(o.learning!==id)return;o.learning=null;(S.learned[h.id]=S.learned[h.id]||[]).push(id);o.xp=(o.xp??XP0[h.id])+250;S.feed.push(['17:10',`Экзамен сдан: ${h.name} освоил${fem(h)?'а':''} трюк «${t.name}» · видео`]);const first=!S.badgeNew;S.badgeNew=true;if(S.screen==='home')render();
-   notify(first?'Новая ачивка':'Трюк освоен',first?`«Первый трюк»: ${h.name} умеет «${t.name}». +250 XP и скидка 10% на День с конём`:`${h.name} умеет «${t.name}». +250 XP`);confetti()},4500)})}
+   notify(first?'Новая ачивка':'Трюк освоен',first?`Артист: ${h.name} умеет «${t.name}». +250 XP и скидка 10% на День с конём`:`${h.name} умеет «${t.name}». +250 XP`);confetti()},4500)})}
 
 function trainSheet(id){const h=S.horse,st=STATS.find(x=>x[0]===id),pc=fpct(h,id),cap=fcap(h,id),gain=Math.max(0,Math.min(6,cap-pc)),cur=S.training&&STATS.find(x=>x[0]===S.training);
  const blk=S.plan.id==='friend'?'Тренировки доступны с тарифа «Совладелец». На тарифе «Друг коня» можно следить за формой.':S.training===id?'Идёт курс · неделя 1 из 3. Замеры после каждой недели придут в ленту.':cur?`Сейчас идёт курс «${cur[1]}». Новый можно начать после него: тренер ведёт один курс за раз.`:gain<=0?'Потолок от ветеринара достигнут. Дальше тренировать эту характеристику нельзя.':'';
