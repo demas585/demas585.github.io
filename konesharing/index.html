@@ -387,8 +387,11 @@ const planOk=(p,h)=>p.id==='friend'||(p.id==='co'?h.places>0:!h.places);
 const LV=[[0,'Новичок'],[800,'Знакомый'],[2000,'Друг'],[3500,'Напарник'],[6000,'Легенда']];
 function lvl(){let i=0;while(i<LV.length-1&&S.xp>=LV[i+1][0])i++;return {n:i+1,name:LV[i][1],from:LV[i][0],to:(LV[i+1]||[S.xp])[0]}}
 function ensureHerd(){if(S.owned&&!S.herd.length)S.herd.push({horse:S.horse,plan:S.plan,sub:S.sub})}
-function saveCur(){const e=S.herd.find(x=>x.horse===S.horse);if(e)Object.assign(e,{plan:S.plan,sub:S.sub,learning:S.learning,training:S.training})}
-function useHorse(id){saveCur();const e=S.herd.find(x=>x.horse.id===id);if(!e)return;Object.assign(S,{horse:e.horse,plan:e.plan,sub:e.sub||'active',learning:e.learning||null,training:e.training||null})}
+const XP0={grom:2620,buran:4280,laska:1900,shaman:4100,aina:1350,kedr:2950};
+function hs(h){return S.horse===h?S:S.herd.find(x=>x.horse===h)||{}}
+function herdChips(stay){return S.herd.length>1?`<div class="chips" role="group" aria-label="Ваши кони">${S.herd.map(e=>`<button class="chip ${e.horse===S.horse?'on':''}" data-horsepick="${e.horse.id}"${stay?' data-stay':''}>${e.horse.name}</button>`).join('')}<button class="chip" data-tab="catalog">+ Ещё конь</button></div>`:''}
+function saveCur(){const e=S.herd.find(x=>x.horse===S.horse);if(e)Object.assign(e,{plan:S.plan,sub:S.sub,learning:S.learning,training:S.training,xp:S.xp})}
+function useHorse(id){saveCur();const e=S.herd.find(x=>x.horse.id===id);if(!e)return;Object.assign(S,{horse:e.horse,plan:e.plan,sub:e.sub||'active',learning:e.learning||null,training:e.training||null,xp:e.xp??XP0[e.horse.id]})}
 const mine=h=>S.owned&&S.herd.some(e=>e.horse===h);
 function addPay(t,sum){S.pays.unshift({d:'5 октября',t,s:sum})}
 function ensurePays(){ensureHerd();saveCur();S.herd.forEach(e=>{if(!S.pays.some(p=>p.sub&&p.hid===e.horse.id))S.pays.push({d:'5 октября',t:`${e.plan.name} · ${e.horse.name}, октябрь`,s:e.plan.price,sub:1,hid:e.horse.id})})}
@@ -479,7 +482,7 @@ R.meet=()=>`<div class="hero" style="background-image:url(${PHOTO['2']})"><div c
  <p style="margin:0 0 20px;font-size:16px;line-height:1.45">Алексей уже записывает для вас видео-приветствие. Оно появится в ленте в течение часа, а первый отчёт придёт вечером.</p>
  <button class="btn light" data-act="toHome">Перейти к ${S.horse.name==='Ласка'||S.horse.name==='Айна'?'ней':'нему'}</button></div>`;
 R.home=()=>{if(!S.owned)return noHorse('Здесь будет ваш конь','Выберите коня в каталоге. После оплаты здесь появятся камеры, лента событий и отчёты.');
- const h=S.horse,t=S.st;return `<div class="pad stack">${S.herd.length>1?`<div class="chips" role="group" aria-label="Ваши кони">${S.herd.map(e=>`<button class="chip ${e.horse===h?'on':''}" data-horsepick="${e.horse.id}">${e.horse.name}</button>`).join('')}<button class="chip" data-tab="catalog">+ Ещё конь</button></div>`:''}<div class="row between"><div><div class="eyebrow">${S.plan.name}</div><h1 class="h1" style="margin-top:3px">${h.name}</h1></div><span class="tag g">● Сейчас: ${t.w.split(/[ ,]/)[0].toLowerCase()}</span></div>
+ const h=S.horse,t=S.st;return `<div class="pad stack">${herdChips()}<div class="row between"><div><div class="eyebrow">${S.plan.name}</div><h1 class="h1" style="margin-top:3px">${h.name}</h1></div><span class="tag g">● Сейчас: ${t.w.split(/[ ,]/)[0].toLowerCase()}</span></div>
  <button class="tap live" data-go="cams">${vid('pasture')}<span class="badge-live">LIVE</span><span class="ov">Пастбище у Катуни · камера 2</span></button>
  <div class="grid2 st">${[['Где сейчас',t.w],['Самочувствие',t.hl],['Настроение',t.m],['Последняя еда',t.f]].map(x=>`<div class="metric"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div>
  <div class="small mute" style="margin-top:-4px">Сегодня ${h.name} прош${fem(h)?'ла':'ёл'} 2 940 шагов · 1,8 км</div>
@@ -516,7 +519,7 @@ R.skills=()=>{if(!S.owned)return noHorse('Здесь будет развитие
   ${st==='locked'?`<div class="small mute" style="margin-top:6px">Нужно: ${need[1].toLowerCase()} ${t.need[1]} ${need[2]} · сейчас ${fval(h,t.need[0])} ${need[2]}. Потренируйте на вкладке «Тренировки».</div>`:''}
   ${st==='open'&&!busy?`<button class="btn" style="margin-top:12px;padding:12px" data-learn="${t.id}">Изучить трюк · ${rub(t.price)}</button>`:''}
   ${st==='open'&&busy?`<div class="small mute" style="margin-top:6px">Можно записать после «${lt.name}»: тренер ведёт один трюк за раз.</div>`:''}</div>`}).join('');
- return `<div class="pad stack"><div><div class="eyebrow">Развитие</div><h1 class="h1" style="margin-top:4px">${h.name} · уровень ${L.n}</h1>${st?`<span class="tag" style="margin-top:6px">${st}</span>`:''}</div>
+ return `<div class="pad stack">${herdChips(true)}<div><div class="eyebrow">Развитие</div><h1 class="h1" style="margin-top:4px">${h.name} · уровень ${L.n}</h1>${st?`<span class="tag" style="margin-top:6px">${st}</span>`:''}</div>
  <div class="card"><div class="row between small"><span>Уровень ${L.n} «${L.name}» → ${L.n+1}</span><b>${S.xp.toLocaleString('ru-RU')} / ${L.to.toLocaleString('ru-RU')} XP</b></div><div class="bar o" style="margin-top:8px"><i style="width:${Math.min(100,Math.round((S.xp-L.from)/(L.to-L.from)*100))}%;transition:width .8s"></i></div><div class="small mute" style="margin-top:8px">Опыт копится у коня с рождения: занятия, трюки, прогулки и визиты. На уровне ${L.n+1} — скидка 15% на визиты.</div></div>
  <div class="seg" role="tablist">${['Тренировки','Трюки'].map(x=>`<button role="tab" aria-selected="${tab===x}" class="${tab===x?'on':''}" data-devtab="${x}">${x}</button>`).join('')}</div>
  ${body}
@@ -744,7 +747,7 @@ function learnSheet(id){const t=TRICKS.find(x=>x.id===id),h=S.horse;const bg=doc
  <button class="btn ochre" data-yes>Начать обучение · ${rub(t.price)}</button><button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Отмена</button></div>`;app.appendChild(bg);
  bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))return bg.remove();if(!e.target.closest('[data-yes]'))return;bg.remove();S.learning=id;addPay(`Трюк «${t.name}» · ${h.name}`,t.price);render();
   setTimeout(()=>notify('Конешеринг',`Тренер Марина записала ${nm('a',h)} на трюк «${t.name}». Первое занятие завтра в 10:00.`),400);
-  setTimeout(()=>{if(S.learning!==id)return;S.learning=null;(S.learned[h.id]=S.learned[h.id]||[]).push(id);S.xp+=250;S.feed.push(['17:10',`Экзамен сдан: ${h.name} освоил${fem(h)?'а':''} трюк «${t.name}» · видео`]);const first=!S.badgeNew;S.badgeNew=true;if(S.screen==='skills')render();
+  setTimeout(()=>{const o=hs(h);if(o.learning!==id)return;o.learning=null;(S.learned[h.id]=S.learned[h.id]||[]).push(id);o.xp=(o.xp??XP0[h.id])+250;S.feed.push(['17:10',`Экзамен сдан: ${h.name} освоил${fem(h)?'а':''} трюк «${t.name}» · видео`]);const first=!S.badgeNew;S.badgeNew=true;if(S.screen==='skills')render();
    notify(first?'Новая ачивка':'Трюк освоен',first?`«Первый трюк»: ${h.name} умеет «${t.name}». +250 XP и скидка 10% на День с конём`:`${h.name} умеет «${t.name}». +250 XP`);confetti()},4500)})}
 
 function trainSheet(id){const h=S.horse,st=STATS.find(x=>x[0]===id),pc=fpct(h,id),cap=fcap(h,id),gain=Math.min(6,cap-pc);const bg=document.createElement('div');bg.className='sheet-bg';
@@ -755,7 +758,7 @@ function trainSheet(id){const h=S.horse,st=STATS.find(x=>x[0]===id),pc=fpct(h,id
  <button class="btn ochre" data-yes>Начать курс${S.plan.id==='own'?'':' · 18 000 ₽'}</button><button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Отмена</button></div>`;app.appendChild(bg);
  bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove();if(e.target.closest('[data-yes]')){bg.remove();S.training=id;if(S.plan.id!=='own')addPay(`Курс «${st[1]}» · ${h.name}`,18000);render();
   setTimeout(()=>notify('Конешеринг',`Курс «${st[1]}» начнётся завтра в 09:00. Тренер Марина пришлёт видео с первого занятия.`),400);
-  setTimeout(()=>{if(S.training!==id)return;S.boost=S.boost||{};S.boost[h.id+id]=(S.boost[h.id+id]||0)+gain;S.training=null;S.xp+=300;if(S.screen==='skills')render();const np=fpct(h,id);notify('Курс завершён',`${h.name}: ${st[1].toLowerCase()} ${id==='jump'?'вырос':'выросла'} до ${fval(h,id)} ${st[2]}. +300 XP`);confetti()},4200)}})}
+  setTimeout(()=>{const o=hs(h);if(o.training!==id)return;S.boost=S.boost||{};S.boost[h.id+id]=(S.boost[h.id+id]||0)+gain;o.training=null;o.xp=(o.xp??XP0[h.id])+300;if(S.screen==='skills')render();const np=fpct(h,id);notify('Курс завершён',`${h.name}: ${st[1].toLowerCase()} ${id==='jump'?'вырос':'выросла'} до ${fval(h,id)} ${st[2]}. +300 XP`);confetti()},4200)}})}
 view.addEventListener('click',e=>{const t=e.target.closest('[data-devtab],[data-train]');if(!t||t.disabled)return;if(t.dataset.devtab){S.devTab=t.dataset.devtab;return render()}if(t.dataset.train)return trainSheet(t.dataset.train)});
 view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');if(!t||t.disabled)return;const d=t.dataset;
  if('back' in d)return back();
@@ -769,7 +772,7 @@ view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');i
  if(d.camact){const h=S.horse,n={stall:'Денник',pasture:'Пастбище',arena:'Плац',pov:'Глазами коня'}[S.cam||'pasture'];if(d.camact==='shot'){const l=view.querySelector('.live');if(l){l.animate([{filter:'brightness(2.2)'},{filter:'none'}],{duration:350})}S.shots=(S.shots||0)+1;return notify('Снимок сохранён',`Кадр «${n}» в альбоме «${h.name}». Всего снимков: ${S.shots}.`)}
   if(d.camact==='groom')return notify('Алексей получил просьбу',`Подведёт ${nm('a',h)} к камере «${n}» в ближайшие 15 минут.`);
   if(d.camact==='archive')return notify('Архив камер','Записи за 7 дней: выберите день и время на шкале. В прототипе архив пока не открывается.')}
- if(d.horsepick){useHorse(d.horsepick);S.stack=[];S.pick=null;return go('home',false)}
+ if(d.horsepick){useHorse(d.horsepick);S.pick=null;if('stay' in d){scr().scrollTop=0;return render()}S.stack=[];return go('home',false)}
  if('povlock' in d)return notify('Камера «глазами коня»','Она на уздечке и включается на прогулках. Доступна на тарифе «Личный конь».');
  if(d.trip==='tour')return go('tour');
  if(d.trip){S.tripSel=d.trip;S.date=null;S.dep=null;S.ppl=1;return go('book')}
@@ -785,7 +788,7 @@ view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');i
  if(a==='haveHorse'){S.after='home';return go('login')}
  if(a==='toPay'){if(!S.logged){S.after='pay';return go('login')}return go('pay')}
  if(a==='more')return notify('В прототипе 6 коней','В приложении здесь будет весь табун Marali: 150 коней с фильтрами и поиском.');
- if(a==='pay'){const h=ph(),p=pp();go('paying');setTimeout(()=>{if(S.screen!=='paying')return;ensureHerd();saveCur();const ex=S.herd.find(e=>e.horse===h);if(ex)Object.assign(ex,{plan:p,sub:'active'});else S.herd.push({horse:h,plan:p,sub:'active'});if(S.horse!==h){S.learning=null;S.training=null}S.horse=h;S.plan=p;S.pick=null;S.pickPlan=null;S.owned=true;S.logged=true;S.sub='active';S.pays=S.pays.filter(x=>!(x.sub&&x.hid===h.id));S.pays.unshift({d:'5 октября',t:`${p.name} · ${h.name}, октябрь`,s:p.price,sub:1,hid:h.id});S.stack=[];go('meet',false);confetti()},1400);return}
+ if(a==='pay'){const h=ph(),p=pp();go('paying');setTimeout(()=>{if(S.screen!=='paying')return;ensureHerd();saveCur();const ex=S.herd.find(e=>e.horse===h);if(ex)Object.assign(ex,{plan:p,sub:'active'});else S.herd.push({horse:h,plan:p,sub:'active'});if(S.horse!==h){S.learning=null;S.training=null;S.xp=(ex&&ex.xp)??XP0[h.id]}S.horse=h;S.plan=p;S.pick=null;S.pickPlan=null;S.owned=true;S.logged=true;S.sub='active';S.pays=S.pays.filter(x=>!(x.sub&&x.hid===h.id));S.pays.unshift({d:'5 октября',t:`${p.name} · ${h.name}, октябрь`,s:p.price,sub:1,hid:h.id});S.stack=[];go('meet',false);confetti()},1400);return}
  if(a==='toHome'){S.stack=[];go('home',false);setTimeout(()=>{S.feed.push(['09:52',`Видео-приветствие от конюха Алексея и ${S.horse.name}`]);S.feedNew=true;if(S.screen==='home')render();notify('Конешеринг',`${S.horse.name} передаёт привет! Алексей записал для вас видео.`)},2200);return}
  if(d.learn)return learnSheet(d.learn);
  if(d.subfor){useHorse(d.subfor);return subSheet()}
