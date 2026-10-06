@@ -210,7 +210,7 @@ canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-ra
 .bub.l{background:#fff;align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 1px 0 var(--line)}
 .bub.r{background:var(--pine);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
 .rg.tap{background:none;border:0;padding:4px 0;border-radius:14px;color:inherit}.rg.tap:active{background:#F1F3EE}.rg .run{color:var(--pine2);font-weight:600;font-size:11px}
-.trk{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.trk b{display:block;font-size:14.5px}.trk span{display:block;font-size:12.5px;color:var(--stone);margin-top:1px}
+.trk .rem svg{width:14px;height:14px;vertical-align:-2px;fill:currentColor;color:var(--pine2)}.trk{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.trk b{display:block;font-size:14.5px}.trk span{display:block;font-size:12.5px;color:var(--stone);margin-top:1px}
 .ti{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--ochre-soft);color:#9A6A1F}.ti.done{background:var(--pine2);color:#fff}.ti.locked{background:#ECEEE9;font-size:12px}.ti.learning{background:var(--ochre);color:#fff}
 .mbtn{background:none;border:0;padding:4px 0;border-radius:12px;color:inherit}.mbtn:active{background:#F1F3EE}.medal.big{font-size:16px;font-weight:700;gap:6px}.medal.big span{font-size:18px;font-family:var(--f-display)}.medal.big svg{width:96px;height:114px}
 .medals{display:grid;grid-template-columns:repeat(4,1fr);gap:12px 4px;text-align:center}.medal{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11.5px;line-height:1.2}.medal svg{filter:drop-shadow(0 2px 3px rgba(0,0,0,.14))}.medal.off{color:var(--stone)}.medal.off svg{filter:none}.medal.pop svg{animation:pop .9s cubic-bezier(.2,1.6,.4,1)}
@@ -524,6 +524,7 @@ function devHome(h){const L=lvl(),fr=S.plan.id==='friend',lt=S.learning?TRICKS.f
  const rings=`<div class="rings">${STATS.map(([id,n,u])=>{const pc=fpct(h,id),cap=fcap(h,id),run=S.training===id;return `<button class="rg tap" data-train="${id}" aria-label="${n}: ${fval(h,id)} ${u}">${ring(pc,cap,74,run?Math.min(6,cap-pc):0,fval(h,id),u)}<b>${n.replace('Грузоподъёмность','Грузо­подъём­ность').replace('Вынос','Вынос­').replace('Прохо','Прохо­')}</b>${run?'<span class="run">идёт курс</span>':''}</button>`}).join('')}</div>`;
  const tricks=TRICKS.map(t=>{const st=trickState(h,t),need=t.need?STATS.find(x=>x[0]===t.need[0]):null;
   return `<div class="trk"><div class="ti ${st}">${st==='done'?'✓':st==='locked'?'🔒':st==='learning'?'…':'★'}</div><div style="flex:1;min-width:0"><b>${t.name}</b><span>${st==='done'?'Освоен':st==='learning'?`Занятие 1 из ${t.lessons} · завтра в 10:00`:st==='locked'?`Нужно: ${need[1].toLowerCase()} ${t.need[1]} ${need[2]}, сейчас ${fval(h,t.need[0])}`:`${t.lessons} занятий · ${rub(t.price)}`}</span></div>
+  ${st==='done'?`<button class="rem on" data-tvid="${t.id}">${I.play} Смотреть</button>`:''}
   ${st==='open'&&!fr?`<button class="rem" data-learn="${t.id}" ${S.learning?'disabled style="opacity:.45"':''}>Изучить</button>`:''}</div>`}).join('');
  const M=achList(h);
  return `<div class="card" id="dev"><div class="row between"><div class="h2">Развитие</div>${stt?`<span class="tag">Курс: ${stt[1].toLowerCase()}</span>`:lt?`<span class="tag">Учит трюк</span>`:''}</div>
@@ -535,6 +536,11 @@ function devHome(h){const L=lvl(),fr=S.plan.id==='friend',lt=S.learning?TRICKS.f
  ${fr?'<button class="btn ghost" style="margin-top:10px;padding:10px;font-size:14px" data-act="subSheet">Сменить тариф</button>':''}</div>
  <div class="card"><div class="row between" style="margin-bottom:10px"><div class="h2">Ачивки</div><span class="small mute">${M.filter(x=>x[3]).length} из ${M.length}</span></div><div class="medals">${M.map((x,i)=>`<button class="tap mbtn" data-ach="${i}" aria-label="Ачивка ${x[1]}">${medal(...x)}</button>`).join('')}</div>
  ${S.badgeNew?'<div class="small" style="margin-top:12px;background:var(--ochre-soft);border-radius:12px;padding:10px 12px"><b>Бонус: −10% на «День с конём»</b> за ачивку «Первый трюк». Действует 60 дней, скидки не суммируются.</div>':''}</div>`}
+function trickVid(id){const t=TRICKS.find(x=>x.id===id),h=S.horse;const bg=document.createElement('div');bg.className='sheet-bg';
+ bg.innerHTML=`<div class="sheet" role="dialog" aria-label="Видео трюка ${t.name}"><div class="grab"></div><div style="position:relative;border-radius:16px;overflow:hidden;background:#000">${vid('arena','width:100%;height:260px;object-fit:cover;display:block')}<span class="ov">${h.name} · ${t.name}</span></div>
+ <div class="row between" style="margin-top:12px"><b style="font-size:17px">${t.name}</b><span class="tag g">Освоен</span></div><p class="small mute" style="margin:4px 0 14px">Запись с экзамена на плацу · тренер Марина Кыпчакова. Видео сохранено в профиле коня.</p><button class="btn" data-close>Закрыть</button></div>`;
+ app.appendChild(bg);paintSheet(bg);bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove()})}
+function paintSheet(bg){bg.querySelectorAll('video').forEach(v=>{v.muted=true;v.loop=true;const p=v.play();if(p)p.catch(()=>{})})}
 function achList(h){const ov=STATS.some(x=>fpct(h,x[0])>100),kn=TRICKS.filter(x=>trickState(h,x)==='done').length,best=STATS.map(x=>[x,fpct(h,x[0])]).sort((a,b)=>b[1]-a[1])[0];
  return [['✓','Знакомство','g',1,'Оформите подписку на коня и посмотрите видео-приветствие от конюха.','+100 XP',[1,1],'Получена 5 октября'],
  ['7','Неделя вместе','o',0,'Будьте с конём 7 дней подряд: заходите в приложение хотя бы раз в день.','+150 XP и фото-открытка от конюха',[2,7],'дней подряд'],
@@ -818,6 +824,7 @@ view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');i
  if('back' in d)return back();
  if(d.fm!==undefined)return feedSheet(+d.fm);
  if(d.ach!==undefined)return achSheet(+d.ach);
+ if(d.tvid)return trickVid(d.tvid);
  if(d.act==='remind'){S.remind=!S.remind;render();return S.remind&&notify('Напомним в 15:55','Пришлём пуш перед тренировкой и сразу откроем камеру «Плац».')}
  if(d.go){if(d.cam)S.cam=d.cam;return go(d.go)}
  if(d.tab){S.stack=[];return go(d.tab,false)}
