@@ -209,7 +209,7 @@ canvas.pic,img.pic,video.vid{display:block;object-fit:cover;width:100%;border-ra
 .bub{max-width:78%;padding:9px 12px;border-radius:16px;font-size:14.5px;line-height:1.4}
 .bub.l{background:#fff;align-self:flex-start;border-bottom-left-radius:4px;box-shadow:0 1px 0 var(--line)}
 .bub.r{background:var(--pine);color:#fff;align-self:flex-end;border-bottom-right-radius:4px}
-.rg.tap{background:none;border:0;padding:4px 0;border-radius:14px;color:inherit}.rg.tap:active{background:#F1F3EE}.rg .run{color:var(--pine2);font-weight:600;font-size:11px}
+.rg.tap{background:none;border:0;padding:4px 0;border-radius:14px;color:inherit}.rg.tap:active{background:#F1F3EE}.rg .mx{color:#9A6A1F;font-weight:700;font-size:11px}.rg .run{color:var(--pine2);font-weight:600;font-size:11px}
 .trk .rem svg{width:14px;height:14px;vertical-align:-2px;fill:currentColor;color:var(--pine2)}.trk{display:flex;align-items:center;gap:12px;padding:10px 0;border-top:1px solid var(--line)}.trk b{display:block;font-size:14.5px}.trk span{display:block;font-size:12.5px;color:var(--stone);margin-top:1px}
 .ti{flex:none;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-weight:700;font-size:14px;background:var(--ochre-soft);color:#9A6A1F}.ti.done{background:var(--pine2);color:#fff}.ti.locked{background:#ECEEE9;font-size:12px}.ti.learning{background:var(--ochre);color:#fff}
 .mbtn{background:none;border:0;padding:4px 0;border-radius:12px;color:inherit}.mbtn:active{background:#F1F3EE}.medal.big{font-size:16px;font-weight:700;gap:6px}.medal.big span{font-size:18px;font-family:var(--f-display)}.medal.big svg{width:96px;height:114px}
@@ -348,7 +348,7 @@ const HORSES=[
 const STATS=[['speed','Скорость','км/ч','на галопе'],['jump','Прыжок','см','высота барьера'],['load','Грузоподъёмность','кг','всадник с грузом'],['power','Сила','кг','тяговое усилие'],['stamina','Выносливость','км','без отдыха'],['climb','Проходимость','м','набор высоты за горный переход']];
 const NORM={'Алтайская':{speed:45,jump:90,load:110,power:350,stamina:60,climb:1200},'Орловская':{speed:55,jump:110,load:100,power:400,stamina:40,climb:600},'Новоалтайская':{speed:45,jump:90,load:130,power:500,stamina:60,climb:1100},'Тракененская':{speed:55,jump:140,load:110,power:420,stamina:40,climb:600}};
 const PASS={
- grom:{sex:'Мерин',w:470,born:'2020, конюшня Marali',par:'Алмаз × Тайга',f:{speed:[72,90],jump:[55,85],load:[80,95],power:[70,95],stamina:[85,100],climb:[82,95]}},
+ grom:{sex:'Мерин',w:470,born:'2020, конюшня Marali',par:'Алмаз × Тайга',f:{speed:[72,90],jump:[55,85],load:[80,95],power:[70,95],stamina:[95,95],climb:[82,95]}},
  buran:{known:['bow'],sex:'Мерин',w:540,born:'2018, Хреновской конный завод',par:'Бриз × Вьюга',f:{speed:[88,95],jump:[70,90],load:[65,85],power:[62,85],stamina:[66,85],climb:[60,80]}},
  laska:{sex:'Кобыла',w:430,born:'2021, конюшня Marali',par:'Алмаз × Зорька',f:{speed:[76,95],jump:[62,95],load:[48,80],power:[52,85],stamina:[70,100],climb:[70,95]}},
  shaman:{sex:'Мерин',w:520,born:'2019, Чемальский район',par:'Байкал × Ночка',f:{speed:[70,85],jump:[50,80],load:[96,105],power:[104,110],stamina:[98,110],climb:[102,110]}},
@@ -363,6 +363,7 @@ const TRICKS=[
 ];
 function fpct(h,id){return (PASS[h.id].f[id][0])+((S.boost&&S.boost[h.id+id])||0)}
 function fcap(h,id){return PASS[h.id].f[id][1]}
+function fmax(h,id){return fpct(h,id)>=fcap(h,id)||fval(h,id)>=fval(h,id,fcap(h,id))}
 function fval(h,id,pc){const v=NORM[h.breed][id]*(pc==null?fpct(h,id):pc)/100;return id==='climb'?Math.round(v/10)*10:Math.round(v)}
 function ring(pc,cap,size,gain,val,unit){const r=15.5,C=2*Math.PI*r,over=pc>100,main=Math.min(pc,100),ang=a=>{const t=(a/100)*2*Math.PI-Math.PI/2;return [18+r*Math.cos(t),18+r*Math.sin(t)]};
   const tk='';
@@ -521,7 +522,7 @@ R.home=()=>{if(!S.owned)return noHorse('Здесь будет ваш конь','
  <div class="qa"><button data-go="chat">${I.chat}Конюху</button><button data-go="report">${I.doc}Отчёт</button><button data-go="stats">${I.chart}Статистика</button><button data-go="health">${I.heart}Здоровье</button></div>
 </div>`};
 function devHome(h){const L=lvl(),fr=S.plan.id==='friend',lt=S.learning?TRICKS.find(x=>x.id===S.learning):null,stt=S.training?STATS.find(x=>x[0]===S.training):null,kn=TRICKS.filter(x=>trickState(h,x)==='done').length,ov=STATS.some(x=>fpct(h,x[0])>100);
- const rings=`<div class="rings">${STATS.map(([id,n,u])=>{const pc=fpct(h,id),cap=fcap(h,id),run=S.training===id;return `<button class="rg tap" data-train="${id}" aria-label="${n}: ${fval(h,id)} ${u}">${ring(pc,cap,74,run?Math.min(6,cap-pc):0,fval(h,id),u)}<b>${n.replace('Грузоподъёмность','Грузо­подъём­ность').replace('Вынос','Вынос­').replace('Прохо','Прохо­')}</b>${run?'<span class="run">идёт курс</span>':''}</button>`}).join('')}</div>`;
+ const rings=`<div class="rings">${STATS.map(([id,n,u])=>{const pc=fpct(h,id),cap=fcap(h,id),run=S.training===id;return `<button class="rg tap" data-train="${id}" aria-label="${n}: ${fval(h,id)} ${u}">${ring(pc,cap,74,run?Math.min(6,cap-pc):0,fval(h,id),u)}<b>${n.replace('Грузоподъёмность','Грузо­подъём­ность').replace('Вынос','Вынос­').replace('Прохо','Прохо­')}</b>${run?'<span class="run">идёт курс</span>':fmax(h,id)?'<span class="mx">✓ прокачано</span>':''}</button>`}).join('')}</div>`;
  const tricks=TRICKS.map(t=>{const st=trickState(h,t),need=t.need?STATS.find(x=>x[0]===t.need[0]):null;
   return `<div class="trk"><div class="ti ${st}">${st==='done'?'✓':st==='locked'?'🔒':st==='learning'?'…':'★'}</div><div style="flex:1;min-width:0"><b>${t.name}</b><span>${st==='done'?'Освоен':st==='learning'?`Занятие 1 из ${t.lessons} · завтра в 10:00`:st==='locked'?`Нужно: ${need[1].toLowerCase()} ${t.need[1]} ${need[2]}, сейчас ${fval(h,t.need[0])}`:`${t.lessons} занятий · ${rub(t.price)}`}</span></div>
   ${st==='done'?`<button class="rem on" data-tvid="${t.id}">${I.play} Смотреть</button>`:''}
@@ -806,8 +807,8 @@ function learnSheet(id){const t=TRICKS.find(x=>x.id===id),h=S.horse;const bg=doc
    notify(first?'Новая ачивка':'Трюк освоен',first?`Артист: ${h.name} умеет «${t.name}». +250 XP и скидка 10% на День с конём`:`${h.name} умеет «${t.name}». +250 XP`);confetti()},4500)})}
 
 function trainSheet(id){const h=S.horse,st=STATS.find(x=>x[0]===id),pc=fpct(h,id),cap=fcap(h,id),gain=Math.max(0,Math.min(6,cap-pc)),cur=S.training&&STATS.find(x=>x[0]===S.training);
- const blk=S.plan.id==='friend'?'Тренировки доступны с тарифа «Совладелец». На тарифе «Друг коня» можно следить за формой.':S.training===id?'Идёт курс · неделя 1 из 3. Замеры после каждой недели придут в ленту.':cur?`Сейчас идёт курс «${cur[1]}». Новый можно начать после него: тренер ведёт один курс за раз.`:gain<=0?'Потолок от ветеринара достигнут. Дальше тренировать эту характеристику нельзя.':'';
- if(blk){const bg=document.createElement('div');bg.className='sheet-bg';bg.innerHTML=`<div class="sheet" role="dialog" aria-label="${st[1]}"><div class="grab"></div><h2 class="h1" style="font-size:20px">${st[1]}</h2>
+ const blk=S.plan.id==='friend'?'Тренировки доступны с тарифа «Совладелец». На тарифе «Друг коня» можно следить за формой.':S.training===id?'Идёт курс · неделя 1 из 3. Замеры после каждой недели придут в ленту.':fmax(h,id)?`Характеристика полностью прокачана. ${fval(h,id)}&nbsp;${st[2]} — максимум для ${nm('g',h)} по заключению ветеринара, дальше тренировать нельзя. Курсы можно взять по другим характеристикам.`:cur?`Сейчас идёт курс «${cur[1]}». Новый можно начать после него: тренер ведёт один курс за раз.`:'';
+ if(blk){const bg=document.createElement('div');bg.className='sheet-bg';bg.innerHTML=`<div class="sheet" role="dialog" aria-label="${st[1]}"><div class="grab"></div><div class="row between"><h2 class="h1" style="font-size:20px">${st[1]}</h2>${fmax(h,id)&&S.training!==id?'<span class="tag">✓ Прокачано полностью</span>':''}</div>
  <div class="row" style="gap:16px;margin:12px 0 14px;align-items:center">${ring(pc,cap,84,S.training===id?gain:0,fval(h,id),st[2])}<div><b>${fval(h,id)} ${st[2]}</b><div class="small mute" style="margin-top:3px">Норма породы ${NORM[h.breed][id]} ${st[2]} · потолок ${fval(h,id,cap)} ${st[2]}</div></div></div>
  <p class="mute" style="margin:0 0 14px">${blk}</p>${S.plan.id==='friend'?'<button class="btn" data-sub>Сменить тариф</button>':''}<button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Закрыть</button></div>`;app.appendChild(bg);
   return bg.addEventListener('click',e=>{if(e.target===bg||e.target.closest('[data-close]'))bg.remove();if(e.target.closest('[data-sub]')){bg.remove();subSheet()}})}const bg=document.createElement('div');bg.className='sheet-bg';
