@@ -315,9 +315,9 @@ const I={
 
 const HORSES=[
  {id:'grom',name:'Гром',age:6,breed:'Алтайская',color:'гнедой',v:0,temper:'Спокойный',h:152,walk:'Прогулки и рысь',places:2,price:29000,tags:['Совладение','Спокойные','Алтайская'],about:'Любит яблоки и долгие прогулки вдоль Катуни. Подходит к людям первым, на пастбище держится рядом с Бураном.'},
- {id:'buran',name:'Буран',age:8,breed:'Орловская',color:'серый',v:1,temper:'Уравновешенный',h:162,walk:'Выездка',places:0,price:89000,tags:['Личный'],about:'Опытный конь с хорошей выездкой. Терпелив с новичками, умеет кланяться по команде.'},
+ {id:'buran',name:'Буран',age:8,breed:'Орловская',color:'серый',v:1,temper:'Уравновешенный',h:162,walk:'Выездка',places:2,price:89000,tags:['Личный'],about:'Опытный конь с хорошей выездкой. Терпелив с новичками, умеет кланяться по команде.'},
  {id:'laska',name:'Ласка',age:5,breed:'Алтайская',color:'рыжая',v:2,temper:'Игривая',h:148,walk:'Прогулки',places:3,price:29000,tags:['Совладение','Для прогулок','Алтайская'],about:'Молодая и любопытная кобыла. Быстро учится, сейчас осваивает рысь на корде.'},
- {id:'shaman',name:'Шаман',age:7,breed:'Новоалтайская',color:'вороной',v:3,temper:'Сильный характер',h:158,walk:'Горные маршруты',places:0,price:89000,tags:['Личный','Для прогулок'],about:'Выносливый конь для горных маршрутов. Ходил в тур «Кержаки» три сезона подряд.'},
+ {id:'shaman',name:'Шаман',age:7,breed:'Новоалтайская',color:'вороной',v:3,temper:'Сильный характер',h:158,walk:'Горные маршруты',places:2,price:89000,tags:['Личный','Для прогулок'],about:'Выносливый конь для горных маршрутов. Ходил в тур «Кержаки» три сезона подряд.'},
  {id:'aina',name:'Айна',age:4,breed:'Алтайская',color:'буланая',v:4,temper:'Мягкая',h:146,walk:'Прогулки',places:4,price:29000,tags:['Совладение','Спокойные','Алтайская'],about:'Самая молодая в табуне. Мягкая, доверчивая, хорошо идёт в поводу.'},
  {id:'kedr',name:'Кедр',age:9,breed:'Тракененская',color:'караковый',v:5,temper:'Спокойный',h:166,walk:'Выездка',places:1,price:29000,tags:['Совладение','Спокойные'],about:'Крупный и очень спокойный конь. Любимец детей на конных прогулках.'},
 ];
@@ -383,7 +383,7 @@ const TABS=[['home','Мой конь',I.horse],['catalog','Каталог',I.gri
 const TAB_OF={home:'home',cams:'home',report:'home',stats:'home',health:'home',catalog:'catalog',horse:'catalog',tariff:'catalog',pay:'catalog',skills:'skills',trips:'trips',book:'trips',bookings:'trips',profile:'profile',chat:'profile',notif:'profile'};
 const NO_TABS=['tour','welcome','login','code','pay','paying','meet','book','chat'];
 const ph=()=>S.pick||S.horse,pp=()=>S.pickPlan||S.plan;
-const planOk=(p,h)=>p.id==='friend'||(p.id==='co'?h.places>0:!h.places);
+const planOk=(p,h)=>true;
 const LV=[[0,'Новичок'],[800,'Знакомый'],[2000,'Друг'],[3500,'Напарник'],[6000,'Легенда']];
 function lvl(){let i=0;while(i<LV.length-1&&S.xp>=LV[i+1][0])i++;return {n:i+1,name:LV[i][1],from:LV[i][0],to:(LV[i+1]||[S.xp])[0]}}
 function ensureHerd(){if(S.owned&&!S.herd.length)S.herd.push({horse:S.horse,plan:S.plan,sub:S.sub})}
@@ -454,15 +454,15 @@ R.login=()=>`<div class="pad stack" style="gap:18px">${top('Вход')}<p class=
  <label class="small mute" for="ph">Номер телефона</label><input class="input" id="ph" inputmode="tel" value="+7 913 245-18-07" style="margin-top:-12px">
  <button class="btn" data-act="sendCode">Получить код</button><p class="small mute" style="margin:0">Нажимая кнопку, вы принимаете условия сервиса и политику конфиденциальности Marali.</p></div>`;
 R.code=()=>`<div class="pad stack" style="gap:18px">${top('Код из SMS','Отправили на +7 913 245-18-07')}<div class="otp" id="otp"><span></span><span></span><span></span><span></span></div><p class="small mute" id="otpHint" style="margin:0">Код подставится автоматически.</p></div>`;
-R.catalog=()=>{const fs=['Все','Совладение','Личный','Спокойные','Для прогулок','Алтайская'];
+R.catalog=()=>{const fs=['Все','Спокойные','Для прогулок','Алтайская'];
  const list=HORSES.filter(h=>S.filter==='Все'||h.tags.includes(S.filter));
  return `<div class="pad stack"><div><div class="eyebrow">150 коней в табуне</div><h1 class="h1" style="margin-top:4px">Выберите коня</h1></div>
  <div class="chips" role="group" aria-label="Фильтры">${fs.map(f=>`<button class="chip ${S.filter===f?'on':''}" data-filter="${f}">${f}</button>`).join('')}</div>
  ${list.map(h=>`<button class="tap card horse-row" data-horse="${h.id}">${pic('portrait',h.v,192,192)}<div style="min-width:0"><div class="row between"><b style="font-size:17px">${h.name}</b><span class="small mute">${yrs(h.age)}</span></div>
- <div class="small mute">${h.breed} · ${h.color} · ${h.temper.toLowerCase()}</div><div class="row" style="margin-top:8px;flex-wrap:wrap;gap:6px">${mine(h)?'<span class="tag g">★ Ваш конь</span>':h.places?`<span class="tag">Совладение: ${h.places} ${h.places===1?'место':'места'}</span>`:'<span class="tag g">Личный конь</span>'}<span class="small" style="font-weight:600">от ${rub(PLANS[0].price)}/мес</span></div></div></button>`).join('')}
+ <div class="small mute">${h.breed} · ${h.color} · ${h.temper.toLowerCase()}</div><div class="row" style="margin-top:8px;flex-wrap:wrap;gap:6px">${mine(h)?'<span class="tag g">★ Ваш конь</span>':''}<span class="small" style="font-weight:600">от ${rub(PLANS[0].price)}/мес</span></div></div></button>`).join('')}
  ${list.length?'':'<p class="mute">По этому фильтру сейчас нет свободных коней.</p>'}<button class="btn ghost" data-act="more">Показать ещё 144 коня</button></div>`};
 R.horse=()=>{const h=ph();return `<div style="position:relative">${pic('portrait',h.v,780,600,'height:300px;border-radius:0')}<button class="back" data-back aria-label="Назад" style="position:absolute;top:60px;left:16px">${I.back}</button></div>
- <div class="pad stack" style="padding-top:18px"><div class="row between"><h1 class="h1">${h.name}</h1><span class="tag ${h.places?'':'g'}">${h.places?'Совладение: '+h.places+(h.places===1?' место':' места'):'Личный конь'}</span></div>
+ <div class="pad stack" style="padding-top:18px"><div class="row between"><h1 class="h1">${h.name}</h1></div>
  <div class="mute">${h.breed} порода · ${h.color} · ${yrs(h.age)}</div><p style="margin:0">${h.about}</p>
  <div class="live" style="position:relative">${vid('pasture','height:200px')}<span class="badge-live">LIVE</span><span class="ov">Пастбище у Катуни · ${h.name} сейчас здесь</span></div>
  <div class="card"><div class="h2" style="margin-bottom:10px">Паспорт</div><div class="pass">${(()=>{const P=PASS[h.id];return [['Порода',h.breed],['Пол',P.sex],['Возраст',yrs(h.age)],['Масть',h.color[0].toUpperCase()+h.color.slice(1)],['Рост в холке',h.h+' см'],['Вес',P.w+' кг'],['Характер',h.temper],['Родился',P.born],['Родители',P.par]].map(x=>`<span>${x[0]}</span><span>${x[1]}</span>`).join('')})()}</div></div>
@@ -765,7 +765,7 @@ view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');i
  if(d.go)return go(d.go);
  if(d.tab){S.stack=[];return go(d.tab,false)}
  if(d.filter){S.filter=d.filter;return render()}
- if(d.horse){S.pick=HORSES.find(h=>h.id===d.horse);S.pickPlan=PLANS[S.pick.places?1:2];return go('horse')}
+ if(d.horse){S.pick=HORSES.find(h=>h.id===d.horse);S.pickPlan=PLANS[1];return go('horse')}
  if(d.plan){S.pickPlan=PLANS.find(p=>p.id===d.plan);return render()}
  if(d.cam){S.cam=d.cam;return render()}
  if(d.staff){S.staffSel=d.staff;return go('staff')}
