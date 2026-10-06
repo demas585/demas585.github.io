@@ -95,7 +95,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .view::-webkit-scrollbar{display:none}
 .pad{padding:60px 18px 24px}
 @media (max-width:760px),(max-height:500px){.pad{padding-top:calc(14px + env(safe-area-inset-top,0px))}}
-.tabs{flex:none;display:grid;grid-template-columns:repeat(5,1fr);background:#fff;border-top:1px solid var(--line);padding:6px 4px calc(8px + env(safe-area-inset-bottom,0px))}
+.tabs{flex:none;display:grid;grid-template-columns:repeat(4,1fr);background:#fff;border-top:1px solid var(--line);padding:6px 4px calc(8px + env(safe-area-inset-bottom,0px))}
 .tabs button{background:none;border:0;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:10.5px;color:#66706B;padding:4px 0}
 .tabs svg{width:24px;height:24px}
 .tabs button.on{color:var(--pine2);font-weight:600}
@@ -379,8 +379,8 @@ const FEED_LIVE=[
 const S={screen:'welcome',stack:[],owned:false,horse:HORSES[0],plan:PLANS[1],filter:'Все',feed:FEED0.slice(),liveIdx:0,live:false,learning:null,badgeNew:false,
  bookings:[],pays:[],herd:[],st:{w:'Пастбище у Катуни',hl:'Отличное',m:'Бодрое',f:'08:05 · завтрак'},learned:{},xp:2620,pick:null,pickPlan:null,logged:false,after:null,sub:'active',ppl:1,dep:null,notif:{daily:true,care:true,mood:true,train:true,cam:false,promo:false,quiet:true},chat:[['l','Здравствуйте! Я Ольга, ваш менеджер в Marali. Чем помочь?']],tripSel:null,date:null};
 
-const TABS=[['home','Мой конь',I.horse],['catalog','Каталог',I.grid],['skills','Развитие',I.star],['trips','Поездки',I.map],['profile','Профиль',I.user]];
-const TAB_OF={home:'home',cams:'home',report:'home',stats:'home',health:'home',catalog:'catalog',horse:'catalog',tariff:'catalog',pay:'catalog',skills:'skills',trips:'trips',book:'trips',bookings:'trips',profile:'profile',chat:'profile',notif:'profile'};
+const TABS=[['home','Мой конь',I.horse],['catalog','Каталог',I.grid],['trips','Поездки',I.map],['profile','Профиль',I.user]];
+const TAB_OF={home:'home',cams:'home',report:'home',stats:'home',health:'home',catalog:'catalog',horse:'catalog',tariff:'catalog',pay:'catalog',skills:'home',trips:'trips',book:'trips',bookings:'trips',profile:'profile',chat:'profile',notif:'profile'};
 const NO_TABS=['tour','welcome','login','code','pay','paying','meet','book','chat'];
 const ph=()=>S.pick||S.horse,pp=()=>S.pickPlan||S.plan;
 const planOk=(p,h)=>true;
@@ -441,7 +441,7 @@ R.staff=()=>{const p=STAFF[S.staffSel||'alexey'],h=S.pick||S.horse,tr=S.staffSel
  <div class="card" style="background:var(--ochre-soft)"><div style="font-size:16px;line-height:1.45">«${p.quote}»</div></div>
  <div class="card"><div class="h2" style="margin-bottom:8px">Что умеет</div><div class="row" style="flex-wrap:wrap;gap:6px">${p.tags.map(t=>`<span class="tag g">${t}</span>`).join('')}</div></div>
  <div class="card"><div class="h2" style="margin-bottom:2px">Обычный день</div>${p.day.map(d=>`<div class="fe"><time>${d[0]}</time><div>${d[1]}</div></div>`).join('')}</div>
- ${tr&&S.owned?`<button class="btn" data-tab="skills">Записать ${nm('a',S.horse)} на тренировку</button>`:''}
+ ${tr&&S.owned?`<button class="btn" data-go="skills">Записать ${nm('a',S.horse)} на тренировку</button>`:''}
  <button class="btn ghost" data-go="chat">Задать вопрос через менеджера</button><p class="small mute" style="margin:0;text-align:center">Вопросы ${tr?'тренеру':'конюху'} передаёт менеджер Ольга, ответ приходит в чат.</p></div>`};
 function noHorse(title,text,extra,icon){return `<div class="pad"><div class="empty stack" style="align-items:center"><div style="width:84px;height:84px;border-radius:50%;background:var(--mint);color:var(--pine2);display:grid;place-items:center"><span style="width:40px;height:40px;display:block">${icon||I.horse}</span></div><h1 class="h1">${title}</h1><p class="mute" style="margin:0">${text}</p>${extra||''}<button class="btn" data-tab="catalog">Выбрать коня</button></div></div>`}
 R.welcome=()=>`<div class="hero" style="background-image:url(${PHOTO['1']})">
@@ -487,6 +487,9 @@ R.home=()=>{if(!S.owned)return noHorse('Здесь будет ваш конь','
  <div class="grid2 st">${[['Где сейчас',t.w],['Самочувствие',t.hl],['Настроение',t.m],['Последняя еда',t.f]].map(x=>`<div class="metric"><span>${x[0]}</span><b>${x[1]}</b></div>`).join('')}</div>
  <div class="small mute" style="margin-top:-4px">Сегодня ${h.name} прош${fem(h)?'ла':'ёл'} 2 940 шагов · 1,8 км</div>
  <div class="qa"><button data-go="cams">${I.cam}Камеры</button><button data-go="report">${I.doc}Отчёт</button><button data-go="stats">${I.chart}Статистика</button><button data-go="health">${I.heart}Здоровье</button></div>
+ ${(()=>{const L=lvl(),lt=S.learning?TRICKS.find(x=>x.id===S.learning):null,stt=S.training?STATS.find(x=>x[0]===S.training):null,kn=TRICKS.filter(x=>trickState(h,x)==='done').length;return `<button class="tap card" data-go="skills" style="background:#fff;padding:14px 16px;border-radius:18px;text-align:left"><div class="row between"><div class="h2">Развитие</div><span class="chev">›</span></div>
+ <div class="row between small" style="margin-top:8px"><span>Уровень ${L.n} «${L.name}»</span><b>${S.xp.toLocaleString('ru-RU')} / ${L.to.toLocaleString('ru-RU')} XP</b></div><div class="bar o" style="margin-top:8px"><i style="width:${Math.min(100,Math.round((S.xp-L.from)/(L.to-L.from)*100))}%"></i></div>
+ <div class="small" style="margin-top:10px;color:${stt||lt?'var(--pine2)':'var(--stone)'};font-weight:${stt||lt?600:400}">${stt?`Идёт курс «${stt[1]}» · неделя 1 из 3`:lt?`Учит трюк «${lt.name}»`:`Трюков освоено: ${kn}. Тренировки, трюки и ачивки внутри.`}</div></button>`})()}
  ${treatRow()}
  <div class="card"><div class="row between" style="margin-bottom:4px"><div class="h2">Сегодня</div><span class="small mute">5 октября</span></div><div class="feed" id="feed">${S.feed.slice().reverse().map((f,i)=>`<div class="fe ${i===0&&S.feedNew?'new':''}"><time>${f[0]}</time><div>${f[1]}</div></div>`).join('')}</div></div></div>`};
 R.cams=()=>{const c=S.cam==='pov'&&S.plan.id!=='own'?'pasture':(S.cam||'pasture');const cams=[['stall','Денник'],['pasture','Пастбище'],['arena','Плац'],['pov','Глазами коня']];const cur=cams.find(x=>x[0]===c);
@@ -519,7 +522,7 @@ R.skills=()=>{if(!S.owned)return noHorse('Здесь будет развитие
   ${st==='locked'?`<div class="small mute" style="margin-top:6px">Нужно: ${need[1].toLowerCase()} ${t.need[1]} ${need[2]} · сейчас ${fval(h,t.need[0])} ${need[2]}. Потренируйте на вкладке «Тренировки».</div>`:''}
   ${st==='open'&&!busy?`<button class="btn" style="margin-top:12px;padding:12px" data-learn="${t.id}">Изучить трюк · ${rub(t.price)}</button>`:''}
   ${st==='open'&&busy?`<div class="small mute" style="margin-top:6px">Можно записать после «${lt.name}»: тренер ведёт один трюк за раз.</div>`:''}</div>`}).join('');
- return `<div class="pad stack">${herdChips(true)}<div><div class="eyebrow">Развитие</div><h1 class="h1" style="margin-top:4px">${h.name} · уровень ${L.n}</h1>${st?`<span class="tag" style="margin-top:6px">${st}</span>`:''}</div>
+ return `<div class="pad stack">${top('Развитие',`${h.name} · уровень ${L.n}`)}${herdChips(true)}${st?`<div><span class="tag">${st}</span></div>`:''}
  <div class="card"><div class="row between small"><span>Уровень ${L.n} «${L.name}» → ${L.n+1}</span><b>${S.xp.toLocaleString('ru-RU')} / ${L.to.toLocaleString('ru-RU')} XP</b></div><div class="bar o" style="margin-top:8px"><i style="width:${Math.min(100,Math.round((S.xp-L.from)/(L.to-L.from)*100))}%;transition:width .8s"></i></div><div class="small mute" style="margin-top:8px">Опыт копится у коня с рождения: занятия, трюки, прогулки и визиты. На уровне ${L.n+1} — скидка 15% на визиты.</div></div>
  <div class="seg" role="tablist">${['Тренировки','Трюки'].map(x=>`<button role="tab" aria-selected="${tab===x}" class="${tab===x?'on':''}" data-devtab="${x}">${x}</button>`).join('')}</div>
  ${body}
@@ -808,10 +811,10 @@ $('#liveBtn').addEventListener('click',e=>{S.live=!S.live;e.currentTarget.setAtt
 $('#resetBtn').addEventListener('click',()=>{location.reload()});
 
 // scenario rail
-const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['staff','Конюх и тренер'],['tariff','Выбор тарифа'],['pay','Оплата'],['gift','Подарочный сертификат']]],['Мой конь',[['home','Главная и лента'],['herd','Два коня у владельца'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта'],['shop','Магазин для коня'],['purchases','Мои покупки и снаряжение'],['buyout','Выкуп коня']]],['Развитие',[['skills','Тренировки, трюки, ачивки'],['club','Клуб владельцев и рейтинг']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['tour','Программа тура «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления'],['payments','История платежей']]]];
+const SC=[['Вход',[['welcome','Приветствие'],['login','Вход по SMS']]],['Выбор коня',[['catalog','Каталог и фильтры'],['horse','Карточка коня'],['staff','Конюх и тренер'],['tariff','Выбор тарифа'],['pay','Оплата'],['gift','Подарочный сертификат']]],['Мой конь',[['home','Главная и лента'],['herd','Два коня у владельца'],['cams','Камеры и «глазами коня»'],['report','Ежедневный отчёт'],['stats','Статистика и GPS'],['health','Здоровье и медкарта'],['shop','Магазин для коня'],['purchases','Мои покупки и снаряжение'],['skills','Развитие: тренировки и трюки'],['buyout','Выкуп коня']]],['Поездки',[['trips','Визиты и тур «Кержаки»'],['tour','Программа тура «Кержаки»'],['bookings','Мои брони']]],['Профиль',[['profile','Подписка и настройки'],['chat','Чат с менеджером'],['notif','Уведомления'],['payments','История платежей'],['club','Клуб владельцев и рейтинг']]]];
 $('#scen').innerHTML=SC.map(g=>`<b>${g[0]}</b>${g[1].map(x=>`<button data-s="${x[0]}">${x[1]}</button>`).join('')}`).join('');
 $('#scen').addEventListener('click',e=>{const b=e.target.closest('[data-s]');if(!b)return;let s=b.dataset.s;if(s==='herd'){S.owned=true;S.herd=[{horse:HORSES[0],plan:PLANS[1],sub:'active'},{horse:HORSES[1],plan:PLANS[2],sub:'active'}];S.horse=HORSES[0];S.plan=PLANS[1];S.sub='active';S.learning=null;S.training=null;s='home'}if(['home','cams','report','stats','health','skills','shop','purchases','buyout'].includes(s))S.owned=true;if(S.owned||['pay','payments'].includes(s))S.logged=true;if(s==='book'&&!S.tripSel)S.tripSel='tour';if(!['horse','tariff','pay','staff'].includes(s)){S.pick=null;S.pickPlan=null}app.querySelector('.sheet-bg')?.remove();
- const ST={login:['welcome'],horse:['catalog'],staff:['catalog','horse'],purchases:['home','shop'],tariff:['catalog','horse'],pay:['catalog','horse','tariff']};S.stack=ST[s]||(TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[]);go(s,false);setRail(false)});
+ const ST={login:['welcome'],horse:['catalog'],staff:['catalog','horse'],purchases:['home','shop'],skills:['home'],tariff:['catalog','horse'],pay:['catalog','horse','tariff']};S.stack=ST[s]||(TAB_OF[s]&&TAB_OF[s]!==s?[TAB_OF[s]]:[]);go(s,false);setRail(false)});
 let lastY=0;const onScr=()=>{const y=scr().scrollTop;if(Math.abs(y-lastY)<6)return;document.body.classList.toggle('fab-hide',y>lastY&&y>40);lastY=y};view.addEventListener('scroll',onScr,{passive:true});addEventListener('scroll',onScr,{passive:true});
 const setRail=o=>{$('#rail').classList.toggle('open',o);document.body.classList.toggle('rail-on',o)};
 $('#fab').addEventListener('click',()=>setRail(!$('#rail').classList.contains('open')));
