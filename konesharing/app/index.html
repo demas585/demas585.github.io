@@ -68,7 +68,9 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .sky.s{padding-bottom:104px}
 .sky.s h1{font-size:40px;letter-spacing:-.035em;margin:18px 0 6px}
 .sky p{font-size:15px;font-weight:500;opacity:.88;position:relative;z-index:1}
-.ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:140px;display:block}
+.sky{z-index:0}:where(.sky ~ *){position:relative}.sky ~ *{z-index:1}
+.ridge{position:absolute;left:0;right:0;bottom:-110px;height:340px;pointer-events:none;z-index:0}
+.ridge svg{position:absolute;inset:0;width:100%;height:100%;display:block;will-change:transform;-webkit-mask-image:linear-gradient(180deg,#000 62%,transparent 94%);mask-image:linear-gradient(180deg,#000 62%,transparent 94%)}
 .stack{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:0 14px 120px;margin-top:-94px;position:relative;z-index:2}
 .stack>*{min-width:0}
 .nobar .stack{padding-bottom:40px}
@@ -434,7 +436,12 @@ const H=id=>HORSES.find(h=>h.id===id);
 function stats(id){const h=H(id),n=NORM[h.breed],f=PASS[id].f;return ST.map(([k,name,u,short])=>{const [p,c]=f[k];return{k,name,short:short||name,u,v:Math.round(n[k]*p/100),norm:n[k],cap:Math.round(n[k]*c/100),p,c,max:p>=c,gold:p>100}})}
 
 /* ---------- кусочки ---------- */
-const ridge=`<svg class="ridge" viewBox="0 0 400 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 86 L48 56 L82 72 L130 28 L168 60 L210 20 L252 66 L300 38 L340 66 L400 44 V140 H0Z" fill="#fff" fill-opacity=".12"/><path d="M0 104 L60 76 L104 94 L150 66 L200 92 L246 62 L300 90 L352 72 L400 86 V140 H0Z" fill="#fff" fill-opacity=".18"/></svg>`;
+const ridge=`<div class="ridge" aria-hidden="true">`
+ +`<svg data-k=".5" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 70 L30 52 L58 62 L96 18 L118 34 L134 26 L172 64 L214 30 L236 8 L262 40 L290 30 L330 62 L362 36 L400 50 V250 H0Z" fill="#fff" fill-opacity=".16"/><path d="M84 32 L96 18 L106 30 L100 28 L94 34Z M226 20 L236 8 L246 22 L240 20 L234 25Z M354 42 L362 36 L370 42 L364 41Z" fill="#fff" fill-opacity=".45"/></svg>`
+ +`<svg data-k=".3" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 92 L36 70 L64 82 L112 44 L150 76 L184 60 L222 84 L268 48 L310 80 L346 64 L400 82 V250 H0Z" fill="#fff" fill-opacity=".2"/></svg>`
+ +`<svg data-k=".12" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 116 C30 104 52 100 80 108 C110 117 130 96 162 92 C196 88 214 110 246 106 C280 102 300 86 334 90 C362 93 380 104 400 100 V250 H0Z" fill="#fff" fill-opacity=".28"/></svg></div>`;
+let pxT=0;function parallax(){pxT=0;const y=Math.min(scrollY,700);document.querySelectorAll('.ridge svg').forEach(e=>{e.style.transform=`translate3d(0,${(y*e.dataset.k).toFixed(1)}px,0)`})}
+addEventListener('scroll',()=>{if(!pxT)pxT=requestAnimationFrame(parallax)},{passive:true});
 const mountMark=`<svg class="m" viewBox="0 0 240 90" aria-hidden="true"><path d="M0 90 L40 50 L70 66 L120 14 L160 56 L200 30 L240 60 V90Z" fill="#fff"/></svg>`;
 const backBtn=`<button class="rb press" data-back aria-label="Назад">${ic('back')}</button>`;
 function skyTab(title,sub,right=''){return `<div class="top-gap"></div><header class="sky t"><div class="tp"><span></span>${right}</div><h1>${title}</h1>${sub?`<p>${sub}</p>`:''}${ridge}</header>`}
@@ -604,6 +611,7 @@ function render(){let r=(location.hash.replace(/^#\/?/,'')||'home').split('/');l
  app.innerHTML=V[n](arg);
  const tb=document.getElementById('tabbar'),t=TAB_OF[n];tb.style.display=NO_TABS.includes(n)?'none':'grid';
  const TI={catalog:'t_grid',trips:'t_trips',club:'t_club',profile:'t_user'};tb.innerHTML=TABS.map(([k,l,i])=>k==='home'?`<button class="main ${k===t?'on':''}" data-go="${k}" aria-label="${l}"><span class="orb"><img class="t3h" src="${R3.t_horse}" alt=""></span>${l}</button>`:`<button class="${k===t?'on':''}" data-go="${k}"><img class="t3" src="${R3[TI[k]]}" alt="">${l}</button>`).join('');
+ parallax();
  if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}
 }
 
