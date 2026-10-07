@@ -74,7 +74,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 .nobar .stack{padding-bottom:40px}
 
 /* поверхности */
-.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);border:1px solid rgba(255,255,255,.75);border-radius:var(--r);box-shadow:0 22px 40px -26px var(--shc),inset 0 1px 0 rgba(255,255,255,.9)}
+.glass{background:linear-gradient(150deg,rgba(255,255,255,.62),rgba(255,255,255,.38));backdrop-filter:blur(18px) saturate(1.6);-webkit-backdrop-filter:blur(18px) saturate(1.6);border:1px solid rgba(255,255,255,.55);border-radius:var(--r);box-shadow:0 22px 40px -26px var(--shc),inset 1.5px 1.5px 0 rgba(255,255,255,.95),inset -1px -1px 0 rgba(255,255,255,.45),inset 0 0 22px rgba(255,255,255,.35)}
 .solid{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.8);border-radius:calc(var(--r) - 8px)}
 .sec{padding:20px}
 h2{font-family:var(--fd);font-size:22px;font-weight:var(--hw);letter-spacing:-.025em}
@@ -245,11 +245,11 @@ h3{font-size:16px;font-weight:600}
 .composer input{flex:1;height:46px;border:0;background:transparent;padding:0 10px;outline:none;font-size:15px}
 
 /* таббар */
-.tabbar{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 12px);width:calc(min(100vw,440px) - 28px);display:grid;grid-template-columns:repeat(5,1fr);padding:9px 4px 8px;background:rgba(255,255,255,.78);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border:1px solid rgba(255,255,255,.8);border-radius:var(--r);box-shadow:0 14px 30px -12px var(--shc);color:var(--off)}
+.tabbar{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 12px);width:calc(min(100vw,440px) - 28px);display:grid;grid-template-columns:repeat(5,1fr);padding:9px 4px 8px;background:linear-gradient(160deg,rgba(255,255,255,.72),rgba(255,255,255,.52));backdrop-filter:blur(10px) saturate(1.8);-webkit-backdrop-filter:blur(10px) saturate(1.8);border:1px solid rgba(255,255,255,.6);border-radius:var(--r);box-shadow:0 14px 30px -12px var(--shc),inset 1.5px 1.5px 0 rgba(255,255,255,.95),inset -1px -1px 0 rgba(255,255,255,.5),inset 0 0 18px rgba(255,255,255,.4);color:var(--mute)}
 .tabbar button{display:grid;justify-items:center;gap:3px;font-size:10.5px;font-weight:600}
 .tabbar svg.i{width:22px;height:22px}
 .tabbar .on{color:var(--acc)}
-.tabbar .t3{width:28px;height:28px;object-fit:contain;margin-top:-3px;filter:grayscale(1) brightness(1.25) contrast(.75);opacity:.6;transition:filter .2s,opacity .2s,transform .25s}
+.tabbar .t3{width:28px;height:28px;object-fit:contain;margin-top:-3px;filter:grayscale(1) brightness(1.1) contrast(.85);opacity:.75;transition:filter .2s,opacity .2s,transform .25s}
 .tabbar .on .t3{filter:drop-shadow(0 3px 4px rgba(60,40,160,.35));opacity:1;transform:translateY(-1px) scale(1.08)}
 .tabbar .t3h{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(20,10,60,.35))}
 .tabbar .main{position:relative;margin-top:-39px;font-weight:700;color:var(--mute)}
@@ -588,7 +588,30 @@ function render(){let r=(location.hash.replace(/^#\/?/,'')||'home').split('/');l
  app.innerHTML=V[n](arg);
  const tb=document.getElementById('tabbar'),t=TAB_OF[n];tb.style.display=NO_TABS.includes(n)?'none':'grid';
  const TI={catalog:'t_grid',trips:'t_trips',club:'t_club',profile:'t_user'};tb.innerHTML=TABS.map(([k,l,i])=>k==='home'?`<button class="main ${k===t?'on':''}" data-go="${k}" aria-label="${l}"><span class="orb"><img class="t3h" src="${R3.t_horse}" alt=""></span>${l}</button>`:`<button class="${k===t?'on':''}" data-go="${k}"><img class="t3" src="${R3[TI[k]]}" alt="">${l}</button>`).join('');
- if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}}
+ if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}
+ requestAnimationFrame(liquid)}
+
+/* Liquid glass: SVG displacement refraction through backdrop-filter (Chromium only; Safari keeps plain blur) */
+const LG=/Chrome\//.test(navigator.userAgent)&&!/iPhone|iPad|iPod/.test(navigator.userAgent);
+const LGC={};let lgN=0;const lgSvg=document.createElementNS('http://www.w3.org/2000/svg','svg');lgSvg.setAttribute('width','0');lgSvg.setAttribute('height','0');lgSvg.style.position='absolute';document.body.appendChild(lgSvg);
+function lgMap(w,h,r,b){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');const im=x.createImageData(w,h);const D=im.data;const hw=w/2,hh=h/2;r=Math.min(r,hw,hh);
+ const sdf=(px,py)=>{const qx=Math.abs(px)-(hw-r),qy=Math.abs(py)-(hh-r);return Math.hypot(Math.max(qx,0),Math.max(qy,0))+Math.min(Math.max(qx,qy),0)-r};
+ for(let j=0;j<h;j++)for(let i=0;i<w;i++){const px=i+.5-hw,py=j+.5-hh;const d=-sdf(px,py);let dx=0,dy=0;
+  if(d<b){const gx=sdf(px+1,py)-sdf(px-1,py),gy=sdf(px,py+1)-sdf(px,py-1);const l=Math.hypot(gx,gy)||1;const m=Math.pow(1-Math.max(d,0)/b,2.2);dx=gx/l*m;dy=gy/l*m}
+  const k=(j*w+i)*4;D[k]=128+dx*127;D[k+1]=128+dy*127;D[k+2]=128;D[k+3]=255}
+ x.putImageData(im,0,0);return c.toDataURL()}
+function lgApply(el,blur,scale){const R=el.getBoundingClientRect();const w=Math.round(el.offsetWidth),h=Math.round(el.offsetHeight);if(w<8||h<8)return;
+ const rr=parseFloat(getComputedStyle(el).borderTopLeftRadius)||0;const key=w+'x'+h+'x'+Math.round(rr)+'x'+scale;
+ if(!LGC[key]){const id='lg'+(lgN++);const b=Math.min(28,h/2.6,w/2.6);const f=document.createElementNS('http://www.w3.org/2000/svg','filter');f.id=id;
+  f.setAttribute('x','0');f.setAttribute('y','0');f.setAttribute('width',w);f.setAttribute('height',h);f.setAttribute('filterUnits','userSpaceOnUse');f.setAttribute('color-interpolation-filters','sRGB');
+  f.innerHTML=`<feImage href="${lgMap(w,h,rr,b)}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="${scale}" xChannelSelector="R" yChannelSelector="G"/>`;
+  lgSvg.appendChild(f);LGC[key]=id}
+ el.style.backdropFilter=`url(#${LGC[key]}) blur(${blur}px) saturate(1.7) brightness(1.04)`}
+function liquid(){if(!LG)return;
+ document.querySelectorAll('.tabbar').forEach(e=>lgApply(e,9,80));
+ document.querySelectorAll('.glass').forEach(e=>{if(!e.style.background)lgApply(e,10,60)});
+ document.querySelectorAll('.rb,.gp,.chipg').forEach(e=>lgApply(e,3,40))}
+let lgT;addEventListener('resize',()=>{clearTimeout(lgT);lgT=setTimeout(liquid,200)});
 function go(r){if(location.hash==='#/'+r){render();return}location.hash='/'+r;window.scrollTo(0,0)}
 function rerender(){const y=scrollY;render();window.scrollTo(0,y)}
 addEventListener('hashchange',()=>{closeSheet();render();window.scrollTo(0,0)});
