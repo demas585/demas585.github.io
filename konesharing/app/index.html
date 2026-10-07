@@ -246,6 +246,12 @@ h3{font-size:16px;font-weight:600}
 .tabbar button{display:grid;justify-items:center;gap:3px;font-size:10.5px;font-weight:600}
 .tabbar svg.i{width:22px;height:22px}
 .tabbar .on{color:var(--acc)}
+.tabbar .main{position:relative;margin-top:-39px;font-weight:700;color:var(--mute)}
+.tabbar .main.on{color:var(--acc)}
+.tabbar .orb{width:66px;height:66px;border-radius:50%;display:grid;place-items:center;background:var(--deep);color:#fff;border:4px solid rgba(255,255,255,.95);box-shadow:0 12px 24px -8px var(--shc),0 0 0 1px rgba(0,0,0,.04);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s}
+.tabbar .orb svg.i{width:30px;height:30px;stroke-width:1.8}
+.tabbar .main.on .orb{box-shadow:0 14px 28px -8px var(--shc),0 0 0 5px color-mix(in srgb,var(--g1) 35%,transparent)}
+.tabbar .main:active .orb{transform:scale(.93)}
 
 /* переключатель схем */
 .sw{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(30,24,22,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 30px -10px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12);transition:transform .25s ease,opacity .25s ease}
@@ -576,7 +582,7 @@ V.chat=()=>skySub('Ольга','Менеджер Marali, обычно отвеч
  <form class="composer glass" data-send><input id="msg" placeholder="Сообщение" autocomplete="off"><button class="btn v sm" aria-label="Отправить">${ic('send')}</button></form></div>`;
 
 /* ---------- роутер ---------- */
-const TABS=[['home','Мой конь','horse'],['catalog','Каталог','grid'],['trips','Поездки','mount'],['club','Клуб','club'],['profile','Профиль','user']];
+const TABS=[['catalog','Каталог','grid'],['trips','Поездки','mount'],['home','Мой конь','horse'],['club','Клуб','club'],['profile','Профиль','user']];
 const TAB_OF={home:'home',cams:'home',report:'home',stats:'home',health:'home',shop:'home',purchases:'home',buyout:'home',notif:'home',catalog:'catalog',horse:'catalog',staff:'catalog',tariff:'catalog',gift:'catalog',trips:'trips',tour:'trips',bookings:'trips',club:'club',profile:'profile',payments:'profile'};
 const NO_TABS=['welcome','login','code','pay','paid','book','chat','tour','horse','staff','tariff','buyout','gift'];
 const ROOTS=['home','catalog','trips','club','profile','welcome'];
@@ -585,7 +591,7 @@ function render(){let r=(location.hash.replace(/^#\/?/,'')||'home').split('/');l
  const app=document.getElementById('app');app.className='app'+(ROOTS.includes(n)?'':' subp')+(NO_TABS.includes(n)?' nobar':'');
  app.innerHTML=V[n](arg);
  const tb=document.getElementById('tabbar'),t=TAB_OF[n];tb.style.display=NO_TABS.includes(n)?'none':'grid';
- tb.innerHTML=TABS.map(([k,l,i])=>`<button class="${k===t?'on':''}" data-go="${k}">${ic(i)}${l}</button>`).join('');
+ tb.innerHTML=TABS.map(([k,l,i])=>k==='home'?`<button class="main ${k===t?'on':''}" data-go="${k}" aria-label="${l}"><span class="orb">${ic(i)}</span>${l}</button>`:`<button class="${k===t?'on':''}" data-go="${k}">${ic(i)}${l}</button>`).join('');
  if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}}
 function go(r){if(location.hash==='#/'+r){render();return}location.hash='/'+r;window.scrollTo(0,0)}
 function rerender(){const y=scrollY;render();window.scrollTo(0,y)}
