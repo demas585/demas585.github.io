@@ -1,0 +1,637 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#3E2A3A"><meta name="apple-mobile-web-app-capable" content="yes">
+<title>Конешеринг</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Wix+Madefor+Display:wght@500;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&family=Commissioner:wght@400;500;600;700&display=swap">
+<style>
+/* ---------- цветовые схемы ---------- */
+.s1{--f:"Geologica",system-ui,sans-serif;--fd:"Geologica",system-ui,sans-serif;--hw:700;--r:28px;--rb:999px;
+ --ink:#2E2227;--mute:#76676B;--off:#AE9FA0;--line:rgba(118,103,107,.18);--acc:#3E2A3A;--lk:#8A4F3E;
+ --g1:#F1B97E;--g2:#C27A4E;--tint:#F7E7D8;--track:rgba(194,122,78,.15);--gold:#D9A21E;--goldt:#A86F0A;--shc:rgba(80,40,50,.45);--top:#3E2A3A;
+ --sky:linear-gradient(180deg,#3E2A3A 0,#7B4B57 200px,#C98468 340px,#EDBA92 440px,#F6DFCB 560px,#F7EDE4 720px,#F4EEE8 100%);
+ --skys:linear-gradient(180deg,#3E2A3A 0,#7B4B57 160px,#C98468 250px,#EDBA92 320px,#F6DFCB 420px,#F7EDE4 560px,#F4EEE8 100%);
+ --deep:linear-gradient(160deg,#3E2A3A,#7B4B57 55%,#D39370)}
+.s2{--f:"Wix Madefor Text",system-ui,sans-serif;--fd:"Wix Madefor Display",system-ui,sans-serif;--hw:700;--r:22px;--rb:14px;
+ --ink:#2A211C;--mute:#7A6B60;--off:#B0A293;--line:rgba(122,107,96,.2);--acc:#33261E;--lk:#8C5E1E;
+ --g1:#E8BF6A;--g2:#A9772F;--tint:#F3E7D3;--track:rgba(169,119,47,.15);--gold:#C99A2E;--goldt:#8C5E1E;--shc:rgba(70,45,25,.45);--top:#33261E;
+ --sky:linear-gradient(180deg,#33261E 0,#6E4C37 200px,#B48858 340px,#E3C597 440px,#F2E6D3 560px,#F6EFE5 720px,#F3ECE2 100%);
+ --skys:linear-gradient(180deg,#33261E 0,#6E4C37 160px,#B48858 250px,#E3C597 320px,#F2E6D3 420px,#F6EFE5 560px,#F3ECE2 100%);
+ --deep:linear-gradient(160deg,#33261E,#6E4C37 55%,#C49A5E)}
+.s3{--f:"Commissioner",system-ui,sans-serif;--fd:"Commissioner",system-ui,sans-serif;--hw:600;--r:18px;--rb:12px;
+ --ink:#262221;--mute:#736A65;--off:#A9A099;--line:rgba(115,106,101,.2);--acc:#2E2A29;--lk:#7D6448;
+ --g1:#D9BC94;--g2:#93744F;--tint:#EEE6DB;--track:rgba(147,116,79,.16);--gold:#BF9440;--goldt:#8A6528;--shc:rgba(40,34,30,.4);--top:#2E2A29;
+ --sky:linear-gradient(180deg,#2E2A29 0,#5B524F 200px,#9E8D82 340px,#D6C6B6 450px,#ECE4D9 570px,#F2EEE8 720px,#EFEAE3 100%);
+ --skys:linear-gradient(180deg,#2E2A29 0,#5B524F 160px,#9E8D82 250px,#D6C6B6 330px,#ECE4D9 430px,#F2EEE8 560px,#EFEAE3 100%);
+ --deep:linear-gradient(160deg,#2E2A29,#5B524F 55%,#A8937F)}
+
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{background:var(--top);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent;transition:background-color .3s}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+button:focus-visible,input:focus-visible{outline:2px solid var(--g2);outline-offset:2px}
+h1,h2,h3,p{margin:0}
+.app{max-width:440px;margin:0 auto;min-height:100dvh;position:relative;background:var(--sky);overflow:clip}
+.app.subp{background:var(--skys)}
+@media (min-width:600px){.app{box-shadow:0 0 0 1px rgba(0,0,0,.05),0 40px 120px -40px rgba(0,0,0,.5)}}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none;display:block}
+.ph{background:center/cover no-repeat;background-color:var(--tint)}
+.grow{flex:1;min-width:0}.grow>small{display:block}
+.row{display:flex;align-items:center;gap:12px}
+.hscroll{display:flex;gap:12px;overflow-x:auto;scrollbar-width:none}
+.hscroll::-webkit-scrollbar{display:none}
+.press{transition:transform .15s ease}
+.press:active{transform:scale(.97)}
+.arc{animation:draw 1.2s cubic-bezier(.2,.7,.2,1) both}
+@keyframes draw{from{stroke-dashoffset:var(--d)}}
+.fade{animation:fade .35s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}}
+@media (prefers-reduced-motion:reduce){.arc,.fade{animation:none}.press:active{transform:none}}
+.muted{color:var(--mute)}
+.top-gap{height:calc(env(safe-area-inset-top,0px) + 62px)}
+
+/* верх: небо */
+.sky{position:relative;padding:0 22px 118px;color:#fff}
+.sky .tp{display:flex;justify-content:space-between;align-items:center;position:relative;z-index:1;min-height:44px}
+.chipg{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px 0 5px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);font-weight:600;font-size:14px}
+.chipg .a{width:30px;height:30px;border-radius:50%}
+.rb{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);position:relative;flex:none}
+.rb .n{position:absolute;top:9px;right:10px;width:8px;height:8px;border-radius:50%;background:#E5533D;box-shadow:0 0 0 2px rgba(255,255,255,.5)}
+.sky h1{font-family:var(--fd);font-size:76px;font-weight:var(--hw);letter-spacing:-.05em;line-height:.92;margin:24px 0 10px;position:relative;z-index:1}
+.sky.t h1{font-size:54px;margin-top:20px}
+.sky.s{padding-bottom:104px}
+.sky.s h1{font-size:40px;letter-spacing:-.035em;margin:18px 0 6px}
+.sky p{font-size:15px;font-weight:500;opacity:.88;position:relative;z-index:1}
+.ridge{position:absolute;left:0;right:0;bottom:0;width:100%;height:140px;display:block}
+.stack{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;padding:0 14px 120px;margin-top:-94px;position:relative;z-index:2}
+.stack>*{min-width:0}
+.nobar .stack{padding-bottom:40px}
+
+/* поверхности */
+.glass{background:rgba(255,255,255,.55);backdrop-filter:blur(24px) saturate(1.3);-webkit-backdrop-filter:blur(24px) saturate(1.3);border:1px solid rgba(255,255,255,.75);border-radius:var(--r);box-shadow:0 22px 40px -26px var(--shc),inset 0 1px 0 rgba(255,255,255,.9)}
+.solid{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.8);border-radius:calc(var(--r) - 8px)}
+.sec{padding:20px}
+h2{font-family:var(--fd);font-size:22px;font-weight:var(--hw);letter-spacing:-.025em}
+h3{font-size:16px;font-weight:600}
+.hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px}
+.lk{font-size:14px;font-weight:600;color:var(--lk)}
+.txt{font-size:15px;color:var(--ink);line-height:1.55}
+.small{font-size:13px;color:var(--mute)}
+.btn{height:48px;padding:0 20px;border-radius:var(--rb);font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
+.btn.w{background:#fff;color:var(--ink)}
+.btn.v{background:var(--acc);color:#fff;box-shadow:0 12px 22px -12px var(--shc)}
+.btn.o{background:rgba(255,255,255,.6);border:1px solid var(--line);color:var(--ink)}
+.btn.g{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff}
+.btn.full{width:100%}
+.btn.sm{height:38px;padding:0 14px;font-size:13.5px}
+.btn[disabled]{opacity:.45;pointer-events:none}
+.pill{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 11px;border-radius:999px;font-size:12.5px;font-weight:600;background:var(--tint);color:var(--g2)}
+.pill.dark{background:var(--acc);color:#fff}
+.gp{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 13px;border-radius:999px;background:rgba(255,255,255,.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.45);color:#fff;font-size:12.5px;font-weight:600}
+.dot{width:8px;height:8px;border-radius:50%;background:#E5533D;box-shadow:0 0 0 3px rgba(229,83,61,.3)}
+.ic{width:44px;height:44px;border-radius:calc(var(--r) - 12px);display:grid;place-items:center;background:var(--tint);color:var(--g2);flex:none}
+.ic.lg{width:54px;height:54px}
+.ic.grad{background:linear-gradient(135deg,var(--g1),var(--g2));color:#fff}
+.chips{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;margin:0 -14px;padding:0 14px}
+.chips::-webkit-scrollbar{display:none}
+.chip{height:38px;padding:0 15px;border-radius:var(--rb);font-size:14px;font-weight:600;white-space:nowrap;background:rgba(255,255,255,.6);border:1px solid rgba(255,255,255,.8);color:var(--mute);flex:none}
+.chip.on{background:var(--acc);color:#fff;border-color:var(--acc)}
+.seg{display:inline-grid;grid-auto-flow:column;grid-auto-columns:1fr;background:rgba(255,255,255,.5);border-radius:var(--rb);padding:4px;border:1px solid rgba(255,255,255,.75)}
+.seg button{font-size:13.5px;font-weight:600;padding:8px 14px;border-radius:var(--rb);color:var(--mute);white-space:nowrap}
+.seg button.on{background:var(--acc);color:#fff}
+.li{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--line);text-align:left;width:100%}
+.li:first-child{border-top:0;padding-top:0}
+.li:last-child{padding-bottom:0}
+.li b{display:block;font-size:15px;font-weight:600}
+.li small{display:block;font-size:13px;color:var(--mute)}
+.chev{color:var(--off)}
+.tr{display:flex;align-items:center;gap:12px;padding:10px;border-radius:calc(var(--r) - 8px);background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8);text-align:left;width:100%}
+.tr+.tr{margin-top:8px}
+.tr .th{width:52px;height:52px;border-radius:calc(var(--r) - 14px);flex:none;display:grid;place-items:center;color:var(--g2);background-color:var(--tint);overflow:hidden}
+.tr b{display:block;font-size:15px;font-weight:600}
+.tr small{display:block;font-size:12.5px;color:var(--mute)}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:14px 12px}
+.kv small{display:block;font-size:12px;color:var(--mute)}
+.kv b{font-size:15.5px;font-weight:600}
+.field{display:block;width:100%;height:56px;border-radius:calc(var(--r) - 8px);border:1px solid var(--line);background:rgba(255,255,255,.85);padding:0 18px;font-size:18px;outline:none}
+.field:focus{border-color:var(--g2)}
+.sticky{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:8}
+
+/* камера */
+.cam{position:relative;height:280px;border-radius:calc(var(--r) + 2px);overflow:hidden;border:5px solid rgba(255,255,255,.5);box-shadow:0 34px 50px -26px var(--shc);background:#222}
+.cam video,.cam .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.cam::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(20,14,12,.7));pointer-events:none}
+.cam .ov{position:absolute;z-index:2}
+.cam .t{top:14px;left:14px;right:14px;display:flex;justify-content:space-between}
+.cam .b{left:16px;right:14px;bottom:14px;display:flex;justify-content:space-between;align-items:center;color:#fff;gap:10px}
+.cam .b small{font-size:13px;font-weight:500;opacity:.92;line-height:1.3}
+
+/* главная */
+.stat{display:grid;grid-template-columns:repeat(3,1fr);padding:16px 6px}
+.stat>button{padding:0 12px;border-left:1px solid var(--line);text-align:left}
+.stat>button:first-child{border-left:0}
+.stat svg{color:var(--g2);margin-bottom:10px}
+.stat small{display:block;font-size:12px;font-weight:500;color:var(--mute)}
+.stat b{font-size:17px;font-weight:600}
+.treat{display:flex;align-items:center;gap:14px;padding:14px 14px 14px 16px}
+.treat b{font-size:16px;font-weight:600;display:block}
+.treat small{font-size:13px;color:var(--mute)}
+.gear{width:132px;flex:none;background:rgba(255,255,255,.7);border-radius:calc(var(--r) - 8px);padding:8px 8px 12px;border:1px solid rgba(255,255,255,.8);text-align:left}
+.gear .im{height:100px;border-radius:calc(var(--r) - 14px);display:grid;place-items:center;color:var(--g2);margin-bottom:10px;background:var(--tint)}
+.gear b{display:block;font-size:13px;font-weight:600;line-height:1.25;padding:0 4px}
+.gear small{display:block;font-size:12px;color:var(--mute);padding:2px 4px 0}
+.lvl{display:flex;align-items:center;gap:14px;padding:12px;border-radius:calc(var(--r) - 8px);background:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.8)}
+.lvl .lv{width:56px;height:56px;border-radius:50%;background:conic-gradient(var(--g1),var(--g2) 75%,var(--track) 0);display:grid;place-items:center;flex:none}
+.lvl .lv b{width:44px;height:44px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:20px;font-weight:700}
+.rings{display:grid;grid-template-columns:repeat(3,1fr);gap:18px 6px;margin-top:20px}
+.ring{text-align:center}
+.ring svg{width:86px;height:86px;display:block;margin:0 auto}
+.ring .v{font:700 20px var(--fd);fill:var(--ink);letter-spacing:-.02em}
+.ring .u{font:500 10px var(--f);fill:var(--mute)}
+.ring b{display:block;font-size:12.5px;font-weight:600;margin-top:4px}
+.ring small{font-size:11px;color:var(--mute)}
+.ring.gold small,.ring.max small{color:var(--goldt);font-weight:600}
+.medals{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 6px}
+.medal{text-align:center;font-size:12px;font-weight:600;color:var(--off)}
+.medal i{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 7px;border-radius:50%;background:rgba(255,255,255,.45);border:1.5px dashed var(--line);color:var(--off)}
+.medal.on{color:var(--ink)}
+.medal.on i{color:#fff;border:0;background:linear-gradient(140deg,var(--g1),var(--g2));box-shadow:0 12px 20px -10px var(--shc),inset 0 0 0 3px rgba(255,255,255,.3)}
+.ev .d{width:52px;height:52px;border-radius:calc(var(--r) - 14px);display:grid;place-items:center;align-content:center;line-height:1;background-color:var(--tint);color:var(--g2);flex:none}
+.ev .d b{font-size:19px;font-weight:700;font-family:var(--fd)}
+.ev .d small{font-size:11px;font-weight:600;margin-top:3px;color:inherit}
+.quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.q{padding:16px;display:flex;flex-direction:column;gap:24px;text-align:left}
+.q svg{color:var(--g2)}
+.q b{font-size:16px;font-weight:600;display:block}
+.q small{font-size:12.5px;color:var(--mute)}
+.deep{border-radius:calc(var(--r) + 2px);padding:22px;color:#fff;background:var(--deep);box-shadow:0 26px 40px -22px var(--shc);position:relative;overflow:hidden;text-align:left}
+.deep svg.m{position:absolute;right:-10px;bottom:-6px;width:240px;height:90px;opacity:.2}
+.deep>*:not(svg){position:relative}
+.deep b.t{font-family:var(--fd);font-size:24px;font-weight:var(--hw);display:block;letter-spacing:-.02em}
+.deep p{margin:6px 0 16px;font-size:14px;opacity:.88;max-width:30ch}
+
+/* каталог и карточки */
+.hcard{position:relative;display:block;width:100%;height:300px;border-radius:calc(var(--r) + 2px);overflow:hidden;text-align:left;box-shadow:0 26px 40px -24px var(--shc);color:#fff}
+.hcard .ph{position:absolute;inset:0}
+.hcard::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.1) 30%,rgba(20,14,12,.78))}
+.hcard .in{position:absolute;z-index:2;left:18px;right:18px;bottom:16px}
+.hcard .in h3{font-family:var(--fd);font-size:34px;font-weight:var(--hw);letter-spacing:-.03em;line-height:1}
+.hcard .in p{font-size:13.5px;opacity:.9;margin-top:4px}
+.hcard .in .row{margin-top:12px;justify-content:space-between}
+.hcard .tag{position:absolute;z-index:2;top:14px;left:14px}
+.hero{position:relative;height:440px;color:#fff;margin-bottom:-120px}
+.hero .ph,.hero video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.35),transparent 30%,transparent 45%,var(--top) 100%)}
+.hero .tp{position:absolute;z-index:2;top:calc(env(safe-area-inset-top,0px) + 62px);left:22px;right:22px;display:flex;justify-content:space-between}
+.hero .nm{position:absolute;z-index:2;left:22px;right:22px;bottom:136px}
+.hero .nm h1{font-family:var(--fd);font-size:68px;font-weight:var(--hw);letter-spacing:-.05em;line-height:.92}
+.hero .nm p{font-size:15px;opacity:.9;margin-top:8px}
+.hero+.stack{margin-top:0}
+.staff{display:flex;gap:12px;align-items:center;text-align:left;width:100%}
+.ava{width:52px;height:52px;border-radius:50%;flex:none}
+.plan{display:block;width:100%;text-align:left;padding:18px;border:2px solid transparent}
+.plan.on{border-color:var(--g2)}
+.plan ul{margin:12px 0 0;padding:0;list-style:none;display:grid;gap:7px}
+.plan li{display:flex;gap:8px;font-size:14px}
+.plan li svg{color:var(--g2);width:18px;height:18px;margin-top:2px}
+.radio{width:24px;height:24px;border-radius:50%;border:2px solid var(--line);flex:none;display:grid;place-items:center}
+.plan.on .radio{border-color:var(--g2)}
+.plan.on .radio::after{content:"";width:12px;height:12px;border-radius:50%;background:var(--g2)}
+.price{font-family:var(--fd);font-size:26px;font-weight:var(--hw);letter-spacing:-.02em}
+.price small{font-family:var(--f);font-size:13px;color:var(--mute);font-weight:500;letter-spacing:0}
+
+/* магазин */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.prod{padding:10px 10px 14px;text-align:left;display:flex;flex-direction:column;gap:10px}
+.prod .im{height:118px;border-radius:calc(var(--r) - 12px);display:grid;place-items:center;color:var(--g2);background:var(--tint)}
+.prod b{font-size:14px;font-weight:600;line-height:1.3;display:block}
+.prod .p{font-family:var(--fd);font-weight:var(--hw);font-size:17px}
+
+/* карта, графики */
+.map{display:block;width:100%;height:auto;border-radius:calc(var(--r) - 8px)}
+.bars{display:flex;align-items:flex-end;gap:10px;height:140px;margin-top:8px}
+.bars div{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;height:100%;justify-content:flex-end}
+.bars i{display:block;width:100%;border-radius:8px 8px 4px 4px;background:var(--track)}
+.bars i.on{background:linear-gradient(180deg,var(--g1),var(--g2))}
+.bars small{font-size:11.5px;color:var(--mute)}
+.big{font-family:var(--fd);font-size:40px;font-weight:var(--hw);letter-spacing:-.04em;line-height:1}
+.tl{position:relative;padding-left:22px}
+.tl::before{content:"";position:absolute;left:6px;top:6px;bottom:6px;width:2px;background:var(--track)}
+.tl>div{position:relative;padding:0 0 16px}
+.tl>div:last-child{padding-bottom:0}
+.tl>div::before{content:"";position:absolute;left:-21px;top:5px;width:12px;height:12px;border-radius:50%;background:#fff;border:3px solid var(--g2)}
+.tl b{font-size:14.5px;font-weight:600;display:block}
+.tl small{font-size:13px;color:var(--mute)}
+
+/* чат */
+.msgs{display:flex;flex-direction:column;gap:8px}
+.msg{max-width:80%;padding:10px 14px;border-radius:18px;font-size:15px;line-height:1.4}
+.msg.in{background:rgba(255,255,255,.85);align-self:flex-start;border-bottom-left-radius:6px}
+.msg.out{background:var(--acc);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
+.msg small{display:block;font-size:11px;opacity:.6;margin-top:3px}
+.composer{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 12px);display:flex;gap:8px;padding:8px;z-index:8}
+.composer input{flex:1;height:46px;border:0;background:transparent;padding:0 10px;outline:none;font-size:15px}
+
+/* таббар */
+.tabbar{position:fixed;z-index:20;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 12px);width:calc(min(100vw,440px) - 28px);display:grid;grid-template-columns:repeat(5,1fr);padding:9px 4px 8px;background:rgba(255,255,255,.78);backdrop-filter:blur(24px) saturate(1.4);-webkit-backdrop-filter:blur(24px) saturate(1.4);border:1px solid rgba(255,255,255,.8);border-radius:var(--r);box-shadow:0 14px 30px -12px var(--shc);color:var(--off)}
+.tabbar button{display:grid;justify-items:center;gap:3px;font-size:10.5px;font-weight:600}
+.tabbar svg.i{width:22px;height:22px}
+.tabbar .on{color:var(--acc)}
+
+/* переключатель схем */
+.sw{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(30,24,22,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 30px -10px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12);transition:transform .25s ease,opacity .25s ease}
+.sw.hide{transform:translate(-50%,-150%);opacity:0}
+.sw button{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font:600 13px "Geologica",system-ui,sans-serif;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.sw button i{width:10px;height:10px;border-radius:50%}
+.sw button.on{background:#fff;color:#000}
+.swatch{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.swatch button{border-radius:calc(var(--r) - 10px);overflow:hidden;border:2px solid transparent;text-align:left;background:#fff}
+.swatch button.on{border-color:var(--g2)}
+.swatch span{display:block;height:58px}
+.swatch b{display:block;font-size:13px;font-weight:600;padding:8px 10px}
+
+/* шторка, тост */
+.scrim{position:fixed;inset:0;z-index:60;background:rgba(20,14,12,.45);opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.on{opacity:1;pointer-events:auto}
+.sheet{position:fixed;z-index:61;left:50%;bottom:0;width:min(100vw,440px);transform:translate(-50%,105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);background:#FBF8F4;border-radius:calc(var(--r) + 4px) calc(var(--r) + 4px) 0 0;padding:10px 20px calc(env(safe-area-inset-bottom,0px) + 22px);max-height:88dvh;overflow:auto;box-shadow:0 -20px 50px -20px rgba(0,0,0,.4)}
+.sheet.on{transform:translate(-50%,0)}
+.sheet .grab{width:44px;height:5px;border-radius:5px;background:var(--line);margin:0 auto 16px}
+.sheet h2{font-size:24px;margin-bottom:6px}
+.toast{position:fixed;z-index:70;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 100px);transform:translate(-50%,20px);opacity:0;transition:.25s;background:var(--acc);color:#fff;padding:12px 18px;border-radius:var(--rb);font-size:14px;font-weight:500;max-width:calc(min(100vw,440px) - 40px);box-shadow:0 14px 30px -12px rgba(0,0,0,.5);pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+.video{width:100%;border-radius:calc(var(--r) - 6px);display:block;background:#000;aspect-ratio:4/5;object-fit:cover}
+.code{display:flex;gap:10px;justify-content:center}
+.code input{width:58px;height:66px;text-align:center;font-size:26px;font-weight:600;border-radius:calc(var(--r) - 8px);border:1px solid var(--line);background:rgba(255,255,255,.85);outline:none}
+.welcome{position:relative;min-height:100dvh;color:#fff;display:flex;flex-direction:column;justify-content:flex-end;padding:0 22px calc(env(safe-area-inset-bottom,0px) + 28px)}
+.welcome video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.welcome::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.2),transparent 30%,var(--top) 78%);z-index:1}
+.welcome>*:not(video){position:relative;z-index:2}
+.welcome h1{font-family:var(--fd);font-size:48px;font-weight:var(--hw);letter-spacing:-.045em;line-height:.98;margin:10px 0 14px}
+.welcome ul{list-style:none;padding:0;margin:0 0 26px;display:grid;gap:10px;font-size:15px;opacity:.92}
+.welcome li{display:flex;gap:10px;align-items:flex-start}
+.welcome li svg{margin-top:2px}
+.counter{display:flex;align-items:center;gap:14px}
+.counter button{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:20px}
+.counter b{font-size:20px;min-width:24px;text-align:center}
+</style>
+</head><body class="s1">
+<nav class="sw" aria-label="Цветовая схема"><button data-s="1"><i style="background:#C98468"></i>Рассвет</button><button data-s="2"><i style="background:#B48858"></i>Мёд</button><button data-s="3"><i style="background:#9E8D82"></i>Туман</button></nav>
+<main class="app" id="app"></main>
+<nav class="tabbar" id="tabbar"></nav>
+<div class="scrim" id="scrim"></div><div class="sheet" id="sheet" role="dialog"></div><div class="toast" id="toast"></div>
+<script>
+const M='../media/';
+const I={
+ apple:'<path d="M12 7c-2-2-7-1.5-7 4 0 4 3 9 5 9 1 0 1.3-.6 2-.6s1 .6 2 .6c2 0 5-5 5-9 0-5.5-5-6-7-4z"/><path d="M12 7c0-2 1-3.5 3-4"/>',
+ heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/>',
+ smile:'<circle cx="12" cy="12" r="8"/><path d="M9 14c.8 1 1.8 1.5 3 1.5s2.2-.5 3-1.5M9.5 10h0M14.5 10h0"/>',
+ bowl:'<path d="M4 11h16a8 8 0 0 1-16 0zM8 7c0-1 1-1.5 1-2.5M12 7c0-1 1-1.5 1-2.5M16 7c0-1 1-1.5 1-2.5"/>',
+ bell:'<path d="M6 16V11a6 6 0 0 1 12 0v5l1.5 2h-15zM10 20a2 2 0 0 0 4 0"/>',
+ call:'<path d="M4 12a8 8 0 0 1 16 0M7 12a5 5 0 0 1 10 0M12 12v8"/>',
+ play:'<path d="M8 5v14l11-7z" fill="currentColor" stroke="none"/>',
+ lock:'<rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+ halter:'<path d="M7 4v8a5 5 0 0 0 10 0V4"/><circle cx="12" cy="17" r="1.6"/>',
+ brush:'<rect x="5" y="7" width="14" height="5" rx="2.5"/><path d="M7 12v4M10 12v4M13 12v4M16 12v4"/>',
+ blanket:'<path d="M5 8l7-3 7 3v9H5z"/><path d="M5 12h14"/>',
+ chat:'<path d="M5 6h14v9H9l-4 3z"/>',
+ doc:'<path d="M7 4h7l4 4v12H7z"/><path d="M14 4v4h4M10 13h5M10 16h5"/>',
+ chart:'<path d="M5 19V9M10 19V5M15 19v-7M20 19v-4"/>',
+ cross:'<path d="M10 4h4v6h6v4h-6v6h-4v-6H4v-4h6z"/>',
+ key:'<circle cx="8" cy="12" r="3.5"/><path d="M11.5 12H20M17 12v3M20 12v2"/>',
+ arrow:'<path d="M9 6l6 6-6 6"/>',
+ back:'<path d="M15 6l-6 6 6 6"/>',
+ down:'<path d="M6 9l6 6 6-6"/>',
+ star:'<path d="M12 4l2.4 5 5.6.6-4.2 3.8 1.2 5.5L12 16l-5 2.9 1.2-5.5L4 9.6 9.6 9z"/>',
+ sun:'<circle cx="12" cy="12" r="3.5"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M5.6 18.4 7 17M17 7l1.4-1.4"/>',
+ eye:'<path d="M2.5 12S6 6 12 6s9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6z"/><circle cx="12" cy="12" r="2.5"/>',
+ mount:'<path d="M3 19l6-10 4 6 2-3 6 7z"/>',
+ cal:'<rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+ shoe:'<path d="M7 4h10v6a5 5 0 0 1-10 0z"/><path d="M7 14v6h10v-6"/>',
+ horse:'<path d="M6 20v-6l3-5 1-5 3 3 3 1 2 3-2 2-3-1-2 3v5"/>',
+ grid:'<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
+ club:'<circle cx="9" cy="9" r="3"/><circle cx="16.5" cy="10" r="2.5"/><path d="M3.5 19c.8-3 3-4.5 5.5-4.5s4.7 1.5 5.5 4.5M15 15c2.5-.4 4.6.8 5.5 3.5"/>',
+ user:'<circle cx="12" cy="8.5" r="3.5"/><path d="M5 20c1-3.5 3.8-5 7-5s6 1.5 7 5"/>',
+ photo:'<rect x="4" y="5" width="16" height="14" rx="3"/><circle cx="9" cy="10" r="1.6"/><path d="M5 17l5-4 3 3 2-2 4 3"/>',
+ camera:'<path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13" r="3.5"/>',
+ video:'<rect x="3" y="6" width="13" height="12" rx="2"/><path d="M16 10l5-3v10l-5-3"/>',
+ archive:'<rect x="4" y="5" width="16" height="4" rx="1"/><path d="M5 9v10h14V9M10 13h4"/>',
+ check:'<path d="M5 12l5 5 9-10"/>',
+ clock:'<circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/>',
+ pin:'<path d="M12 21s-6-5.5-6-11a6 6 0 0 1 12 0c0 5.5-6 11-6 11z"/><circle cx="12" cy="10" r="2.2"/>',
+ card:'<rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/>',
+ gift:'<rect x="4" y="9" width="16" height="11" rx="1.5"/><path d="M3 9h18M12 9v11M12 9c-1.5-3-5-3.5-5-1.5S10 9 12 9zm0 0c1.5-3 5-3.5 5-1.5S14 9 12 9z"/>',
+ pause:'<path d="M9 6v12M15 6v12"/>',
+ out:'<path d="M14 5h5v14h-5M10 8l-4 4 4 4M6 12h10"/>',
+ palette:'<path d="M12 4a8 8 0 1 0 0 16c1.2 0 1.6-.9 1.2-1.8-.6-1.2.2-2.2 1.4-2.2H17a3 3 0 0 0 3-3c0-5-3.6-9-8-9z"/><circle cx="8" cy="11" r="1"/><circle cx="11" cy="7.5" r="1"/><circle cx="15.5" cy="8.5" r="1"/>',
+ send:'<path d="M4 12l16-8-6 16-3-7z"/>',
+ cart:'<path d="M4 5h2l2 10h10l2-7H7"/><circle cx="10" cy="19" r="1.4"/><circle cx="17" cy="19" r="1.4"/>',
+ drop:'<path d="M12 4s-6 6.5-6 10.5a6 6 0 0 0 12 0C18 10.5 12 4 12 4z"/>',
+ pill:'<rect x="4" y="9" width="16" height="6" rx="3" transform="rotate(-35 12 12)"/><path d="M10 8.6l3.4 5"/>',
+ sack:'<path d="M8 6h8l-1 3c3 2 4 5 4 8a3 3 0 0 1-3 3H8a3 3 0 0 1-3-3c0-3 1-6 4-8z"/>',
+ tooth:'<path d="M7 4c-2 0-3 2-3 4 0 3 1 4 1.5 7S7 20 8.5 20s1.5-4 3.5-4 2 4 3.5 4 2.5-2 3-5S20 11 20 8c0-2-1-4-3-4-2 0-3 1-5 1S9 4 7 4z"/>',
+ plate:'<rect x="4" y="7" width="16" height="10" rx="2"/><path d="M8 12h8"/>',
+ trophy:'<path d="M8 4h8v5a4 4 0 0 1-8 0zM8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4M12 13v4M9 20h6"/>',
+ news:'<rect x="4" y="5" width="16" height="14" rx="2"/><path d="M8 9h8M8 13h8M8 16h5"/>',
+ plus:'<path d="M12 5v14M5 12h14"/>',
+ minus:'<path d="M5 12h14"/>',
+ tent:'<path d="M3 20L12 5l9 15zM12 5v15M9 20l3-5 3 5"/>',
+ route:'<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6"/>',
+ temp:'<path d="M10 14V5a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z"/>',
+ weight:'<path d="M6 8h12l2 12H4z"/><circle cx="12" cy="5" r="2"/>',
+ pulse:'<path d="M3 12h4l2-5 4 10 2-5h6"/>'
+};
+const ic=(n,s)=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true"${s?` style="${s}"`:''}>${I[n]||''}</svg>`;
+const rub=n=>n.toLocaleString('ru-RU').replace(/ /g,' ')+' ₽';
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+/* ---------- данные (из прототипа, цифры условные) ---------- */
+const HORSES=[
+ {id:'grom',name:'Гром',age:6,breed:'Алтайская',color:'гнедой',temper:'Спокойный',h:152,walk:'Прогулки и рысь',places:2,tags:['Спокойные','Для прогулок'],about:'Любит яблоки и долгие прогулки вдоль Катуни. Подходит к людям первым, на пастбище держится рядом с Бураном.'},
+ {id:'buran',name:'Буран',age:8,breed:'Орловская',color:'серый',temper:'Уравновешенный',h:162,walk:'Выездка',places:2,tags:['Выездка'],about:'Опытный конь с хорошей выездкой. Терпелив с новичками, умеет кланяться по команде.'},
+ {id:'laska',name:'Ласка',age:5,breed:'Алтайская',color:'рыжая',temper:'Игривая',h:148,walk:'Прогулки',places:3,tags:['Для прогулок'],about:'Молодая и любопытная кобыла. Быстро учится, сейчас осваивает рысь на корде.'},
+ {id:'shaman',name:'Шаман',age:7,breed:'Новоалтайская',color:'вороной',temper:'Сильный характер',h:158,walk:'Горные маршруты',places:2,tags:['Горные маршруты'],about:'Выносливый конь для горных маршрутов. Ходил в тур «Кержаки» три сезона подряд.'},
+ {id:'aina',name:'Айна',age:4,breed:'Алтайская',color:'буланая',temper:'Мягкая',h:146,walk:'Прогулки',places:4,tags:['Спокойные','Для прогулок'],about:'Самая молодая в табуне. Мягкая, доверчивая, хорошо идёт в поводу.'},
+ {id:'kedr',name:'Кедр',age:9,breed:'Тракененская',color:'караковый',temper:'Спокойный',h:166,walk:'Выездка',places:1,tags:['Спокойные','Выездка'],about:'Крупный и очень спокойный конь. Любимец детей на конных прогулках.'}];
+const PASS={
+ grom:{sex:'Мерин',w:470,born:'2020, конюшня Marali',par:'Алмаз и Тайга',f:{speed:[72,90],jump:[55,85],load:[80,95],power:[70,95],stamina:[95,95],climb:[82,95]}},
+ buran:{sex:'Мерин',w:540,born:'2018, Хреновской завод',par:'Бриз и Вьюга',f:{speed:[88,95],jump:[70,90],load:[65,85],power:[62,85],stamina:[66,85],climb:[60,80]}},
+ laska:{sex:'Кобыла',w:430,born:'2021, конюшня Marali',par:'Алмаз и Зорька',f:{speed:[76,95],jump:[62,95],load:[48,80],power:[52,85],stamina:[70,100],climb:[70,95]}},
+ shaman:{sex:'Мерин',w:520,born:'2019, Чемальский район',par:'Байкал и Ночка',f:{speed:[70,85],jump:[50,80],load:[96,105],power:[104,110],stamina:[98,110],climb:[102,110]}},
+ aina:{sex:'Кобыла',w:410,born:'2022, конюшня Marali',par:'Кайрат и Ласточка',f:{speed:[60,95],jump:[45,90],load:[40,80],power:[45,85],stamina:[58,95],climb:[55,90]}},
+ kedr:{sex:'Мерин',w:600,born:'2017, Кировский завод',par:'Кристалл и Купава',f:{speed:[74,85],jump:[92,95],load:[78,90],power:[75,85],stamina:[60,80],climb:[50,75]}}};
+const NORM={'Алтайская':{speed:45,jump:90,load:110,power:350,stamina:60,climb:1200},'Орловская':{speed:55,jump:110,load:100,power:400,stamina:40,climb:600},'Новоалтайская':{speed:45,jump:90,load:130,power:500,stamina:60,climb:1100},'Тракененская':{speed:55,jump:140,load:110,power:420,stamina:40,climb:600}};
+const ST=[['speed','Скорость','км/ч'],['jump','Прыжок','см'],['load','Грузоподъёмность','кг','Груз'],['power','Сила','кг'],['stamina','Выносливость','км'],['climb','Проходимость','м']];
+const PLANS=[
+ {id:'friend',name:'Друг коня',price:4900,pts:['Камеры денника, пастбища и плаца','Лента событий и уведомления','Отчёт раз в неделю','Скидка 5% на визиты']},
+ {id:'co',name:'Совладелец',price:29000,pts:['Всё из тарифа «Друг коня»','Конь на 2–4 владельцев','Ежедневный отчёт и статистика','Запись на тренировки и трюки','Скидка 10% на визиты и тур']},
+ {id:'own',name:'Личный конь',price:89000,pts:['Всё из тарифа «Совладелец»','Камера «глазами коня»','Курсы тренировок входят в тариф','2 визита «День с конём» в год','Скидка 15% на тур']}];
+const TRICKS=[
+ {id:'step',name:'Шаг по команде',state:'done',date:'2 октября'},
+ {id:'bow',name:'Поклон',state:'learn',price:6000,lessons:4,done:2},
+ {id:'pole',name:'Прыжок через жердь',state:'lock',price:9000,lessons:6,need:['jump',60,'прыжке 60 см']},
+ {id:'spanish',name:'Испанский шаг',state:'lock',price:12000,lessons:7,need:['power',260,'силе 260 кг']}];
+const MED=[['Начало','star',1,'Оформить первую подписку','Скидка 5% на первый визит'],['Неделя','cal',1,'Заходить в приложение 7 дней подряд','+100 XP'],['Зритель','eye',1,'Посмотреть 10 часов эфира','+150 XP'],['Артист','play',0,'Выучить первый трюк','−10% на визит и +250 XP',[2,4]],['Месяц','sun',0,'Месяц с конём без перерыва','Табличка на денник в подарок',[24,30]],['Кержак','mount',0,'Пройти тур «Кержаки» на своём коне','Именная попона',[0,1]],['Путник','shoe',0,'Конь прошёл 500 км','+300 XP',[312,500]],['Чемпион','trophy',0,'Войти в тройку рейтинга клуба','Ужин в ресторане Marali',[4,3]]];
+const SHOP=[
+ {id:'apples',cat:'Лакомства',name:'Яблоки, 1 кг',price:350,art:'apple',info:'Алтайские яблоки из сада Marali. Конюх вручит сегодня и снимет видео.'},
+ {id:'carrot',cat:'Лакомства',name:'Морковь, 2 кг',price:300,art:'apple',info:'Сладкая морковь, режем кружками, как любит конь.'},
+ {id:'treats',cat:'Лакомства',name:'Травяные печенья',price:890,art:'star',info:'Лакомство из овса, льна и алтайских трав. Ветеринар одобрил.'},
+ {id:'oats',cat:'Корм',name:'Овёс премиум, 20 кг',price:1900,art:'sack',info:'Плющеный овёс с алтайских полей, хватит примерно на 5 дней.'},
+ {id:'hay',cat:'Корм',name:'Люцерновое сено, тюк',price:1200,art:'sack',info:'Мягкое сено с высоким белком, особенно полезно в период тренировок.'},
+ {id:'vit',cat:'Здоровье',name:'Витамины на месяц',price:3400,art:'pill',info:'Витаминно-минеральный комплекс для сезона холодов.'},
+ {id:'teeth',cat:'Здоровье',name:'Осмотр стоматолога',price:5500,art:'tooth',info:'Внеплановый осмотр и шлифовка зубов. Отчёт с фото придёт в медкарту.'},
+ {id:'hoof',cat:'Здоровье',name:'Бальзам для копыт',price:1600,art:'drop',info:'Защищает копыта от трещин в сухую погоду.'},
+ {id:'spa',cat:'Уход',name:'СПА-день',price:4500,art:'drop',info:'Мойка с шампунем, расчёсывание гривы и массаж. Видео приходит вечером.'},
+ {id:'brush',cat:'Уход',name:'Именной набор щёток',price:2400,art:'brush',info:'Щётки останутся в деннике, на ручках гравировка с именем.'},
+ {id:'halter',cat:'Снаряжение',name:'Недоуздок с гравировкой',price:6900,art:'halter',info:'Кожаный недоуздок ручной работы, латунная пластина с именем.'},
+ {id:'blanket',cat:'Снаряжение',name:'Зимняя попона',price:14500,art:'blanket',info:'Тёплая попона в цветах Marali, вышивка с именем коня.'},
+ {id:'plate',cat:'Именное',name:'Табличка на денник',price:3900,art:'plate',info:'Латунная табличка с именем коня и владельца на двери денника.'}];
+const GEAR=[['halter','Недоуздок с гравировкой','Едет к вам, 7–10 дней'],['brush','Именной набор щёток','Уже у Грома'],['blanket','Зимняя попона','Уже у Грома']];
+const EVU=[['7','окт','Тренировка на манеже','Сегодня в 16:00, ведёт Марина'],['12','окт','Осмотр ветеринара','Суббота в 11:00, плановый'],['12','июн','Тур «Кержаки»','4 дня, у вас 2 места']];
+const EVP=[['6','окт','Купание в реке','Алексей прислал 5 фото и видео','pov'],['4','окт','Занятие по поклону','Второе из четырёх, видео с манежа','arena'],['1','окт','Новые подковы','Кузнец проверил копыта','stall']];
+const STAFF={
+ alexey:{name:'Алексей Тойбоев',role:'Конюх',img:'alexey',stats:[['8','лет в Marali'],['12','коней под присмотром'],['1 400+','видео для владельцев']],about:'Вырос в Чемальском районе и с детства при лошадях. Отвечает за кормление, чистку, выгул и купание, следит за самочувствием коня каждый день. Именно он снимает фото и видео для вашей ленты.',tags:['Уход и чистка','Расчистка копыт','Выгул в горах','Съёмка видео'],quote:'Конь сразу чувствует, в каком ты настроении. Поэтому к нему я прихожу только спокойным.',day:[['06:30','Утренний осмотр и кормление'],['09:00','Чистка и выгул на пастбище'],['13:00','Обед и купание в реке'],['19:00','Вечерний осмотр, видео для владельцев']]},
+ marina:{name:'Марина Кыпчакова',role:'Тренер',img:'marina',stats:[['10','лет в конном спорте'],['30','коней на тренировках'],['40+','выученных трюков']],about:'Кандидат в мастера спорта по конкуру. Ведёт курсы тренировок и учит коней трюкам: от поклона до испанского шага. После каждого занятия присылает видео и замеры.',tags:['Конкур','Выездка','Трюки','Горные переходы'],quote:'Трюк — это разговор с конём. Сначала доверие, потом команда.',day:[['09:00','Курсы тренировок на плацу'],['10:00','Занятия по трюкам'],['15:00','Горные выезды с туристами'],['18:00','Видео и замеры для владельцев']]}};
+const NEWS=[['stall','В табуне пополнение','Кобыла Майра принесла жеребёнка. Владельцы выбирают ему имя голосованием до 15 октября.','3 октября'],['pov','Ранняя бронь «Кержаков» 2027','Для владельцев коней скидка 15% до 1 декабря. Можно ехать на своём коне.','1 октября'],['arena','Ветеринарный день','Игорь Сабашкин осмотрел зубы всем 150 коням. Отчёты уже в медкартах.','28 сентября']];
+const CLUBEV=[['Встреча владельцев в Marali','14 ноября, суббота','Ужин у камина, прогулка с конями, знакомство с тренерами',23],['Эфир с тренером Мариной','20 октября в 19:00, онлайн','Как тренировать коня зимой и каким трюкам учить',58],['Скачки на празднике Эл-Ойын','Июль 2027','Болеем за коней Marali, трансфер и места на трибуне',11]];
+const RATING=[['shaman',640],['buran',560],['laska',430],['grom',380],['kedr',310],['aina',240]];
+const DEPS=[['12–15 июня',8],['3–6 июля',5],['24–27 июля',0],['14–17 августа',11]];
+const VALUE={grom:650000};
+const CAMS=[['pasture','Пастбище'],['stall','Денник'],['arena','Плац'],['pov','Глазами коня']];
+
+const S={scheme:'1',owner:true,horse:'grom',plan:'co',pick:null,pickPlan:'co',ev:0,club:0,shopCat:'Все',catF:'Все',cam:0,people:2,dep:0,stats:0,bookings:[['Тур «Кержаки»','12–15 июня 2027, 2 человека']],orders:[['Недоуздок с гравировкой','5 октября',6900,'В пути'],['Яблоки, 1 кг','4 октября',350,'Вручено'],['СПА-день','28 сентября',4500,'Выполнено']],paused:false,chat:[['in','Здравствуйте! Я Ольга, ваш менеджер в Marali. Спрашивайте про визиты, тур и всё, что касается Грома.','10:02']]};
+try{const sv=localStorage.getItem('kn-scheme');if(sv)S.scheme=sv}catch(e){}
+const H=id=>HORSES.find(h=>h.id===id);
+function stats(id){const h=H(id),n=NORM[h.breed],f=PASS[id].f;return ST.map(([k,name,u,short])=>{const [p,c]=f[k];return{k,name,short:short||name,u,v:Math.round(n[k]*p/100),norm:n[k],cap:Math.round(n[k]*c/100),p,c,max:p>=c,gold:p>100}})}
+
+/* ---------- кусочки ---------- */
+const ridge=`<svg class="ridge" viewBox="0 0 400 140" preserveAspectRatio="none" aria-hidden="true"><path d="M0 86 L48 56 L82 72 L130 28 L168 60 L210 20 L252 66 L300 38 L340 66 L400 44 V140 H0Z" fill="#fff" fill-opacity=".12"/><path d="M0 104 L60 76 L104 94 L150 66 L200 92 L246 62 L300 90 L352 72 L400 86 V140 H0Z" fill="#fff" fill-opacity=".18"/></svg>`;
+const mountMark=`<svg class="m" viewBox="0 0 240 90" aria-hidden="true"><path d="M0 90 L40 50 L70 66 L120 14 L160 56 L200 30 L240 60 V90Z" fill="#fff"/></svg>`;
+const backBtn=`<button class="rb press" data-back aria-label="Назад">${ic('back')}</button>`;
+function skyTab(title,sub,right=''){return `<div class="top-gap"></div><header class="sky t"><div class="tp"><span></span>${right}</div><h1>${title}</h1>${sub?`<p>${sub}</p>`:''}${ridge}</header>`}
+function skySub(title,sub,right=''){return `<div class="top-gap"></div><header class="sky s"><div class="tp">${backBtn}${right}</div><h1>${title}</h1>${sub?`<p>${sub}</p>`:''}${ridge}</header>`}
+function arc(cx,r,w,col,p){const C=2*Math.PI*r,L=(p*C).toFixed(1);return `<circle class="arc" cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${L} ${C.toFixed(1)}" style="--d:${L}" transform="rotate(-90 ${cx} ${cx})"/>`}
+let gidN=0;
+function rings(id,tap){const g='g'+(++gidN);return `<div class="rings">${stats(id).map((s,k)=>{const sub=s.max?'✓ прокачано':s.gold?'выше нормы':`норма ${s.norm}`;const col=s.gold?'var(--gold)':`url(#${g})`;
+ return `<button class="ring press ${s.max?'max':''} ${s.gold?'gold':''}" ${tap?`data-train="${s.k}"`:''} aria-label="${s.name}: ${s.v} ${s.u}, ${sub}"><svg viewBox="0 0 80 80">${k?'':`<defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${getVar('--g1')}"/><stop offset="1" stop-color="${getVar('--g2')}"/></linearGradient></defs>`}<circle cx="40" cy="40" r="34" fill="none" stroke="var(--track)" stroke-width="8"/>${arc(40,34,8,col,Math.min(1,s.p/100))}<text x="40" y="43" text-anchor="middle" class="v">${s.v}</text><text x="40" y="57" text-anchor="middle" class="u">${s.u}</text></svg><b>${s.short}</b><small>${sub}</small></button>`}).join('')}</div>`}
+function getVar(n){return getComputedStyle(document.body).getPropertyValue(n).trim()}
+function evRow([d,m,t,s,p],past){return `<button class="tr ev" ${past?`data-go="report"`:''}><div class="d ${past?'ph':''}" ${past?`style="background-image:url(${M}${p}.jpg);color:#fff"`:''}>${past?ic('photo','width:22px;height:22px'):`<b>${d}</b><small>${m}</small>`}</div><div class="grow"><b>${t}</b><small>${past?d+' '+m+'. ':''}${s}</small></div>${ic('arrow','color:var(--off)')}</button>`}
+function events(){return `<div class="seg" style="margin-bottom:12px" data-segev>${['Ближайшие','Прошедшие'].map((t,k)=>`<button class="${S.ev===k?'on':''}" data-ev="${k}">${t}</button>`).join('')}</div>${(S.ev?EVP:EVU).map(e=>evRow(e,S.ev)).join('')}`}
+function trickRow(t,id){const st=stats(id);if(t.state==='done')return `<div class="tr"><div class="th ph" style="background-image:url(${M}arena.jpg)"></div><div class="grow"><b>${t.name}</b><small>Освоен ${t.date}</small></div><button class="btn v sm press" data-trick="${t.id}">${ic('play','width:12px;height:12px')}Смотреть</button></div>`;
+ if(t.state==='learn')return `<div class="tr"><div class="th">${ic('shoe')}</div><div class="grow"><b>${t.name}</b><small>Занятие ${t.done} из ${t.lessons}, следующее в четверг</small></div><span class="pill">${Math.round(t.done/t.lessons*100)}%</span></div>`;
+ const s=st.find(x=>x.k===t.need[0]);return `<div class="tr"><div class="th" style="color:var(--off)">${ic('lock')}</div><div class="grow"><b>${t.name}</b><small>Откроется при ${t.need[2]}, сейчас ${s.v} ${s.u}</small></div></div>`}
+
+/* ---------- экраны ---------- */
+const V={};
+V.welcome=()=>`<section class="welcome"><video src="${M}pasture.mp4" poster="${M}pasture.jpg" autoplay muted loop playsinline></video>
+ <span class="pill" style="background:rgba(255,255,255,.2);color:#fff;align-self:flex-start">Marali, Горный Алтай</span>
+ <h1>Свой конь на&nbsp;Алтае, даже если вы в&nbsp;городе</h1>
+ <ul>${[['eye','Смотрите на коня в прямом эфире'],['star','Учите его трюкам вместе с тренером'],['mount','Приезжайте в гости и в тур «Кержаки»']].map(([i,t])=>`<li>${ic(i)}${t}</li>`).join('')}</ul>
+ <button class="btn w full press" data-go="catalog">Выбрать коня</button>
+ <button class="btn full press" style="color:#fff;margin-top:8px" data-go="login">У меня уже есть конь</button></section>`;
+V.login=()=>skySub('Вход','Пришлём код в SMS')+`<div class="stack"><div class="glass sec"><label class="small" for="ph">Номер телефона</label><input id="ph" class="field" style="margin:8px 0 16px" inputmode="tel" value="+7 913 " autocomplete="tel"><button class="btn v full press" data-go="code">Получить код</button><p class="small" style="margin-top:14px">Нажимая кнопку, вы соглашаетесь с условиями сервиса и обработкой данных.</p></div></div>`;
+V.code=()=>skySub('Код из SMS','Отправили на +7 913 ••• 42 18')+`<div class="stack"><div class="glass sec"><div class="code">${[1,2,3,4].map(k=>`<input inputmode="numeric" maxlength="1" aria-label="Цифра ${k}" value="${k<4?[4,1,7][k-1]:''}">`).join('')}</div><button class="btn v full press" style="margin-top:20px" data-login>Войти</button><button class="btn full" style="margin-top:6px;color:var(--lk)" data-toast="Новый код отправлен">Отправить код ещё раз</button></div></div>`;
+
+V.home=()=>{const h=H(S.horse);return `<div class="top-gap"></div><header class="sky"><div class="tp"><button class="chipg press" data-go="catalog"><span class="a ph" style="background-image:url(${M}${h.id}.jpg)"></span>Мой конь${ic('down','width:16px;height:16px')}</button><button class="rb press" data-go="notif" aria-label="Уведомления">${ic('bell')}<i class="n"></i></button></div><h1>${h.name}</h1><p>Вечер в Marali, +8°, ясно</p>${ridge}</header>
+<div class="stack">
+ <div class="cam press" data-go="cams" role="button" aria-label="Открыть камеры"><video src="${M}pasture.mp4" poster="${M}pasture.jpg" autoplay muted loop playsinline></video><div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span></div>
+  <div class="ov b"><small>Пастбище, в кадре<br>2 мин назад</small><button class="btn w sm press" data-call>${ic('call')}Позвать к камере</button></div></div>
+ <div class="glass stat"><button data-go="health">${ic('heart')}<small>Самочувствие</small><b>Отличное</b></button><button data-go="health">${ic('smile')}<small>Настроение</small><b>Бодрое</b></button><button data-go="report">${ic('bowl')}<small>Завтрак</small><b>в 08:05</b></button></div>
+ <div class="glass treat"><span class="ic lg grad">${ic('apple','width:26px;height:26px')}</span><div class="grow"><b>Угостить ${h.name==='Гром'?'Грома':h.name}</b><small>Яблоки, 350&nbsp;₽ за кг</small></div><button class="btn v sm press" data-treat>Угостить</button></div>
+ <section class="glass sec"><div class="hd"><h2>Снаряжение</h2><button class="lk" data-shop="Снаряжение">Добавить</button></div>
+  <div class="hscroll" style="margin:0 -20px;padding:0 20px">${GEAR.map(([i,n,s])=>`<button class="gear press" data-go="purchases"><div class="im">${ic(i,'width:42px;height:42px;stroke-width:1.5')}</div><b>${n}</b><small>${s}</small></button>`).join('')}</div></section>
+ <section class="glass sec"><div class="hd"><h2>Развитие</h2><span class="small">Нажмите на кольцо</span></div>
+  <div class="lvl"><div class="lv"><b>3</b></div><div class="grow"><b style="font-size:17px;font-weight:600">Уровень «Друг»</b><br><span class="small">2 620 из 3 500 XP, дальше скидка 15% в магазине</span></div></div>
+  ${rings(S.horse,true)}</section>
+ <section class="glass sec"><div class="hd"><h2>Трюки</h2><span class="lk">1 из 4</span></div>${TRICKS.map(t=>trickRow(t,S.horse)).join('')}</section>
+ <section class="glass sec"><div class="hd"><h2>Ачивки</h2><span class="lk">3 из 8</span></div><div class="medals">${MED.map((m,k)=>`<button class="medal press ${m[2]?'on':''}" data-medal="${k}"><i>${ic(m[1],'width:24px;height:24px')}</i>${m[0]}</button>`).join('')}</div></section>
+ <section class="glass sec"><div class="hd"><h2>События</h2></div><div id="evbox">${events()}</div></section>
+ <section class="quick">${[['chat','Конюху','Алексей на связи','chat'],['doc','Отчёт','За 6 октября','report'],['chart','Статистика','12,4 км за день','stats'],['cross','Здоровье','Осмотр 12 октября','health']].map(([i,t,s,g])=>`<button class="q glass press" data-go="${g}">${ic(i,'width:26px;height:26px')}<span><b>${t}</b><small>${s}</small></span></button>`).join('')}</section>
+ <button class="deep press" data-go="buyout">${mountMark}<b class="t">Выкупить ${h.name==='Гром'?'Грома':h.name}</b><p>Половина уже оплаченной подписки идёт в счёт цены</p><span class="btn w sm">${ic('key')}Узнать условия</span></button>
+</div>`};
+
+V.cams=()=>{const c=CAMS[S.cam],lock=c[0]==='pov'&&S.plan!=='own';return skySub('Камеры','Гром сейчас на пастбище')+`<div class="stack">
+ <div class="cam" style="height:360px">${lock?`<div class="ph" style="background-image:url(${M}pov.jpg);filter:blur(14px) brightness(.7)"></div><div class="ov" style="inset:0;display:grid;place-items:center;text-align:center;color:#fff;padding:30px"><div>${ic('lock','width:32px;height:32px;margin:0 auto 10px')}<b>Камера на коне</b><p class="small" style="color:#fff;opacity:.85;margin:6px 0 14px">Доступна в тарифе «Личный конь»</p><button class="btn w sm" data-go="tariff/grom">Сменить тариф</button></div></div>`:`<video src="${M}${c[0]}.mp4" poster="${M}${c[0]}.jpg" autoplay muted loop playsinline></video><div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span><span class="gp">${c[1]}</span></div>`}</div>
+ <div class="hscroll">${CAMS.map(([k,n],i)=>`<button class="press" data-cam="${i}" style="flex:none;width:96px;text-align:left"><div class="ph" style="height:70px;border-radius:calc(var(--r) - 10px);background-image:url(${M}${k}.jpg);outline:${i===S.cam?'3px solid var(--g2)':'0'};outline-offset:2px;position:relative">${k==='pov'&&S.plan!=='own'?`<span style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;background:rgba(0,0,0,.35);border-radius:inherit">${ic('lock')}</span>`:''}</div><small style="display:block;font-size:12.5px;font-weight:600;margin-top:6px">${n}</small></button>`).join('')}</div>
+ <div class="glass sec" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center">${[['camera','Снимок','Снимок сохранён в галерею'],['apple','Угостить',''],['call','Позвать','Алексей позовёт Грома к камере'],['archive','Архив','Архив за 7 дней откроется в полной версии']].map(([i,t,m])=>`<button class="press" ${t==='Угостить'?'data-treat':`data-toast="${m}"`}><span class="ic" style="margin:0 auto 6px">${ic(i)}</span><small style="font-size:12.5px;font-weight:600">${t}</small></button>`).join('')}</div>
+ <p class="small" style="padding:0 6px">Камеры работают круглосуточно. Ночью включается инфракрасный режим.</p></div>`};
+
+V.report=()=>skySub('Отчёт','6 октября, воскресенье')+`<div class="stack">
+ <div class="glass sec"><div class="staff"><span class="ava ph" style="background-image:url(${M}alexey.jpg)"></span><div class="grow"><b>Алексей, конюх</b><small class="small">Отчёт в 19:40</small></div></div><p class="txt" style="margin-top:14px">Гром весь день был бодрым. Утром ходили на пастбище у ручья, после обеда искупались в реке, ему очень понравилось. Съел все яблоки, которые вы прислали. Копыта в порядке.</p></div>
+ <div class="grid2">${['pov','pasture','stall','arena'].map(p=>`<button class="ph press" data-toast="Фото откроется на весь экран" style="height:150px;border-radius:calc(var(--r) - 6px);background-image:url(${M}${p}.jpg)"></button>`).join('')}</div>
+ <div class="glass sec"><div class="kv">${[['Прошёл','12,4 км'],['Корм','Овёс, сено, яблоки'],['Вес','470 кг'],['Настроение','Бодрое']].map(([a,b])=>`<div><small>${a}</small><b>${b}</b></div>`).join('')}</div></div>
+ <div class="glass sec"><h2 style="margin-bottom:16px">День Грома</h2><div class="tl">${[['06:30','Осмотр и завтрак'],['09:00','Чистка и выгул на пастбище'],['13:00','Купание в реке'],['16:00','Отдых в деннике'],['19:00','Вечерний осмотр']].map(([t,s])=>`<div><b>${t}</b><small>${s}</small></div>`).join('')}</div></div></div>`;
+
+V.stats=()=>{const per=S.stats,km=[[12.4,'км за день'],[71.8,'км за неделю'],[312,'км за месяц']][per],bars=[[6,9,8,12,10,7,12.4],[58,64,71,72],[240,280,312]][per],lab=[['Пн','Вт','Ср','Чт','Пт','Сб','Вс'],['1 нед','2 нед','3 нед','4 нед'],['Авг','Сен','Окт']][per],mx=Math.max(...bars);
+ return skySub('Статистика','Где был и сколько прошёл Гром')+`<div class="stack">
+ <div class="seg" style="justify-self:start" data-segst>${['День','Неделя','Месяц'].map((t,k)=>`<button class="${per===k?'on':''}" data-st="${k}">${t}</button>`).join('')}</div>
+ <div class="glass sec"><div class="row" style="align-items:flex-end;justify-content:space-between"><div><div class="big">${String(km[0]).replace('.',',')}</div><span class="small">${km[1]}</span></div><div style="text-align:right"><b>${[14,82,356][per]} 200</b><br><span class="small">шагов</span></div></div>
+ <div class="bars">${bars.map((b,k)=>`<div><i class="${k===bars.length-1?'on':''}" style="height:${Math.round(b/mx*100)}%"></i><small>${lab[k]}</small></div>`).join('')}</div></div>
+ <div class="glass sec"><div class="hd"><h2>Маршрут за день</h2><span class="pill">GPS</span></div>
+  <svg class="map" viewBox="0 0 340 240" role="img" aria-label="Карта территории Marali с маршрутом"><rect width="340" height="240" fill="var(--tint)"/><path d="M0 170 C60 150 90 200 150 185 S260 140 340 160 V240 H0Z" fill="#fff" opacity=".55"/><path d="M-10 60 C60 90 120 40 190 70 S300 120 350 90" fill="none" stroke="#9FC3D6" stroke-width="9" stroke-linecap="round" opacity=".8"/><g fill="none" stroke="var(--g2)" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 7"><path d="M70 190 C90 140 130 150 150 120 S210 80 250 100 S300 160 270 190"/></g><circle cx="70" cy="190" r="7" fill="var(--acc)"/><circle cx="270" cy="190" r="9" fill="var(--g2)" stroke="#fff" stroke-width="3"/><text x="82" y="210" font-size="12" fill="var(--mute)" font-family="inherit">Денник</text><text x="200" y="218" font-size="12" fill="var(--mute)" font-family="inherit">Пастбище, сейчас</text><text x="200" y="58" font-size="12" fill="var(--mute)" font-family="inherit">река Катунь</text></svg>
+  <p class="small" style="margin-top:10px">Карта территории условная, точные зоны согласуем с Marali.</p></div></div>`};
+
+V.health=()=>skySub('Здоровье','Медкарта Грома')+`<div class="stack">
+ <div class="deep">${mountMark}<span class="pill" style="background:rgba(255,255,255,.2);color:#fff">${ic('check','width:14px;height:14px')}Здоров</span><b class="t" style="margin-top:12px">Всё в порядке</b><p>Последний осмотр 28 сентября. Ветеринар Игорь Сабашкин.</p></div>
+ <div class="glass sec"><div class="kv">${[['temp','Температура','37,6°'],['pulse','Пульс','36 уд/мин'],['weight','Вес','470 кг'],['cal','Следующий осмотр','12 октября']].map(([i,a,b])=>`<div class="row" style="align-items:flex-start"><span class="ic">${ic(i)}</span><div><small>${a}</small><b>${b}</b></div></div>`).join('')}</div></div>
+ <div class="glass sec"><h2 style="margin-bottom:14px">История</h2>${[['tooth','Осмотр зубов','28 сентября, без замечаний'],['shoe','Расчистка и ковка','1 октября, кузнец Иван'],['cross','Прививка от гриппа','12 августа, следующая в феврале'],['pill','Витамины','С 1 октября, курс на месяц']].map(([i,t,s])=>`<div class="li"><span class="ic">${ic(i)}</span><div class="grow"><b>${t}</b><small>${s}</small></div></div>`).join('')}</div>
+ <button class="btn o full press" data-shop="Здоровье">${ic('cross')}Заказать осмотр или витамины</button></div>`;
+
+V.shop=()=>{const cats=['Все',...new Set(SHOP.map(p=>p.cat))],list=SHOP.filter(p=>S.shopCat==='Все'||p.cat===S.shopCat);
+ return skySub('Магазин','Всё вручит конюх и пришлёт видео',`<button class="rb press" data-go="purchases" aria-label="Мои покупки">${ic('cart')}</button>`)+`<div class="stack">
+ <div class="chips">${cats.map(c=>`<button class="chip ${S.shopCat===c?'on':''}" data-cat="${c}">${c}</button>`).join('')}</div>
+ <div class="grid2">${list.map(p=>`<button class="glass prod press" data-prod="${p.id}"><div class="im">${ic(p.art,'width:44px;height:44px;stroke-width:1.4')}</div><b>${p.name}</b><span class="p">${rub(p.price)}</span></button>`).join('')}</div>
+ <button class="btn o full press" data-go="purchases">Мои покупки</button></div>`};
+V.purchases=()=>skySub('Мои покупки','Снаряжение Грома и заказы')+`<div class="stack">
+ <div class="glass sec"><h2 style="margin-bottom:14px">У Грома</h2>${GEAR.map(([i,n,s])=>`<div class="li"><span class="ic">${ic(i)}</span><div class="grow"><b>${n}</b><small>${s}</small></div></div>`).join('')}</div>
+ <div class="glass sec"><h2 style="margin-bottom:14px">Заказы</h2>${S.orders.map(([n,d,p,st])=>`<div class="li"><div class="grow"><b>${n}</b><small>${d}, ${st.toLowerCase()}</small></div><b>${rub(p)}</b></div>`).join('')}</div>
+ <button class="btn v full press" data-shop="Все">В магазин</button></div>`;
+
+V.buyout=()=>{const val=VALUE.grom,paid=174000,off=paid/2;return skySub('Выкуп Грома','Конь станет только вашим')+`<div class="stack">
+ <div class="glass sec"><div class="li"><div class="grow"><small>Стоимость коня</small></div><b>${rub(val)}</b></div><div class="li"><div class="grow"><small>Минус половина подписки за 6 месяцев</small></div><b>−${rub(off)}</b></div><div class="li"><div class="grow"><b>К оплате</b></div><span class="price">${rub(val-off)}</span></div></div>
+ <div class="glass sec"><h2 style="margin-bottom:12px">Где будет жить</h2><div class="tr"><span class="radio" style="border-color:var(--g2)"><i style="width:12px;height:12px;border-radius:50%;background:var(--g2)"></i></span><div class="grow"><b>Остаётся в Marali</b><small>Содержание 70 000 ₽ в месяц, камеры и отчёты сохраняются</small></div></div><div class="tr"><span class="radio"></span><div class="grow"><b>Забираю домой</b><small>Поможем с перевозкой и документами</small></div></div></div>
+ <div class="glass sec"><h2 style="margin-bottom:12px">Оплата</h2><div class="seg"><button class="on">Сразу</button><button>Рассрочка на 12 мес</button></div><p class="small" style="margin-top:12px">Договор подписывается электронно. Совладельцы Грома получат уведомление и смогут выбрать другого коня.</p></div>
+ <button class="btn v full press sticky" data-toast="Заявка отправлена, менеджер позвонит сегодня">Отправить заявку</button></div>`};
+
+V.notif=()=>skySub('Уведомления')+`<div class="stack"><div class="glass sec">${[['apple','Гром получил яблоки','Алексей прислал видео','18:20'],['star','Занятие по поклону','Второе из четырёх прошло отлично','16:45'],['doc','Отчёт за 6 октября готов','Купание, 12,4 км за день','вчера'],['cal','Осмотр ветеринара в субботу','12 октября в 11:00','вчера'],['club','Новость клуба','В табуне пополнение','3 окт']].map(([i,t,s,d])=>`<div class="li"><span class="ic">${ic(i)}</span><div class="grow"><b>${t}</b><small>${s}</small></div><small>${d}</small></div>`).join('')}</div></div>`;
+
+V.catalog=()=>{const f=['Все','Спокойные','Для прогулок','Выездка','Горные маршруты'],list=HORSES.filter(h=>S.catF==='Все'||h.tags.includes(S.catF));
+ return skyTab('Каталог','150 коней Marali, 6 ищут владельцев')+`<div class="stack">
+ <div class="chips">${f.map(c=>`<button class="chip ${S.catF===c?'on':''}" data-catf="${c}">${c}</button>`).join('')}</div>
+ ${list.map(h=>`<button class="hcard press fade" data-go="horse/${h.id}"><div class="ph" style="background-image:url(${M}${h.id}.jpg)"></div>${h.id===S.horse&&S.owner?'<span class="tag pill dark">Ваш конь</span>':''}<div class="in"><h3>${h.name}</h3><p>${h.breed}, ${h.age} ${h.age<5?'года':'лет'}, ${h.color}. ${h.temper}</p><div class="row"><span class="small" style="color:#fff;opacity:.9">${h.walk}</span><span class="pill" style="background:rgba(255,255,255,.9);color:var(--ink)">от 4 900&nbsp;₽ в мес</span></div></div></button>`).join('')}
+ <button class="glass sec press" data-go="gift" style="text-align:left;display:flex;gap:14px;align-items:center"><span class="ic lg grad">${ic('gift')}</span><div class="grow"><b>Подарить коня</b><br><span class="small">Сертификат на подписку для близкого</span></div>${ic('arrow','color:var(--off)')}</button></div>`};
+
+V.horse=id=>{const h=H(id),p=PASS[id],mine=S.owner&&id===S.horse;return `<section class="hero"><div class="ph" style="background-image:url(${M}${id}.jpg)"></div><div class="tp">${backBtn}<button class="rb press" data-toast="Добавили в избранное">${ic('heart')}</button></div><div class="nm"><h1>${h.name}</h1><p>${h.breed}, ${h.age} ${h.age<5?'года':'лет'}. ${h.temper}</p></div></section>
+<div class="stack">
+ <div class="glass sec"><p class="txt">${h.about}</p><div class="row" style="margin-top:14px;flex-wrap:wrap;gap:8px">${h.tags.map(t=>`<span class="pill">${t}</span>`).join('')}<span class="pill">Владельцев: ${h.places>1?`до ${h.places}`:'1'}</span></div></div>
+ <div class="cam" style="height:220px"><video src="${M}pasture.mp4" poster="${M}pasture.jpg" autoplay muted loop playsinline></video><div class="ov t"><span class="gp"><i class="dot"></i>Сейчас на пастбище</span></div></div>
+ <section class="glass sec"><h2 style="margin-bottom:16px">Паспорт</h2><div class="kv">${[['Порода',h.breed],['Пол',p.sex],['Возраст',h.age+(h.age<5?' года':' лет')],['Масть',h.color],['Рост в холке',h.h+' см'],['Вес',p.w+' кг'],['Родился',p.born],['Родители',p.par]].map(([a,b])=>`<div><small>${a}</small><b>${b}</b></div>`).join('')}</div></section>
+ <section class="glass sec"><div class="hd"><h2>Физическая форма</h2></div><p class="small">Полное кольцо означает норму породы</p>${rings(id,false)}</section>
+ <section class="glass sec"><h2 style="margin-bottom:14px">Кто за ним ухаживает</h2>${Object.entries(STAFF).map(([k,s])=>`<button class="li press" data-go="staff/${k}"><span class="ava ph" style="background-image:url(${M}${s.img}.jpg)"></span><div class="grow"><b>${s.name}</b><small>${s.role}</small></div>${ic('arrow','color:var(--off)')}</button>`).join('')}</section>
+ ${mine?`<button class="btn v full press sticky" data-go="home">Открыть «Мой конь»</button>`:`<button class="btn v full press sticky" data-go="tariff/${id}">Выбрать тариф</button>`}</div>`};
+
+V.staff=id=>{const s=STAFF[id];return `<section class="hero"><div class="ph" style="background-image:url(${M}${s.img}.jpg);background-position:center 20%"></div><div class="tp">${backBtn}<span></span></div><div class="nm"><h1 style="font-size:48px">${s.name.split(' ')[0]}</h1><p>${s.role} в Marali</p></div></section>
+<div class="stack"><div class="glass sec" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${s.stats.map(([a,b])=>`<div><div class="price">${a}</div><small class="small">${b}</small></div>`).join('')}</div>
+ <div class="glass sec"><p class="txt">${s.about}</p><div class="row" style="margin-top:14px;flex-wrap:wrap;gap:8px">${s.tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div></div>
+ <div class="deep">${mountMark}<p style="font-size:18px;max-width:none;margin:0;opacity:1;line-height:1.4">«${s.quote}»</p></div>
+ <div class="glass sec"><h2 style="margin-bottom:16px">Обычный день</h2><div class="tl">${s.day.map(([t,d])=>`<div><b>${t}</b><small>${d}</small></div>`).join('')}</div></div>
+ <button class="btn o full press" data-go="chat">${ic('chat')}Написать</button></div>`};
+
+V.tariff=id=>{const h=H(id);return skySub('Тариф',`для ${h.name==='Гром'?'Грома':h.name}`)+`<div class="stack">${PLANS.map(p=>`<button class="glass plan press ${S.pickPlan===p.id?'on':''}" data-plan="${p.id}"><div class="row"><div class="grow"><h2>${p.name}</h2><span class="price">${rub(p.price)} <small>в месяц</small></span></div><span class="radio"></span></div><ul>${p.pts.map(t=>`<li>${ic('check')}${t}</li>`).join('')}</ul></button>`).join('')}
+ <button class="btn v full press sticky" data-go="pay/${id}">Продолжить за ${rub(PLANS.find(p=>p.id===S.pickPlan).price)}</button></div>`};
+V.pay=id=>{const h=H(id),p=PLANS.find(x=>x.id===S.pickPlan);return skySub('Оплата','Первый месяц подписки')+`<div class="stack">
+ <div class="glass sec"><div class="staff"><span class="ava ph" style="background-image:url(${M}${id}.jpg)"></span><div class="grow"><b>${h.name}</b><small class="small">Тариф «${p.name}»</small></div><span class="price">${rub(p.price)}</span></div></div>
+ <div class="glass sec"><h2 style="margin-bottom:12px">Способ оплаты</h2>${[['card','Банковская карта','Мир, Visa, Mastercard'],['send','СБП','Через приложение банка'],['card','SberPay','В один тап']].map(([i,t,s],k)=>`<div class="li"><span class="ic">${ic(i)}</span><div class="grow"><b>${t}</b><small>${s}</small></div><span class="radio" style="${k?'':'border-color:var(--g2)'}">${k?'':'<i style="width:12px;height:12px;border-radius:50%;background:var(--g2)"></i>'}</span></div>`).join('')}</div>
+ <p class="small" style="padding:0 6px">Подписка продлевается раз в месяц. Отменить или поставить на паузу можно в профиле.</p>
+ <button class="btn v full press sticky" data-paid="${id}">Оплатить ${rub(p.price)}</button></div>`};
+V.paid=id=>{const h=H(id);return skySub(`${h.name} теперь ваш`,'Оплата прошла')+`<div class="stack"><div class="glass sec" style="text-align:center"><span class="ic lg grad" style="margin:0 auto 14px">${ic('check','width:28px;height:28px')}</span><h2>Добро пожаловать в Marali</h2><p class="small" style="margin:8px 0 18px">Алексей уже знает о вас и пришлёт первое видео сегодня вечером.</p><button class="btn v full press" data-go="home">Открыть «Мой конь»</button></div></div>`};
+
+V.gift=()=>skySub('Подарок','Сертификат на подписку')+`<div class="stack">
+ <div class="deep" style="min-height:190px">${mountMark}<span class="small" style="color:#fff;opacity:.8">Конешеринг, Marali</span><b class="t" style="font-size:30px;margin-top:30px">Свой конь на Алтае</b><p>Тариф «Совладелец» на 3 месяца</p></div>
+ <div class="glass sec"><h2 style="margin-bottom:12px">Срок</h2><div class="seg"><button>1 мес</button><button class="on">3 мес</button><button>6 мес</button><button>Год</button></div>
+ <label class="small" style="display:block;margin-top:16px">Кому</label><input class="field" style="margin-top:8px" value="Маме, Елене Викторовне"></div>
+ <div class="glass sec"><div class="li"><div class="grow"><b>К оплате</b><small>Коня получатель выберет сам</small></div><span class="price">${rub(87000)}</span></div></div>
+ <button class="btn v full press sticky" data-toast="Сертификат отправлен на почту">Оплатить и отправить</button></div>`;
+
+V.trips=()=>skyTab('Поездки','Приезжайте к Грому в гости')+`<div class="stack">
+ <button class="hcard press" data-go="tour" style="height:340px"><div class="ph" style="background-image:url(${M}pov.jpg)"></div><span class="tag pill" style="background:rgba(255,255,255,.9);color:var(--ink)">4 дня в горах</span><div class="in"><h3>Тур «Кержаки»</h3><p>Горный переход на своём коне по старообрядческим местам Алтая</p><div class="row"><span class="price" style="color:#fff">${rub(150000)}</span><span class="pill dark">Программа</span></div></div></button>
+ <div class="glass sec"><div class="hd"><h2>День с конём</h2><span class="price" style="font-size:20px">${rub(12000)}</span></div><p class="txt">Чистка, прогулка верхом с тренером и обед в ресторане Marali. Скидка 10% по вашему тарифу.</p><button class="btn v full press" style="margin-top:14px" data-toast="Менеджер предложит даты в чате">Записаться</button></div>
+ <div class="glass sec"><div class="hd"><h2>Мои брони</h2><button class="lk" data-go="bookings">Все</button></div>${S.bookings.slice(0,2).map(([t,s])=>`<div class="li"><span class="ic">${ic('cal')}</span><div class="grow"><b>${t}</b><small>${s}</small></div></div>`).join('')}</div></div>`;
+V.tour=()=>`<section class="hero"><div class="ph" style="background-image:url(${M}pov.jpg)"></div><div class="tp">${backBtn}<span></span></div><div class="nm"><h1 style="font-size:52px">Кержаки</h1><p>4 дня, 70 км по горам. ${rub(150000)} за человека</p></div></section>
+<div class="stack"><div class="glass sec"><h2 style="margin-bottom:16px">Программа</h2><div class="tl">${[['День 1','Встреча в Marali, знакомство с конём, ужин у костра'],['День 2','Переход к Тюнгурскому перевалу, ночёвка в юртах'],['День 3','Старообрядческая заимка, баня и мёд'],['День 4','Спуск к Катуни, обед в Marali, отъезд']].map(([a,b])=>`<div><b>${a}</b><small>${b}</small></div>`).join('')}</div></div>
+ <div class="glass sec"><div class="row"><span class="ic lg grad">${ic('mount')}</span><div class="grow"><b>Гром может пойти в тур</b><br><span class="small">Его проходимость 984 м, нужно от 900 м</span></div></div></div>
+ <div class="glass sec"><h2 style="margin-bottom:12px">Входит в цену</h2>${['Конь и снаряжение','Проводник и повар','Проживание и питание','Трансфер из Горно-Алтайска'].map(t=>`<div class="li"><span class="ic">${ic('check')}</span><b class="grow">${t}</b></div>`).join('')}</div>
+ <button class="btn v full press sticky" data-go="book">Выбрать даты</button></div>`;
+V.book=()=>{const total=150000*S.people,disc=Math.round(total*.15);return skySub('Бронь тура','Ранняя бронь, скидка владельцам 15%')+`<div class="stack">
+ <div class="glass sec"><h2 style="margin-bottom:12px">Даты 2027</h2>${DEPS.map(([d,n],k)=>`<button class="li press" ${n?`data-dep="${k}"`:'disabled style="opacity:.45"'}><span class="radio" style="${S.dep===k?'border-color:var(--g2)':''}">${S.dep===k?'<i style="width:12px;height:12px;border-radius:50%;background:var(--g2)"></i>':''}</span><div class="grow"><b>${d}</b><small>${n?`Осталось мест: ${n}`:'Мест нет'}</small></div></button>`).join('')}</div>
+ <div class="glass sec"><div class="row"><div class="grow"><b>Сколько человек</b></div><div class="counter"><button data-ppl="-1" aria-label="Меньше">${ic('minus')}</button><b>${S.people}</b><button data-ppl="1" aria-label="Больше">${ic('plus')}</button></div></div></div>
+ <div class="glass sec"><div class="li"><div class="grow"><small>${S.people} × ${rub(150000)}</small></div><b>${rub(total)}</b></div><div class="li"><div class="grow"><small>Скидка владельца 15%</small></div><b>−${rub(disc)}</b></div><div class="li"><b class="grow">Итого</b><span class="price">${rub(total-disc)}</span></div></div>
+ <button class="btn v full press sticky" data-book>Забронировать</button></div>`};
+V.bookings=()=>skySub('Мои брони')+`<div class="stack"><div class="glass sec">${S.bookings.map(([t,s])=>`<div class="li"><span class="ic">${ic('cal')}</span><div class="grow"><b>${t}</b><small>${s}</small></div></div>`).join('')}</div><button class="btn o full press" data-go="trips">Новая поездка</button></div>`;
+
+V.club=()=>skyTab('Клуб','Владельцы коней Marali')+`<div class="stack">
+ <div class="seg" style="justify-self:start">${['Новости','События','Рейтинг'].map((t,k)=>`<button class="${S.club===k?'on':''}" data-club="${k}">${t}</button>`).join('')}</div>
+ ${S.club===0?NEWS.map(([p,t,s,d])=>`<article class="glass fade" style="overflow:hidden"><div class="ph" style="height:170px;background-image:url(${M}${p}.jpg)"></div><div class="sec"><small class="small">${d}</small><h2 style="margin:4px 0 6px">${t}</h2><p class="txt">${s}</p></div></article>`).join(''):''}
+ ${S.club===1?CLUBEV.map(([t,d,s,n])=>`<div class="glass sec fade"><small class="small">${d}</small><h2 style="margin:4px 0 6px">${t}</h2><p class="txt">${s}</p><div class="row" style="margin-top:14px;justify-content:space-between"><span class="small">Идут ${n} человек</span><button class="btn v sm press" data-toast="Записали вас, напомним за день">Пойду</button></div></div>`).join(''):''}
+ ${S.club===2?`<div class="glass sec fade"><p class="small" style="margin-bottom:12px">Очки за тренировки, трюки и километры за октябрь</p>${RATING.map(([id,pt],k)=>`<div class="li" style="${id===S.horse?'background:var(--tint);margin:0 -10px;padding-left:10px;padding-right:10px;border-radius:14px':''}"><b style="width:22px">${k+1}</b><span class="ava ph" style="width:44px;height:44px;background-image:url(${M}${id}.jpg)"></span><div class="grow"><b>${H(id).name}${id===S.horse?' (ваш)':''}</b><small>${H(id).breed}</small></div><b>${pt}</b></div>`).join('')}</div>`:''}</div>`;
+
+V.profile=()=>{const p=PLANS.find(x=>x.id===S.plan);return skyTab('Профиль','Анна Королёва, +7 913 ••• 42 18')+`<div class="stack">
+ <div class="glass sec"><div class="staff"><span class="ava ph" style="background-image:url(${M}grom.jpg)"></span><div class="grow"><b>Гром, «${p.name}»</b><small class="small">${S.paused?'Подписка на паузе':'Следующее списание 5 ноября'}</small></div><span class="price" style="font-size:20px">${rub(p.price)}</span></div>
+  <div class="row" style="margin-top:14px"><button class="btn o sm grow press" data-go="tariff/grom">Сменить тариф</button><button class="btn o sm grow press" data-pause>${ic('pause','width:16px;height:16px')}${S.paused?'Продолжить':'Пауза'}</button></div></div>
+ <div class="glass sec"><h2 style="margin-bottom:12px">Цветовая схема</h2><div class="swatch">${[['1','Рассвет','linear-gradient(160deg,#3E2A3A,#C98468,#F6DFCB)'],['2','Мёд','linear-gradient(160deg,#33261E,#B48858,#F2E6D3)'],['3','Туман','linear-gradient(160deg,#2E2A29,#9E8D82,#ECE4D9)']].map(([k,n,g])=>`<button class="press ${S.scheme===k?'on':''}" data-s="${k}"><span style="background:${g}"></span><b>${n}</b></button>`).join('')}</div></div>
+ <div class="glass sec">${[['bell','Уведомления','notif'],['card','История платежей','payments'],['chat','Чат с менеджером','chat'],['cal','Мои брони','bookings'],['gift','Подарить сертификат','gift']].map(([i,t,g])=>`<button class="li press" data-go="${g}"><span class="ic">${ic(i)}</span><b class="grow">${t}</b>${ic('arrow','color:var(--off)')}</button>`).join('')}</div>
+ <button class="btn o full press" data-logout>${ic('out')}Выйти</button></div>`};
+V.payments=()=>skySub('Платежи')+`<div class="stack"><div class="glass sec">${[['Подписка «Совладелец»','5 октября',29000],['Недоуздок с гравировкой','5 октября',6900],['Яблоки, 1 кг','4 октября',350],['СПА-день','28 сентября',4500],['Подписка «Совладелец»','5 сентября',29000]].map(([t,d,p])=>`<div class="li"><div class="grow"><b>${t}</b><small>${d}</small></div><b>${rub(p)}</b></div>`).join('')}</div></div>`;
+V.chat=()=>skySub('Ольга','Менеджер Marali, обычно отвечает за 5 минут')+`<div class="stack" style="padding-bottom:30px"><div class="msgs" id="msgs">${S.chat.map(([w,t,d])=>`<div class="msg ${w}">${esc(t)}<small>${d}</small></div>`).join('')}</div>
+ <form class="composer glass" data-send><input id="msg" placeholder="Сообщение" autocomplete="off"><button class="btn v sm" aria-label="Отправить">${ic('send')}</button></form></div>`;
+
+/* ---------- роутер ---------- */
+const TABS=[['home','Мой конь','horse'],['catalog','Каталог','grid'],['trips','Поездки','mount'],['club','Клуб','club'],['profile','Профиль','user']];
+const TAB_OF={home:'home',cams:'home',report:'home',stats:'home',health:'home',shop:'home',purchases:'home',buyout:'home',notif:'home',catalog:'catalog',horse:'catalog',staff:'catalog',tariff:'catalog',gift:'catalog',trips:'trips',tour:'trips',bookings:'trips',club:'club',profile:'profile',payments:'profile'};
+const NO_TABS=['welcome','login','code','pay','paid','book','chat','tour','horse','staff','tariff','buyout','gift'];
+const ROOTS=['home','catalog','trips','club','profile','welcome'];
+function render(){let r=(location.hash.replace(/^#\/?/,'')||'home').split('/');let [n,arg]=r;if(!V[n])n='home';
+ if(!S.owner&&['home','cams','report','stats','health','purchases','buyout','profile'].includes(n)){n='welcome'}
+ const app=document.getElementById('app');app.className='app'+(ROOTS.includes(n)?'':' subp')+(NO_TABS.includes(n)?' nobar':'');
+ app.innerHTML=V[n](arg);
+ const tb=document.getElementById('tabbar'),t=TAB_OF[n];tb.style.display=NO_TABS.includes(n)?'none':'grid';
+ tb.innerHTML=TABS.map(([k,l,i])=>`<button class="${k===t?'on':''}" data-go="${k}">${ic(i)}${l}</button>`).join('');
+ if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}}
+function go(r){if(location.hash==='#/'+r){render();return}location.hash='/'+r;window.scrollTo(0,0)}
+function rerender(){const y=scrollY;render();window.scrollTo(0,y)}
+addEventListener('hashchange',()=>{closeSheet();render();window.scrollTo(0,0)});
+
+/* ---------- шторки, тосты ---------- */
+let tt;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2400)}
+function sheet(html){const s=document.getElementById('sheet');s.innerHTML='<div class="grab"></div>'+html;s.classList.add('on');document.getElementById('scrim').classList.add('on')}
+function closeSheet(){document.getElementById('sheet').classList.remove('on');document.getElementById('scrim').classList.remove('on');const v=document.querySelector('#sheet video');v&&v.pause()}
+document.getElementById('scrim').onclick=closeSheet;addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+function trainSheet(k){const s=stats(S.horse).find(x=>x.k===k),gain=Math.min(Math.round(s.norm*.06),s.cap-s.v);
+ sheet(`<h2>${s.name}</h2><p class="small">Курс тренировок с Мариной, 3 недели</p><div class="glass sec" style="margin:16px 0;background:#fff"><div class="kv"><div><small>Сейчас</small><b>${s.v} ${s.u}</b></div><div><small>Норма породы</small><b>${s.norm} ${s.u}</b></div><div><small>Предел по ветеринару</small><b>${s.cap} ${s.u}</b></div><div><small>За курс</small><b>${s.max?'—':`+${gain} ${s.u}`}</b></div></div></div>${s.max?`<button class="btn o full" disabled>Прокачано полностью</button>`:`<button class="btn v full press" data-close-toast="Марина начнёт курс завтра, пришлём видео">Начать курс за ${rub(7500)}</button>`}`)}
+function medalSheet(k){const m=MED[k];sheet(`<div style="text-align:center"><span class="ic lg ${m[2]?'grad':''}" style="margin:0 auto 12px;width:72px;height:72px;border-radius:50%">${ic(m[1],'width:30px;height:30px')}</span><h2>${m[0]}</h2><p class="small">${m[2]?'Получена':'Пока не получена'}</p></div><div class="glass sec" style="margin-top:16px;background:#fff"><div class="li"><div class="grow"><small>Условие</small><b>${m[3]}</b></div></div><div class="li"><div class="grow"><small>Награда</small><b>${m[4]}</b></div></div>${m[5]?`<div class="li"><div class="grow"><small>Прогресс</small><b>${m[5][0]} из ${m[5][1]}</b></div></div>`:''}</div>`)}
+function trickSheet(){sheet(`<h2>Шаг по команде</h2><p class="small" style="margin-bottom:14px">Освоен 2 октября, занятия вела Марина</p><video class="video" src="${M}arena.mp4" poster="${M}arena.jpg" controls autoplay muted playsinline></video>`)}
+function treatSheet(){sheet(`<h2>Угостить Грома</h2><p class="small" style="margin-bottom:14px">Конюх вручит сегодня и снимет видео</p>${SHOP.filter(p=>p.cat==='Лакомства').map(p=>`<button class="li press" data-close-toast="${p.name.split(',')[0]} для Грома оплачены, видео пришлём вечером"><span class="ic">${ic(p.art)}</span><div class="grow"><b>${p.name}</b><small>${p.info}</small></div><b>${rub(p.price)}</b></button>`).join('')}<button class="btn o full press" style="margin-top:16px" data-shop="Все">Весь магазин</button>`)}
+function prodSheet(id){const p=SHOP.find(x=>x.id===id);sheet(`<div class="prod" style="padding:0"><div class="im" style="height:160px">${ic(p.art,'width:60px;height:60px;stroke-width:1.3')}</div></div><h2 style="margin-top:16px">${p.name}</h2><p class="txt" style="margin-bottom:16px">${p.info}</p><button class="btn v full press" data-order="${p.id}">Купить за ${rub(p.price)}</button>`)}
+
+/* ---------- клики ---------- */
+function setScheme(k){S.scheme=k;document.body.className='s'+k;try{localStorage.setItem('kn-scheme',k)}catch(e){}
+ document.querySelectorAll('.sw button').forEach(b=>b.classList.toggle('on',b.dataset.s===k));document.querySelector('meta[name=theme-color]').content=getVar('--top');rerender()}
+document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go],[role=button]');if(!t)return;const d=t.dataset;
+ if(d.call!==undefined){e.stopPropagation();toast('Алексей позовёт Грома к камере');return}
+ if(d.s){setScheme(d.s);return}
+ if(d.back!==undefined){history.length>1?history.back():go('home');return}
+ if(d.go){go(d.go);return}
+ if(d.train){trainSheet(d.train);return}
+ if(d.medal){medalSheet(+d.medal);return}
+ if(d.trick){trickSheet();return}
+ if(d.treat!==undefined){treatSheet();return}
+ if(d.shop){S.shopCat=d.shop;closeSheet();go('shop');return}
+ if(d.cat){S.shopCat=d.cat;rerender();return}
+ if(d.catf){S.catF=d.catf;rerender();return}
+ if(d.prod){prodSheet(d.prod);return}
+ if(d.order){const p=SHOP.find(x=>x.id===d.order);S.orders.unshift([p.name,'7 октября',p.price,'Оформлен']);closeSheet();toast('Заказ оформлен, конюх вручит и пришлёт видео');return}
+ if(d.closeToast){closeSheet();toast(d.closeToast);return}
+ if(d.toast){toast(d.toast);return}
+ if(d.ev){S.ev=+d.ev;document.getElementById('evbox').innerHTML=events();return}
+ if(d.cam){S.cam=+d.cam;rerender();return}
+ if(d.st){S.stats=+d.st;rerender();return}
+ if(d.club){S.club=+d.club;rerender();return}
+ if(d.plan){S.pickPlan=d.plan;rerender();return}
+ if(d.paid){S.owner=true;S.horse=d.paid;S.plan=S.pickPlan;toast('Оплата прошла');go('paid/'+d.paid);return}
+ if(d.dep){S.dep=+d.dep;rerender();return}
+ if(d.ppl){S.people=Math.max(1,Math.min(6,S.people+ +d.ppl));rerender();return}
+ if(d.book!==undefined){S.bookings.unshift(['Тур «Кержаки»',`${DEPS[S.dep][0]} 2027, ${S.people} чел.`]);toast('Тур забронирован');go('bookings');return}
+ if(d.pause!==undefined){S.paused=!S.paused;rerender();toast(S.paused?'Подписка на паузе до 5 декабря':'Подписка снова активна');return}
+ if(d.logout!==undefined){S.owner=false;go('welcome');return}
+ if(d.login!==undefined){S.owner=true;go('home');return}
+ if(d.seg){return}
+ if(t.parentElement&&t.parentElement.classList.contains('seg')){t.parentElement.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b===t))}
+});
+document.addEventListener('submit',e=>{if(!e.target.matches('[data-send]'))return;e.preventDefault();const i=document.getElementById('msg');const v=i.value.trim();if(!v)return;
+ S.chat.push(['out',v,'сейчас']);rerender();setTimeout(()=>{S.chat.push(['in','Спасибо! Уточню у Алексея и отвечу в течение пяти минут.','сейчас']);if(location.hash.includes('chat'))rerender()},1200)});
+document.querySelector('.sw').addEventListener('click',e=>{const b=e.target.closest('button');if(b)setScheme(b.dataset.s)});
+let ly=0;addEventListener('scroll',()=>{const y=scrollY;document.querySelector('.sw').classList.toggle('hide',y>ly&&y>80);ly=y},{passive:true});
+document.body.className='s'+S.scheme;document.querySelectorAll('.sw button').forEach(b=>b.classList.toggle('on',b.dataset.s===S.scheme));
+document.querySelector('meta[name=theme-color]').content=getVar('--top');
+render();
+</script>
+</body></html>
