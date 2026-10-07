@@ -2,7 +2,7 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#3E2A3A"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Конешеринг</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Wix+Madefor+Display:wght@500;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&family=Commissioner:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;500;600;700&family=Wix+Madefor+Display:wght@500;600;700;800&family=Wix+Madefor+Text:wght@400;500;600;700&family=Commissioner:wght@400;500;600;700&family=Nunito:wght@600;700;800;900&display=swap">
 <style>
 /* ---------- цветовые схемы ---------- */
 .s1{--f:"Geologica",system-ui,sans-serif;--fd:"Geologica",system-ui,sans-serif;--hw:700;--r:28px;--rb:999px;
@@ -23,6 +23,12 @@
  --sky:linear-gradient(180deg,#2E2A29 0,#5B524F 200px,#9E8D82 340px,#D6C6B6 450px,#ECE4D9 570px,#F2EEE8 720px,#EFEAE3 100%);
  --skys:linear-gradient(180deg,#2E2A29 0,#5B524F 160px,#9E8D82 250px,#D6C6B6 330px,#ECE4D9 430px,#F2EEE8 560px,#EFEAE3 100%);
  --deep:linear-gradient(160deg,#2E2A29,#5B524F 55%,#A8937F)}
+.s4{--f:"Nunito",system-ui,sans-serif;--fd:"Nunito",system-ui,sans-serif;--hw:900;--r:30px;--rb:999px;
+ --ink:#221E45;--mute:#625E80;--off:#A7A3C2;--line:rgba(98,94,128,.16);--acc:#2A2468;--lk:#5B4CE6;
+ --g1:#FF9A7A;--g2:#7B5CE6;--tint:#F1EDFF;--track:rgba(91,76,230,.12);--gold:#F2A93B;--goldt:#B86E00;--shc:rgba(60,40,140,.45);--top:#2A2468;
+ --sky:linear-gradient(180deg,#2A2468 0,#5B4CE6 210px,#C98BD0 360px,#FFD3C2 480px,#F6E9F5 640px,#E9EEFB 1100px,#E3F4EE 1900px,#EFEAFB 100%);
+ --skys:linear-gradient(180deg,#2A2468 0,#5B4CE6 160px,#C98BD0 260px,#FFD3C2 340px,#F6E9F5 440px,#E9EEFB 700px,#EFEAFB 100%);
+ --deep:linear-gradient(135deg,#2A2468,#5B4CE6 50%,#B45CE0 80%,#FF9A7A)}
 
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
@@ -244,10 +250,10 @@ h3{font-size:16px;font-weight:600}
 /* переключатель схем */
 .sw{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(30,24,22,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 30px -10px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12);transition:transform .25s ease,opacity .25s ease}
 .sw.hide{transform:translate(-50%,-150%);opacity:0}
-.sw button{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font:600 13px "Geologica",system-ui,sans-serif;padding:8px 12px;border-radius:999px;white-space:nowrap}
+.sw button{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font:600 12.5px "Geologica",system-ui,sans-serif;padding:8px 9px;border-radius:999px;white-space:nowrap}
 .sw button i{width:10px;height:10px;border-radius:50%}
 .sw button.on{background:#fff;color:#000}
-.swatch{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.swatch{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}
 .swatch button{border-radius:calc(var(--r) - 10px);overflow:hidden;border:2px solid transparent;text-align:left;background:#fff}
 .swatch button.on{border-color:var(--g2)}
 .swatch span{display:block;height:58px}
@@ -278,7 +284,7 @@ h3{font-size:16px;font-weight:600}
 .counter b{font-size:20px;min-width:24px;text-align:center}
 </style>
 </head><body class="s1">
-<nav class="sw" aria-label="Цветовая схема"><button data-s="1"><i style="background:#C98468"></i>Рассвет</button><button data-s="2"><i style="background:#B48858"></i>Мёд</button><button data-s="3"><i style="background:#9E8D82"></i>Туман</button></nav>
+<nav class="sw" aria-label="Цветовая схема"><button data-s="1"><i style="background:#C98468"></i>Рассвет</button><button data-s="2"><i style="background:#B48858"></i>Мёд</button><button data-s="3"><i style="background:#9E8D82"></i>Туман</button><button data-s="4"><i style="background:linear-gradient(135deg,#5B4CE6,#FF9A7A)"></i>Аврора</button></nav>
 <main class="app" id="app"></main>
 <nav class="tabbar" id="tabbar"></nav>
 <div class="scrim" id="scrim"></div><div class="sheet" id="sheet" role="dialog"></div><div class="toast" id="toast"></div>
@@ -562,7 +568,7 @@ V.club=()=>skyTab('Клуб','Владельцы коней Marali')+`<div class
 V.profile=()=>{const p=PLANS.find(x=>x.id===S.plan);return skyTab('Профиль','Анна Королёва, +7 913 ••• 42 18')+`<div class="stack">
  <div class="glass sec"><div class="staff"><span class="ava ph" style="background-image:url(${M}grom.jpg)"></span><div class="grow"><b>Гром, «${p.name}»</b><small class="small">${S.paused?'Подписка на паузе':'Следующее списание 5 ноября'}</small></div><span class="price" style="font-size:20px">${rub(p.price)}</span></div>
   <div class="row" style="margin-top:14px"><button class="btn o sm grow press" data-go="tariff/grom">Сменить тариф</button><button class="btn o sm grow press" data-pause>${ic('pause','width:16px;height:16px')}${S.paused?'Продолжить':'Пауза'}</button></div></div>
- <div class="glass sec"><h2 style="margin-bottom:12px">Цветовая схема</h2><div class="swatch">${[['1','Рассвет','linear-gradient(160deg,#3E2A3A,#C98468,#F6DFCB)'],['2','Мёд','linear-gradient(160deg,#33261E,#B48858,#F2E6D3)'],['3','Туман','linear-gradient(160deg,#2E2A29,#9E8D82,#ECE4D9)']].map(([k,n,g])=>`<button class="press ${S.scheme===k?'on':''}" data-s="${k}"><span style="background:${g}"></span><b>${n}</b></button>`).join('')}</div></div>
+ <div class="glass sec"><h2 style="margin-bottom:12px">Цветовая схема</h2><div class="swatch">${[['1','Рассвет','linear-gradient(160deg,#3E2A3A,#C98468,#F6DFCB)'],['2','Мёд','linear-gradient(160deg,#33261E,#B48858,#F2E6D3)'],['3','Туман','linear-gradient(160deg,#2E2A29,#9E8D82,#ECE4D9)'],['4','Аврора','linear-gradient(160deg,#2A2468,#5B4CE6,#C98BD0,#FFD3C2)']].map(([k,n,g])=>`<button class="press ${S.scheme===k?'on':''}" data-s="${k}"><span style="background:${g}"></span><b>${n}</b></button>`).join('')}</div></div>
  <div class="glass sec">${[['bell','Уведомления','notif'],['card','История платежей','payments'],['chat','Чат с менеджером','chat'],['cal','Мои брони','bookings'],['gift','Подарить сертификат','gift']].map(([i,t,g])=>`<button class="li press" data-go="${g}"><span class="ic">${ic(i)}</span><b class="grow">${t}</b>${ic('arrow','color:var(--off)')}</button>`).join('')}</div>
  <button class="btn o full press" data-logout>${ic('out')}Выйти</button></div>`};
 V.payments=()=>skySub('Платежи')+`<div class="stack"><div class="glass sec">${[['Подписка «Совладелец»','5 октября',29000],['Недоуздок с гравировкой','5 октября',6900],['Яблоки, 1 кг','4 октября',350],['СПА-день','28 сентября',4500],['Подписка «Совладелец»','5 сентября',29000]].map(([t,d,p])=>`<div class="li"><div class="grow"><b>${t}</b><small>${d}</small></div><b>${rub(p)}</b></div>`).join('')}</div></div>`;
