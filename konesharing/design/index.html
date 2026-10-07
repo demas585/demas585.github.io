@@ -2,7 +2,7 @@
 <html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0A0C0B"><meta name="apple-mobile-web-app-capable" content="yes">
 <title>Конешеринг: дизайн</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito:wght@500;600;700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Literata:opsz,wght@7..72,400;7..72,500&family=Manrope:wght@500;600;700;800&family=Rubik:wght@500;600;700;800;900&family=Nunito:wght@500;600;700;800;900&display=swap">
 <style>
 /* Layout: three full-length phone screens side by side (stack on narrow), short description under each */
 :root{
@@ -317,15 +317,172 @@ body{background:#0A0C0B;-webkit-tap-highlight-color:transparent}
 .sw{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(20,22,21,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 8px 24px -8px rgba(0,0,0,.45),inset 0 0 0 1px rgba(255,255,255,.1);max-width:calc(100vw - 24px)}
 .sw{transition:transform .25s ease,opacity .25s ease}
 .sw.hide{transform:translate(-50%,-140%);opacity:0}
-.sw button{border:0;background:transparent;color:rgba(255,255,255,.72);font:600 13px "Golos Text",system-ui,sans-serif;padding:9px 13px;border-radius:999px;white-space:nowrap;cursor:pointer}
+.sw button{border:0;background:transparent;color:rgba(255,255,255,.72);font:600 13px "Golos Text",system-ui,sans-serif;padding:9px 12px;border-radius:999px;white-space:nowrap;cursor:pointer}
 .sw button.on{background:#fff;color:#111}
 .sw button:focus-visible{outline:2px solid #fff;outline-offset:2px}
 @media (max-width:360px){.sw button{padding:8px 9px;font-size:12px}}
+
+/* ================= V4 · СКАНДИ (Literata + Manrope) ================= */
+.v4{--c-bg:#EEEFEA;--c-card:#FFFFFF;--c-ink:#1E2421;--c-mute:#6E7570;--c-line:#E2E3DD;--c-sage:#6F8F78;--c-sage-2:#E3EBE4;--c-clay:#B9785A;--c-oat:#F3EFE7;
+  background:var(--c-bg);color:var(--c-ink);font-family:"Manrope",system-ui,sans-serif}
+.v4 .serif{font-family:"Literata",Georgia,serif}
+.v4 .wrap4{padding:0 18px 22px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.v4 .wrap4>*{min-width:0}
+.v4 .cam{position:relative;height:300px;border-radius:32px;overflow:hidden}
+.v4 .cam>*{position:absolute;z-index:2}
+.v4 .cam::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.18),transparent 30%,transparent 70%,rgba(0,0,0,.35))}
+.v4 .tag{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 12px;border-radius:999px;background:rgba(255,255,255,.9);font-size:12px;font-weight:700;color:var(--c-ink)}
+.v4 .live{width:7px;height:7px;border-radius:50%;background:#D9553F}
+.v4 .cam .t{top:14px;left:14px;display:flex;gap:6px}
+.v4 .cam .b{right:14px;bottom:14px}
+.v4 .round{width:48px;height:48px;border-radius:50%;background:#fff;display:grid;place-items:center;color:var(--c-ink);box-shadow:0 6px 16px -6px rgba(0,0,0,.3)}
+.v4 .head{display:flex;justify-content:space-between;align-items:flex-end;padding:2px 4px 0}
+.v4 .head h1{font-family:"Literata",serif;font-weight:500;font-size:48px;line-height:1;margin:0;letter-spacing:-.02em}
+.v4 .head small{display:block;font-size:13px;color:var(--c-mute);margin-bottom:6px;font-weight:600}
+.v4 .head .w{text-align:right;font-size:13px;color:var(--c-mute);font-weight:600}
+.v4 .head .w b{display:block;font-family:"Literata",serif;font-size:24px;color:var(--c-ink);font-weight:500}
+.v4 .st{display:flex;gap:8px;flex-wrap:wrap}
+.v4 .st span{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:var(--c-card);border:1px solid var(--c-line);font-size:13px;font-weight:600}
+.v4 .st i{width:8px;height:8px;border-radius:50%}
+.v4 .card{background:var(--c-card);border:1px solid var(--c-line);border-radius:26px;padding:20px}
+.v4 .card.soft{background:var(--c-oat);border-color:transparent}
+.v4 h3{font-family:"Literata",serif;font-weight:500;font-size:26px;margin:0;letter-spacing:-.01em}
+.v4 .hd{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.v4 .link{font-size:13px;font-weight:700;color:var(--c-sage)}
+.v4 .btn{height:46px;padding:0 20px;border-radius:999px;border:0;font:700 14px "Manrope",sans-serif;display:inline-flex;align-items:center;gap:8px}
+.v4 .btn.d{background:var(--c-ink);color:#fff}
+.v4 .btn.o{background:transparent;border:1px solid var(--c-line);color:var(--c-ink)}
+.v4 .treat{display:flex;align-items:center;gap:14px}
+.v4 .treat .im{width:56px;height:56px;border-radius:18px;background:#fff;display:grid;place-items:center;color:var(--c-clay)}
+.v4 .gear{width:140px;flex:none}
+.v4 .gear .im{height:140px;border-radius:22px;background:var(--c-oat);display:grid;place-items:center;color:var(--c-clay);margin-bottom:10px}
+.v4 .gear b{display:block;font-size:14px;font-weight:700;line-height:1.3}
+.v4 .gear small{font-size:12px;color:var(--c-mute);font-weight:600}
+.v4 .lvl{display:flex;align-items:baseline;gap:10px}
+.v4 .lvl .n{font-family:"Literata",serif;font-size:56px;line-height:1;font-weight:400}
+.v4 .lvl b{font-size:16px}
+.v4 .lvl small{display:block;font-size:13px;color:var(--c-mute);font-weight:600}
+.v4 .seg3{display:grid;grid-template-columns:repeat(10,1fr);gap:4px;margin:14px 0 4px}
+.v4 .seg3 i{height:6px;border-radius:6px;background:var(--c-line)}
+.v4 .seg3 i.on{background:var(--c-sage)}
+.v4 .rings{display:grid;grid-template-columns:repeat(3,1fr);gap:20px 8px;margin-top:20px}
+.v4 .ring{text-align:center}
+.v4 .ring svg{width:90px;height:90px;display:block;margin:0 auto}
+.v4 .ring .v{font:500 24px "Literata",serif;fill:var(--c-ink)}
+.v4 .ring .u{font:600 10px "Manrope",sans-serif;fill:var(--c-mute)}
+.v4 .ring b{display:block;font-size:12px;font-weight:700;margin-top:4px}
+.v4 .ring small{font-size:11px;color:var(--c-mute);font-weight:600}
+.v4 .row4{display:flex;align-items:center;gap:14px;padding:14px 0;border-top:1px solid var(--c-line)}
+.v4 .row4:first-of-type{border-top:0;padding-top:0}
+.v4 .row4:last-child{padding-bottom:0}
+.v4 .row4 .th{width:56px;height:56px;border-radius:18px;flex:none;display:grid;place-items:center;background-color:var(--c-oat);color:var(--c-mute)}
+.v4 .row4 b{display:block;font-size:15px;font-weight:700}
+.v4 .row4 small{font-size:13px;color:var(--c-mute);font-weight:500}
+.v4 .medals{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 6px}
+.v4 .medal{text-align:center;font-size:12px;font-weight:600;color:var(--c-mute)}
+.v4 .medal i{display:grid;place-items:center;width:58px;height:58px;margin:0 auto 6px;border-radius:50%;border:1px solid var(--c-line);color:#B9BDB8}
+.v4 .medal.on{color:var(--c-ink)}
+.v4 .medal.on i{border:0;background:var(--c-sage-2);color:var(--c-sage);box-shadow:inset 0 0 0 6px #fff,inset 0 0 0 7px var(--c-sage)}
+.v4 .tabs{display:flex;gap:6px;margin-bottom:12px}
+.v4 .tabs span{height:36px;padding:0 16px;border-radius:999px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;border:1px solid var(--c-line);color:var(--c-mute)}
+.v4 .tabs span.on{background:var(--c-ink);color:#fff;border-color:var(--c-ink)}
+.v4 .ev .d{font-family:"Literata",serif;font-size:26px;width:56px;text-align:center;line-height:1;flex:none}
+.v4 .ev .d small{display:block;font:700 10px "Manrope",sans-serif;text-transform:uppercase;letter-spacing:.08em;color:var(--c-sage);margin-top:4px}
+.v4 .quick{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.v4 .q{background:var(--c-card);border:1px solid var(--c-line);border-radius:22px;padding:16px;display:flex;flex-direction:column;gap:22px}
+.v4 .q .ic{color:var(--c-sage)}
+.v4 .q b{font-family:"Literata",serif;font-weight:500;font-size:19px;display:block}
+.v4 .q small{font-size:12px;color:var(--c-mute);font-weight:600}
+.v4 .buy{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center}
+.v4 .buy .ph{height:120px;border-radius:20px}
+.v4 .buy b{font-family:"Literata",serif;font-weight:500;font-size:22px;display:block;line-height:1.1}
+.v4 .buy p{font-size:13px;color:var(--c-mute);margin:6px 0 12px}
+.v4 .tabbar{background:#fff;border:1px solid var(--c-line);border-radius:999px;color:#8E948F;font-family:"Manrope",sans-serif;box-shadow:0 12px 30px -16px rgba(0,0,0,.25)}
+.v4 .tabbar .on{color:var(--c-ink)}
+.v4 .tabbar .on svg{color:var(--c-sage)}
+
+/* ================= V5 · НЕОБРУТАЛИЗМ (Rubik) ================= */
+.v5{--c-bg:#F2EFE8;--c-ink:#121212;--c-y:#FFD84D;--c-m:#7FE0B5;--c-p:#FF9EC7;--c-b:#8AB8FF;--c-o:#FF8A3D;--c-l:#C9B6FF;
+  --bd:2px solid #121212;--sh:4px 4px 0 #121212;
+  background:var(--c-bg);color:var(--c-ink);font-family:"Rubik",system-ui,sans-serif;
+  background-image:radial-gradient(rgba(18,18,18,.08) 1px,transparent 1px);background-size:18px 18px}
+.v5 .wrap5{padding:0 16px 22px;display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.v5 .wrap5>*{min-width:0}
+.v5 .box{background:#fff;border:var(--bd);border-radius:20px;box-shadow:var(--sh)}
+.v5 .top{display:flex;align-items:center;justify-content:space-between;padding:0 2px}
+.v5 .top h1{font-size:40px;font-weight:900;margin:0;line-height:1;letter-spacing:-.02em}
+.v5 .top small{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+.v5 .sq{width:48px;height:48px;border:var(--bd);border-radius:14px;box-shadow:3px 3px 0 #121212;display:grid;place-items:center;background:var(--c-y)}
+.v5 .cam{position:relative;height:280px;border:var(--bd);border-radius:22px;box-shadow:6px 6px 0 #121212;overflow:hidden}
+.v5 .cam>*{position:absolute;z-index:2}
+.v5 .stk{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border:var(--bd);border-radius:10px;font-size:13px;font-weight:800;background:#fff}
+.v5 .cam .a{top:14px;left:14px;transform:rotate(-4deg);background:#FF5A4E;color:#fff}
+.v5 .cam .c{top:16px;right:14px;transform:rotate(3deg);background:var(--c-y)}
+.v5 .cam .d{left:14px;bottom:14px}
+.v5 .btn{height:46px;padding:0 18px;border:var(--bd);border-radius:14px;box-shadow:3px 3px 0 #121212;font:800 14px "Rubik",sans-serif;display:inline-flex;align-items:center;gap:8px;background:#fff;color:#121212}
+.v5 .btn.k{background:#121212;color:#fff;box-shadow:3px 3px 0 var(--c-o)}
+.v5 .tri{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.v5 .tri .box{padding:12px;border-radius:16px}
+.v5 .tri small{display:block;font-size:11px;font-weight:700;margin:10px 0 2px}
+.v5 .tri b{font-size:15px;font-weight:900}
+.v5 .treat{display:flex;align-items:center;gap:12px;padding:12px;background:var(--c-p)}
+.v5 .treat b{display:block;font-size:17px;font-weight:900}
+.v5 .treat small{font-size:13px;font-weight:600}
+.v5 .sec{padding:18px}
+.v5 h3{font-size:22px;font-weight:900;margin:0;letter-spacing:-.01em}
+.v5 .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.v5 .pill{height:30px;padding:0 12px;border:var(--bd);border-radius:999px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;background:var(--c-y)}
+.v5 .gear{width:132px;flex:none;border:var(--bd);border-radius:16px;overflow:hidden;background:#fff}
+.v5 .gear .im{height:96px;display:grid;place-items:center;border-bottom:var(--bd)}
+.v5 .gear div.t{padding:10px}
+.v5 .gear b{display:block;font-size:13px;font-weight:800;line-height:1.25}
+.v5 .gear small{font-size:11px;font-weight:700}
+.v5 .lvl{display:flex;align-items:center;gap:12px;padding:12px;border:var(--bd);border-radius:16px;background:var(--c-l)}
+.v5 .lvl .n{width:48px;height:48px;border:var(--bd);border-radius:12px;background:#fff;display:grid;place-items:center;font-size:24px;font-weight:900}
+.v5 .bar{height:14px;border:var(--bd);border-radius:8px;background:#fff;overflow:hidden;margin-top:6px}
+.v5 .bar i{display:block;height:100%;width:75%;background:repeating-linear-gradient(45deg,#121212 0 6px,var(--c-y) 6px 12px)}
+.v5 .rings{display:grid;grid-template-columns:repeat(3,1fr);gap:12px 8px;margin-top:16px}
+.v5 .ring{text-align:center;border:var(--bd);border-radius:16px;padding:10px 4px 8px}
+.v5 .ring svg{width:74px;height:74px;display:block;margin:0 auto}
+.v5 .ring .v{font:900 19px "Rubik",sans-serif;fill:#121212}
+.v5 .ring .u{font:700 9px "Rubik",sans-serif;fill:#121212}
+.v5 .ring b{display:block;font-size:12px;font-weight:800;margin-top:2px}
+.v5 .ring small{font-size:10px;font-weight:700}
+.v5 .tr{display:flex;align-items:center;gap:12px;padding:10px;border:var(--bd);border-radius:16px;margin-top:10px}
+.v5 .tr:first-of-type{margin-top:0}
+.v5 .tr .th{width:50px;height:50px;border:var(--bd);border-radius:12px;flex:none;display:grid;place-items:center}
+.v5 .tr b{display:block;font-size:14px;font-weight:900}
+.v5 .tr small{font-size:12px;font-weight:600}
+.v5 .medals{display:grid;grid-template-columns:repeat(4,1fr);gap:14px 6px}
+.v5 .medal{text-align:center;font-size:11px;font-weight:800;color:#8A8780}
+.v5 .medal i{display:grid;place-items:center;width:56px;height:56px;margin:0 auto 6px;border:2px dashed #B9B5AC;border-radius:50%;color:#B9B5AC}
+.v5 .medal.on{color:#121212}
+.v5 .medal.on i{border:var(--bd);color:#121212;box-shadow:3px 3px 0 #121212}
+.v5 .tabs{display:flex;gap:8px;margin-bottom:10px}
+.v5 .tabs span{height:36px;padding:0 14px;border:var(--bd);border-radius:12px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;background:#fff}
+.v5 .tabs span.on{background:#121212;color:#fff}
+.v5 .ev{display:flex;gap:12px;align-items:center;padding:10px 0;border-top:2px dashed #DDD8CC}
+.v5 .ev:first-of-type{border-top:0}
+.v5 .ev .d{width:52px;height:56px;border:var(--bd);border-radius:12px;display:grid;place-items:center;align-content:center;line-height:1;flex:none}
+.v5 .ev .d b{font-size:20px;font-weight:900}
+.v5 .ev .d small{font-size:10px;font-weight:800;text-transform:uppercase;margin-top:2px}
+.v5 .ev b{display:block;font-size:14px;font-weight:900}
+.v5 .ev small{font-size:12px;font-weight:600}
+.v5 .quick{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.v5 .q{padding:14px;display:flex;flex-direction:column;gap:20px}
+.v5 .q b{font-size:16px;font-weight:900;display:block}
+.v5 .q small{font-size:12px;font-weight:700}
+.v5 .buy{padding:18px;background:var(--c-m)}
+.v5 .buy b{font-size:24px;font-weight:900;display:block;line-height:1.05}
+.v5 .buy p{font-size:13px;font-weight:600;margin:6px 0 14px}
+.v5 .tabbar{background:#fff;border:var(--bd);border-radius:20px;box-shadow:var(--sh);color:#77736B;font-family:"Rubik",sans-serif;font-weight:700}
+.v5 .tabbar .on{color:#121212}
+.v5 .tabbar .on svg{background:var(--c-y);border:2px solid #121212;border-radius:10px;padding:2px;width:32px;height:28px;margin-top:-4px}
 </style>
 
 </head><body>
-<nav class="sw" aria-label="Вариант дизайна"><button type="button" data-v="1" class="on">1 · Бенто</button><button type="button" data-v="2">2 · Эдиториал</button><button type="button" data-v="3">3 · Аврора</button></nav>
-<main class="app"><div class="screen v1" id="v1"></div><div class="screen v2" id="v2" hidden></div><div class="screen v3" id="v3" hidden></div></main>
+<nav class="sw" aria-label="Вариант дизайна"><button type="button" data-v="1" class="on">Бенто</button><button type="button" data-v="3">Аврора</button><button type="button" data-v="4">Сканди</button><button type="button" data-v="5">Брутал</button></nav>
+<main class="app"><div class="screen v1" id="v1"></div><div class="screen v3" id="v3" hidden></div><div class="screen v4" id="v4" hidden></div><div class="screen v5" id="v5" hidden></div></main>
 <script>
 const I={
  apple:'<path d="M12 7c-2-2-7-1.5-7 4 0 4 3 9 5 9 1 0 1.3-.6 2-.6s1 .6 2 .6c2 0 5-5 5-9 0-5.5-5-6-7-4z"/><path d="M12 7c0-2 1-3.5 3-4"/>',
@@ -409,39 +566,6 @@ document.getElementById('v1').innerHTML=SB+`
  <div class="buy"><b>Выкупить Грома</b><p>Стоимость уменьшается на половину уже оплаченной подписки</p><button class="btn w">${ic('key')}Узнать условия</button></div>
 </div>`+tabbar();
 
-/* ---------- V2 ---------- */
-document.getElementById('v2').innerHTML=SB+`
-<div class="hero ph p-pasture">
- <div class="t"><span class="gl"><i class="live"></i>LIVE · Пастбище</span><span class="gl">В кадре</span></div>
- <div class="b"><div class="kick">Совладелец · Marali</div><div class="nm">Гром</div>
-  <div class="meta">Алтай, +8°, ясно<i></i>камера 2 из 4</div>
-  <div class="call"><button class="btn g">${ic('call')}Позвать к камере</button><button class="btn">${ic('grid')}Камеры</button></div></div>
-</div>
-<div class="stack">
- <div class="card stats"><div><small>Самочувствие</small><b>Отличное</b></div><div><small>Настроение</small><b>Бодрое</b></div><div><small>Завтрак</small><b>08:05</b></div></div>
- <div class="card treat"><span class="ic">${ic('apple','width:26px;height:26px')}</span><div class="grow"><b>Яблоки для Грома</b><small>350&nbsp;₽ · другие лакомства</small></div><button class="btn g" style="padding:0 16px">Угостить</button></div>
- <div class="card"><div class="hd"><h3>Снаряжение</h3><span class="link">Добавить</span></div>
-  <div class="hscroll" style="margin:0 -20px;padding:0 20px">${GEAR.map(([i,n,s])=>`<div class="gear"><div class="im">${ic(i,'width:54px;height:54px;stroke-width:1.1')}</div><small>${s}</small><b>${n}</b></div>`).join('')}</div></div>
- <div class="card"><div class="hd"><h3>Развитие</h3><span class="link">Курсы</span></div>
-  <div class="lvl"><div class="big">3 <em>«Друг»</em></div><small>2 620 из 3 500 XP<br>до скидки 15% на визиты</small></div>
-  <div class="bar"><i></i></div>
-  <div class="rings">${STATS.map(s=>ring(s,{r:38,w:2.5,track:'rgba(242,237,228,.1)',gold:'#D9BE8C',col:()=>'#F2EDE4'})).join('')}</div>
- </div>
- <div class="card"><div class="hd"><h3>Трюки</h3><span class="link">1 из 4</span></div>
-  <div class="trick"><div class="th ph p-arena">${ic('play','width:22px;height:22px')}</div><div class="grow"><b>Поклон</b><small>освоен, смотреть видео</small></div></div>
-  <div class="trick"><div class="th" style="color:var(--c-gold)">${ic('shoe')}</div><div class="grow"><b>Испанский шаг</b><small>занятие 3 из 7, идёт обучение</small></div></div>
-  <div class="trick"><div class="th">${ic('lock')}</div><div class="grow"><b>Прыжок через жердь</b><small>откроется при прыжке 60 см</small></div></div>
- </div>
- <div class="card"><div class="hd"><h3>Ачивки</h3><span class="link">3 из 8</span></div>
-  <div class="medals">${MED.map(([n,i,on])=>`<div class="medal ${on?'on':''}"><i>${ic(i,'width:24px;height:24px')}</i>${n}</div>`).join('')}</div></div>
- <div class="card"><div class="hd"><h3>События</h3></div>
-  <div class="tabs"><span class="on">Ближайшие</span><span>Прошедшие</span></div>
-  ${EV.map(([d,m,t,s])=>`<div class="ev"><div class="d">${d}<small>${m}</small></div><div><b>${t}</b><small>${s}</small></div></div>`).join('')}
- </div>
- <div class="card list">${[["chat","Написать конюху","Алексей ответит в течение часа"],["doc","Отчёт за день","6 октября, 4 фото и видео"],["chart","Статистика","12,4 км, 3 часа на пастбище"],["cross","Здоровье","Следующий осмотр 12 октября"]].map(([i,t,s])=>`<div class="li"><span class="ic">${ic(i)}</span><div class="grow"><b>${t}</b><small>${s}</small></div>${ic('arrow','color:var(--c-mute)')}</div>`).join('')}</div>
- <div class="buy ph p-grom"><div><div class="kick">Навсегда ваш</div><b>Выкупить Грома</b><button class="btn g">${ic('key')}Узнать условия</button></div></div>
-</div>`+tabbar();
-
 /* ---------- V3 ---------- */
 const V3G=['#20B7A4,#0E8F80','#8A7CFF,#5A49F0','#FFC46B,#FF9A3D','#FF9C8F,#FF5E73','#7CC8FF,#3D8BFF','#FFD36E,#F2A900'];
 const g=k=>`background:linear-gradient(135deg,${V3G[k]})`;
@@ -479,7 +603,69 @@ document.getElementById('v3').innerHTML=SB+`
  <div class="buy"><b>Выкупить Грома</b><p>Половина оплаченной подписки пойдёт в счёт стоимости</p><button class="btn w">${ic('key')}Узнать условия</button></div>
 </div>`+tabbar();
 
-const BG={1:'#F2F3F1',2:'#0F1311',3:'#F1EEFB'};
+/* ---------- V4 СКАНДИ ---------- */
+document.getElementById('v4').innerHTML=SB+`
+<div class="wrap4">
+ <div class="cam ph p-pasture"><div class="t"><span class="tag"><i class="live"></i>LIVE</span><span class="tag">Пастбище · в кадре</span></div><div class="b"><span class="round">${ic('call')}</span></div></div>
+ <div class="head"><div><small>Совладелец · Marali</small><h1>Гром</h1></div><div class="w">Алтай<b>+8° ясно</b></div></div>
+ <div class="st"><span><i style="background:#6F8F78"></i>Самочувствие отличное</span><span><i style="background:#D4A84E"></i>Настроение бодрое</span><span><i style="background:#B9785A"></i>Завтрак в 08:05</span></div>
+ <div class="card soft treat"><span class="im">${ic('apple','width:26px;height:26px')}</span><div class="grow"><b style="font-size:16px">Угостить Грома</b><div style="font-size:13px;color:var(--c-mute);font-weight:600">Яблоки · 350&nbsp;₽</div></div><button class="btn d">Угостить</button></div>
+ <div class="card"><div class="hd"><h3>Снаряжение</h3><span class="link">Добавить</span></div>
+  <div class="hscroll" style="margin:0 -20px;padding:0 20px">${GEAR.map(([i,n,s])=>`<div class="gear"><div class="im">${ic(i,'width:52px;height:52px;stroke-width:1.2')}</div><b>${n}</b><small>${s}</small></div>`).join('')}</div></div>
+ <div class="card"><div class="hd"><h3>Развитие</h3><span class="link">Курсы</span></div>
+  <div class="lvl"><span class="n">3</span><div><b>Уровень «Друг»</b><small>2 620 из 3 500 XP</small></div></div>
+  <div class="seg3">${Array.from({length:10},(_,k)=>`<i class="${k<7?'on':''}"></i>`).join('')}</div>
+  <div class="rings">${STATS.map(s=>ring(s,{r:38,w:3,track:'#ECEDE8',gold:'#B9785A',col:()=>'#6F8F78'})).join('')}</div>
+ </div>
+ <div class="card"><div class="hd"><h3>Трюки</h3><span class="link">1 из 4</span></div>
+  <div class="row4"><div class="th ph p-arena"></div><div class="grow"><b>Поклон</b><small>Освоен</small></div><button class="btn o" style="height:38px;padding:0 14px">${ic('play','width:14px;height:14px')}Видео</button></div>
+  <div class="row4"><div class="th" style="color:var(--c-sage)">${ic('shoe')}</div><div class="grow"><b>Испанский шаг</b><small>Занятие 3 из 7</small></div></div>
+  <div class="row4"><div class="th">${ic('lock')}</div><div class="grow"><b>Прыжок через жердь</b><small>Нужен прыжок 60 см</small></div></div>
+ </div>
+ <div class="card"><div class="hd"><h3>Ачивки</h3><span class="link">3 из 8</span></div>
+  <div class="medals">${MED.map(([n,i,on])=>`<div class="medal ${on?'on':''}"><i>${ic(i,'width:22px;height:22px')}</i>${n}</div>`).join('')}</div></div>
+ <div class="card"><div class="hd"><h3>События</h3></div>
+  <div class="tabs"><span class="on">Ближайшие</span><span>Прошедшие</span></div>
+  ${EV.map(([d,m,t,s])=>`<div class="row4 ev"><div class="d">${d}<small>${m}</small></div><div class="grow"><b>${t}</b><small>${s}</small></div>${ic('arrow','color:#B5BAB7')}</div>`).join('')}
+ </div>
+ <div class="quick">${[["chat","Конюху","Алексей онлайн"],["doc","Отчёт","За 6 октября"],["chart","Статистика","12,4 км за день"],["cross","Здоровье","Осмотр 12 окт"]].map(([i,t,s])=>`<div class="q"><span class="ic">${ic(i,'width:24px;height:24px')}</span><div><b>${t}</b><small>${s}</small></div></div>`).join('')}</div>
+ <div class="card buy"><div class="ph p-grom"></div><div><b>Выкупить Грома</b><p>Половина оплаченной подписки пойдёт в счёт стоимости</p><button class="btn d" style="height:40px">${ic('key')}Условия</button></div></div>
+</div>`+tabbar();
+
+/* ---------- V5 НЕОБРУТАЛИЗМ ---------- */
+const C5=['#7FE0B5','#8AB8FF','#FFD84D','#FF9EC7','#C9B6FF','#FF8A3D'];
+document.getElementById('v5').innerHTML=SB+`
+<div class="wrap5">
+ <div class="top"><div><small>Совладелец · Marali · +8°</small><h1>Гром</h1></div><span class="sq">${ic('bell')}</span></div>
+ <div class="cam ph p-pasture"><span class="stk a"><i class="live" style="width:7px;height:7px;border-radius:50%;background:#fff"></i>LIVE</span><span class="stk c">в кадре</span><div class="d"><button class="btn">${ic('call')}Позвать к камере</button></div></div>
+ <div class="tri">
+  <div class="box" style="background:${C5[0]}">${ic('heart')}<small>Самочувствие</small><b>Отличное</b></div>
+  <div class="box" style="background:${C5[1]}">${ic('smile')}<small>Настроение</small><b>Бодрое</b></div>
+  <div class="box" style="background:${C5[2]}">${ic('bowl')}<small>Завтрак</small><b>08:05</b></div>
+ </div>
+ <div class="box treat"><span class="sq" style="background:#fff">${ic('apple','width:24px;height:24px')}</span><div class="grow"><b>Угостить Грома</b><small>Яблоки · 350&nbsp;₽</small></div><button class="btn k">Угостить</button></div>
+ <div class="box sec"><div class="hd"><h3>Снаряжение</h3><span class="pill">+ Добавить</span></div>
+  <div class="hscroll" style="margin:0 -18px;padding:0 18px 6px">${GEAR.map(([i,n,s],j)=>`<div class="gear"><div class="im" style="background:${[C5[5],C5[1],C5[4]][j]}">${ic(i,'width:42px;height:42px;stroke-width:1.8')}</div><div class="t"><b>${n}</b><small>${s}</small></div></div>`).join('')}</div></div>
+ <div class="box sec"><div class="hd"><h3>Развитие</h3><span class="pill" style="background:#fff">Курсы</span></div>
+  <div class="lvl"><span class="n">3</span><div class="grow"><b style="font-weight:900">Уровень «Друг»</b> <span style="font-size:12px;font-weight:700">2 620 / 3 500 XP</span><div class="bar"><i></i></div></div></div>
+  <div class="rings">${STATS.map((s,k)=>ring(s,{r:30,w:9,track:'#EFECE4',gold:'#FF8A3D',col:()=>['#2BB673','#3D7BFF','#E8B400','#FF4F93','#8A63FF','#FF8A3D'][k]})).join('')}</div>
+ </div>
+ <div class="box sec"><div class="hd"><h3>Трюки</h3><span class="pill">1 из 4</span></div>
+  <div class="tr" style="background:${C5[0]}"><div class="th ph p-arena"></div><div class="grow"><b>Поклон</b><small>Освоен!</small></div><button class="btn k" style="height:38px;padding:0 12px">▶ Смотреть</button></div>
+  <div class="tr"><div class="th" style="background:${C5[1]}">${ic('shoe')}</div><div class="grow"><b>Испанский шаг</b><small>Занятие 3 из 7</small></div><span class="pill">43%</span></div>
+  <div class="tr" style="border-style:dashed"><div class="th" style="background:#EFECE4">${ic('lock')}</div><div class="grow"><b>Прыжок через жердь</b><small>Нужен прыжок 60 см</small></div></div>
+ </div>
+ <div class="box sec"><div class="hd"><h3>Ачивки</h3><span class="pill">3 из 8</span></div>
+  <div class="medals">${MED.map(([n,i,on],k)=>`<div class="medal ${on?'on':''}"><i style="${on?`background:${[C5[2],C5[3],C5[1]][k]}`:''}">${ic(i,'width:24px;height:24px')}</i>${n}</div>`).join('')}</div></div>
+ <div class="box sec"><div class="hd"><h3>События</h3></div>
+  <div class="tabs"><span class="on">Ближайшие</span><span>Прошедшие</span></div>
+  ${EV.map(([d,m,t,s],k)=>`<div class="ev"><div class="d" style="background:${[C5[4],C5[0],C5[2]][k]}"><b>${d}</b><small>${m}</small></div><div class="grow"><b>${t}</b><small>${s}</small></div></div>`).join('')}
+ </div>
+ <div class="quick">${[["chat","Конюху","Алексей онлайн",1],["doc","Отчёт","За 6 октября",2],["chart","Статистика","12,4 км за день",4],["cross","Здоровье","Осмотр 12 окт",3]].map(([i,t,s,k])=>`<div class="box q" style="background:${C5[k]}">${ic(i,'width:26px;height:26px')}<div><b>${t}</b><small>${s}</small></div></div>`).join('')}</div>
+ <div class="box buy"><b>Выкупить Грома</b><p>Половина оплаченной подписки пойдёт в счёт стоимости</p><button class="btn k">${ic('key')}Узнать условия</button></div>
+</div>`+tabbar();
+
+const BG={1:'#F2F3F1',3:'#F1EEFB',4:'#EEEFEA',5:'#F2EFE8'};
 function show(v){v=String(v);if(!BG[v])v='1';
  document.querySelectorAll('.screen').forEach(s=>s.hidden=s.id!=='v'+v);
  document.querySelectorAll('.sw button').forEach(b=>b.classList.toggle('on',b.dataset.v===v));
@@ -488,7 +674,7 @@ function show(v){v=String(v);if(!BG[v])v='1';
  if(location.hash!=='#v'+v)history.replaceState(null,'','#v'+v);
  window.scrollTo(0,0)}
 document.querySelector('.sw').addEventListener('click',e=>{const b=e.target.closest('button');if(b)show(b.dataset.v)});
-let start=(location.hash.match(/v([123])/)||[])[1];
+let start=(location.hash.match(/v([1345])/)||[])[1];
 if(!start){try{start=localStorage.getItem('ksv')}catch(e){}}
 show(start||'1');
 let ly=0;addEventListener('scroll',()=>{const y=scrollY;document.querySelector('.sw').classList.toggle('hide',y>ly&&y>80);ly=y},{passive:true});
