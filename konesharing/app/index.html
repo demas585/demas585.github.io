@@ -124,7 +124,7 @@ h3{font-size:16px;font-weight:600}
 .sticky{position:sticky;bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:8}
 
 /* камера */
-.cam{position:relative;height:280px;border-radius:calc(var(--r) + 2px);overflow:hidden;border:5px solid rgba(255,255,255,.5);box-shadow:0 34px 50px -26px var(--shc);background:#222}
+.cam{position:relative;height:280px;border-radius:calc(var(--r) + 2px);overflow:hidden;border:5px solid rgba(255,255,255,.5);box-shadow:0 34px 50px -26px var(--shc);background:#222 padding-box}
 .cam video,.cam .ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .cam::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(20,14,12,.7));pointer-events:none}
 .cam .ov{position:absolute;z-index:2}
@@ -284,9 +284,25 @@ h3{font-size:16px;font-weight:600}
 .counter{display:flex;align-items:center;gap:14px}
 .counter button{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--line);display:grid;place-items:center;font-size:20px}
 .counter b{font-size:20px;min-width:24px;text-align:center}
+
+/* Liquid glass (ioNihal/SVG-liquid-glass): blurred backdrop on ::before, bent by an SVG turbulence displacement filter */
+:where(.glass,.solid,.btn.o,.chip,.chipg,.rb,.gp,.seg,.tr,.gear,.lvl,.medal i,.msg.in){position:relative}
+.glass,.solid,.btn.o,.chip,.chipg,.rb,.gp,.seg,.tr,.gear,.lvl,.medal i,.msg.in,.tabbar{isolation:isolate;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+.glass::before,.solid::before,.btn.o::before,.chip::before,.chipg::before,.rb::before,.gp::before,.seg::before,.tr::before,.gear::before,.lvl::before,.medal i::before,.msg.in::before,.tabbar::before{
+ content:"";position:absolute;inset:-24px;z-index:-1;pointer-events:none;
+ background:rgba(255,255,255,.05);
+ backdrop-filter:blur(var(--lgb,4px)) saturate(1.6) brightness(1.1);-webkit-backdrop-filter:blur(var(--lgb,4px)) saturate(1.6) brightness(1.1);
+ filter:url(#light-bender);transform:translateZ(0);
+ clip-path:inset(24px round var(--lgr,var(--r)))}
+.glass{--lgb:6px}.tabbar{--lgb:5px}
+.solid,.tr,.gear,.lvl{--lgr:calc(var(--r) - 8px)}
+.chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i{--lgr:999px}
+.chip::before,.chipg::before,.rb::before,.gp::before,.seg::before,.btn.o::before,.medal i::before{filter:url(#light-bender-s)}
+.msg.in{--lgr:18px 18px 18px 6px}
 </style>
 </head><body class="s1">
 <main class="app" id="app"></main>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="light-bender" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" result="noise"/><feGaussianBlur in="noise" stdDeviation="2" result="blurredNoise"/><feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="50" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="light-bender-s" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="1" result="noise"/><feGaussianBlur in="noise" stdDeviation="1" result="blurredNoise"/><feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="22" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/><g fill="none" stroke="#000" stroke-linecap="round"><path stroke-width="2.4" d="M43.5 15.5c2.6 4.3 4.5 9 6.6 13.5M47 14.5c2.3 4.6 5 9 7.3 13.6"/><path stroke-width="2.2" d="M33.8 42.4c-1.6-3.6-4.8-6-8.6-6.6"/><path stroke-width="2.4" d="M12 41.8c1-1 2.6-1.1 3.6-.1"/><path stroke-width="1.8" d="M10.6 46.4c1.5.4 3 .4 4.4-.1"/><path stroke-width="2" d="M34.8 6l.5 4.6"/></g><path fill="#000" d="M29.4 21.2c2-2.2 5.2-2.4 7.2-.4-1.5 2.6-5 3.3-7.2.4z"/></mask></defs></svg>
 <nav class="tabbar" id="tabbar"></nav>
 <div class="scrim" id="scrim"></div><div class="sheet" id="sheet" role="dialog"></div><div class="toast" id="toast"></div>
@@ -589,29 +605,8 @@ function render(){let r=(location.hash.replace(/^#\/?/,'')||'home').split('/');l
  const tb=document.getElementById('tabbar'),t=TAB_OF[n];tb.style.display=NO_TABS.includes(n)?'none':'grid';
  const TI={catalog:'t_grid',trips:'t_trips',club:'t_club',profile:'t_user'};tb.innerHTML=TABS.map(([k,l,i])=>k==='home'?`<button class="main ${k===t?'on':''}" data-go="${k}" aria-label="${l}"><span class="orb"><img class="t3h" src="${R3.t_horse}" alt=""></span>${l}</button>`:`<button class="${k===t?'on':''}" data-go="${k}"><img class="t3" src="${R3[TI[k]]}" alt="">${l}</button>`).join('');
  if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}
- requestAnimationFrame(liquid)}
+}
 
-/* Liquid glass: SVG displacement refraction through backdrop-filter (Chromium only; Safari keeps plain blur) */
-const LG=/Chrome\//.test(navigator.userAgent)&&!/iPhone|iPad|iPod/.test(navigator.userAgent);
-const LGC={};let lgN=0;const lgSvg=document.createElementNS('http://www.w3.org/2000/svg','svg');lgSvg.setAttribute('width','0');lgSvg.setAttribute('height','0');lgSvg.style.position='absolute';document.body.appendChild(lgSvg);
-function lgMap(w,h,r,b){const c=document.createElement('canvas');c.width=w;c.height=h;const x=c.getContext('2d');const im=x.createImageData(w,h);const D=im.data;const hw=w/2,hh=h/2;r=Math.min(r,hw,hh);
- const sdf=(px,py)=>{const qx=Math.abs(px)-(hw-r),qy=Math.abs(py)-(hh-r);return Math.hypot(Math.max(qx,0),Math.max(qy,0))+Math.min(Math.max(qx,qy),0)-r};
- for(let j=0;j<h;j++)for(let i=0;i<w;i++){const px=i+.5-hw,py=j+.5-hh;const d=-sdf(px,py);let dx=0,dy=0;
-  if(d<b){const gx=sdf(px+1,py)-sdf(px-1,py),gy=sdf(px,py+1)-sdf(px,py-1);const l=Math.hypot(gx,gy)||1;const m=Math.pow(1-Math.max(d,0)/b,2.2);dx=gx/l*m;dy=gy/l*m}
-  const k=(j*w+i)*4;D[k]=128+dx*127;D[k+1]=128+dy*127;D[k+2]=128;D[k+3]=255}
- x.putImageData(im,0,0);return c.toDataURL()}
-function lgApply(el,blur,scale){const R=el.getBoundingClientRect();const w=Math.round(el.offsetWidth),h=Math.round(el.offsetHeight);if(w<8||h<8)return;
- const rr=parseFloat(getComputedStyle(el).borderTopLeftRadius)||0;const key=w+'x'+h+'x'+Math.round(rr)+'x'+scale;
- if(!LGC[key]){const id='lg'+(lgN++);const b=Math.min(28,h/2.6,w/2.6);const f=document.createElementNS('http://www.w3.org/2000/svg','filter');f.id=id;
-  f.setAttribute('x','0');f.setAttribute('y','0');f.setAttribute('width',w);f.setAttribute('height',h);f.setAttribute('filterUnits','userSpaceOnUse');f.setAttribute('color-interpolation-filters','sRGB');
-  f.innerHTML=`<feImage href="${lgMap(w,h,rr,b)}" x="0" y="0" width="${w}" height="${h}" preserveAspectRatio="none" result="m"/><feDisplacementMap in="SourceGraphic" in2="m" scale="${scale}" xChannelSelector="R" yChannelSelector="G"/>`;
-  lgSvg.appendChild(f);LGC[key]=id}
- el.style.backdropFilter=`url(#${LGC[key]}) blur(${blur}px) saturate(1.7) brightness(1.04)`}
-function liquid(){if(!LG)return;
- document.querySelectorAll('.tabbar').forEach(e=>lgApply(e,9,80));
- document.querySelectorAll('.glass').forEach(e=>{if(!e.style.background)lgApply(e,10,60)});
- document.querySelectorAll('.rb,.gp,.chipg').forEach(e=>lgApply(e,3,40))}
-let lgT;addEventListener('resize',()=>{clearTimeout(lgT);lgT=setTimeout(liquid,200)});
 function go(r){if(location.hash==='#/'+r){render();return}location.hash='/'+r;window.scrollTo(0,0)}
 function rerender(){const y=scrollY;render();window.scrollTo(0,y)}
 addEventListener('hashchange',()=>{closeSheet();render();window.scrollTo(0,0)});
