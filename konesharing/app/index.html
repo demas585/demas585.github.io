@@ -255,7 +255,7 @@ h3{font-size:16px;font-weight:600}
 .tl small{font-size:13px;color:var(--mute)}
 
 /* чат */
-.msgs{display:flex;flex-direction:column;gap:8px}
+.msgs{display:flex;flex-direction:column;justify-content:flex-end;gap:8px;min-height:calc(100dvh - env(safe-area-inset-top,0px) - 280px)}
 .msg{max-width:80%;padding:10px 14px;border-radius:18px;font-size:15px;line-height:1.4}
 .msg.in{background:rgba(255,255,255,.85);align-self:flex-start;border-bottom-left-radius:6px}
 .msg.out{background:var(--acc);color:#fff;align-self:flex-end;border-bottom-right-radius:6px}
@@ -315,6 +315,9 @@ h3{font-size:16px;font-weight:600}
  filter:url(#light-bender);transform:translateZ(0);
  clip-path:inset(24px round var(--lgr,var(--r)))}
 .glass{--lgb:6px}.tabbar{--lgb:5px}
+/* WebKit (Safari, all iPhone browsers) ignores clip-path on backdrop-filter and can't bend the backdrop: plain rounded frosted glass there */
+.wk .glass::before,.wk .solid::before,.wk .btn.o::before,.wk .chip::before,.wk .chipg::before,.wk .rb::before,.wk .gp::before,.wk .seg::before,.wk .tr::before,.wk .gear::before,.wk .lvl::before,.wk .medal i::before,.wk .msg.in::before,.wk .tabbar::before{inset:0;clip-path:none;filter:none;border-radius:var(--lgr,var(--r))}
+
 .solid,.tr,.gear,.lvl{--lgr:calc(var(--r) - 8px)}
 .chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i{--lgr:999px}
 .chip::before,.chipg::before,.rb::before,.gp::before,.seg::before,.btn.o::before,.medal i::before{filter:url(#light-bender-s)}
@@ -687,6 +690,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]
 });
 document.addEventListener('submit',e=>{if(!e.target.matches('[data-send]'))return;e.preventDefault();const i=document.getElementById('msg');const v=i.value.trim();if(!v)return;
  S.chat.push(['out',v,'сейчас']);rerender();setTimeout(()=>{S.chat.push(['in','Спасибо! Уточню у Алексея и отвечу в течение пяти минут.','сейчас']);if(location.hash.includes('chat'))rerender()},1200)});
+{const ua=navigator.userAgent;if(/iPhone|iPad|iPod/.test(ua)||(/AppleWebKit/.test(ua)&&!/Chrome|Chromium|Edg|OPR/.test(ua))||(navigator.platform==='MacIntel'&&navigator.maxTouchPoints>1))document.documentElement.classList.add('wk')}
 try{const k=localStorage.getItem('kn-scheme');if(k==='4'||k==='5')S.scheme=k}catch(e){}
 if(/[?&]theme=marali/i.test(location.search))S.scheme='5';
 let ly=0;addEventListener('scroll',()=>{const y=scrollY;document.querySelector('.sw').classList.toggle('hide',y>ly&&y>80);ly=y},{passive:true});
