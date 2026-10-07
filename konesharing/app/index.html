@@ -30,6 +30,17 @@
  --skys:linear-gradient(180deg,#2A2468 0,#5B4CE6 160px,#C98BD0 260px,#FFD3C2 340px,#F6E9F5 440px,#E9EEFB 700px,#EFEAFB 100%);
  --deep:linear-gradient(135deg,#2A2468,#5B4CE6 50%,#B45CE0 80%,#FF9A7A)}
 
+.s5{--f:"Geologica",system-ui,sans-serif;--fd:"Geologica",system-ui,sans-serif;--hw:700;--r:30px;--rb:999px;
+ --ink:#1F2622;--mute:#5F6657;--off:#A3A08C;--line:rgba(95,102,87,.18);--acc:#052E2A;--lk:#740F03;
+ --g1:#B68B58;--g2:#740F03;--tint:#EFE8DA;--track:rgba(5,46,42,.12);--gold:#B68B58;--goldt:#7D4822;--shc:rgba(5,46,42,.42);--top:#052E2A;
+ --sky:linear-gradient(180deg,#052E2A 0,#1D4A40 210px,#919179 360px,#D4C9B5 480px,#EDE6D8 640px,#F1ECE2 1100px,#E9ECE3 1900px,#F3EFE6 100%);
+ --skys:linear-gradient(180deg,#052E2A 0,#1D4A40 160px,#919179 260px,#D4C9B5 340px,#EDE6D8 440px,#F1ECE2 700px,#F3EFE6 100%);
+ --deep:linear-gradient(135deg,#052E2A,#293855 50%,#7D4822 80%,#B68B58)}
+.sw{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sw button{display:flex;align-items:center;gap:10px;padding:10px;border-radius:calc(var(--r) - 10px);border:1.5px solid transparent;background:rgba(255,255,255,.55);font-weight:600;text-align:left}
+.sw button.on{border-color:var(--acc)}
+.sw i{width:38px;height:38px;border-radius:50%;flex:none;box-shadow:inset 0 0 0 2px rgba(255,255,255,.7)}
+
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{background:var(--top);color:var(--ink);font-family:var(--f);font-size:16px;line-height:1.45;-webkit-tap-highlight-color:transparent;transition:background-color .3s}
@@ -253,6 +264,7 @@ h3{font-size:16px;font-weight:600}
 .tabbar .on{color:var(--acc)}
 .tabbar .t3{width:28px;height:28px;object-fit:contain;margin-top:-3px;filter:grayscale(1) brightness(1.1) contrast(.85);opacity:.75;transition:filter .2s,opacity .2s,transform .25s}
 .tabbar .on .t3{filter:drop-shadow(0 3px 4px rgba(60,40,160,.35));opacity:1;transform:translateY(-1px) scale(1.08)}
+.s5 .tabbar .on .t3{filter:hue-rotate(-95deg) saturate(.55) brightness(.75) drop-shadow(0 3px 4px rgba(5,46,42,.35))}
 .tabbar .t3h{width:44px;height:44px;object-fit:contain;filter:drop-shadow(0 3px 4px rgba(20,10,60,.35))}
 .tabbar .main{position:relative;margin-top:-39px;font-weight:700;color:var(--mute)}
 .tabbar .main.on{color:var(--acc)}
@@ -595,6 +607,7 @@ V.profile=()=>{const p=PLANS.find(x=>x.id===S.plan);return skyTab('Профил�
  <div class="glass sec"><div class="staff"><span class="ava ph" style="background-image:url(${M}grom.jpg)"></span><div class="grow"><b>Гром, «${p.name}»</b><small class="small">${S.paused?'Подписка на паузе':'Следующее списание 5 ноября'}</small></div><span class="price" style="font-size:20px">${rub(p.price)}</span></div>
   <div class="row" style="margin-top:14px"><button class="btn o sm grow press" data-go="tariff/grom">Сменить тариф</button><button class="btn o sm grow press" data-pause>${ic('pause','width:16px;height:16px')}${S.paused?'Продолжить':'Пауза'}</button></div></div>
  <div class="glass sec">${[['bell','Уведомления','notif'],['card','История платежей','payments'],['chat','Чат с менеджером','chat'],['cal','Мои брони','bookings'],['gift','Подарить сертификат','gift']].map(([i,t,g])=>`<button class="li press" data-go="${g}"><span class="ic">${ic(i)}</span><b class="grow">${t}</b>${ic('arrow','color:var(--off)')}</button>`).join('')}</div>
+ <div class="glass sec"><b style="display:block;margin-bottom:12px">Тема оформления</b><div class="sw">${[['4','Аврора','linear-gradient(135deg,#2A2468,#5B4CE6 50%,#C98BD0 75%,#FF9A7A)'],['5','Marali','linear-gradient(135deg,#052E2A,#293855 45%,#7D4822 70%,#B68B58 85%,#D4C9B5)']].map(([k,n,g])=>`<button class="press ${S.scheme===k?'on':''}" data-s="${k}"><i style="background:${g}"></i>${n}</button>`).join('')}</div></div>
  <button class="btn o full press" data-logout>${ic('out')}Выйти</button></div>`};
 V.payments=()=>skySub('Платежи')+`<div class="stack"><div class="glass sec">${[['Подписка «Совладелец»','5 октября',29000],['Недоуздок с гравировкой','5 октября',6900],['Яблоки, 1 кг','4 октября',350],['СПА-день','28 сентября',4500],['Подписка «Совладелец»','5 сентября',29000]].map(([t,d,p])=>`<div class="li"><div class="grow"><b>${t}</b><small>${d}</small></div><b>${rub(p)}</b></div>`).join('')}</div></div>`;
 V.chat=()=>skySub('Ольга','Менеджер Marali, обычно отвечает за 5 минут')+`<div class="stack" style="padding-bottom:30px"><div class="msgs" id="msgs">${S.chat.map(([w,t,d])=>`<div class="msg ${w}">${esc(t)}<small>${d}</small></div>`).join('')}</div>
@@ -667,6 +680,8 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]
 });
 document.addEventListener('submit',e=>{if(!e.target.matches('[data-send]'))return;e.preventDefault();const i=document.getElementById('msg');const v=i.value.trim();if(!v)return;
  S.chat.push(['out',v,'сейчас']);rerender();setTimeout(()=>{S.chat.push(['in','Спасибо! Уточню у Алексея и отвечу в течение пяти минут.','сейчас']);if(location.hash.includes('chat'))rerender()},1200)});
+try{const k=localStorage.getItem('kn-scheme');if(k==='4'||k==='5')S.scheme=k}catch(e){}
+if(/[?&]theme=marali/i.test(location.search))S.scheme='5';
 document.body.className='s'+S.scheme;
 document.querySelector('meta[name=theme-color]').content=getVar('--top');
 render();
