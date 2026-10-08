@@ -101,6 +101,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 h2{font-family:var(--fd);font-size:22px;font-weight:var(--hw);letter-spacing:-.025em}
 h3{font-size:16px;font-weight:600}
 .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px}
+.hd+p{margin-top:-5px}
 .lk{font-size:14px;font-weight:600;color:var(--lk)}
 .txt{font-size:15px;color:var(--ink);line-height:1.55}
 .small{font-size:13px;color:var(--mute);line-height:1.3}
@@ -183,7 +184,7 @@ small{line-height:1.25}
 .ring .v{font:700 20px var(--fd);fill:var(--ink);letter-spacing:-.02em}
 .ring .u{font:500 10px var(--f);fill:var(--mute)}
 .ring b{display:block;font-size:12.5px;font-weight:600;margin-top:4px}
-.ring small{font-size:11px;color:var(--mute)}
+.ring small{display:block;font-size:11px;line-height:1.25;color:var(--mute);margin-top:1px}
 .ring.gold small,.ring.max small{color:var(--goldt);font-weight:600}
 .medals{display:grid;grid-template-columns:repeat(4,1fr);gap:16px 6px}
 .medal{text-align:center;font-size:12px;font-weight:600;color:var(--off)}
@@ -224,6 +225,8 @@ small{line-height:1.25}
 .hero .nm h1{font-family:var(--fd);font-size:68px;font-weight:var(--hw);letter-spacing:-.05em;line-height:.92}
 .hero .nm p{font-size:15px;opacity:.9;margin-top:8px}
 .hero+.stack{margin-top:0}
+b:has(+br+:is(small,.small)){display:block;line-height:1.3}b+br:has(+:is(small,.small)){display:none}b+br+:is(small,.small){display:block;margin-top:2px}
+.hero.hs{height:400px;margin-bottom:16px}.hero.hs .nm{bottom:26px}
 .staff{display:flex;gap:12px;align-items:center;text-align:left;width:100%}
 .ava{width:52px;height:52px;border-radius:50%;flex:none}
 .plan{display:block;width:100%;text-align:left;padding:18px;border:2px solid transparent}
@@ -517,7 +520,7 @@ V.home=()=>{const h=H(S.horse);return `<div class="top-gap"></div><header class=
 V.cams=()=>{const c=CAMS[S.cam],lock=c[0]==='pov'&&S.plan!=='own';return skySub('Камеры','Гром сейчас на пастбище')+`<div class="stack">
  <div class="cam" style="height:360px">${lock?`<div class="ph" style="background-image:url(${M}pov.jpg);filter:blur(14px) brightness(.7)"></div><div class="ov" style="inset:0;display:grid;place-items:center;text-align:center;color:#fff;padding:30px"><div>${ic('lock','width:32px;height:32px;margin:0 auto 10px')}<b>Камера на коне</b><p class="small" style="color:#fff;opacity:.85;margin:6px 0 14px">Доступна в тарифе «Личный конь»</p><button class="btn w sm" data-go="tariff/grom">Сменить тариф</button></div></div>`:`<video src="${M}${c[0]}.mp4" poster="${M}${c[0]}.jpg" autoplay muted loop playsinline></video><div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span><span class="gp">${c[1]}</span></div>`}</div>
  <div class="hscroll">${CAMS.map(([k,n],i)=>`<button class="press" data-cam="${i}" style="flex:none;width:96px;text-align:left"><div class="ph" style="height:70px;border-radius:calc(var(--r) - 10px);background-image:url(${M}${k}.jpg);outline:${i===S.cam?'3px solid var(--g2)':'0'};outline-offset:2px;position:relative">${k==='pov'&&S.plan!=='own'?`<span style="position:absolute;inset:0;display:grid;place-items:center;color:#fff;background:rgba(0,0,0,.35);border-radius:inherit">${ic('lock')}</span>`:''}</div><small style="display:block;font-size:12.5px;font-weight:600;margin-top:6px">${n}</small></button>`).join('')}</div>
- <div class="glass sec" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center">${[['camera','Снимок','Снимок сохранён в галерею'],['apple','Угостить',''],['call','Позвать','Алексей позовёт Грома к камере'],['archive','Архив','Архив за 7 дней откроется в полной версии']].map(([i,t,m])=>`<button class="press" ${t==='Угостить'?'data-treat':`data-toast="${m}"`}><span class="ic" style="margin:0 auto 6px">${ic(i)}</span><small style="font-size:12.5px;font-weight:600">${t}</small></button>`).join('')}</div>
+ <div class="glass sec" style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;text-align:center">${[['camera','Снимок','Снимок сохранён в галерею'],['apple','Угостить',''],['call','Позвать','Алексей позовёт Грома к камере'],['archive','Архив','Архив за 7 дней откроется в полной версии']].map(([i,t,m])=>`<button class="press" ${t==='Угостить'?'data-treat':`data-toast="${m}"`}><span class="ic" style="margin:0 auto 6px">${ic(i)}</span><small style="display:block;font-size:12.5px;font-weight:600">${t}</small></button>`).join('')}</div>
  <p class="small" style="padding:0 6px">Камеры работают круглосуточно. Ночью включается инфракрасный режим.</p></div>`};
 
 V.report=()=>skySub('Отчёт','6 октября, воскресенье')+`<div class="stack">
@@ -574,7 +577,7 @@ V.horse=id=>{const h=H(id),p=PASS[id],mine=S.owner&&id===S.horse;return `<sectio
  <section class="glass sec"><h2 style="margin-bottom:14px">Кто за ним ухаживает</h2>${Object.entries(STAFF).map(([k,s])=>`<button class="li press" data-go="staff/${k}"><span class="ava ph" style="background-image:url(${M}${s.img}.jpg)"></span><div class="grow"><b>${s.name}</b><small>${s.role}</small></div>${ic('arrow','color:var(--off)')}</button>`).join('')}</section>
  ${mine?`<button class="btn v full press sticky" data-go="home">Открыть «Мой конь»</button>`:`<button class="btn v full press sticky" data-go="tariff/${id}">Выбрать тариф</button>`}</div>`};
 
-V.staff=id=>{const s=STAFF[id];return `<section class="hero"><div class="ph" style="background-image:url(${M}${s.img}.jpg);background-position:center 20%"></div><div class="tp">${backBtn}<span></span></div><div class="nm"><h1 style="font-size:48px">${s.name.split(' ')[0]}</h1><p>${s.role} в Marali</p></div></section>
+V.staff=id=>{const s=STAFF[id];return `<section class="hero hs"><div class="ph" style="background-image:url(${M}${s.img}.jpg);background-position:center 20%"></div><div class="tp">${backBtn}<span></span></div><div class="nm"><h1 style="font-size:48px">${s.name.split(' ')[0]}</h1><p>${s.role} в Marali</p></div></section>
 <div class="stack"><div class="glass sec" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px">${s.stats.map(([a,b])=>`<div><div class="price">${a}</div><small class="small">${b}</small></div>`).join('')}</div>
  <div class="glass sec"><p class="txt">${s.about}</p><div class="row" style="margin-top:14px;flex-wrap:wrap;gap:8px">${s.tags.map(t=>`<span class="pill">${t}</span>`).join('')}</div></div>
  <div class="deep">${mountMark}<p style="font-size:18px;max-width:none;margin:0;opacity:1;line-height:1.4">«${s.quote}»</p></div>
