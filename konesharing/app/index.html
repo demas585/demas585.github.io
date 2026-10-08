@@ -466,9 +466,9 @@ const DEPS=[['12–15 июня',8],['3–6 июля',5],['24–27 июля',0],[
 const VALUE={grom:650000};
 const CAMS=[['pasture','Пастбище'],['stall','Денник'],['arena','Плац'],['pov','Глазами коня']];
 
-const S={scheme:'4',owner:true,horse:'grom',plan:'co',pick:null,pickPlan:'co',ev:0,club:0,shopCat:'Все',catF:'Все',cam:0,people:2,dep:0,stats:0,bookings:[['Тур «Кержаки»','12–15 июня 2027, 2 человека']],orders:[['Недоуздок с гравировкой','5 октября',6900,'В пути'],['Яблоки, 1 кг','4 октября',350,'Вручено'],['СПА-день','28 сентября',4500,'Выполнено']],paused:false,chat:[['in','Здравствуйте! Я Ольга, ваш менеджер в Marali. Спрашивайте про визиты, тур и всё, что касается Грома.','10:02']]};
+const S={xp:2620,boost:{},training:null,scheme:'4',owner:true,horse:'grom',plan:'co',pick:null,pickPlan:'co',ev:0,club:0,shopCat:'Все',catF:'Все',cam:0,people:2,dep:0,stats:0,bookings:[['Тур «Кержаки»','12–15 июня 2027, 2 человека']],orders:[['Недоуздок с гравировкой','5 октября',6900,'В пути'],['Яблоки, 1 кг','4 октября',350,'Вручено'],['СПА-день','28 сентября',4500,'Выполнено']],paused:false,chat:[['in','Здравствуйте! Я Ольга, ваш менеджер в Marali. Спрашивайте про визиты, тур и всё, что касается Грома.','10:02']]};
 const H=id=>HORSES.find(h=>h.id===id);
-function stats(id){const h=H(id),n=NORM[h.breed],f=PASS[id].f;return ST.map(([k,name,u,short])=>{const [p,c]=f[k];return{k,name,short:short||name,u,v:Math.round(n[k]*p/100),norm:n[k],cap:Math.round(n[k]*c/100),p,c,max:p>=c,gold:p>100}})}
+function stats(id){const h=H(id),n=NORM[h.breed],f=PASS[id].f;return ST.map(([k,name,u,short])=>{const [p0,c]=f[k],p=p0+(S.boost[id+k]||0);return{k,name,short:short||name,u,v:Math.round(n[k]*p/100),norm:n[k],cap:Math.round(n[k]*c/100),p,c,max:p>=c,gold:p>100}})}
 
 /* ---------- кусочки ---------- */
 const ridge=`<div class="ridge" aria-hidden="true">`
@@ -483,7 +483,7 @@ function skyTab(title,sub,right=''){return `<div class="top-gap"></div><header c
 function skySub(title,sub,right=''){return `<div class="top-gap"></div><header class="sky s"><div class="tp">${backBtn}${right}</div><h1>${title}</h1>${sub?`<p>${sub}</p>`:''}${ridge}</header>`}
 function arc(cx,r,w,col,p){const C=2*Math.PI*r,L=(p*C).toFixed(1);return `<circle class="arc" cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${L} ${C.toFixed(1)}" style="--d:${L}" transform="rotate(-90 ${cx} ${cx})"/>`}
 let gidN=0;
-function rings(id,tap){const g='g'+(++gidN);return `<div class="rings">${stats(id).map((s,k)=>{const sub=s.max?'✓ прокачано':s.gold?'выше нормы':`норма ${s.norm}`;const col=s.gold?'var(--gold)':`url(#${g})`;
+function rings(id,tap){const g='g'+(++gidN);return `<div class="rings">${stats(id).map((s,k)=>{const sub=S.training===s.k&&id===S.horse?'идёт курс':s.max?'✓ прокачано':s.gold?'выше нормы':`норма ${s.norm}`;const col=s.gold?'var(--gold)':`url(#${g})`;
  return `<button class="ring press ${s.max?'max':''} ${s.gold?'gold':''}" ${tap?`data-train="${s.k}"`:''} aria-label="${s.name}: ${s.v} ${s.u}, ${sub}"><svg viewBox="0 0 80 80">${k?'':`<defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${getVar('--g1')}"/><stop offset="1" stop-color="${getVar('--g2')}"/></linearGradient></defs>`}<circle cx="40" cy="40" r="34" fill="none" stroke="var(--track)" stroke-width="8"/>${arc(40,34,8,col,Math.min(1,s.p/100))}<text x="40" y="43" text-anchor="middle" class="v">${s.v}</text><text x="40" y="57" text-anchor="middle" class="u">${s.u}</text></svg><b>${s.short}</b><small>${sub}</small></button>`}).join('')}</div>`}
 function getVar(n){return getComputedStyle(document.body).getPropertyValue(n).trim()}
 function evRow([d,m,t,s,p],past){return `<button class="tr ev" ${past?`data-go="report"`:''}><div class="d ${past?'ph':''}" ${past?`style="background-image:url(${M}${p}.jpg);color:#fff"`:''}>${past?ic('photo','width:22px;height:22px'):`<b>${d}</b><small>${m}</small>`}</div><div class="grow"><b>${t}</b><small>${past?d+' '+m+'. ':''}${s}</small></div>${ic('arrow','color:var(--off)')}</button>`}
@@ -512,7 +512,7 @@ V.home=()=>{const h=H(S.horse);return `<div class="top-gap"></div><header class=
  <section class="glass sec"><div class="hd"><h2>Снаряжение</h2><button class="lk" data-shop="Снаряжение">Добавить</button></div>
   <div class="hscroll" style="margin:0 -20px;padding:0 20px">${GEAR.map(([i,n,s])=>`<button class="gear press" data-go="purchases"><div class="im${G3.includes(i)?' has3':''}">${G3.includes(i)?g3(i):ic(i,'width:42px;height:42px;stroke-width:1.5')}</div><b>${n}</b><small>${s}</small></button>`).join('')}</div></section>
  <section class="glass sec"><div class="hd"><h2>Развитие</h2><span class="small">Нажмите на кольцо</span></div>
-  <div class="lvl"><div class="lv"><b>3</b></div><div class="grow"><b style="font-size:17px;font-weight:600">Уровень «Друг»</b><br><span class="small">2 620 из 3 500 XP, дальше скидка 15% в магазине</span></div></div>
+  <div class="lvl"><div class="lv"><b>3</b></div><div class="grow"><b style="font-size:17px;font-weight:600">Уровень «Друг»</b><br><span class="small">${S.xp.toLocaleString('ru')} из 3 500 XP, дальше скидка 15% в магазине</span></div></div>
   ${rings(S.horse,true)}</section>
  <section class="glass sec"><div class="hd"><h2>Трюки</h2><span class="lk">1 из 4</span></div>${TRICKS.map(t=>trickRow(t,S.horse)).join('')}</section>
  <section class="glass sec"><div class="hd"><h2>Ачивки</h2><span class="lk">3 из 8</span></div><div class="medals">${MED.map((m,k)=>`<button class="medal press ${m[2]?'on':''}" data-medal="${k}"><img class="m3" src="${R3[MIMG[k]]}" alt="">${m[0]}</button>`).join('')}</div></section>
@@ -660,8 +660,13 @@ let tt;function toast(m){const t=document.getElementById('toast');t.textContent=
 function sheet(html){const s=document.getElementById('sheet');s.innerHTML='<div class="grab"></div>'+html;s.classList.add('on');document.getElementById('scrim').classList.add('on')}
 function closeSheet(){document.getElementById('sheet').classList.remove('on');document.getElementById('scrim').classList.remove('on');const v=document.querySelector('#sheet video');v&&v.pause()}
 document.getElementById('scrim').onclick=closeSheet;addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
-function trainSheet(k){const s=stats(S.horse).find(x=>x.k===k),gain=Math.min(Math.round(s.norm*.06),s.cap-s.v);
- sheet(`<h2>${s.name}</h2><p class="small">Курс тренировок с Мариной, 3 недели</p><div class="glass sec" style="margin:16px 0;background:#fff"><div class="kv"><div><small>Сейчас</small><b>${s.v} ${s.u}</b></div><div><small>Норма породы</small><b>${s.norm} ${s.u}</b></div><div><small>Предел по ветеринару</small><b>${s.cap} ${s.u}</b></div><div><small>За курс</small><b>${s.max?'—':`+${gain} ${s.u}`}</b></div></div></div>${s.max?`<button class="btn o full" disabled>Прокачано полностью</button>`:`<button class="btn v full press" data-close-toast="Марина начнёт курс завтра, пришлём видео">Начать курс за ${rub(7500)}</button>`}`)}
+function trainSheet(k){const s=stats(S.horse).find(x=>x.k===k),gp=Math.max(0,Math.min(6,s.c-s.p)),gain=Math.round(s.norm*gp/100),cur=S.training&&stats(S.horse).find(x=>x.k===S.training);
+ const btn=s.max?`<button class="btn o full" disabled>Прокачано полностью</button>`:S.training===k?`<button class="btn o full" disabled>Идёт курс, неделя 1 из 3</button>`:cur?`<button class="btn o full" disabled>Сейчас идёт курс «${cur.name}»</button><p class="small" style="margin-top:10px;text-align:center">Тренер ведёт один курс за раз</p>`:`<button class="btn v full press" data-course="${k}">Начать курс за ${rub(7500)}</button>`;
+ sheet(`<h2>${s.name}</h2><p class="small">Курс тренировок с Мариной, 3 недели</p><div class="glass sec" style="margin:16px 0;background:#fff"><div class="kv"><div><small>Сейчас</small><b>${s.v} ${s.u}</b></div><div><small>Норма породы</small><b>${s.norm} ${s.u}</b></div><div><small>Предел по ветеринару</small><b>${s.cap} ${s.u}</b></div><div><small>За курс</small><b>${s.max?'—':`+${gain} ${s.u}`}</b></div></div></div>${btn}`)}
+function startCourse(k){const h=S.horse,s0=stats(h).find(x=>x.k===k),gp=Math.max(0,Math.min(6,s0.c-s0.p));closeSheet();S.training=k;render();toast(`Курс «${s0.name}» начат. Марина пришлёт видео с занятий`);
+ setTimeout(()=>{if(S.training!==k)return;S.boost[h+k]=(S.boost[h+k]||0)+gp;S.training=null;S.xp+=300;render();const s1=stats(h).find(x=>x.k===k);
+  const a=document.querySelector(`.ring[data-train="${k}"] .arc`);if(a){const C=2*Math.PI*34;a.style.setProperty('--d',((Math.min(1,s1.p/100)-Math.min(1,s0.p/100))*C).toFixed(1));document.querySelectorAll('.rings .arc').forEach(x=>{if(x!==a)x.style.animation='none'})}
+  toast(`Курс завершён: ${s1.name.toLowerCase()} теперь ${s1.v} ${s1.u}. +300 XP`)},4500)}
 function medalSheet(k){const m=MED[k];sheet(`<div style="text-align:center"><img class="m3 big ${m[2]?'':'off'}" src="${R3[MIMG[k]]}" alt=""><h2>${m[0]}</h2><p class="small">${m[2]?'Получена':'Пока не получена'}</p></div><div class="glass sec" style="margin-top:16px;background:#fff"><div class="li"><div class="grow"><small>Условие</small><b>${m[3]}</b></div></div><div class="li"><div class="grow"><small>Награда</small><b>${m[4]}</b></div></div>${m[5]?`<div class="li"><div class="grow"><small>Прогресс</small><b>${m[5][0]} из ${m[5][1]}</b></div></div>`:''}</div>`)}
 function trickSheet(){sheet(`<h2>Шаг по команде</h2><p class="small" style="margin-bottom:14px">Освоен 2 октября, занятия вела Марина</p><video class="video" src="${M}arena.mp4" poster="${M}arena.jpg" controls autoplay muted playsinline></video>`)}
 function treatSheet(){sheet(`<h2>Угостить Грома</h2><p class="small" style="margin-bottom:14px">Конюх вручит сегодня и снимет видео</p>${SHOP.filter(p=>p.cat==='Лакомства').map(p=>`<button class="li press" data-close-toast="${p.name.split(',')[0]} для Грома оплачены, видео пришлём вечером"><span class="ic">${ic(p.art)}</span><div class="grow"><b>${p.name}</b><small>${p.info}</small></div><b>${rub(p.price)}</b></button>`).join('')}<button class="btn o full press" style="margin-top:16px" data-shop="Все">Весь магазин</button>`)}
@@ -676,6 +681,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]
  if(d.back!==undefined){history.length>1?history.back():go('home');return}
  if(d.go){go(d.go);return}
  if(d.train){trainSheet(d.train);return}
+ if(d.course){startCourse(d.course);return}
  if(d.medal){medalSheet(+d.medal);return}
  if(d.trick){trickSheet();return}
  if(d.treat!==undefined){treatSheet();return}
