@@ -103,7 +103,11 @@ h3{font-size:16px;font-weight:600}
 .hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:12px}
 .lk{font-size:14px;font-weight:600;color:var(--lk)}
 .txt{font-size:15px;color:var(--ink);line-height:1.55}
-.small{font-size:13px;color:var(--mute)}
+.small{font-size:13px;color:var(--mute);line-height:1.3}
+small{line-height:1.25}
+:where(small,span.small){display:inline-block}
+.price+small,.big+small,.big+.small{display:block;margin-top:4px}
+.deep p{line-height:1.35}
 .btn{height:48px;padding:0 20px;border-radius:var(--rb);font-weight:600;font-size:15px;display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap}
 .btn.w{background:#fff;color:var(--ink)}
 .btn.v{background:var(--acc);color:#fff;box-shadow:0 12px 22px -12px var(--shc)}
