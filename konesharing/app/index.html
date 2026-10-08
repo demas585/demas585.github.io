@@ -28,14 +28,16 @@
  --g1:#FF9A7A;--g2:#7B5CE6;--tint:#F1EDFF;--track:rgba(91,76,230,.12);--gold:#F2A93B;--goldt:#B86E00;--shc:rgba(60,40,140,.45);--top:#2A2468;
  --sky:linear-gradient(180deg,#2A2468 0,#5B4CE6 210px,#C98BD0 360px,#FFD3C2 480px,#F6E9F5 640px,#E9EEFB 1100px,#E3F4EE 1900px,#EFEAFB 100%);
  --skys:linear-gradient(180deg,#2A2468 0,#5B4CE6 160px,#C98BD0 260px,#FFD3C2 340px,#F6E9F5 440px,#E9EEFB 700px,#EFEAFB 100%);
- --deep:linear-gradient(135deg,#2A2468,#5B4CE6 50%,#B45CE0 80%,#FF9A7A)}
+ --deep:linear-gradient(135deg,#2A2468,#5B4CE6 50%,#B45CE0 80%,#FF9A7A);
+ --m1a:#9486EF;--m1b:#D0A6DE;--m2a:#7A6BE8;--m2b:#BC93DA;--m3a:#6455DE;--m3b:#A985D6}
 
 .s5{--f:"Geologica",system-ui,sans-serif;--fd:"Geologica",system-ui,sans-serif;--hw:700;--r:30px;--rb:999px;
  --ink:#1F2622;--mute:#5F6657;--off:#A3A08C;--line:rgba(95,102,87,.18);--acc:#052E2A;--lk:#740F03;
  --g1:#B68B58;--g2:#740F03;--tint:#EFE8DA;--track:rgba(5,46,42,.12);--gold:#B68B58;--goldt:#7D4822;--shc:rgba(5,46,42,.42);--top:#052E2A;
  --sky:linear-gradient(180deg,#052E2A 0,#1D4A40 210px,#919179 360px,#D4C9B5 480px,#EDE6D8 640px,#F1ECE2 1100px,#E9ECE3 1900px,#F3EFE6 100%);
  --skys:linear-gradient(180deg,#052E2A 0,#1D4A40 160px,#919179 260px,#D4C9B5 340px,#EDE6D8 440px,#F1ECE2 700px,#F3EFE6 100%);
- --deep:linear-gradient(135deg,#052E2A,#293855 50%,#7D4822 80%,#B68B58)}
+ --deep:linear-gradient(135deg,#052E2A,#293855 50%,#7D4822 80%,#B68B58);
+ --m1a:#5D7E76;--m1b:#A3A592;--m2a:#40665E;--m2b:#8C9480;--m3a:#2A5048;--m3b:#77846F}
 .sw{position:fixed;z-index:50;top:calc(env(safe-area-inset-top,0px) + 10px);left:50%;transform:translateX(-50%);display:flex;gap:2px;padding:4px;border-radius:999px;background:rgba(30,24,22,.72);backdrop-filter:blur(18px) saturate(1.4);-webkit-backdrop-filter:blur(18px) saturate(1.4);box-shadow:0 10px 30px -10px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.12);transition:transform .25s ease,opacity .25s ease}
 .sw.hide{transform:translate(-50%,-150%);opacity:0}
 .sw button{display:inline-flex;align-items:center;gap:6px;color:rgba(255,255,255,.75);font:600 12.5px "Geologica",system-ui,sans-serif;padding:8px 9px;border-radius:999px;white-space:nowrap}
@@ -326,7 +328,7 @@ h3{font-size:16px;font-weight:600}
 </head><body class="s1">
 <main class="app" id="app"></main>
 <nav class="sw" aria-label="Цветовая схема"><button data-s="4"><i style="background:linear-gradient(135deg,#5B4CE6,#FF9A7A)"></i>Аврора</button><button data-s="5"><i style="background:linear-gradient(135deg,#052E2A,#B68B58)"></i>Marali</button></nav>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="light-bender" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" result="noise"/><feGaussianBlur in="noise" stdDeviation="2" result="blurredNoise"/><feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="50" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="light-bender-s" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="1" result="noise"/><feGaussianBlur in="noise" stdDeviation="1" result="blurredNoise"/><feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="22" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><linearGradient id="mg1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--m1a)"/><stop offset="1" style="stop-color:var(--m1b)"/></linearGradient><linearGradient id="mg2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--m2a)"/><stop offset="1" style="stop-color:var(--m2b)"/></linearGradient><linearGradient id="mg3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--m3a)"/><stop offset="1" style="stop-color:var(--m3b)"/></linearGradient><filter id="light-bender" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="1" result="noise"/><feGaussianBlur in="noise" stdDeviation="2" result="blurredNoise"/><feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="50" xChannelSelector="R" yChannelSelector="G"/></filter><filter id="light-bender-s" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.03" numOctaves="1" result="noise"/><feGaussianBlur in="noise" stdDeviation="1" result="blurredNoise"/><feDisplacementMap in="SourceGraphic" in2="blurredNoise" scale="22" xChannelSelector="R" yChannelSelector="G"/></filter></defs></svg>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><mask id="hm" maskUnits="userSpaceOnUse" x="0" y="0" width="64" height="64"><rect width="64" height="64" fill="#fff"/><g fill="none" stroke="#000" stroke-linecap="round"><path stroke-width="2.4" d="M43.5 15.5c2.6 4.3 4.5 9 6.6 13.5M47 14.5c2.3 4.6 5 9 7.3 13.6"/><path stroke-width="2.2" d="M33.8 42.4c-1.6-3.6-4.8-6-8.6-6.6"/><path stroke-width="2.4" d="M12 41.8c1-1 2.6-1.1 3.6-.1"/><path stroke-width="1.8" d="M10.6 46.4c1.5.4 3 .4 4.4-.1"/><path stroke-width="2" d="M34.8 6l.5 4.6"/></g><path fill="#000" d="M29.4 21.2c2-2.2 5.2-2.4 7.2-.4-1.5 2.6-5 3.3-7.2.4z"/></mask></defs></svg>
 <nav class="tabbar" id="tabbar"></nav>
 <div class="scrim" id="scrim"></div><div class="sheet" id="sheet" role="dialog"></div><div class="toast" id="toast"></div>
@@ -459,9 +461,9 @@ function stats(id){const h=H(id),n=NORM[h.breed],f=PASS[id].f;return ST.map(([k,
 
 /* ---------- кусочки ---------- */
 const ridge=`<div class="ridge" aria-hidden="true">`
- +`<svg data-k=".5" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 70 L30 52 L58 62 L96 18 L118 34 L134 26 L172 64 L214 30 L236 8 L262 40 L290 30 L330 62 L362 36 L400 50 V250 H0Z" fill="#fff" fill-opacity=".16"/><path d="M84 32 L96 18 L106 30 L100 28 L94 34Z M226 20 L236 8 L246 22 L240 20 L234 25Z M354 42 L362 36 L370 42 L364 41Z" fill="#fff" fill-opacity=".45"/></svg>`
- +`<svg data-k=".3" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 92 L36 70 L64 82 L112 44 L150 76 L184 60 L222 84 L268 48 L310 80 L346 64 L400 82 V250 H0Z" fill="#fff" fill-opacity=".2"/></svg>`
- +`<svg data-k=".12" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 116 C30 104 52 100 80 108 C110 117 130 96 162 92 C196 88 214 110 246 106 C280 102 300 86 334 90 C362 93 380 104 400 100 V250 H0Z" fill="#fff" fill-opacity=".28"/></svg></div>`;
+ +`<svg data-k=".5" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 70 L30 52 L58 62 L96 18 L118 34 L134 26 L172 64 L214 30 L236 8 L262 40 L290 30 L330 62 L362 36 L400 50 V250 H0Z" fill="url(#mg1)"/><path d="M84 32 L96 18 L106 30 L100 28 L94 34Z M226 20 L236 8 L246 22 L240 20 L234 25Z M354 42 L362 36 L370 42 L364 41Z" fill="#fff" fill-opacity=".85"/></svg>`
+ +`<svg data-k=".3" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 92 L36 70 L64 82 L112 44 L150 76 L184 60 L222 84 L268 48 L310 80 L346 64 L400 82 V250 H0Z" fill="url(#mg2)"/></svg>`
+ +`<svg data-k=".12" viewBox="0 0 400 250" preserveAspectRatio="none"><path d="M0 116 C30 104 52 100 80 108 C110 117 130 96 162 92 C196 88 214 110 246 106 C280 102 300 86 334 90 C362 93 380 104 400 100 V250 H0Z" fill="url(#mg3)"/></svg></div>`;
 let pxT=0;function parallax(){pxT=0;const y=Math.min(scrollY,700);document.querySelectorAll('.ridge svg').forEach(e=>{e.style.transform=`translate3d(0,${(y*e.dataset.k).toFixed(1)}px,0)`})}
 addEventListener('scroll',()=>{if(!pxT)pxT=requestAnimationFrame(parallax)},{passive:true});
 const mountMark=`<svg class="m" viewBox="0 0 240 90" aria-hidden="true"><path d="M0 90 L40 50 L70 66 L120 14 L160 56 L200 30 L240 60 V90Z" fill="#fff"/></svg>`;
