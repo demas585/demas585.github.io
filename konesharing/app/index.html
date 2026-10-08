@@ -325,7 +325,8 @@ b:has(+br+:is(small,.small)){display:block;line-height:1.3}b+br:has(+:is(small,.
 .glass{--lgb:16px}.tabbar{--lgb:14px}
 /* Android WebView ignores clip-path on backdrop-filter too: the plate itself clips its blurred layer to the rounded shape */
 .glass,.solid,.btn.o,.chip,.chipg,.rb,.gp,.seg,.tr,.gear,.lvl,.medal i,.msg.in{overflow:hidden;border-radius:var(--lgr,var(--r))}
-.an .tabbar::before{inset:0;clip-path:none;filter:none;border-radius:var(--lgr,var(--r))}
+/* Android WebView (Telegram etc.) does not clip the bent backdrop either: plain rounded frosted glass there, like WebKit */
+.an .glass::before,.an .solid::before,.an .btn.o::before,.an .chip::before,.an .chipg::before,.an .rb::before,.an .gp::before,.an .seg::before,.an .tr::before,.an .gear::before,.an .lvl::before,.an .medal i::before,.an .msg.in::before,.an .tabbar::before{inset:0;clip-path:none;filter:none;border-radius:var(--lgr,var(--r))}
 /* WebKit (Safari, all iPhone browsers) ignores clip-path on backdrop-filter and can't bend the backdrop: plain rounded frosted glass there */
 .wk .glass::before,.wk .solid::before,.wk .btn.o::before,.wk .chip::before,.wk .chipg::before,.wk .rb::before,.wk .gp::before,.wk .seg::before,.wk .tr::before,.wk .gear::before,.wk .lvl::before,.wk .medal i::before,.wk .msg.in::before,.wk .tabbar::before{inset:0;clip-path:none;filter:none;border-radius:var(--lgr,var(--r))}
 
