@@ -775,7 +775,7 @@ V.home=()=>{const h=H(S.horse),st=hst(h.id),night=isNight(),wk=night?'stall':WHE
 <div class="stack">
  ${installBanner()}
  ${storiesRow()}
- <div class="cam press${night?' ir':''}" data-go="cams" role="button" aria-label="Открыть камеры">${camMedia(wk)}<div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span>${night?`<span class="gp">${ic('moon','width:14px;height:14px')}ИК-камера</span>`:''}</div>
+ <div class="cam press${night?' ir':''}" data-camgo="${CAMS.findIndex(c=>c[0]===wk)}" role="button" aria-label="Открыть камеры">${camMedia(wk)}<div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span>${night?`<span class="gp">${ic('moon','width:14px;height:14px')}ИК-камера</span>`:''}</div>
   <div class="ov b"><small>${night?`${h.name} спит в деннике<br>ночная камера`:`${st.where}, в кадре<br>2 мин назад`}</small><button class="btn w sm press" data-call>${ic('call')}Позвать к камере</button></div></div>
  <div class="glass stat"><button data-go="health">${ic('heart')}<small>Самочувствие</small><b>${st.wb}</b></button><button data-go="health">${ic(night?'moon':'smile')}<small>Настроение</small><b>${night?'Спит':st.mood}</b></button><button data-go="report">${ic('bowl')}<small>${ml[0]}</small><b>${ml[1]}</b></button></div>
  <div class="glass treat"><button class="tt press" data-treat><small>Угостить</small><b>${nm(h.id,2)}</b></button><div class="tq">${TREATS.map(([k,n])=>`<button class="ti press" data-prod="${k}"><img src="${G3D[k]}" alt=""><span>${n}</span></button>`).join('')}</div></div>
