@@ -560,6 +560,12 @@ label.btn{cursor:pointer}
 .chk.on b{color:var(--mute);text-decoration:line-through}
 .chk b{font-size:15px;font-weight:600;display:block}.chk small{display:block;font-size:12.5px;color:var(--mute)}
 .seg.c4 button{padding:8px 10px}
+/* Плашки на однотонном фоне: чисто белые, без прозрачности и преломления. Стекло остаётся только там, где под плашкой фото, видео, горы шапки
+   или едущий под ней контент (закреплённые панели). Класс .flat ставит flatScan() после каждой отрисовки */
+.flat::before{content:none!important}
+.flat:not(.chip.on,.medal i){--gbg:#fff!important}
+.glass.flat .flat:is(.tr,.gear,.lvl,.seg){--gbg:var(--tint)!important}
+.chip.flat:not(.on){color:var(--ink);text-shadow:none;border-color:var(--line)}
 </style>
 </head><body class="s1">
 <main class="app" id="app"></main>
@@ -1004,6 +1010,7 @@ let enT=0;function render(mode,y){let r=(location.hash.replace(/^#\/?/,'')||'hom
  tb.classList.toggle('tbpop',/^tab/.test(mode||''));
  if(n!=='crew'&&S.pending.length){const q=S.pending.splice(0);q.forEach((x,k)=>setTimeout(()=>banner(...x),700+k*5600))}
  if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}
+ flatScan()
 }
 
 function go(r){if(location.hash==='#/'+r){render('tab');return}location.hash='/'+r}
@@ -1135,6 +1142,25 @@ async function install(){if(BIP){const b=BIP;BIP=null;b.prompt();try{const r=awa
 async function notifOn(){if(!('Notification' in window)){toast('Этот браузер не умеет показывать уведомления');return}let r='denied';try{r=await Notification.requestPermission()}catch(e){}rerender();
  if(r==='granted'){toast('Уведомления включены');hap('ok');if(navigator.serviceWorker)navigator.serviceWorker.ready.then(g=>g.showNotification('Конешеринг',{body:`Готово! Сюда будут приходить видео и новости про ${nm(S.horse,2)}`,icon:'icons/icon-192.png',data:{hash:'#/home'}})).catch(()=>{})}else toast('Уведомления выключены в настройках браузера')}
 /* появление при прокрутке: карточки, которые при открытии экрана ниже его края */
+/* какие плашки стеклянные, а какие белые: стекло только над картинкой (фото, видео, горы шапки) или над контентом, который под ней едет */
+const GLS='.glass,.solid,.btn.o,.chip,.seg,.tr,.gear,.lvl,.medal i,.msg.in',PICS='img,video,canvas,.ph,[style*="background-image"]';
+function flatScan(){for(const root of [document.getElementById('app'),...document.querySelectorAll('.sheet,.pop,.sv')]){if(!root)continue;
+ const els=root.querySelectorAll(GLS);if(!els.length)continue;
+ const pics=[...root.querySelectorAll(PICS)].map(e=>[e,e.getBoundingClientRect()]).filter(x=>x[1].width&&x[1].height);
+ const rg=root.querySelector('.ridge'),G=rg&&rg.getBoundingClientRect(),gb=G?G.top+G.height*.5:0;
+ for(const el of els){const R=el.getBoundingClientRect();if(!R.width)continue;let glass=false;
+  const up=el.parentElement&&el.parentElement.closest(GLS);
+  if(up&&root.contains(up))glass=!up.classList.contains('flat');
+  else if(el.closest('.sky,.hero,.cam,.ph,.sticky,.cbar,.composer,[style*="background-image"]'))glass=true;
+  else if(G&&R.top<gb&&R.bottom>G.top){
+   /* над горами, но только если эту часть плашки не закрывает её же фото во всю ширину */
+   let t=Math.max(R.top,G.top);const e=Math.min(R.bottom,gb);
+   for(const [p,q] of pics)if(el.contains(p)&&q.width>=R.width*.9&&q.top<=t+1&&q.bottom>t)t=q.bottom;
+   glass=e-t>8}
+  else{const A=R.width*R.height*.03;glass=pics.some(([p,q])=>{if(el.contains(p))return false;const w=Math.min(R.right,q.right)-Math.max(R.left,q.left),h=Math.min(R.bottom,q.bottom)-Math.max(R.top,q.top);return w>2&&h>2&&w*h>A})}
+  el.classList.toggle('flat',!glass)}}}
+new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1)))flatScan()}).observe(document.body,{childList:true,subtree:true});
+let flR=0;addEventListener('resize',()=>{if(!flR)flR=requestAnimationFrame(()=>{flR=0;flatScan()})});addEventListener('load',flatScan);try{document.fonts.ready.then(flatScan)}catch(e){}
 let RV=null;function rvSetup(){RV&&RV.disconnect();if(!('IntersectionObserver' in window))return;const H0=innerHeight;RV=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');RV.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
  document.querySelectorAll('#app .stack>*,#app .grid2>*,#app .cgrid>*').forEach(el=>{if(el.getBoundingClientRect().top>H0-20){el.classList.add('rv');RV.observe(el)}})}
 let IO=null;function reveal(mode){const L=document.querySelectorAll('.rings');if(!mode||RM||!('IntersectionObserver' in window)){L.forEach(e=>e.classList.add('in'));return}
