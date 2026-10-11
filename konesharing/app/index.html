@@ -992,12 +992,13 @@ const TABS=[['catalog','Каталог','grid'],['trips','Поездки','mount
 const TAB_OF={album:'home',crew:'profile',home:'home',cams:'home',report:'home',stats:'home',health:'home',shop:'home',purchases:'home',buyout:'home',notif:'home',catalog:'catalog',horse:'catalog',staff:'catalog',tariff:'catalog',gift:'catalog',trips:'trips',tour:'trips',bookings:'trips',club:'club',profile:'profile',payments:'profile'};
 const NO_TABS=['crew','welcome','login','code','pay','paid','book','chat','tour','horse','staff','tariff','buyout','gift'];
 const ROOTS=['home','catalog','trips','club','profile','welcome'];
-let enT=0;function render(mode){let r=(location.hash.replace(/^#\/?/,'')||'home').split('/');let [n,arg]=r;if(!V[n])n='home';
+let enT=0;function render(mode,y){let r=(location.hash.replace(/^#\/?/,'')||'home').split('/');let [n,arg]=r;if(!V[n])n='home';
  if(!S.owner&&['home','cams','report','stats','health','purchases','buyout','profile'].includes(n)){n='welcome'}
  const app=document.getElementById('app');app.className='app'+(ROOTS.includes(n)?'':' subp')+(NO_TABS.includes(n)?' nobar':'');
  app.innerHTML=V[n](arg);
  const tb=document.getElementById('tabbar'),t=TAB_OF[n];tb.style.display=NO_TABS.includes(n)?'none':'grid';
  const TI={catalog:'t_grid',trips:'t_trips',club:'t_club',profile:'t_user'};tb.innerHTML=TABS.map(([k,l,i])=>k==='home'?`<button class="main ${k===t?'on':''}" data-go="${k}" aria-label="${l}"><span class="orb"><img class="t3h" src="${R3.t_horse}" alt=""></span>${l}</button>`:`<button class="${k===t?'on':''}" data-go="${k}"><img class="t3" src="${R3[TI[k]]}" alt="">${l}</button>`).join('');
+ if(y!=null)window.scrollTo(0,y);
  parallax();camHook();reveal(mode);
  if(mode){app.classList.add('enter');clearTimeout(enT);enT=setTimeout(()=>app.classList.remove('enter'),1000);rvSetup()}
  tb.classList.toggle('tbpop',/^tab/.test(mode||''));
@@ -1005,15 +1006,20 @@ let enT=0;function render(mode){let r=(location.hash.replace(/^#\/?/,'')||'home'
  if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}
 }
 
-function go(r){if(location.hash==='#/'+r){render('tab');return}location.hash='/'+r;window.scrollTo(0,0)}
+function go(r){if(location.hash==='#/'+r){render('tab');return}location.hash='/'+r}
 function rerender(){const y=scrollY;render();window.scrollTo(0,y)}
 const DEPTH={cams:1,report:1,stats:1,health:1,shop:1,purchases:2,buyout:1,notif:1,album:1,horse:1,staff:2,tariff:2,pay:3,paid:4,gift:1,tour:1,book:2,bookings:1,payments:1,chat:1,login:1,code:2,crew:1};
 const dep=n=>ROOTS.includes(n)?0:DEPTH[n]||1;
 function navDir(a,b){const x=dep(a),y=dep(b);if(x!==y)return y>x?'fwd':'back';const ti=n=>TABS.findIndex(t=>t[0]===TAB_OF[n]),i=ti(a),j=ti(b);return i<0||j<0||i===j?'tab':j>i?'tabR':'tabL'}
 let vtN=0;function transition(dir,fn){if(!document.startViewTransition){fn();const a=document.getElementById('app');a.classList.add('pg-'+dir);setTimeout(()=>a.classList.remove('pg-'+dir),600);return}const h=document.documentElement;h.dataset.dir=dir;h.classList.add('vt');vtN++;const end=()=>{if(--vtN<=0){vtN=0;h.classList.remove('vt')}};try{document.startViewTransition(fn).finished.finally(end)}catch(e){end();fn()}}
-let lastR=curRoute();
-addEventListener('hashchange',()=>{if(!history.state)history.replaceState({ia:1},'');closeSheet();if(SV)svClose(true);const to=curRoute(),dir=navDir(lastR,to);lastR=to;transition(dir,()=>{render(dir);window.scrollTo(0,0)})});
-try{if(!history.state)history.replaceState({ia:0},'')}catch(e){}
+/* прокрутка запоминается для каждого шага истории и возвращается при «назад» */
+const SCR={},nk=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+function hk(ia){const st=history.state;try{if(!st)history.replaceState({ia,k:nk()},'');else if(st.k==null)history.replaceState({...st,k:nk()},'')}catch(e){}return history.state&&history.state.k}
+function keepY(y){const k=curK;let n=0;(function f(){if(curK!==k||!y)return;const m=document.documentElement.scrollHeight-innerHeight;if(scrollY<y-2&&m>scrollY+2)window.scrollTo(0,Math.min(y,m));if(m<y-2&&n++<40)requestAnimationFrame(f)})()}
+try{history.scrollRestoration='manual'}catch(e){}
+let lastR=curRoute(),curK=hk(0);
+addEventListener('scroll',()=>{SCR[curK]=scrollY},{passive:true});
+addEventListener('hashchange',()=>{const st=history.state,seen=!!(st&&st.k!=null),k=hk(1);closeSheet();if(SV)svClose(true);const to=curRoute(),dir=navDir(lastR,to);lastR=to;transition(dir,()=>{curK=k;const y=seen&&SCR[k]||0;render(dir,y);keepY(y)})});
 
 /* ---------- шторки, тосты ---------- */
 let tt;function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('on'),2400)}
@@ -1180,7 +1186,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]
   S.staffStories.unshift({id:'u'+Date.now(),who,title:'Только что',t:nowT(),h:S.pubH,fresh:1,thumb:pb.vid?pb.thumb||'':pb.url,it:[[pb.url,pb.vid?1:0,()=>txt]]});S.pub=null;S.pubCap='';
   push(`${who==='marina'?'Марина':'Алексей'}: ${pb.vid?'новое видео':'новое фото'}`,`${H(S.pubH).name}: ${txt}`,'home','photo');hap('ok');rerender();toast('Опубликовано, владельцы увидят историю на главной');return}
  if(d.s){setScheme(d.s);return}
- if(d.back!==undefined){if(history.state&&history.state.ia)history.back();else{const to=parentOf();history.replaceState({ia:0},'','#/'+to);closeSheet();lastR=to.split('/')[0];transition('back',()=>{render('back');window.scrollTo(0,0)})}return}
+ if(d.back!==undefined){if(history.state&&history.state.ia)history.back();else{const to=parentOf();history.replaceState({ia:0,k:nk()},'','#/'+to);const k=history.state.k;closeSheet();lastR=to.split('/')[0];transition('back',()=>{curK=k;render('back',0)})}return}
  if(d.go){go(d.go);return}
  if(d.train){trainSheet(d.train);return}
  if(d.course){startCourse(d.course);return}
