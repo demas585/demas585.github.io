@@ -371,7 +371,8 @@ html[data-dir=tab]::view-transition-new(root){animation:vtFadeIn .3s ease both}
 @keyframes vtInL{from{transform:translateX(-18%);opacity:0}}
 @keyframes vtFadeOut{to{opacity:0}}
 @keyframes vtFadeIn{from{opacity:0}}
-.tabbar{view-transition-name:tabbar}.sw{view-transition-name:sw}
+/* имя перехода только на время анимации: постоянный view-transition-name делает таббар backdrop root и гасит преломление */
+html.vt .tabbar{view-transition-name:tabbar}html.vt .sw{view-transition-name:sw}
 .enter .stack>*{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
 .enter .stack>*:nth-child(2){animation-delay:.05s}.enter .stack>*:nth-child(3){animation-delay:.1s}.enter .stack>*:nth-child(4){animation-delay:.15s}.enter .stack>*:nth-child(5){animation-delay:.2s}.enter .stack>*:nth-child(n+6){animation-delay:.25s}
 @keyframes rise{from{opacity:0;transform:translateY(16px)}}
@@ -962,7 +963,7 @@ function rerender(){const y=scrollY;render();window.scrollTo(0,y)}
 const DEPTH={cams:1,report:1,stats:1,health:1,shop:1,purchases:2,buyout:1,notif:1,album:1,horse:1,staff:2,tariff:2,pay:3,paid:4,gift:1,tour:1,book:2,bookings:1,payments:1,chat:1,login:1,code:2,crew:1};
 const dep=n=>ROOTS.includes(n)?0:DEPTH[n]||1;
 function navDir(a,b){const x=dep(a),y=dep(b);return x===y?'tab':y>x?'fwd':'back'}
-function transition(dir,fn){if(RM||!document.startViewTransition){fn();return}document.documentElement.dataset.dir=dir;try{document.startViewTransition(fn)}catch(e){fn()}}
+let vtN=0;function transition(dir,fn){if(RM||!document.startViewTransition){fn();return}const h=document.documentElement;h.dataset.dir=dir;h.classList.add('vt');vtN++;const end=()=>{if(--vtN<=0){vtN=0;h.classList.remove('vt')}};try{document.startViewTransition(fn).finished.finally(end)}catch(e){end();fn()}}
 let lastR=curRoute();
 addEventListener('hashchange',()=>{if(!history.state)history.replaceState({ia:1},'');closeSheet();if(SV)svClose(true);const to=curRoute(),dir=navDir(lastR,to);lastR=to;transition(dir,()=>{render(dir);window.scrollTo(0,0)})});
 try{if(!history.state)history.replaceState({ia:0},'')}catch(e){}
