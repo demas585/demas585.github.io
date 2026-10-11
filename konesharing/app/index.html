@@ -73,7 +73,7 @@ svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stro
 @keyframes draw{from{stroke-dashoffset:var(--d)}}
 .fade{animation:fade .35s ease both}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}}
-@media (prefers-reduced-motion:reduce){.arc,.fade{animation:none}.press:active{transform:none}}
+html.rm .arc,html.rm .fade{animation:none}html.rm .press:active{transform:none}
 .muted{color:var(--mute)}
 .top-gap{height:calc(env(safe-area-inset-top,0px) + 62px)}
 
@@ -298,18 +298,25 @@ b:has(+br+:is(small,.small)){display:block;line-height:1.3}b+br:has(+:is(small,.
 /* переключатель схем */
 
 /* шторка, тост */
-.scrim{position:fixed;inset:0;z-index:60;background:rgba(20,14,12,.45);opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim{position:fixed;inset:0;z-index:60;background:rgba(20,14,12,.45);opacity:0;pointer-events:none;transition:opacity .35s}
 .scrim.on{opacity:1;pointer-events:auto}
 .confetti{position:fixed;inset:0;width:100%;height:100%;z-index:90;pointer-events:none}
 .pop-bg{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:24px;background:rgba(20,12,40,.45);opacity:0;transition:opacity .25s}.pop-bg.on{opacity:1}
-.pop{width:min(100%,340px);background:#FBF8F4;border-radius:28px;padding:22px 22px 18px;text-align:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.45);transform:scale(.85);transition:transform .35s cubic-bezier(.2,1.4,.4,1)}.pop-bg.on .pop{transform:none}
+.pop{width:min(100%,340px);background:#FBF8F4;border-radius:28px;padding:22px 22px 18px;text-align:center;box-shadow:0 30px 60px -20px rgba(0,0,0,.45);transform:translateY(24px) scale(.82);opacity:0;transition:transform .5s cubic-bezier(.2,1.35,.4,1),opacity .25s}.pop-bg.on .pop{transform:none;opacity:1}
+.pop-bg.on .pop>*{animation:rise .5s .12s cubic-bezier(.2,.8,.2,1) both}.pop-bg.on .pop>*:nth-child(2){animation-delay:.17s}.pop-bg.on .pop>*:nth-child(3){animation-delay:.21s}.pop-bg.on .pop>*:nth-child(4){animation-delay:.25s}.pop-bg.on .pop>*:nth-child(n+5){animation-delay:.29s}
+.pop-bg.on .pop img{animation:popImg .7s .1s cubic-bezier(.2,1.5,.4,1) both}@keyframes popImg{from{transform:scale(.4) rotate(-12deg);opacity:0}}
+html.rm .pop{transform:none;transition:opacity .25s}html.rm .pop-bg.on .pop *{animation:fo .3s ease both}
 .pop img{height:150px;display:block;margin:-60px auto 6px;filter:drop-shadow(0 12px 18px rgba(60,40,120,.3))}.pop small{display:block;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--acc)}.pop h2{margin:4px 0 8px}.pop p{margin-bottom:16px}
-.sheet{position:fixed;z-index:61;left:50%;bottom:0;width:min(100vw,440px);transform:translate(-50%,105%);transition:transform .3s cubic-bezier(.2,.8,.2,1);background:#FBF8F4;border-radius:calc(var(--r) + 4px) calc(var(--r) + 4px) 0 0;padding:10px 20px calc(env(safe-area-inset-bottom,0px) + 22px);max-height:88dvh;overflow:auto;box-shadow:0 -20px 50px -20px rgba(0,0,0,.4)}
+.sheet{position:fixed;z-index:61;left:50%;bottom:0;width:min(100vw,440px);transform:translate(-50%,105%);transition:transform .5s cubic-bezier(.32,.72,0,1);background:#FBF8F4;border-radius:calc(var(--r) + 4px) calc(var(--r) + 4px) 0 0;padding:10px 20px calc(env(safe-area-inset-bottom,0px) + 22px);max-height:88dvh;overflow:auto;box-shadow:0 -20px 50px -20px rgba(0,0,0,.4)}
 .sheet.on{transform:translate(-50%,0)}
+.sheet.on>*:not(.grab){animation:rise .5s .08s cubic-bezier(.2,.8,.2,1) both}
+.sheet.on>*:nth-child(3){animation-delay:.13s}.sheet.on>*:nth-child(4){animation-delay:.18s}.sheet.on>*:nth-child(5){animation-delay:.23s}.sheet.on>*:nth-child(n+6){animation-delay:.28s}
+html.rm .sheet{transition-duration:.25s}html.rm .sheet.on>*{animation:fo .3s ease both}
 .sheet .grab{width:44px;height:5px;border-radius:5px;background:var(--line);margin:0 auto 16px}
 .sheet h2{font-size:24px;margin-bottom:6px}
-.toast{position:fixed;z-index:70;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 100px);transform:translate(-50%,20px);opacity:0;transition:.25s;background:var(--acc);color:#fff;padding:12px 18px;border-radius:var(--rb);font-size:14px;font-weight:500;max-width:calc(min(100vw,440px) - 40px);box-shadow:0 14px 30px -12px rgba(0,0,0,.5);pointer-events:none}
+.toast{position:fixed;z-index:70;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 100px);transform:translate(-50%,24px) scale(.9);opacity:0;transition:transform .45s cubic-bezier(.2,1.4,.4,1),opacity .25s;background:var(--acc);color:#fff;padding:12px 18px;border-radius:var(--rb);font-size:14px;font-weight:500;max-width:calc(min(100vw,440px) - 40px);box-shadow:0 14px 30px -12px rgba(0,0,0,.5);pointer-events:none}
 .toast.on{opacity:1;transform:translate(-50%,0)}
+html.rm .toast{transform:translate(-50%,0)}
 .video{width:100%;border-radius:calc(var(--r) - 6px);display:block;background:#000;aspect-ratio:4/5;object-fit:cover}
 .code{display:flex;gap:10px;justify-content:center}
 .code input{width:58px;height:66px;text-align:center;font-size:26px;font-weight:600;border-radius:calc(var(--r) - 8px);border:1px solid var(--line);background:rgba(255,255,255,.85);outline:none}
@@ -362,19 +369,38 @@ b:has(+br+:is(small,.small)){display:block;line-height:1.3}b+br:has(+:is(small,.
 .msg.in{--lgr:18px 18px 18px 6px}
 
 /* ---------- переходы между экранами (View Transitions), появление карточек ---------- */
-::view-transition-old(root),::view-transition-new(root){animation-duration:.34s;animation-timing-function:cubic-bezier(.2,.8,.2,1)}
-html[data-dir=fwd]::view-transition-old(root){animation-name:vtOutL}
-html[data-dir=fwd]::view-transition-new(root){animation-name:vtInR}
-html[data-dir=back]::view-transition-old(root){animation-name:vtOutR}
-html[data-dir=back]::view-transition-new(root){animation-name:vtInL}
-html[data-dir=tab]::view-transition-old(root){animation:vtFadeOut .18s ease both}
-html[data-dir=tab]::view-transition-new(root){animation:vtFadeIn .3s ease both}
-@keyframes vtOutL{to{transform:translateX(-18%);opacity:0}}
-@keyframes vtInR{from{transform:translateX(28%);opacity:0}}
-@keyframes vtOutR{to{transform:translateX(28%);opacity:0}}
-@keyframes vtInL{from{transform:translateX(-18%);opacity:0}}
-@keyframes vtFadeOut{to{opacity:0}}
+/* push/pop как в нативных приложениях: новый экран заезжает справа поверх старого, старый уходит влево и темнеет; назад наоборот.
+   Вкладки: сдвиг на 48px с затуханием в сторону выбранной вкладки. В режиме «меньше движения» только затухание */
+::view-transition-old(root),::view-transition-new(root){mix-blend-mode:normal;animation-duration:.46s;animation-timing-function:cubic-bezier(.32,.72,0,1);animation-fill-mode:both}
+html[data-dir=fwd]::view-transition-old(root){animation-name:vtPushOut}
+html[data-dir=fwd]::view-transition-new(root){animation-name:vtPushIn;box-shadow:-24px 0 48px rgba(20,12,50,.3)}
+html[data-dir=back]::view-transition-old(root){animation-name:vtPopOut;z-index:2;box-shadow:-24px 0 48px rgba(20,12,50,.3)}
+html[data-dir=back]::view-transition-new(root){animation-name:vtPopIn}
+html[data-dir=tabR]::view-transition-old(root){animation:vtAxOutL .42s cubic-bezier(.4,0,.2,1) both}
+html[data-dir=tabR]::view-transition-new(root){animation:vtAxInR .42s cubic-bezier(.2,.8,.2,1) both}
+html[data-dir=tabL]::view-transition-old(root){animation:vtAxOutR .42s cubic-bezier(.4,0,.2,1) both}
+html[data-dir=tabL]::view-transition-new(root){animation:vtAxInL .42s cubic-bezier(.2,.8,.2,1) both}
+html[data-dir=tab]::view-transition-old(root){animation:vtHold .4s both}
+html[data-dir=tab]::view-transition-new(root){animation:vtZoomIn .4s cubic-bezier(.2,.8,.2,1) both}
+html.rm[data-dir]::view-transition-old(root){animation:vtHold .3s both;box-shadow:none;z-index:auto}
+html.rm[data-dir]::view-transition-new(root){animation:vtFadeIn .3s ease both;box-shadow:none}
+@keyframes vtPushOut{to{transform:translateX(-30%);filter:brightness(.82)}}
+@keyframes vtPushIn{from{transform:translateX(100%)}}
+@keyframes vtPopOut{to{transform:translateX(100%)}}
+@keyframes vtPopIn{from{transform:translateX(-30%);filter:brightness(.82)}}
+@keyframes vtAxOutL{to{transform:translateX(-24px)}}
+@keyframes vtAxOutR{to{transform:translateX(24px)}}
+@keyframes vtAxInR{from{transform:translateX(48px);opacity:0}}
+@keyframes vtAxInL{from{transform:translateX(-48px);opacity:0}}
+@keyframes vtFadeOut{to{opacity:0}}@keyframes vtHold{to{opacity:1}}
 @keyframes vtFadeIn{from{opacity:0}}
+@keyframes vtZoomIn{from{transform:scale(.96);opacity:0}}
+/* браузер без View Transitions: анимируем только входящий экран */
+.app.pg-fwd{animation:pgInR .42s cubic-bezier(.32,.72,0,1) both}.app.pg-back{animation:pgInL .42s cubic-bezier(.32,.72,0,1) both}
+.app.pg-tabR{animation:pgAxR .4s cubic-bezier(.2,.8,.2,1) both}.app.pg-tabL{animation:pgAxL .4s cubic-bezier(.2,.8,.2,1) both}.app.pg-tab{animation:vtZoomIn .4s cubic-bezier(.2,.8,.2,1) both}
+html.rm .app[class*=pg-]{animation:vtFadeIn .3s ease both}
+@keyframes pgInR{from{transform:translateX(60%);opacity:0}}@keyframes pgInL{from{transform:translateX(-40%);opacity:0}}
+@keyframes pgAxR{from{transform:translateX(48px);opacity:0}}@keyframes pgAxL{from{transform:translateX(-48px);opacity:0}}
 /* имя перехода только на время анимации: постоянный view-transition-name делает таббар backdrop root и гасит преломление */
 html.vt .tabbar{view-transition-name:tabbar}html.vt .sw{view-transition-name:sw}
 .enter .stack>*{animation:rise .55s cubic-bezier(.2,.8,.2,1) both}
@@ -383,7 +409,14 @@ html.vt .tabbar{view-transition-name:tabbar}html.vt .sw{view-transition-name:sw}
 .rings:not(.in) .arc{animation-play-state:paused}
 .bars i{animation:barup .8s cubic-bezier(.2,.8,.2,1) both}.bars div:nth-child(2) i{animation-delay:.04s}.bars div:nth-child(3) i{animation-delay:.08s}.bars div:nth-child(4) i{animation-delay:.12s}.bars div:nth-child(5) i{animation-delay:.16s}.bars div:nth-child(6) i{animation-delay:.2s}.bars div:nth-child(7) i{animation-delay:.24s}
 @keyframes barup{from{height:0}}
-@media (prefers-reduced-motion:reduce){.enter .stack>*,.bars i{animation:none}.rings:not(.in) .arc{animation-play-state:running}}
+/* карточки ниже первого экрана выезжают, когда до них докрутили */
+.rv:not(.in){opacity:0}
+.rv.in{animation:rvIn .7s cubic-bezier(.2,.8,.2,1) both}
+@keyframes rvIn{from{opacity:0;transform:translateY(28px) scale(.98)}}
+.tabbar.tbpop .on .t3{animation:tabPop .5s cubic-bezier(.2,1.6,.4,1)}.tabbar.tbpop .main.on .orb{animation:orbPop .5s cubic-bezier(.2,1.6,.4,1)}
+@keyframes tabPop{0%{transform:translateY(4px) scale(.7)}}@keyframes orbPop{0%{transform:scale(.86)}}
+@keyframes fo{from{opacity:0}}
+html.rm .enter .stack>*,html.rm .rv.in{animation:fo .35s ease both}html.rm .bars i,html.rm .tabbar.tbpop *{animation:none}html.rm .rings:not(.in) .arc{animation-play-state:running}
 
 /* ---------- пуш-баннер, заставка ---------- */
 .push{position:fixed;z-index:95;left:50%;top:calc(env(safe-area-inset-top,0px) + 8px);width:min(calc(100vw - 20px),420px);transform:translate(-50%,-150%);transition:transform .5s cubic-bezier(.2,1.2,.3,1);display:flex;gap:12px;align-items:center;padding:12px 16px 12px 12px;border-radius:22px;background:rgba(28,22,52,.9);backdrop-filter:blur(20px) saturate(1.5);-webkit-backdrop-filter:blur(20px) saturate(1.5);color:#fff;box-shadow:0 18px 40px -14px rgba(0,0,0,.55);text-align:left}
@@ -413,8 +446,9 @@ html.vt .tabbar{view-transition-name:tabbar}html.vt .sw{view-transition-name:sw}
 .story .sr i{display:block;border-radius:50%;border:3px solid #fff;background:center/cover no-repeat var(--deep);position:relative}
 .story .sr i em{position:absolute;inset:0;display:grid;place-items:center;color:#fff}
 .story .nw{position:relative;margin-top:-17px;margin-bottom:-2px;z-index:1;font-size:9.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;border-radius:6px;background:var(--g2);color:#fff;text-shadow:none;box-shadow:0 0 0 2px #fff}
-.sv{position:fixed;top:0;bottom:0;left:0;right:0;margin:0 auto;max-width:440px;z-index:88;background:#000;opacity:0;transform:scale(.94);transition:opacity .22s,transform .25s cubic-bezier(.2,.8,.2,1);touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden}
-.sv.on{opacity:1;transform:none}
+.sv{position:fixed;top:0;bottom:0;left:0;right:0;margin:0 auto;max-width:440px;z-index:88;background:#000;opacity:0;transform:scale(.2);transform-origin:var(--ox,50%) var(--oy,30%);border-radius:40px;transition:opacity .25s,transform .45s cubic-bezier(.32,.72,0,1),border-radius .45s;touch-action:none;user-select:none;-webkit-user-select:none;overflow:hidden}
+.sv.on{opacity:1;transform:none;border-radius:0}
+html.rm .sv{transform:none}
 .sv .md{position:absolute;inset:0}
 .sv .md img,.sv .md video{width:100%;height:100%;object-fit:cover;display:block}
 .sv::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.5),transparent 20%,transparent 58%,rgba(0,0,0,.7));pointer-events:none;z-index:1}
@@ -602,7 +636,8 @@ const ic=(n,s)=>`<svg class="i" viewBox="0 0 24 24" aria-hidden="true"${s?` styl
 const rub=n=>n.toLocaleString('ru-RU').replace(/ /g,' ')+' ₽';
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const LS={get(k,d){try{const v=localStorage.getItem('kn-'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('kn-'+k,JSON.stringify(v))}catch(e){}}};
-const RM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+/* RM: меньше движения. Берём из системы (на Android включается и режимом энергосбережения), в демо можно включить все анимации */
+const RMsys=matchMedia('(prefers-reduced-motion: reduce)').matches;let RM=RMsys&&!LS.get('anim',0);document.documentElement.classList.toggle('rm',RM);
 function hap(p){if(RM)return;try{navigator.vibrate&&navigator.vibrate(p==='ok'?[14,60,22]:p==='snap'?[8,40,30]:p||8)}catch(e){}}
 function altai(){const d=new Date(Date.now()+7*36e5);return [d.getUTCHours(),d.getUTCMinutes()]} // Горный Алтай, UTC+7
 const hm=(h,m)=>String(h).padStart(2,'0')+':'+String(m).padStart(2,'0');
@@ -913,6 +948,7 @@ V.profile=()=>skyTab('Профиль','Анна Королёва, +7 913 ••�
  <div class="glass sec"><h2 style="margin-bottom:4px">Демонстрация</h2><p class="small" style="margin-bottom:6px">Для показа Marali</p>
   <button class="li press" data-go="crew"><span class="ic">${ic('key')}</span><div class="grow"><b>Панель сотрудника</b><small>Конюх и тренер: заказы, статусы коней, истории</small></div>${ic('arrow','color:var(--off)')}</button>
   <div class="li" style="display:block"><small class="small" style="display:block;margin-bottom:8px">Камера</small><div class="seg c4">${[['auto','Авто'],['day','День'],['night','Ночь'],['off','Нет сети']].map(([k,t])=>`<button class="${S.camMode===k?'on':''}" data-cmode="${k}">${t}</button>`).join('')}</div><small class="small" style="display:block;margin-top:8px">В режиме «Авто» ночь наступает в 22:00 по времени Алтая</small></div>
+  <div class="li" style="display:block"><small class="small" style="display:block;margin-bottom:8px">Анимации</small><div class="seg">${[[0,'Как в системе'],[1,'Все']].map(([k,t])=>`<button class="${(LS.get('anim',0)?1:0)===k?'on':''}" data-anim="${k}">${t}</button>`).join('')}</div><small class="small" style="display:block;margin-top:8px">${RMsys?'В телефоне включено «Убрать анимации» или энергосбережение. В режиме «Как в системе» экраны только плавно проявляются':'Телефон анимации не ограничивает, показываем все'}</small></div>
   <button class="li press" data-reset><span class="ic">${ic('archive')}</span><div class="grow"><b>Сбросить демо</b><small>Заказы, снимки, голос и просмотренные истории</small></div></button></div>
  <button class="btn o full press" data-logout>${ic('out')}Выйти</button></div>`;
 V.payments=()=>skySub('Платежи')+`<div class="stack"><div class="glass sec">${S.pays.map(([t,d,p])=>`<div class="li"><div class="grow"><b>${t}</b><small>${d}</small></div><b>${rub(p)}</b></div>`).join('')}</div></div>`;
@@ -958,7 +994,8 @@ let enT=0;function render(mode){let r=(location.hash.replace(/^#\/?/,'')||'home'
  const tb=document.getElementById('tabbar'),t=TAB_OF[n];tb.style.display=NO_TABS.includes(n)?'none':'grid';
  const TI={catalog:'t_grid',trips:'t_trips',club:'t_club',profile:'t_user'};tb.innerHTML=TABS.map(([k,l,i])=>k==='home'?`<button class="main ${k===t?'on':''}" data-go="${k}" aria-label="${l}"><span class="orb"><img class="t3h" src="${R3.t_horse}" alt=""></span>${l}</button>`:`<button class="${k===t?'on':''}" data-go="${k}"><img class="t3" src="${R3[TI[k]]}" alt="">${l}</button>`).join('');
  parallax();camHook();reveal(mode);
- if(mode==='tab'||mode==='load'){app.classList.add('enter');clearTimeout(enT);enT=setTimeout(()=>app.classList.remove('enter'),1000)}
+ if(mode){app.classList.add('enter');clearTimeout(enT);enT=setTimeout(()=>app.classList.remove('enter'),1000);rvSetup()}
+ tb.classList.toggle('tbpop',/^tab/.test(mode||''));
  if(n!=='crew'&&S.pending.length){const q=S.pending.splice(0);q.forEach((x,k)=>setTimeout(()=>banner(...x),700+k*5600))}
  if(n==='chat'){const m=document.getElementById('msgs');m&&m.lastElementChild&&m.lastElementChild.scrollIntoView({block:'end'})}
 }
@@ -967,8 +1004,8 @@ function go(r){if(location.hash==='#/'+r){render('tab');return}location.hash='/'
 function rerender(){const y=scrollY;render();window.scrollTo(0,y)}
 const DEPTH={cams:1,report:1,stats:1,health:1,shop:1,purchases:2,buyout:1,notif:1,album:1,horse:1,staff:2,tariff:2,pay:3,paid:4,gift:1,tour:1,book:2,bookings:1,payments:1,chat:1,login:1,code:2,crew:1};
 const dep=n=>ROOTS.includes(n)?0:DEPTH[n]||1;
-function navDir(a,b){const x=dep(a),y=dep(b);return x===y?'tab':y>x?'fwd':'back'}
-let vtN=0;function transition(dir,fn){if(RM||!document.startViewTransition){fn();return}const h=document.documentElement;h.dataset.dir=dir;h.classList.add('vt');vtN++;const end=()=>{if(--vtN<=0){vtN=0;h.classList.remove('vt')}};try{document.startViewTransition(fn).finished.finally(end)}catch(e){end();fn()}}
+function navDir(a,b){const x=dep(a),y=dep(b);if(x!==y)return y>x?'fwd':'back';const ti=n=>TABS.findIndex(t=>t[0]===TAB_OF[n]),i=ti(a),j=ti(b);return i<0||j<0||i===j?'tab':j>i?'tabR':'tabL'}
+let vtN=0;function transition(dir,fn){if(!document.startViewTransition){fn();const a=document.getElementById('app');a.classList.add('pg-'+dir);setTimeout(()=>a.classList.remove('pg-'+dir),600);return}const h=document.documentElement;h.dataset.dir=dir;h.classList.add('vt');vtN++;const end=()=>{if(--vtN<=0){vtN=0;h.classList.remove('vt')}};try{document.startViewTransition(fn).finished.finally(end)}catch(e){end();fn()}}
 let lastR=curRoute();
 addEventListener('hashchange',()=>{if(!history.state)history.replaceState({ia:1},'');closeSheet();if(SV)svClose(true);const to=curRoute(),dir=navDir(lastR,to);lastR=to;transition(dir,()=>{render(dir);window.scrollTo(0,0)})});
 try{if(!history.state)history.replaceState({ia:0},'')}catch(e){}
@@ -990,7 +1027,8 @@ function confetti(){const c=document.createElement('canvas'),x=c.getContext('2d'
 function unlockPop(ids){const t=TRICKS.find(x=>x.id===ids[0]),cur=TRICKS.find(x=>tState(x,S.horse)==='learn');const el=document.createElement('div');el.className='pop-bg';
  el.innerHTML=`<div class="pop"><img src="${R3['tr_'+t.id]}" alt=""><small>Новый трюк открыт</small><h2>${t.name}</h2><p class="small">${H(S.horse).name} достиг нужного уровня: ${t.need[2].replace('прыжке','прыжок').replace('силе','сила')}. ${cur?`Начать занятия можно после трюка «${cur.name}».`:'Можно начинать занятия.'}</p>${cur?`<button class="btn v full press" data-pop-close>Отлично</button>`:`<button class="btn v full press" data-learn="${t.id}" data-pop-close>Изучить за ${rub(t.price)}</button><button class="btn o full press" data-pop-close style="margin-top:8px">Позже</button>`}</div>`;
  document.body.appendChild(el);requestAnimationFrame(()=>el.classList.add('on'));confetti();
- el.addEventListener('click',e=>{if(e.target===el||e.target.closest('[data-pop-close]')){el.remove()}})}
+ el.addEventListener('click',e=>{if(e.target===el||e.target.closest('[data-pop-close]'))popClose(el)})}
+function popClose(el){el.classList.remove('on');setTimeout(()=>el.remove(),300)}
 function startCourse(k){const h=S.horse,s0=stats(h).find(x=>x.k===k),gp=Math.max(0,Math.min(6,s0.c-s0.p));closeSheet();S.training=k;render();toast(`Курс «${s0.name}» начат. Марина пришлёт видео с занятий`);
  setTimeout(()=>{if(S.training!==k)return;const u0=unlocked(h);S.boost[h+k]=(S.boost[h+k]||0)+gp;S.training=null;S.xp+=300;render();const s1=stats(h).find(x=>x.k===k);
   const a=document.querySelector(`.ring[data-train="${k}"] .arc`);if(a){const C=2*Math.PI*34;a.style.setProperty('--d',((Math.min(1,s1.p/100)-Math.min(1,s0.p/100))*C).toFixed(1));document.querySelectorAll('.rings .arc').forEach(x=>{if(x!==a)x.style.animation='none'})}
@@ -1031,7 +1069,7 @@ function banner(title,body,go){const p=document.getElementById('push');p.innerHT
 
 /* истории */
 let SV=null;
-function openStory(k){const L=storyList();if(!L[k])return;const el=document.createElement('div');el.className='sv';el.setAttribute('role','dialog');document.body.appendChild(el);SV={L,k,i:0,el,elapsed:0,dur:5000,last:0,paused:false,held:false,raf:0,liked:{}};
+function openStory(k){const L=storyList();if(!L[k])return;const el=document.createElement('div');el.className='sv';{const b=document.querySelector(`[data-story="${k}"]`),w=Math.min(innerWidth,440),x0=(innerWidth-w)/2;if(b){const r=b.getBoundingClientRect();el.style.setProperty('--ox',(r.left+r.width/2-x0)+'px');el.style.setProperty('--oy',(r.top+r.height/2)+'px')}}el.setAttribute('role','dialog');document.body.appendChild(el);SV={L,k,i:0,el,elapsed:0,dur:5000,last:0,paused:false,held:false,raf:0,liked:{}};
  try{history.pushState({...(history.state||{}),sv:1},'')}catch(e){}
  let y0=0,dy=0,hold=0;el.addEventListener('pointerdown',e=>{y0=e.clientY;dy=0;hold=setTimeout(()=>{if(SV){SV.paused=SV.held=true;const v=el.querySelector('video');v&&v.pause()}},220)});
  el.addEventListener('pointermove',e=>{if(!y0)return;dy=Math.max(0,e.clientY-y0);if(dy>8){clearTimeout(hold);el.style.transform=`translateY(${dy}px) scale(${1-dy/2000})`;el.style.transition='none'}});
@@ -1085,6 +1123,9 @@ async function install(){if(BIP){const b=BIP;BIP=null;b.prompt();try{const r=awa
  const ios=document.documentElement.classList.contains('wk');sheet(`<h2>Установить на телефон</h2><p class="small" style="margin-bottom:12px">Конешеринг откроется как обычное приложение: со своей иконкой, на весь экран и без адресной строки</p>${(ios?[['share','Нажмите «Поделиться» внизу экрана'],['plus','Выберите «На экран Домой»'],['check','Нажмите «Добавить»']]:[['list','Откройте меню браузера: три точки или три полоски'],['plus','Выберите «Установить приложение», «Добавить ярлык» или «На главный экран»'],['check','Подтвердите, и иконка с пони появится на рабочем столе']]).map(([i,t],k)=>`<div class="li"><span class="ic">${ic(i)}</span><div class="grow"><small>Шаг ${k+1}</small><b>${t}</b></div></div>`).join('')}<button class="btn v full press" style="margin-top:16px" data-close-toast="Ждём вас на главном экране">Понятно</button>`)}
 async function notifOn(){if(!('Notification' in window)){toast('Этот браузер не умеет показывать уведомления');return}let r='denied';try{r=await Notification.requestPermission()}catch(e){}rerender();
  if(r==='granted'){toast('Уведомления включены');hap('ok');if(navigator.serviceWorker)navigator.serviceWorker.ready.then(g=>g.showNotification('Конешеринг',{body:`Готово! Сюда будут приходить видео и новости про ${nm(S.horse,2)}`,icon:'icons/icon-192.png',data:{hash:'#/home'}})).catch(()=>{})}else toast('Уведомления выключены в настройках браузера')}
+/* появление при прокрутке: карточки, которые при открытии экрана ниже его края */
+let RV=null;function rvSetup(){RV&&RV.disconnect();if(!('IntersectionObserver' in window))return;const H0=innerHeight;RV=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');RV.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
+ document.querySelectorAll('#app .stack>*,#app .grid2>*,#app .cgrid>*').forEach(el=>{if(el.getBoundingClientRect().top>H0-20){el.classList.add('rv');RV.observe(el)}})}
 let IO=null;function reveal(mode){const L=document.querySelectorAll('.rings');if(!mode||RM||!('IntersectionObserver' in window)){L.forEach(e=>e.classList.add('in'));return}
  IO&&IO.disconnect();IO=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');countUp(e.target);IO.unobserve(e.target)}}),{threshold:.3});L.forEach(e=>IO.observe(e))}
 function countUp(el){el.querySelectorAll('text.v').forEach(t=>{const to=+t.textContent;if(!to)return;const t0=performance.now(),D=1150;t.textContent='0';(function f(n){const q=Math.min(1,(n-t0)/D);t.textContent=Math.round(to*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(f)})(t0)})}
@@ -1115,6 +1156,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]
  if(d.albf){S.albF=+d.albf;rerender();return}
  if(d.alb){albSheet(+d.alb);return}
  if(d.share){shareAlb(+d.share);return}
+ if(d.anim!==undefined){LS.set('anim',+d.anim);RM=RMsys&&!+d.anim;document.documentElement.classList.toggle('rm',RM);rerender();toast(+d.anim?'Показываем все анимации':'Анимации как в настройках телефона');return}
  if(d.cmode){S.camMode=d.cmode;LS.set('cam',d.cmode);rerender();toast({auto:'Камера: день и ночь по времени Алтая',day:'Камера: всегда день',night:'Камера: ночь, ИК-режим',off:'Камера: показываем «Нет соединения»'}[d.cmode]);return}
  if(d.reset!==undefined){try{Object.keys(localStorage).filter(k=>k.startsWith('kn-')&&k!=='kn-scheme').forEach(k=>localStorage.removeItem(k))}catch(e){}location.reload();return}
  if(d.crewx!==undefined){go('profile');return}
@@ -1137,7 +1179,7 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]
  if(d.go){go(d.go);return}
  if(d.train){trainSheet(d.train);return}
  if(d.course){startCourse(d.course);return}
- if(d.learn){if(t.closest('.pop-bg'))t.closest('.pop-bg').remove();learnSheet(d.learn);return}
+ if(d.learn){if(t.closest('.pop-bg'))popClose(t.closest('.pop-bg'));learnSheet(d.learn);return}
  if(d.learnGo){S.tst[S.horse+':'+d.learnGo]='learn';S.lessons[S.horse+':'+d.learnGo]=0;hap('ok');closeSheet();render();toast(`Записали на «${TRICKS.find(x=>x.id===d.learnGo).name}». Первое занятие завтра`);return}
  if(d.medal){medalSheet(+d.medal);return}
  if(d.trick){trickSheet(d.trick);return}
