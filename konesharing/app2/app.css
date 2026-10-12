@@ -600,3 +600,11 @@ p,.txt,.cap,.tx small{text-wrap:pretty}
 html.rm :is(#sheet,.sv,.pop,.push,#toast,#topbar,.pop-bg,.rv.in){transition-duration:.15s!important;transition-timing-function:linear!important}
 html.rm .sv,html.rm .pop{transform:none}
 #sheet:focus{outline:none}
+
+/* ---------- предложения аудита 12.10, одобрены ---------- */
+button.chip:not(.tiny-chip){--_size:40px}
+:is(button,.button).small,.acts .button,.tb{--_size:40px}
+.camx{margin-left:auto}
+.ring{position:relative}
+.ring .rp{position:absolute;top:6px;left:50%;margin-left:26px;inline-size:24px;block-size:24px;border-radius:50%;display:grid;place-items:center;background:var(--primary);color:var(--on-primary);box-shadow:0 0 0 3px var(--card);z-index:1}
+.ring .rp i{--_size:16px}

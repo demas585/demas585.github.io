@@ -596,6 +596,19 @@ button.lk::after{content:"";position:absolute;inset:-12px -8px}
 /* «Меньше движения»: бесконечные анимации останавливаются (покачивание, пульс, зерно ИК-камеры, бегущие полоски) */
 html.rm .tqc .tqi img,html.rm .pulse,html.rm .cam.ir::before,html.rm .tqs i.run::after,html.rm .cam .ld,html.rm .g3{animation:none;transition:none}
 html.rm .scrim,html.rm .pop-bg{transition-duration:.2s}
+
+/* ---------- предложения аудита 12.10, одобрены ---------- */
+.tabbar button{font-size:12px}
+.chip{height:44px}
+.hero .rb{--gbg:rgba(20,14,40,.32);border-color:rgba(255,255,255,.35)}
+.camx{position:relative;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;color:#fff;background:rgba(20,14,40,.32);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.camx::after{content:"";position:absolute;inset:-6px}
+.ring{position:relative}
+.ring .rp{position:absolute;top:0;left:50%;margin-left:26px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;background:var(--acc);color:#fff;box-shadow:0 0 0 3px #fff}
+.ring .rp svg{width:12px;height:12px;stroke-width:2.6}
+html[data-dir=tabR]::view-transition-old(root),html[data-dir=tabL]::view-transition-old(root){animation-duration:.3s}
+html[data-dir=tabR]::view-transition-new(root),html[data-dir=tabL]::view-transition-new(root),html[data-dir=tab]::view-transition-old(root),html[data-dir=tab]::view-transition-new(root){animation-duration:.3s}
+.app.pg-tabR,.app.pg-tabL,.app.pg-tab{animation-duration:.3s}
 </style>
 </head><body class="s1">
 <main class="app" id="app"></main>
@@ -666,6 +679,7 @@ const I={
  temp:'<path d="M10 14V5a2 2 0 0 1 4 0v9a4 4 0 1 1-4 0z"/>',
  weight:'<path d="M6 8h12l2 12H4z"/><circle cx="12" cy="5" r="2"/>',
  pulse:'<path d="M3 12h4l2-5 4 10 2-5h6"/>',
+ expand:'<path d="M14 4h6v6M10 20H4v-6M20 4l-6 6M4 20l6-6"/>',
  list:'<path d="M5 7h14M5 12h14M5 17h14"/>',
  moon:'<path d="M19 14.5A7.5 7.5 0 1 1 9.5 5a6 6 0 0 0 9.5 9.5z"/>',
  wifioff:'<path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5 13a10 10 0 0 1 5-2.7M14 10.3A10 10 0 0 1 19 13M2 9.5a15 15 0 0 1 4.5-2.8M10.5 5.6A15 15 0 0 1 22 9.5"/><circle cx="12" cy="19.5" r="1" fill="currentColor" stroke="none"/>',
@@ -807,7 +821,7 @@ function skySub(title,sub,right=''){return `<div class="top-gap"></div><header c
 function arc(cx,r,w,col,p){const C=2*Math.PI*r,L=(p*C).toFixed(1);return `<circle class="arc" cx="${cx}" cy="${cx}" r="${r}" fill="none" stroke="${col}" stroke-width="${w}" stroke-linecap="round" stroke-dasharray="${L} ${C.toFixed(1)}" style="--d:${L}" transform="rotate(-90 ${cx} ${cx})"/>`}
 let gidN=0;
 function rings(id,tap){const g='g'+(++gidN);return `<div class="rings">${stats(id).map((s,k)=>{const sub=S.training===s.k&&id===S.horse?'идёт курс':s.max?'✓ прокачано':s.gold?'выше нормы':`норма ${s.norm}`;const col=s.gold?'var(--gold)':`url(#${g})`;
- return `<button class="ring press ${s.max?'max':''} ${s.gold?'gold':''}" ${tap==='info'?`data-ring="${id}|${s.k}"`:tap?`data-train="${s.k}"`:''} aria-label="${s.name}: ${s.v} ${s.u}, ${sub}"><svg viewBox="0 0 80 80">${k?'':`<defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${getVar('--g1')}"/><stop offset="1" stop-color="${getVar('--g2')}"/></linearGradient></defs>`}<circle cx="40" cy="40" r="34" fill="none" stroke="var(--track)" stroke-width="8"/>${arc(40,34,8,col,Math.min(1,s.p/100))}<text x="40" y="43" text-anchor="middle" class="v">${s.v}</text><text x="40" y="57" text-anchor="middle" class="u">${s.u}</text></svg><b>${s.short}</b><small>${sub}</small></button>`}).join('')}</div>`}
+ return `<button class="ring press ${s.max?'max':''} ${s.gold?'gold':''}" ${tap==='info'?`data-ring="${id}|${s.k}"`:tap?`data-train="${s.k}"`:''} aria-label="${s.name}: ${s.v} ${s.u}, ${sub}"><svg viewBox="0 0 80 80">${k?'':`<defs><linearGradient id="${g}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${getVar('--g1')}"/><stop offset="1" stop-color="${getVar('--g2')}"/></linearGradient></defs>`}<circle cx="40" cy="40" r="34" fill="none" stroke="var(--track)" stroke-width="8"/>${arc(40,34,8,col,Math.min(1,s.p/100))}<text x="40" y="43" text-anchor="middle" class="v">${s.v}</text><text x="40" y="57" text-anchor="middle" class="u">${s.u}</text></svg>${tap===true&&!s.max&&!(S.training===s.k&&id===S.horse)?`<span class="rp" aria-hidden="true">${ic('plus')}</span>`:''}<b>${s.short}</b><small>${sub}</small></button>`}).join('')}</div>`}
 function getVar(n){return getComputedStyle(document.body).getPropertyValue(n).trim()}
 function evRow([d,m,t,s,p],past,k){return `<button class="tr ev" ${past?`data-go="report"`:`data-evd="${k}"`}><div class="d ${past?'ph':''}" ${past?`style="background-image:url(${M}${p}.jpg);color:#fff"`:''}>${past?ic('photo','width:22px;height:22px'):`<b>${d}</b><small>${m}</small>`}</div><div class="grow"><b>${t}</b><small>${past?d+' '+m+'. ':''}${s}</small></div>${ic('arrow','color:var(--off)')}</button>`}
 function events(){return `<div class="seg" style="margin-bottom:12px" data-segev>${['Ближайшие','Прошедшие'].map((t,k)=>`<button class="${S.ev===k?'on':''}" data-ev="${k}">${t}</button>`).join('')}</div>${(S.ev?EVP:EVU).map((e,k)=>evRow(e,S.ev,k)).join('')}`}
@@ -857,14 +871,14 @@ V.home=()=>{const h=H(S.horse),st=hst(h.id),night=isNight(),wk=night?'stall':WHE
 <div class="stack">
  ${installBanner()}
  ${storiesRow()}
- <div class="cam press${night?' ir':''}" data-camgo="${CAMS.findIndex(c=>c[0]===wk)}" role="button" aria-label="Открыть камеры">${camMedia(wk)}<div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span>${night?`<span class="gp">${ic('moon','width:14px;height:14px')}ИК-камера</span>`:''}</div>
+ <div class="cam press${night?' ir':''}" data-camgo="${CAMS.findIndex(c=>c[0]===wk)}" role="button" aria-label="Открыть камеры">${camMedia(wk)}<div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span><span class="row" style="gap:8px">${night?`<span class="gp">${ic('moon','width:14px;height:14px')}ИК-камера</span>`:''}<button class="camx" data-camgo="${CAMS.findIndex(c=>c[0]===wk)}" aria-label="Развернуть камеры">${ic('expand','width:16px;height:16px')}</button></span></div>
   <div class="ov b"><small>${night?`${h.name} спит в деннике<br>ночная камера`:`${st.where}, в кадре<br>2 мин назад`}</small><button class="btn w sm press" data-call>${ic('call')}Позвать к камере</button></div></div>
  <div class="glass stat"><button data-go="health">${ic('heart')}<small>Самочувствие</small><b>${st.wb}</b></button><button data-go="health">${ic(night?'moon':'smile')}<small>Настроение</small><b>${night?'Спит':st.mood}</b></button><button data-go="report">${ic('bowl')}<small>${ml[0]}</small><b>${ml[1]}</b></button></div>
  <div class="glass treat"><button class="tt press" data-treat><small>Угостить</small><b>${nm(h.id,2)}</b></button><div class="tq">${TREATS.map(([k,n])=>`<button class="ti press" data-prod="${k}"><img src="${G3D[k]}" alt=""><span>${n}</span></button>`).join('')}</div></div>
  <div id="tqbox">${tqCards()}</div>
  <section class="glass sec"><div class="hd"><h2>Снаряжение</h2><button class="lk" data-shop="Снаряжение">Добавить</button></div>
   ${h.id==='grom'?`<div class="hscroll" style="margin:0 -20px;padding:0 20px">${GEAR.map(([i,n,s])=>`<button class="gear press" data-go="purchases"><div class="im${G3.includes(i)?' has3':''}">${G3.includes(i)?g3(i):ic(i,'width:42px;height:42px;stroke-width:1.5')}</div><b>${n}</b><small>${s}</small></button>`).join('')}</div>`:`<button class="empty press" data-shop="Снаряжение"><span class="g3w">${g3('halter')}</span><span><b>Пока пусто</b><small>Подберите ${nm(h.id,1)} первое снаряжение: недоуздок, щётки, попону</small></span></button>`}</section>
- <section class="glass sec"><div class="hd"><h2>Развитие</h2><span class="small">Нажмите на кольцо</span></div>
+ <section class="glass sec"><div class="hd"><h2>Развитие</h2></div>
   <div class="lvl"><div class="lv"><b>3</b></div><div class="grow"><b style="font-size:17px;font-weight:600">Уровень «Друг»</b><br><span class="small">${S.xp.toLocaleString('ru')} из 3 500 XP, дальше скидка 15% в магазине</span></div></div>
   ${rings(S.horse,true)}</section>
  <section class="glass sec"><div class="hd"><h2>Трюки</h2><span class="lk">${TRICKS.filter(t=>tState(t,h.id)==='done').length} из ${TRICKS.length}</span></div>${TRICKS.map(t=>trickRow(t,S.horse)).join('')}</section>
