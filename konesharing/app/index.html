@@ -609,6 +609,11 @@ html.rm .scrim,html.rm .pop-bg{transition-duration:.2s}
 html[data-dir=tabR]::view-transition-old(root),html[data-dir=tabL]::view-transition-old(root){animation-duration:.3s}
 html[data-dir=tabR]::view-transition-new(root),html[data-dir=tabL]::view-transition-new(root),html[data-dir=tab]::view-transition-old(root),html[data-dir=tab]::view-transition-new(root){animation-duration:.3s}
 .app.pg-tabR,.app.pg-tabL,.app.pg-tab{animation-duration:.3s}
+
+/* Android: у маленьких круглых плашек (чипы, кнопки-кружки, метки на фото и видео) преломление сдвигало края размытого слоя, и углы выглядели квадратными.
+   На них остаётся ровное матовое стекло по форме плашки, как на iPhone; крупные плашки преломляют как раньше. Радиус пилюль задаётся точно в половину высоты (flatScan) */
+.an :is(.chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i)::before{filter:none}
+.an .camx,.an .seats{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(20,14,40,.5)}
 </style>
 </head><body class="s1">
 <main class="app" id="app"></main>
@@ -1202,7 +1207,9 @@ function flatScan(){for(const root of [document.getElementById('app'),...documen
    for(const [p,q] of pics)if(el.contains(p)&&q.width>=R.width*.9&&q.top<=t+1&&q.bottom>t)t=q.bottom;
    glass=e-t>8}
   else{const A=R.width*R.height*.03;glass=pics.some(([p,q])=>{if(el.contains(p))return false;const w=Math.min(R.right,q.right)-Math.max(R.left,q.left),h=Math.min(R.bottom,q.bottom)-Math.max(R.top,q.top);return w>2&&h>2&&w*h>A})}
-  el.classList.toggle('flat',!glass)}}}
+  el.classList.toggle('flat',!glass)}}
+ /* пилюли: радиус ровно в половину высоты, чтобы размытый слой на Android скруглялся так же, как сама плашка */
+ for(const el of document.querySelectorAll('.chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i')){const h=el.offsetHeight;if(h)el.style.setProperty('--lgr',Math.round(h/2)+'px')}}
 new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1)))flatScan()}).observe(document.body,{childList:true,subtree:true});
 let flR=0;addEventListener('resize',()=>{if(!flR)flR=requestAnimationFrame(()=>{flR=0;flatScan()})});addEventListener('load',flatScan);try{document.fonts.ready.then(flatScan)}catch(e){}
 let RV=null;function rvSetup(){RV&&RV.disconnect();if(!('IntersectionObserver' in window))return;const H0=innerHeight;RV=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');RV.unobserve(e.target)}}),{rootMargin:'0px 0px -8% 0px'});
