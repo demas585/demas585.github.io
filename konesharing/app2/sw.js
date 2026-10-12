@@ -1,5 +1,5 @@
 /* Конешеринг (Material): офлайн-кэш. Страница, скрипты и стили из сети, без сети из кэша; картинки и шрифты из кэша. Видео камер не кэшируются. */
-const V='kn2-v1';
+const V='kn2-v2';
 const CORE=['./','./index.html','./app.js','./app.css','./manifest.webmanifest','./kit/beer.min.css','./kit/beer.min.js','./kit/material-dynamic-colors.min.js','./kit/material-symbols-rounded.woff2','./fonts/roboto-flex-cyrillic-standard-normal.woff2','./fonts/roboto-flex-latin-standard-normal.woff2','./icons/icon-192.png',
  '../media/grom.jpg','../media/buran.jpg','../media/laska.jpg','../media/shaman.jpg','../media/aina.jpg','../media/kedr.jpg','../media/alexey.jpg','../media/marina.jpg','../media/pasture.jpg','../media/stall.jpg','../media/arena.jpg','../media/pov.jpg'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(V).then(c=>c.addAll(CORE)).then(()=>self.skipWaiting()))});

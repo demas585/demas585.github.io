@@ -244,7 +244,7 @@ V.cams=()=>{const c=CAMS[S.cam],lock=c[0]==='pov'&&S.plan!=='own',night=isNight(
 
 V.report=()=>{const id=S.horse,h=H(id);return skySub('Отчёт','6 октября, вторник')+`<div class="stack">
  <div class="card"><div class="who">${photoShape('circle',M+'alexey.jpg','av48')}<span class="tx"><b>Алексей, конюх</b><small>Отчёт в 19:40</small></span></div><p class="txt mt">${h.name} весь день ${fw(id,'был бодрым','была бодрой')}. Утром ходили на пастбище у ручья, после обеда искупались в реке, ${fw(id,'ему','ей')} очень понравилось. ${fw(id,'Съел','Съела')} все яблоки, которые вы прислали. Копыта в порядке.</p></div>
- <div class="bento">${['pov','pasture','stall','arena'].map((p,j)=>`<button class="u wave ph b${j}" data-toast="Фото откроется на весь экран" style="background-image:url(${M}${p}.jpg)"></button>`).join('')}</div>
+ <div class="bento">${['pov','pasture','stall','arena'].map((p,j)=>`<button class="u wave ph b${j}" aria-label="Фото ${j+1} из 4" data-toast="Фото откроется на весь экран" style="background-image:url(${M}${p}.jpg)"></button>`).join('')}</div>
  <div class="kv4">${[['walk','Прошёл','12,4 км','c-pri'],['bowl','Корм','Овёс, сено, яблоки','c-sec'],['weight','Вес',PASS[id].w+' кг','c-sec'],['smile','Настроение','Бодрое','c-ter']].map(([i,a,b,c])=>`<div class="tile ${c}">${ic(i,'small')}<small>${a}</small><b>${b}</b></div>`).join('')}</div>
  <div class="card">${sh('День '+nm(id,0))}<div class="tl">${[['06:30','Осмотр и завтрак'],['09:00','Чистка и выгул на пастбище'],['13:00','Купание в реке'],['16:00','Отдых в деннике'],['19:00','Вечерний осмотр']].map(([t,s])=>`<div><b>${t}</b><small>${s}</small></div>`).join('')}</div></div></div>`};
 
@@ -291,7 +291,7 @@ V.catalog=()=>{const f=['Все','Спокойные','Для прогулок',
  <button class="u wave card giftc" data-go="gift"><span class="shape sided-cookie9 medium c-pri gs"><img src="${G3D.gift}" alt=""></span><span class="tx"><b>Подарить коня</b><small>Сертификат на подписку для близкого</small></span>${ic('arrow')}</button></div>`};
 
 function heroTop(img,right=''){PG={title:'',back:true};return `<section class="hero"><div class="ph" style="background-image:url(${img})"></div><div class="tp">${backBtn}${right||'<span></span>'}</div></section>`}
-V.horse=id=>{const h=H(id),p=PASS[id],mine=S.owner&&S.herd.includes(id);const r=heroTop(M+id+'.jpg',`<button class="ib onimg wave" data-toast="Добавили в избранное">${ic('heart')}</button>`);PG={title:h.name,back:true};return r+`
+V.horse=id=>{const h=H(id),p=PASS[id],mine=S.owner&&S.herd.includes(id);const r=heroTop(M+id+'.jpg',`<button class="ib onimg wave" aria-label="В избранное" data-toast="Добавили в избранное">${ic('heart')}</button>`);PG={title:h.name,back:true};return r+`
 <div class="stack">
  <div class="ttl"><h1 class="disp">${h.name}</h1><p class="sub">${h.breed}, ${h.age} ${h.age<5?'года':'лет'}. ${h.temper}</p><div class="tags">${h.tags.map(t=>`<span class="chip">${t}</span>`).join('')}<span class="chip">${ic('groups','small')}${h.places>1?`До ${h.places} совладельцев${mine?'':`, свободно ${seatInfo(h).free}`}`:'Только личный конь'}</span></div></div>
  <div class="card"><p class="txt">${h.about}</p></div>
@@ -652,3 +652,9 @@ addEventListener('online',()=>{toast('Соединение восстановл�
 if('serviceWorker' in navigator&&location.protocol==='https:'){addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{}));navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.go)location.hash=e.data.go})}
 if(isStandalone()){const sp=document.createElement('div');sp.className='splash';sp.innerHTML=`${shape('sunny','extra c-pri slow-rotate',ic('horse','extra'))}<b>Конешеринг</b><small>парк-отель Marali</small>`;document.body.appendChild(sp);setTimeout(()=>sp.classList.add('out'),800);setTimeout(()=>sp.remove(),1400)}
 applyTheme();render('load');
+
+/* доступность: шторка ведёт себя как модальное окно (подпись по заголовку, фокус внутрь и обратно), скрытый пуш не читается и не ловит фокус */
+(()=>{const s=document.getElementById('sheet'),p=document.getElementById('push');let back=null;s.tabIndex=-1;s.setAttribute('aria-label','Окно');
+ const sync=()=>{const on=s.classList.contains('active');if(on){s.setAttribute('aria-hidden','false');const h=s.querySelector('h2');s.setAttribute('aria-label',h?h.textContent.trim():'Окно');if(!s.contains(document.activeElement)){if(!back)back=document.activeElement;requestAnimationFrame(()=>setTimeout(()=>{if(s.classList.contains('active')&&!s.contains(document.activeElement))s.focus({preventScroll:true})},30))}}else if(back){const b=back;back=null;if(b.isConnected&&b.focus)b.focus({preventScroll:true})}if(!on)s.setAttribute('aria-hidden','true')};
+ sync();new MutationObserver(sync).observe(s,{attributes:true,attributeFilter:['class'],childList:true});
+ const ph=()=>{const on=p.classList.contains('on');p.setAttribute('aria-hidden',on?'false':'true');p.tabIndex=on?0:-1};ph();new MutationObserver(ph).observe(p,{attributes:true,attributeFilter:['class']})})();

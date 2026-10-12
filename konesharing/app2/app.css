@@ -144,7 +144,7 @@ nav.seg>button:last-child{border-start-end-radius:21px!important;border-end-end-
 .ov.b{position:absolute;left:0;right:0;bottom:0;padding:56px 16px 16px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;background:linear-gradient(transparent,rgba(0,0,0,.62));color:#fff;z-index:2;border-radius:0}
 .ov.b small{font-size:12.5px;line-height:1.35;opacity:.92}
 .live,.gp{display:inline-flex;align-items:center;gap:7px;block-size:30px;padding:0 13px;border-radius:15px;font-size:12.5px;font-weight:650;letter-spacing:.01em}
-.live{background:#E5322D;color:#fff}
+.live{background:#D32F2F;color:#fff}
 .gp{background:rgba(10,14,15,.6);color:#fff}
 .gp i{--_size:16px}
 .live .dot{inline-size:8px;block-size:8px;border-radius:50%;background:#fff;animation:blink 1.6s infinite}
@@ -314,7 +314,7 @@ body.dark #sheet{background:var(--surface-container)}
 .two>*{inline-size:auto!important;min-inline-size:0;box-sizing:border-box}
 
 /* снекбар, пуш, всплывашка */
-#toast{inset:auto auto calc(108px + env(safe-area-inset-bottom)) 50%;inline-size:min(92%,520px);border-radius:14px;font-size:14.5px;padding:14px 18px;z-index:200;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:all .35s var(--sps)}
+#toast{inset:auto auto calc(108px + env(safe-area-inset-bottom)) 50%;inline-size:min(92%,520px);border-radius:14px;font-size:14.5px;padding:14px 18px;z-index:200;box-shadow:0 6px 20px rgba(0,0,0,.25);transition:transform .35s var(--sps),opacity .25s var(--ez),visibility .35s}
 body:has(#app.nobar) #toast{bottom:calc(20px + env(safe-area-inset-bottom))}
 .push{all:unset;position:fixed;left:10px;right:10px;top:calc(10px + env(safe-area-inset-top));max-inline-size:540px;margin:0 auto;z-index:210;display:flex;align-items:center;gap:12px;padding:12px 16px 12px 12px;border-radius:26px;background:var(--surface-container-highest);color:var(--on-surface);box-shadow:0 10px 30px rgba(0,0,0,.22);transform:translateY(calc(-100% - 40px));transition:transform .55s var(--sps);cursor:pointer;box-sizing:border-box}
 .push.on{transform:none}
@@ -583,8 +583,20 @@ html[data-dir=tab]::view-transition-new(root){animation:ftIn .32s var(--ez) .07s
 @keyframes ftOut{to{opacity:0}}
 @keyframes ftIn{from{opacity:0;transform:scale(.94)}}
 .pg-fwd{animation:axInR .4s var(--ez)}.pg-back{animation:axInL .4s var(--ez)}.pg-tab{animation:ftIn .32s var(--ez)}
-html.rm *{animation-duration:.01s!important;animation-delay:0s!important}
+html.rm *{animation-duration:.01s!important;animation-delay:0s!important;animation-iteration-count:1!important}
 html.rm ::view-transition-old(root){animation:ftOut .15s linear both!important}html.rm ::view-transition-new(root){animation:ftIn .2s linear both!important}
 html.rm .rv{opacity:1;transform:none}
 @media (min-width:600px){body{--side:18px}}
 .navbar.gone{display:none!important}
+
+/* ---------- аудит 12.10: доступность и отделка без изменения вида ---------- */
+/* цифры одной ширины там, где они меняются; переносы без висячих слов */
+.price,.bignum,.pts,.counter>b,.dt b,.lvs b,.kvs b,.tile b,.poll em,.bars small,.pc b,.seats b{font-variant-numeric:tabular-nums}
+h1,h2,h3,.h2b,.nm{text-wrap:balance}
+p,.txt,.cap,.tx small{text-wrap:pretty}
+/* шторка закрывается быстрее, чем открывается */
+#sheet:not(.active){transition-duration:.36s,.36s;transition-timing-function:var(--ez)}
+/* «Меньше движения»: без пружин и наездов у шторки, историй, всплывашки, пуша и снекбара */
+html.rm :is(#sheet,.sv,.pop,.push,#toast,#topbar,.pop-bg,.rv.in){transition-duration:.15s!important;transition-timing-function:linear!important}
+html.rm .sv,html.rm .pop{transform:none}
+#sheet:focus{outline:none}
