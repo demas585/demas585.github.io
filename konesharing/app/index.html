@@ -612,7 +612,11 @@ html[data-dir=tabR]::view-transition-new(root),html[data-dir=tabL]::view-transit
 
 /* Android: у маленьких круглых плашек (чипы, кнопки-кружки, метки на фото и видео) преломление сдвигало края размытого слоя, и углы выглядели квадратными.
    На них остаётся ровное матовое стекло по форме плашки, как на iPhone; крупные плашки преломляют как раньше. Радиус пилюль задаётся точно в половину высоты (flatScan) */
-.an :is(.chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i)::before{filter:none}
+/* Android-Chromium не скругляет слой backdrop-filter, если у его предка скруглённая обрезка (а у плашки она есть): размытие рисуется прямоугольником поверх скругления.
+   Поэтому у маленьких плашек на Android слоя размытия нет вовсе, остаётся только скруглённая заливка (размытие там было 2px и почти не видно) */
+.an :is(.chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i)::before{content:none}
+.an :is(.chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i){overflow:visible}
+.an .cam .ov .gp,.an .hero .gp,.an .hero .rb{--gbg:rgba(20,14,40,.42)}
 .an .camx,.an .seats{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(20,14,40,.5)}
 
 /* «Угостить»: заголовок сверху, карточки угощений строкой под ним */
