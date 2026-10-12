@@ -614,6 +614,14 @@ html[data-dir=tabR]::view-transition-new(root),html[data-dir=tabL]::view-transit
    На них остаётся ровное матовое стекло по форме плашки, как на iPhone; крупные плашки преломляют как раньше. Радиус пилюль задаётся точно в половину высоты (flatScan) */
 .an :is(.chip,.chipg,.rb,.gp,.seg,.btn.o,.medal i)::before{filter:none}
 .an .camx,.an .seats{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(20,14,40,.5)}
+
+/* «Угостить»: заголовок сверху, карточки угощений строкой под ним */
+.treat{display:block;padding:20px}
+.treat .hd{margin-bottom:14px}
+.treat .tq{gap:8px}
+.treat .ti{padding:10px 4px 8px;gap:6px}
+.treat .ti img{width:56px;height:56px}
+.treat .ti span{font-size:12.5px;color:var(--ink);font-weight:500}
 </style>
 </head><body class="s1">
 <main class="app" id="app"></main>
@@ -879,7 +887,7 @@ V.home=()=>{const h=H(S.horse),st=hst(h.id),night=isNight(),wk=night?'stall':WHE
  <div class="cam press${night?' ir':''}" data-camgo="${CAMS.findIndex(c=>c[0]===wk)}" role="button" aria-label="Открыть камеры">${camMedia(wk)}<div class="ov t"><span class="gp"><i class="dot"></i>В эфире</span><span class="row" style="gap:8px">${night?`<span class="gp">${ic('moon','width:14px;height:14px')}ИК-камера</span>`:''}<button class="camx" data-camgo="${CAMS.findIndex(c=>c[0]===wk)}" aria-label="Развернуть камеры">${ic('expand','width:16px;height:16px')}</button></span></div>
   <div class="ov b"><small>${night?`${h.name} спит в деннике<br>ночная камера`:`${st.where}, в кадре<br>2 мин назад`}</small><button class="btn w sm press" data-call>${ic('call')}Позвать к камере</button></div></div>
  <div class="glass stat"><button data-go="health">${ic('heart')}<small>Самочувствие</small><b>${st.wb}</b></button><button data-go="health">${ic(night?'moon':'smile')}<small>Настроение</small><b>${night?'Спит':st.mood}</b></button><button data-go="report">${ic('bowl')}<small>${ml[0]}</small><b>${ml[1]}</b></button></div>
- <div class="glass treat"><button class="tt press" data-treat><small>Угостить</small><b>${nm(h.id,2)}</b></button><div class="tq">${TREATS.map(([k,n])=>`<button class="ti press" data-prod="${k}"><img src="${G3D[k]}" alt=""><span>${n}</span></button>`).join('')}</div></div>
+ <div class="glass treat"><div class="hd"><h2>Угостить</h2><button class="lk" data-treat>Все угощения</button></div><div class="tq">${TREATS.map(([k,n])=>`<button class="ti press" data-prod="${k}"><img src="${G3D[k]}" alt=""><span>${n}</span></button>`).join('')}</div></div>
  <div id="tqbox">${tqCards()}</div>
  <section class="glass sec"><div class="hd"><h2>Снаряжение</h2><button class="lk" data-shop="Снаряжение">Добавить</button></div>
   ${h.id==='grom'?`<div class="hscroll" style="margin:0 -20px;padding:0 20px">${GEAR.map(([i,n,s])=>`<button class="gear press" data-go="purchases"><div class="im${G3.includes(i)?' has3':''}">${G3.includes(i)?g3(i):ic(i,'width:42px;height:42px;stroke-width:1.5')}</div><b>${n}</b><small>${s}</small></button>`).join('')}</div>`:`<button class="empty press" data-shop="Снаряжение"><span class="g3w">${g3('halter')}</span><span><b>Пока пусто</b><small>Подберите ${nm(h.id,1)} первое снаряжение: недоуздок, щётки, попону</small></span></button>`}</section>
