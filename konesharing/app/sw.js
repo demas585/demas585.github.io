@@ -1,5 +1,5 @@
 /* Конешеринг: офлайн-кэш. Страница берётся из сети, при отсутствии сети из кэша; фото, иконки и шрифты из кэша. Видео камер не кэшируются: без сети приложение показывает «Нет соединения». */
-const V='kn-v24';
+const V='kn-v25';
 const CORE=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/apple-touch-icon.png',
  '../media/grom.jpg','../media/buran.jpg','../media/laska.jpg','../media/shaman.jpg','../media/aina.jpg','../media/kedr.jpg',
  '../media/alexey.jpg','../media/marina.jpg','../media/pasture.jpg','../media/stall.jpg','../media/arena.jpg','../media/pov.jpg'];
