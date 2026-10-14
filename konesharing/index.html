@@ -122,8 +122,7 @@ td b{font-weight:600}
 /* медиа */
 .media{display:grid;gap:var(--s3);align-items:start}
 .vwrap{max-width:340px;margin:0 auto;width:100%}
-@media(max-width:719.98px){.only-d{display:none!important}}
-@media(min-width:720px){.only-m{display:none!important}.media{grid-template-columns:2.2fr 1fr}}
+@media(min-width:720px){.media{grid-template-columns:minmax(0,340px) 1fr;align-items:start}}
 .alt{margin-top:var(--s2);font-size:var(--fs-12);line-height:var(--lh-12);color:var(--mute)}
 video{display:block;width:100%;border-radius:var(--r-l);background:#1C1634;box-shadow:0 16px 32px -16px rgba(42,36,104,.45)}
 .mapbox{display:block;background:#fff;border-radius:var(--r-l);padding:var(--s3);box-shadow:0 8px 24px -16px var(--shc)}
@@ -178,7 +177,7 @@ footer{padding:var(--s5) 0 var(--s6);color:var(--mute);font-size:var(--fs-12);li
  <div class="wrap">
   <div class="eyebrow">Парк-отель Marali · Горный Алтай</div>
   <h1>Конешеринг</h1>
-  <p class="lead">Сервис, где горожанин становится совладельцем настоящего алтайского коня: смотрит на него по камере, заботится, тренирует его вместе с тренером Marali и приезжает в гости. Здесь собран весь проект, от идеи до работающего приложения. На телефоне страница показывает вертикальные версии материалов, на компьютере горизонтальные.</p>
+  <p class="lead">Сервис, где горожанин становится совладельцем настоящего алтайского коня: смотрит на него по камере, заботится, тренирует его вместе с тренером Marali и приезжает в гости. Здесь собран весь проект, от идеи до работающего приложения.</p>
   <div class="cta">
    <a class="btn pri" href="app/">Открыть приложение <svg width="20" height="20" aria-hidden="true"><use href="#i-arrow"/></svg></a>
    <a class="btn sec" href="#showcase">Шоурил и презентация</a>
@@ -196,10 +195,10 @@ footer{padding:var(--s5) 0 var(--s6);color:var(--mute);font-size:var(--fs-12);li
  <ol class="tl">
   <li><div class="card"><div class="d">Шаг 1 · готово</div><h3>Проработка идеи</h3><p>Суть сервиса, аудитория, модель развития коня, тарифы и экономика.</p><div class="links"><a class="chip" href="#idea">Идея</a><a class="chip" href="#money">Тарифы и экономика</a></div></div></li>
   <li><div class="card"><div class="d">Шаг 2 · готово</div><h3>Структура приложения и майнд-карта</h3><p>Разделы, экраны и роли персонала, собранные в одну карту.</p><div class="links"><a class="chip" href="#structure">Майнд-карта</a></div></div></li>
-  <li><div class="card"><div class="d">Шаг 3 · готово</div><h3>Кликабельный прототип и его презентация</h3><p>Проверка сценариев на телефоне, презентация сервиса и инструкция по прототипу.</p><div class="links"><a class="chip" href="#prototype">Прототип</a><a class="chip only-m" href="summary/files/guide-prototype-mobile.pdf"><svg><use href="#i-pdf"/></svg>Инструкция</a><a class="chip only-d" href="summary/files/guide-prototype.pdf"><svg><use href="#i-pdf"/></svg>Инструкция</a><a class="chip only-m" href="summary/files/presentation-mobile.pdf"><svg><use href="#i-pdf"/></svg>Презентация</a><a class="chip only-d" href="summary/files/presentation.pdf"><svg><use href="#i-pdf"/></svg>Презентация</a></div></div></li>
+  <li><div class="card"><div class="d">Шаг 3 · готово</div><h3>Кликабельный прототип и его презентация</h3><p>Проверка сценариев на телефоне, презентация сервиса и инструкция по прототипу.</p><div class="links"><a class="chip" href="#prototype">Прототип</a><a class="chip" href="summary/files/guide-prototype-mobile.pdf"><svg><use href="#i-pdf"/></svg>Инструкция</a><a class="chip" href="summary/files/presentation-mobile.pdf"><svg><use href="#i-pdf"/></svg>Презентация</a></div></div></li>
   <li><div class="card"><div class="d">Шаг 4 · дизайн-система готова, айдентика следующая</div><h3>Цветовые схемы, айдентика, дизайн-система</h3><p>Стиль «Аврора», четыре цветовые темы и единые правила размеров, шрифтов и цветов.</p><div class="links"><a class="chip" href="#design">Дизайн</a></div></div></li>
   <li><div class="card"><div class="d">Шаг 5 · демо готово</div><h3>Разработка приложения</h3><p>Работающее демо со всеми разделами для клиента и экраном персонала.</p><div class="links"><a class="chip" href="#app">Экраны</a><a class="chip" href="app/"><svg><use href="#i-phone"/></svg>Открыть приложение</a></div></div></li>
-  <li class="now"><div class="card"><div class="d">Шаг 6</div><h3>Презентация приложения и шоурил</h3><p>Инструкция по приложению и минутный ролик. Обновим после брифа с Marali.</p><div class="links"><a class="chip" href="#showcase"><svg><use href="#i-play"/></svg>Шоурил</a><a class="chip only-m" href="summary/files/guide-mobile.pdf"><svg><use href="#i-pdf"/></svg>Инструкция</a><a class="chip only-d" href="summary/files/guide.pdf"><svg><use href="#i-pdf"/></svg>Инструкция</a></div></div></li>
+  <li class="now"><div class="card"><div class="d">Шаг 6</div><h3>Презентация приложения и шоурил</h3><p>Инструкция по приложению и минутный ролик. Обновим после брифа с Marali.</p><div class="links"><a class="chip" href="#showcase"><svg><use href="#i-play"/></svg>Шоурил</a><a class="chip" href="summary/files/guide-mobile.pdf"><svg><use href="#i-pdf"/></svg>Инструкция</a></div></div></li>
  </ol>
 </div></section>
 
@@ -259,12 +258,10 @@ footer{padding:var(--s5) 0 var(--s6);color:var(--mute);font-size:var(--fs-12);li
  <p>Прототип проверяет структуру и логику на телефоне до дизайна: каталог, покупку, развитие коня, поездки, клуб. Внешний вид в нём ранний, он нужен только для сценариев.</p></div>
  <div class="files" style="max-width:720px">
   <a class="file" href="prototype/"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Кликабельный прототип</b><span>Открывается в браузере, лучше с телефона</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
-  <a class="file only-m" href="summary/files/guide-prototype-mobile.pdf"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Инструкция по прототипу</b><span>PDF для телефона, 18 вертикальных слайдов · 6,1 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
-  <a class="file only-d" href="summary/files/guide-prototype.pdf"><span class="ic"><svg><use href="#i-pdf"/></svg></span><div><b>Инструкция по прототипу</b><span>PDF, 18 слайдов, скриншоты всех разделов · 6,5 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
-  <a class="file only-m" href="summary/files/presentation-mobile.pdf"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Презентация сервиса</b><span>PDF для телефона, 25 вертикальных слайдов · 9,1 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
-  <a class="file only-d" href="summary/files/presentation.pdf"><span class="ic"><svg><use href="#i-pdf"/></svg></span><div><b>Презентация сервиса</b><span>PDF, 25 слайдов · 9,8 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
- </div>
- <p class="alt only-m">Для компьютера: <a href="summary/files/guide-prototype.pdf">горизонтальная инструкция</a> (PDF, 6,5 МБ) и <a href="summary/files/presentation.pdf">горизонтальная презентация</a> (PDF, 9,8 МБ).</p><p class="alt only-d">Для телефона: <a href="summary/files/guide-prototype-mobile.pdf">вертикальная инструкция</a> (PDF, 6,1 МБ) и <a href="summary/files/presentation-mobile.pdf">вертикальная презентация</a> (PDF, 9,1 МБ).</p>
+  <a class="file" href="summary/files/guide-prototype-mobile.pdf"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Инструкция по прототипу</b><span>PDF, 18 вертикальных слайдов · 6,1 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
+    <a class="file" href="summary/files/presentation-mobile.pdf"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Презентация сервиса</b><span>PDF, 25 вертикальных слайдов · 9,1 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
+   </div>
+ 
  <p class="small" style="margin-top:var(--s3)">Прототип и презентация обновлены под актуальные тарифы: «Друг», «Совладелец», «Владелец». В прототипе осталась отдельная вкладка «Развитие», а в приложении она стала блоком на экране «Мой конь».</p>
 </div></section>
 
@@ -334,14 +331,11 @@ footer{padding:var(--s5) 0 var(--s6);color:var(--mute);font-size:var(--fs-12);li
 <section id="showcase"><div class="wrap">
  <div class="sh"><div class="eyebrow">Шаг 6 · Презентация</div><h2>Презентация приложения и шоурил</h2></div>
  <div class="media">
-  <div class="vwrap only-m"><video controls preload="none" playsinline poster="summary/video/poster-9x16.jpg" src="summary/video/reel-9x16.mp4" aria-label="Шоурил Конешеринга, вертикальный, 60 секунд" width="720" height="1280" style="aspect-ratio:9/16;height:auto"></video>
-   <p class="small" style="margin-top:var(--s2)">Шоурил, 60 секунд, со звуком.</p></div>
-  <div class="only-d"><video controls preload="none" playsinline poster="summary/video/poster.jpg" src="summary/video/reel-16x9.mp4" aria-label="Шоурил Конешеринга, 60 секунд" width="1280" height="720" style="aspect-ratio:16/9;height:auto"></video>
+  <div class="vwrap"><video controls preload="none" playsinline poster="summary/video/poster-9x16.jpg" src="summary/video/reel-9x16.mp4" aria-label="Шоурил Конешеринга, вертикальный, 60 секунд" width="720" height="1280" style="aspect-ratio:9/16;height:auto"></video>
    <p class="small" style="margin-top:var(--s2)">Шоурил, 60 секунд, со звуком.</p></div>
   <div class="files">
-   <a class="file only-m" href="summary/files/guide-mobile.pdf"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Инструкция по приложению</b><span>PDF для телефона, 26 вертикальных слайдов · 8,8 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
-   <a class="file only-d" href="summary/files/guide.pdf"><span class="ic"><svg><use href="#i-pdf"/></svg></span><div><b>Инструкция по приложению</b><span>PDF, 26 слайдов · 9,6 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
-   <p class="alt only-m">Для компьютера: <a href="summary/files/guide.pdf">горизонтальная инструкция</a> (PDF, 9,6 МБ) и <a href="summary/video/reel-16x9.mp4">горизонтальный шоурил</a>.</p><p class="alt only-d">Для телефона: <a href="summary/files/guide-mobile.pdf">вертикальная инструкция</a> (PDF, 8,8 МБ) и <a href="summary/video/reel-9x16.mp4">вертикальный шоурил</a>.</p>
+   <a class="file" href="summary/files/guide-mobile.pdf"><span class="ic"><svg><use href="#i-phone"/></svg></span><div><b>Инструкция по приложению</b><span>PDF, 26 вертикальных слайдов · 8,8 МБ</span></div><svg class="go" width="20" height="20"><use href="#i-arrow"/></svg></a>
+      
   </div>
  </div>
  <p class="small" style="margin-top:var(--s3)">Инструкция снята с версии приложения от 14 октября. Шоурил пока показывает версию от 10 октября, его обновление готовится.</p>
