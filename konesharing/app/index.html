@@ -648,7 +648,7 @@ html.rm .tour .hole,html.rm .tour .tip{transition:none}
 <nav class="tabbar" id="tabbar"></nav>
 <div class="scrim" id="scrim"></div><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Окно" tabindex="-1"></div><button class="push" id="push" aria-live="polite"></button>
 <script>
-const M='../media/';const BUILD='14.10 · 17:10';
+const M='../media/';const BUILD='14.10 · 22:30';
 const G3D={halter:'img/halter.webp',brush:'img/brush.webp',blanket:'img/blanket.webp',plate:'img/plate.webp',bridle:'img/bridle.webp',pad:'img/pad.webp',boots:'img/boots.webp',flymask:'img/flymask.webp',rope:'img/rope.webp',saddle:'img/saddle.webp',apples:'img/apples.webp',carrot:'img/carrot.webp',treats:'img/treats.webp',hay:'img/hay.webp',oats:'img/oats.webp',vit:'img/vit.webp',hoof:'img/hoof.webp',spa:'img/spa.webp',teeth:'img/teeth.webp',gift:'img/gift.webp',ball:'img/ball.webp',salt:'img/salt.webp'};
 const G3=Object.keys(G3D).filter(k=>k!=='gift');const G3S=['apples','carrot','treats','hay','oats','vit','hoof','spa','teeth','ball','salt'];const g3=(k,c='')=>`<img class="g3 ${c}" src="${G3D[k]}" alt="" loading="lazy">`;
 const I={
@@ -765,9 +765,6 @@ const TRICKS=[
  {id:'spanish',name:'Испанский шаг',state:'lock',price:12000,lessons:7,need:['power',260,'силе 260 кг']},
  {id:'lie',name:'Лечь по команде',state:'lock',price:10000,lessons:6,need:['climb',1050,'проходимости 1050 м']}];
 const R3={"tr_hoof": "img/tr_hoof.webp","tr_smile": "img/tr_smile.webp","tr_lie": "img/tr_lie.webp","tr_step": "img/tr_step.webp", "tr_bow": "img/tr_bow.webp", "tr_pole": "img/tr_pole.webp", "tr_spanish": "img/tr_spanish.webp", "m_star": "img/m_star.webp", "m_cal": "img/m_cal.webp", "m_eye": "img/m_eye.webp", "m_horse": "img/m_horse.webp", "m_moon": "img/m_moon.webp", "m_mount": "img/m_mount.webp", "m_shoe": "img/m_shoe.webp", "m_cup": "img/m_cup.webp", "t_grid": "img/t_grid.webp", "t_trips": "img/t_trips.webp", "t_club": "img/t_club.webp", "t_user": "img/t_user.webp", "t_horse": "img/t_horse.webp"};
-/* стиль иллюстраций: «Мультяшный» (img/) или «Реалистичный» (img/real/); медали, снаряжение и угощения общие для обоих */
-const REAL=['t_grid','t_horse','tr_bow','t_trips','t_club','t_user','tr_step','tr_hoof','tr_smile','tr_pole','tr_spanish','tr_lie'];
-function applyIll(){for(const k in R3)R3[k]=(S.ill==='real'&&REAL.includes(k)?'img/real/':'img/')+k+'.webp'}
 const MIMG=['m_star','m_cal','m_eye','m_horse','m_moon','m_mount','m_shoe','m_cup'];
 const MED=[['Начало','star',1,'Оформить первую подписку','Скидка 5% на первый визит'],['Неделя','cal',1,'Заходить в приложение 7 дней подряд','+100 XP'],['Зритель','eye',1,'Посмотреть 10 часов эфира','+150 XP'],['Артист','play',0,'Выучить первый трюк','−10% на визит и +250 XP',[2,4]],['Месяц','sun',0,'Месяц с конём без перерыва','Табличка на денник в подарок',[24,30]],['Кержак','mount',0,'Пройти тур «Кержаки» на своём коне','Именная попона',[0,1]],['Путник','shoe',0,'Конь прошёл 500 км','+300 XP',[312,500]],['Чемпион','trophy',0,'Войти в тройку рейтинга клуба','Ужин в ресторане Marali',[4,3]]];
 const SHOP=[
@@ -836,7 +833,7 @@ const DEMO_OWN={gear:{grom:GEAR.map(([i,,st])=>[i,st])},herd:['grom'],horse:'gro
 /* состояние владельца хранится в браузере (kn-st): купленные кони, тарифы, платежи, заказы, брони, прогресс; «Сбросить демо» его стирает */
 const ST_KEYS=['herd','horse','owner','plan','subs','months','pays','orders','bookings','xp','boost','tst','lessons','tdate','gear'];
 function saveSt(){if(window.knReset)return;const o={};for(const k of ST_KEYS)o[k]=S[k];LS.set('st',o)}
-Object.assign(S,{tq:LS.get('tq',[]),tqN:LS.get('tqn',0),album:LS.get('album',[]),vote:LS.get('vote',null),seen:LS.get('seen',[]),camMode:LS.get('cam','auto'),catV:LS.get('catv',0),ill:LS.get('ill','toon'),albF:0,qz:[],crewUsed:false,crewRole:0,crewTab:0,lessons:{'grom:bow':2},tdate:{},st:{},chk:{0:1,1:1,2:1},unread:1,pending:[],staffStories:[],pub:null,pubH:'grom',pubCap:'',
+Object.assign(S,{tq:LS.get('tq',[]),tqN:LS.get('tqn',0),album:LS.get('album',[]),vote:LS.get('vote',null),seen:LS.get('seen',[]),camMode:LS.get('cam','auto'),catV:LS.get('catv',0),albF:0,qz:[],crewUsed:false,crewRole:0,crewTab:0,lessons:{'grom:bow':2},tdate:{},st:{},chk:{0:1,1:1,2:1},unread:1,pending:[],staffStories:[],pub:null,pubH:'grom',pubCap:'',
  notifs:[['apple','Гром получил яблоки','Алексей прислал видео','18:20','report'],['star','Занятие по поклону','Второе из четырёх прошло отлично','16:45','home'],['doc','Отчёт за 6 октября готов','Купание, 12,4 км за день','вчера','report'],['cal','Осмотр ветеринара в субботу','10 октября в 11:00','вчера','health'],['club','Новость клуба','В табуне пополнение, голосуйте за имя','3 окт','club']]});
 {const o=LS.get('st',null);if(o&&Array.isArray(o.herd)&&o.herd.every(id=>H(id))){for(const k of ST_KEYS)if(o[k]!==undefined)S[k]=o[k];if(!S.herd.includes(S.horse))S.horse=S.herd[0]||'grom';if(o.gear===undefined&&S.herd.includes('grom'))S.gear={grom:GEAR.map(([i,,st])=>[i,st])}}}
 S.tq.slice().reverse().forEach(o=>{const p=SHOP.find(x=>x.id===o.p);if(p){S.orders.unshift([p.name,'7 октября',p.price,'Оформлен',o.n]);S.pays.unshift([p.name,'7 октября',p.price])}});
@@ -1047,7 +1044,6 @@ V.profile=()=>skyTab('Профиль','Анна Королёва, +7 913 ••�
   <div class="row" style="margin-top:var(--s3)"><button class="btn o sm grow" data-go="tariff/${id}">Сменить тариф</button><button class="btn o sm grow" data-pause="${id}">${ic('pause','width:16px;height:16px')}${pz?'Продолжить':'Пауза'}</button></div></div>`}).join('')}
  <div class="glass sec">${[['bell','Уведомления','notif'],['card','История платежей','payments'],['chat','Чат с менеджером','chat'],['cal','Мои брони','bookings'],['gift','Подарить сертификат','gift']].map(([i,t,g])=>`<button class="li" data-go="${g}"><span class="ic">${ic(i)}</span><b class="grow">${t}</b>${ic('arrow','color:var(--off)')}</button>`).join('')}</div>
  <div class="glass sec"><h2 style="margin-bottom:var(--s3)">Цветовая схема</h2><div class="swatch">${[['4','Аврора','linear-gradient(160deg,#2A2468,#5B4CE6,#C98BD0,#FFD3C2)'],['5','Marali','linear-gradient(160deg,#052E2A,#293855,#7D4822,#B68B58,#D4C9B5)'],['6','Светлая','linear-gradient(160deg,#2C2C2E,#9A9CA2,#ECECEE)'],['7','Тёмная','linear-gradient(160deg,#0E0E10,#2A2A30,#4A4A52)']].map(([k,n,g])=>`<button class="${S.scheme===k?'on':''}" data-s="${k}"><span style="background:${g}"></span><b>${n}</b></button>`).join('')}</div></div>
- <div class="glass sec"><h2 style="margin-bottom:var(--s3)">Иллюстрации</h2><div class="swatch">${[['toon','Мультяшный','img/t_horse.webp'],['real','Реалистичный','img/real/t_horse.webp']].map(([k,n,u])=>`<button class="${S.ill===k?'on':''}" data-ill="${k}"><span style="height:96px;background:var(--tint) url(${u}) center/auto 84% no-repeat"></span><b>${n}</b></button>`).join('')}</div></div>
  ${phoneCard()}
  <div class="glass sec"><h2 style="margin-bottom:var(--s1)">Демонстрация</h2><p class="small" style="margin-bottom:var(--s2)">Для показа Marali</p>
   <button class="li" data-go="crew"><span class="ic">${ic('key')}</span><div class="grow"><b>Панель сотрудника</b><small>Конюх и тренер: заказы, статусы коней, истории</small></div>${ic('arrow','color:var(--off)')}</button>
@@ -1355,7 +1351,6 @@ document.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]
  if(d.pub!==undefined){const pb=S.pub;if(!pb)return;const cap=(document.getElementById('pubcap')||{}).value||S.pubCap||'',who=S.crewRole?'marina':'alexey',txt=cap.trim()||(pb.vid?'Новое видео за сегодня':'Новое фото за сегодня');
   S.staffStories.unshift({id:'u'+Date.now(),who,title:'Только что',t:nowT(),h:S.pubH,fresh:1,thumb:pb.vid?pb.thumb||'':pb.url,it:[[pb.url,pb.vid?1:0,()=>txt]]});S.pub=null;S.pubCap='';
   push(`${who==='marina'?'Марина':'Алексей'}: ${pb.vid?'новое видео':'новое фото'}`,`${H(S.pubH).name}: ${txt}`,'home','photo');hap('ok');rerender();toast('Опубликовано, владельцы увидят историю на главной');return}
- if(d.ill){S.ill=d.ill;LS.set('ill',d.ill);applyIll();rerender();return}
  if(d.s){setScheme(d.s);return}
  if(d.back!==undefined){if(history.state&&history.state.ia)history.back();else{const to=parentOf();history.replaceState({ia:0,k:nk()},'','#/'+to);const k=history.state.k;closeSheet();lastR=to.split('/')[0];transition('back',()=>{curK=k;render('back',0)})}return}
  if(d.go){go(d.go);return}
@@ -1417,7 +1412,7 @@ addEventListener('offline',()=>{toast('Нет соединения с интер
 addEventListener('online',()=>{toast('Соединение восстановлено');if(['home','cams','horse'].includes(curRoute()))rerender()});
 if('serviceWorker' in navigator&&location.protocol==='https:'){addEventListener('load',()=>navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).catch(()=>{}));navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.go)location.hash=e.data.go})}
 if(isStandalone()){const sp=document.createElement('div');sp.className='splash';sp.innerHTML=`<img src="icons/icon-512.png" alt=""><b>Конешеринг</b><small>парк-отель Marali</small>`;document.body.appendChild(sp);setTimeout(()=>sp.classList.add('out'),800);setTimeout(()=>sp.remove(),1400)}
-applyIll();
+try{localStorage.removeItem('kn-ill')}catch(e){}
 render('load');
 /* иллюстрации лежат файлами в img/: после первого кадра подгружаем остальные, чтобы при переходах они были уже готовы */
 setTimeout(()=>[...Object.values(R3),...Object.values(G3D)].forEach(u=>{const i=new Image();i.decoding='async';i.src=u}),1200);
