@@ -110,12 +110,12 @@ small{line-height:1.25}
 :where(small,span.small){display:inline-block}
 .price+small,.big+small,.big+.small{display:block;margin-top:var(--s1)}
 
-.btn{min-height:var(--h-btn);text-align:center;padding:0 var(--s3);border-radius:var(--r-pill);font-weight:600;font-size:var(--fs-16);line-height:var(--lh-16);display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);white-space:nowrap}
+.btn{min-height:var(--h-btn);text-align:center;padding:calc(var(--s2) + var(--s1)) var(--s3);border-radius:var(--r-pill);font-weight:600;font-size:var(--fs-16);line-height:var(--lh-16);display:inline-flex;align-items:center;justify-content:center;gap:var(--s2);white-space:nowrap}
 .btn.w{background:var(--raised);color:var(--ink)}
 .btn.v{background:var(--acc);color:#fff;box-shadow:0 12px 22px -12px var(--shc)}
 .btn.o{--gbg:rgba(255,255,255,.6);border:1px solid var(--line);color:var(--ink)}
 .btn.full{width:100%}
-.btn.sm{min-height:var(--h-btn-sm);padding:0 var(--s3);font-size:var(--fs-16);line-height:var(--lh-16)}
+.btn.sm{min-height:var(--h-btn-sm);padding:var(--s2) var(--s3);font-size:var(--fs-16);line-height:var(--lh-16)}
 .btn[disabled]{opacity:.45;pointer-events:none}
 .pill{display:inline-flex;align-items:center;gap:var(--s1);height:24px;padding:0 var(--s2);border-radius:var(--r-pill);font-size:var(--fs-12);line-height:var(--lh-12);font-weight:600;background:var(--tint);color:var(--g2)}
 .pill.dark{background:var(--acc);color:#fff}
@@ -645,7 +645,7 @@ html.rm .tour .hole,html.rm .tour .tip{transition:none}
 <nav class="tabbar" id="tabbar"></nav>
 <div class="scrim" id="scrim"></div><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Окно" tabindex="-1"></div><button class="push" id="push" aria-live="polite"></button>
 <script>
-const M='../media/';const BUILD='14.10 · 10:40';
+const M='../media/';const BUILD='14.10 · 10:55';
 const G3D={halter:'img/halter.webp',brush:'img/brush.webp',blanket:'img/blanket.webp',plate:'img/plate.webp',bridle:'img/bridle.webp',pad:'img/pad.webp',boots:'img/boots.webp',flymask:'img/flymask.webp',rope:'img/rope.webp',saddle:'img/saddle.webp',apples:'img/apples.webp',carrot:'img/carrot.webp',treats:'img/treats.webp',hay:'img/hay.webp',oats:'img/oats.webp',vit:'img/vit.webp',hoof:'img/hoof.webp',spa:'img/spa.webp',teeth:'img/teeth.webp',gift:'img/gift.webp',ball:'img/ball.webp',salt:'img/salt.webp'};
 const G3=Object.keys(G3D).filter(k=>k!=='gift');const G3S=['apples','carrot','treats','hay','oats','vit','hoof','spa','teeth','ball','salt'];const g3=(k,c='')=>`<img class="g3 ${c}" src="${G3D[k]}" alt="" loading="lazy">`;
 const I={
