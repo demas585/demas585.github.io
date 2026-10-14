@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1F3B33">
+<meta name="robots" content="noindex, nofollow">
 <title>Конешеринг · прототип</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=Unbounded:wght@600;700&display=swap">
@@ -339,9 +340,9 @@ const I={
 
 const HORSES=[
  {id:'grom',name:'Гром',age:6,breed:'Алтайская',color:'гнедой',v:0,temper:'Спокойный',h:152,walk:'Прогулки и рысь',places:2,price:29000,tags:['Совладение','Спокойные','Алтайская'],about:'Любит яблоки и долгие прогулки вдоль Катуни. Подходит к людям первым, на пастбище держится рядом с Бураном.'},
- {id:'buran',name:'Буран',age:8,breed:'Орловская',color:'серый',v:1,temper:'Уравновешенный',h:162,walk:'Выездка',places:2,price:89000,tags:['Личный'],about:'Опытный конь с хорошей выездкой. Терпелив с новичками, умеет кланяться по команде.'},
+ {id:'buran',name:'Буран',age:8,breed:'Орловская',color:'серый',v:1,temper:'Уравновешенный',h:162,walk:'Выездка',places:2,price:89000,tags:['Один владелец'],about:'Опытный конь с хорошей выездкой. Терпелив с новичками, умеет кланяться по команде.'},
  {id:'laska',name:'Ласка',age:5,breed:'Алтайская',color:'рыжая',v:2,temper:'Игривая',h:148,walk:'Прогулки',places:3,price:29000,tags:['Совладение','Для прогулок','Алтайская'],about:'Молодая и любопытная кобыла. Быстро учится, сейчас осваивает рысь на корде.'},
- {id:'shaman',name:'Шаман',age:7,breed:'Новоалтайская',color:'вороной',v:3,temper:'Сильный характер',h:158,walk:'Горные маршруты',places:2,price:89000,tags:['Личный','Для прогулок'],about:'Выносливый конь для горных маршрутов. Ходил в тур «Кержаки» три сезона подряд.'},
+ {id:'shaman',name:'Шаман',age:7,breed:'Новоалтайская',color:'вороной',v:3,temper:'Сильный характер',h:158,walk:'Горные маршруты',places:2,price:89000,tags:['Один владелец','Для прогулок'],about:'Выносливый конь для горных маршрутов. Ходил в тур «Кержаки» три сезона подряд.'},
  {id:'aina',name:'Айна',age:4,breed:'Алтайская',color:'буланая',v:4,temper:'Мягкая',h:146,walk:'Прогулки',places:4,price:29000,tags:['Совладение','Спокойные','Алтайская'],about:'Самая молодая в табуне. Мягкая, доверчивая, хорошо идёт в поводу.'},
  {id:'kedr',name:'Кедр',age:9,breed:'Тракененская',color:'караковый',v:5,temper:'Спокойный',h:166,walk:'Выездка',places:1,price:29000,tags:['Совладение','Спокойные'],about:'Крупный и очень спокойный конь. Любимец детей на конных прогулках.'},
 ];
@@ -382,9 +383,9 @@ const pron=(c,h)=>fem(h)?{n:'она',a:'её',d:'ей',p:'ней'}[c]:{n:'он',
 const plur=(n,a,b,c)=>{const m=n%10,k=n%100;return m===1&&k!==11?a:m>=2&&m<=4&&(k<12||k>14)?b:c};
 const yrs=n=>n+' '+plur(n,'год','года','лет');
 const PLANS=[
- {id:'friend',name:'Друг коня',price:4900,disc:5,pts:['Камеры денника, пастбища и плаца','Лента событий и уведомления','Отчёт раз в неделю','Скидка 5% на визиты']},
- {id:'co',name:'Совладелец',price:29000,disc:10,pts:['Всё из тарифа «Друг коня»','Конь на 2–4 владельцев','Ежедневный отчёт и статистика','Запись на тренировки и трюки','Скидка 10% на визиты и тур']},
- {id:'own',name:'Личный конь',price:89000,disc:15,pts:['Всё из тарифа «Совладелец»','Конь только ваш','Камера «глазами коня»','Курсы тренировок входят в тариф','2 визита «День с конём» в год включены','Скидка 15% на тур']},
+ {id:'friend',name:'Друг',price:4900,disc:5,pts:['Камеры денника, пастбища и плаца','Лента событий и уведомления','Отчёт раз в неделю','Скидка 5% на визиты']},
+ {id:'co',name:'Совладелец',price:29000,disc:10,pts:['Всё из тарифа «Друг»','Конь на 2–4 владельцев','Ежедневный отчёт и статистика','Запись на тренировки и трюки','Скидка 10% на визиты и тур']},
+ {id:'own',name:'Владелец',price:89000,disc:15,pts:['Всё из тарифа «Совладелец»','Камера «глазами коня»','Курсы тренировок входят в тариф','2 визита «День с конём» в год','Скидка 15% на тур']},
 ];
 const FEED0=[
  ['07:30','Утренний осмотр: всё в порядке, температура 37,6°'],
@@ -578,7 +579,7 @@ function feedSheet(i){const x=S.feed[i],h=S.horse;if(!x)return;x[3]=0;const bg=d
 R.cams=()=>{const c=S.cam==='pov'&&S.plan.id!=='own'?'pasture':(S.cam||'pasture');const cams=[['stall','Денник'],['pasture','Пастбище'],['arena','Плац'],['pov','Глазами коня']];const cur=cams.find(x=>x[0]===c);
  return `<div class="pad stack">${top('Камеры',S.horse.name)}<div class="live">${vid(c,'height:260px')}<span class="badge-live">LIVE</span><span class="ov">${cur[1]}${c==='pov'?' · камера на уздечке':''}</span></div>
  <style>@keyframes bob{50%{transform:translateY(-6px) rotate(.4deg)}}</style>
- <div class="grid2">${cams.map(x=>{const lk=x[0]==='pov'&&S.plan.id!=='own';return `<button class="tap" ${lk?'data-povlock':`data-cam="${x[0]}"`} style="position:relative;border-radius:14px;overflow:hidden;outline:${x[0]===c?'3px solid var(--ochre)':'0'}"><img src="../media/${x[0]}.jpg" alt="" style="display:block;width:100%;height:96px;object-fit:cover">${lk?'<span class="lock">🔒 Глазами коня<br>на тарифе «Личный конь»</span>':`<span class="ov" style="font-size:12px">${x[1]}</span>`}</button>`}).join('')}</div>
+ <div class="grid2">${cams.map(x=>{const lk=x[0]==='pov'&&S.plan.id!=='own';return `<button class="tap" ${lk?'data-povlock':`data-cam="${x[0]}"`} style="position:relative;border-radius:14px;overflow:hidden;outline:${x[0]===c?'3px solid var(--ochre)':'0'}"><img src="../media/${x[0]}.jpg" alt="" style="display:block;width:100%;height:96px;object-fit:cover">${lk?'<span class="lock">🔒 Глазами коня<br>на тарифе «Владелец»</span>':`<span class="ov" style="font-size:12px">${x[1]}</span>`}</button>`}).join('')}</div>
  <p class="small mute" style="margin:0">«Глазами коня» включается во время прогулок и занятий.</p></div>`};
 R.report=()=>{const h=S.horse,f=fem(h);return `<div class="pad stack">${top('Отчёт за 4 октября',h.name)}<div style="position:relative">${pic('portrait',h.v,780,460,'height:220px').replace('alt=""',`alt="${h.name} на пастбище, фото дня"`)}<span class="ov">Фото дня · 15:20</span></div>
  <div class="card"><div class="h2" style="margin-bottom:6px">От конюха Алексея</div><p style="margin:0">${h.name} отлично отработал${f?'а':''} на корде, после занятия был${f?'а':''} спокоен${f?'а':''}. Съел${f?'а':''} всё, особенно морковь. Копыта почистили, подковы в порядке.</p></div>
@@ -750,7 +751,7 @@ function giftCard(){const g=S.gift,p=PLANS.find(x=>x.id===g.plan),h=HORSES.find(
  ${pic('portrait',h?h.v:0,240,240,'position:absolute;right:-18px;bottom:-18px;width:130px;height:130px;border-radius:50%;opacity:.95')}</div>`}
 
 const VALUE={grom:650000,buran:1100000,laska:600000,shaman:900000,aina:550000,kedr:1300000};
-R.buyout=()=>{if(!S.owned)return noHorse('Выкуп коня','Выкупить можно коня, которым вы уже владеете по подписке: в цену засчитывается часть уплаченных взносов. Сначала выберите коня.');if(S.plan.id==='friend')return noHorse('Выкуп коня','Выкупить коня могут совладельцы и личные владельцы. На тарифе «Друг коня» можно перейти на «Совладельца» в профиле.');const h=S.horse,b=S.bo,months=1,paid=months*S.plan.price,credit=Math.round(paid*.5),base=VALUE[h.id],price=base-credit,extra=b.keep?0:85000,total=price+extra;
+R.buyout=()=>{if(!S.owned)return noHorse('Выкуп коня','Выкупить можно коня, которым вы уже владеете по подписке: в цену засчитывается часть уплаченных взносов. Сначала выберите коня.');if(S.plan.id==='friend')return noHorse('Выкуп коня','Выкупить коня могут подписчики тарифов «Совладелец» и «Владелец». На тарифе «Друг» можно перейти на «Совладельца» в профиле.');const h=S.horse,b=S.bo,months=1,paid=months*S.plan.price,credit=Math.round(paid*.5),base=VALUE[h.id],price=base-credit,extra=b.keep?0:85000,total=price+extra;
  if(b.sent)return `<div class="pad stack">${top('Заявка на выкуп',h.name)}<div class="card" style="background:var(--mint)"><b>Заявка отправлена</b><div class="small" style="margin-top:4px">Менеджер Ольга свяжется с вами сегодня. Цена зафиксирована на 14 дней.</div></div>
  <div class="card"><div class="h2" style="margin-bottom:6px">Что дальше</div>${[['Заявка','сегодня',1],['Осмотр ветеринаром и оценка','1–3 дня',0],['Договор купли-продажи','онлайн с электронной подписью',0],['Оплата',b.plan==='full'?'одним платежом':'12 платежей',0],['Передача паспорта коня',b.keep?'конь остаётся в Marali':'доставка коневозом',0]].map((s,i)=>`<div class="fe"><time style="color:${s[2]?'var(--pine2)':'var(--stone)'}">${s[2]?'✓':i+1}</time><div><b style="font-weight:600">${s[0]}</b><div class="small mute">${s[1]}</div></div></div>`).join('')}</div>
  <button class="btn ghost" data-tab="home">Вернуться к ${her()?'ней':'нему'}</button></div>`;
@@ -815,7 +816,7 @@ function learnSheet(id){const t=TRICKS.find(x=>x.id===id),h=S.horse;const bg=doc
    notify(first?'Новая ачивка':'Трюк освоен',first?`Артист: ${h.name} умеет «${t.name}». +250 XP и скидка 10% на День с конём`:`${h.name} умеет «${t.name}». +250 XP`);confetti()},4500)})}
 
 function trainSheet(id){const h=S.horse,st=STATS.find(x=>x[0]===id),pc=fpct(h,id),cap=fcap(h,id),gain=Math.max(0,Math.min(6,cap-pc)),cur=S.training&&STATS.find(x=>x[0]===S.training);
- const blk=S.plan.id==='friend'?'Тренировки доступны с тарифа «Совладелец». На тарифе «Друг коня» можно следить за формой.':S.training===id?'Идёт курс · неделя 1 из 3. Замеры после каждой недели придут в ленту.':fmax(h,id)?`Характеристика полностью прокачана. ${fval(h,id)}&nbsp;${st[2]} — максимум для ${nm('g',h)} по заключению ветеринара, дальше тренировать нельзя. Курсы можно взять по другим характеристикам.`:cur?`Сейчас идёт курс «${cur[1]}». Новый можно начать после него: тренер ведёт один курс за раз.`:'';
+ const blk=S.plan.id==='friend'?'Тренировки доступны с тарифа «Совладелец». На тарифе «Друг» можно следить за формой.':S.training===id?'Идёт курс · неделя 1 из 3. Замеры после каждой недели придут в ленту.':fmax(h,id)?`Характеристика полностью прокачана. ${fval(h,id)}&nbsp;${st[2]} — максимум для ${nm('g',h)} по заключению ветеринара, дальше тренировать нельзя. Курсы можно взять по другим характеристикам.`:cur?`Сейчас идёт курс «${cur[1]}». Новый можно начать после него: тренер ведёт один курс за раз.`:'';
  if(blk){const bg=document.createElement('div');bg.className='sheet-bg';bg.innerHTML=`<div class="sheet" role="dialog" aria-label="${st[1]}"><div class="grab"></div><div class="row between"><h2 class="h1" style="font-size:20px">${st[1]}</h2>${fmax(h,id)&&S.training!==id?'<span class="tag">✓ Прокачано полностью</span>':''}</div>
  <div class="row" style="gap:16px;margin:12px 0 14px;align-items:center">${ring(pc,cap,84,S.training===id?gain:0,fval(h,id),st[2])}<div><b>${fval(h,id)} ${st[2]}</b><div class="small mute" style="margin-top:3px">Норма породы ${NORM[h.breed][id]} ${st[2]} · потолок ${fval(h,id,cap)} ${st[2]}</div></div></div>
  <p class="mute" style="margin:0 0 14px">${blk}</p>${S.plan.id==='friend'?'<button class="btn" data-sub>Сменить тариф</button>':''}<button class="btn" style="background:none;color:var(--stone);margin-top:4px" data-close>Закрыть</button></div>`;app.appendChild(bg);
@@ -846,7 +847,7 @@ view.addEventListener('click',e=>{const t=e.target.closest('button,[data-go]');i
   if(d.camact==='groom')return notify('Алексей получил просьбу',`Подведёт ${nm('a',h)} к камере «${n}» в ближайшие 15 минут.`);
   if(d.camact==='archive')return notify('Архив камер','Записи за 7 дней: выберите день и время на шкале. В прототипе архив пока не открывается.')}
  if(d.horsepick){useHorse(d.horsepick);S.pick=null;if('stay' in d){scr().scrollTop=0;return render()}S.stack=[];return go('home',false)}
- if('povlock' in d)return notify('Камера «глазами коня»','Она на уздечке и включается на прогулках. Доступна на тарифе «Личный конь».');
+ if('povlock' in d)return notify('Камера «глазами коня»','Она на уздечке и включается на прогулках. Доступна на тарифе «Владелец».');
  if(d.trip==='tour')return go('tour');
  if(d.trip){S.tripSel=d.trip;S.date=null;S.dep=null;S.ppl=1;return go('book')}
  if(d.dep){S.dep=d.dep;return render()}
