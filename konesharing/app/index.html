@@ -409,10 +409,12 @@ html.rm .enter .stack>*,html.rm .rv.in{animation:fo .35s ease both}html.rm .bars
 
 /* ---------- установка ---------- */
 .inst{display:flex;align-items:center;gap:var(--s3)}
+.inst.ib{flex-wrap:wrap;align-items:flex-start;padding:var(--s3)}
+.inst.ib .grow{flex:1 1 calc(100% - 64px);padding-top:var(--s1)}
+.inst.ib [data-install]{width:100%}
 .inst img{width:56px;height:56px;border-radius:var(--r-s);flex:none;box-shadow:0 8px 16px -8px var(--shc)}
 .inst b{display:block;font-size:var(--fs-16);line-height:var(--lh-16);font-weight:600}
-.ib{padding:var(--s2) var(--s2) var(--s2) var(--s3);gap:var(--s3)}.ib img{width:40px;height:40px;border-radius:var(--r-s)}
-.ib .x{width:40px;height:40px;display:grid;place-items:center;color:var(--mute);flex:none}
+.ib{padding:var(--s2) var(--s2) var(--s2) var(--s3);gap:var(--s3)}.ib .x{width:40px;height:40px;display:grid;place-items:center;color:var(--mute);flex:none}
 
 /* ---------- истории ---------- */
 .stories{margin:0 calc(-1 * var(--s3));padding:2px var(--s3) 2px;gap:var(--s3)}
@@ -646,7 +648,7 @@ html.rm .tour .hole,html.rm .tour .tip{transition:none}
 <nav class="tabbar" id="tabbar"></nav>
 <div class="scrim" id="scrim"></div><div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Окно" tabindex="-1"></div><button class="push" id="push" aria-live="polite"></button>
 <script>
-const M='../media/';const BUILD='14.10 · 12:10';
+const M='../media/';const BUILD='14.10 · 17:10';
 const G3D={halter:'img/halter.webp',brush:'img/brush.webp',blanket:'img/blanket.webp',plate:'img/plate.webp',bridle:'img/bridle.webp',pad:'img/pad.webp',boots:'img/boots.webp',flymask:'img/flymask.webp',rope:'img/rope.webp',saddle:'img/saddle.webp',apples:'img/apples.webp',carrot:'img/carrot.webp',treats:'img/treats.webp',hay:'img/hay.webp',oats:'img/oats.webp',vit:'img/vit.webp',hoof:'img/hoof.webp',spa:'img/spa.webp',teeth:'img/teeth.webp',gift:'img/gift.webp',ball:'img/ball.webp',salt:'img/salt.webp'};
 const G3=Object.keys(G3D).filter(k=>k!=='gift');const G3S=['apples','carrot','treats','hay','oats','vit','hoof','spa','teeth','ball','salt'];const g3=(k,c='')=>`<img class="g3 ${c}" src="${G3D[k]}" alt="" loading="lazy">`;
 const I={
@@ -885,7 +887,7 @@ function camMedia(k){if(camOff())return `<div class="ph" style="background-image
 function storyList(){const L=[...S.staffStories.filter(s=>!s.h||s.h===S.horse),...STO],seen=s=>S.seen.includes(s.id+':'+S.horse);return [...L.filter(s=>!seen(s)),...L.filter(seen)]}
 function storyThumb(s){const m=s.it[0][0];return s.thumb||(/^(blob:|data:)/.test(m)?'':M+m+'.jpg')}
 function storiesRow(){return `<div class="stories hscroll" aria-label="Истории дня">${storyList().map((s,k)=>{const seen=S.seen.includes(s.id+':'+S.horse),th=storyThumb(s);return `<button class="story  ${seen?'seen':''}" data-story="${k}"><span class="sr"><i style="${th?`background-image:url(${th})`:''}">${th?'':`<em>${ic('play')}</em>`}</i></span>${s.fresh&&!seen?'<span class="nw">новое</span>':''}${s.title}</button>`}).join('')}</div>`}
-function installBanner(){if(!BIP||isStandalone()||LS.get('instx',0))return '';return `<div class="glass inst ib"><img src="icons/icon-192.png" alt=""><div class="grow"><b>Установите приложение</b><small class="small">Иконка на главном экране, без адресной строки</small></div><button class="btn v sm" data-install>Установить</button><button class="x" data-instx aria-label="Скрыть">${ic('plus','transform:rotate(45deg)')}</button></div>`}
+function installBanner(){if(!BIP||isStandalone()||LS.get('instx',0))return '';return `<div class="glass inst ib"><div class="grow"><b>Установите приложение</b><small class="small">Иконка на главном экране, без адресной строки</small></div><button class="x" data-instx aria-label="Скрыть">${ic('plus','transform:rotate(45deg)')}</button><button class="btn v sm" data-install>Установить</button></div>`}
 function tqName(o){return {apples:'Яблоки',carrot:'Морковь',treats:'Травяные печенья',hay:'Сено'}[o.p]||SHOP.find(x=>x.id===o.p).name}
 function tqStage(o){return o.done?2:Date.now()-o.t>2500?1:0}
 function tqStatus(n){const o=S.tq.find(x=>x.n==n);if(!o)return 'оформлен';const st=tqStage(o);return st===2?'вручено, есть видео':st===1?'Алексей угостит '+o.slot:'оплачено'}
