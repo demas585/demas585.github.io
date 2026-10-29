@@ -10,6 +10,7 @@
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font:500 15px/1.5 Manrope,system-ui,sans-serif}
 .wrap{max-width:1200px;margin:0 auto;padding:40px 16px 64px;display:grid;gap:40px}
+.wrap>*{min-width:0}
 h1{font-size:clamp(26px,4vw,40px);margin:0 0 8px;font-weight:800}
 p{margin:0;color:var(--muted);max-width:70ch}
 a{color:var(--violet)}
@@ -24,10 +25,12 @@ figure{margin:0;background:var(--card);border:1px solid var(--line);border-radiu
 .pic{position:relative;aspect-ratio:1;background:repeating-conic-gradient(#0000000a 0 25%,#0000 0 50%) 0 0/18px 18px}
 .pic.wide{aspect-ratio:4/1}
 .pic img{position:absolute;inset:14px;width:calc(100% - 28px);height:calc(100% - 28px);object-fit:contain}
-figcaption{display:flex;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);font-size:14px}
-figcaption b{font-weight:700}
-figcaption small{color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
-figcaption a{margin-left:auto;font-weight:700;text-decoration:none;white-space:nowrap}
+/* подпись: название и размер слева в два ряда, кнопка скачивания справа — ничего не вылезает при любой ширине карточки */
+figcaption{display:grid;grid-template-columns:minmax(0,1fr) auto;grid-template-rows:auto auto;column-gap:10px;align-items:center;padding:10px 12px 10px 14px;border-top:1px solid var(--line);font-size:14px;line-height:1.25}
+figcaption b{grid-column:1;grid-row:1;font-weight:700;overflow-wrap:anywhere}
+figcaption small{grid-column:1;grid-row:2;color:var(--muted);font-size:12px;font-variant-numeric:tabular-nums}
+figcaption a{grid-column:2;grid-row:1/3;display:inline-flex;align-items:center;gap:4px;padding:7px 12px;border-radius:999px;border:1.5px solid var(--violet);font-weight:700;font-size:13px;text-decoration:none;white-space:nowrap}
+figcaption a:hover{background:var(--violet);color:#fff}
 .full{grid-column:1/-1}
 .pairs{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:15px}
 .pairs th,.pairs td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top}
@@ -56,28 +59,28 @@ figcaption a{margin-left:auto;font-weight:700;text-decoration:none;white-space:n
   <section>
     <h2><i style="background:var(--coral)"></i>Биба — монстр-дедлайн</h2>
     <div class="grid">
-      <figure><div class="pic"><img src="biba/biba-idle.png" alt="Биба в стойке" loading="lazy" decoding="async"></div><figcaption><b>Стойка</b><small>1079×1199</small><a href="biba/biba-idle.png" download="biba-idle.png">Скачать PNG</a></figcaption></figure>
-      <figure><div class="pic"><img src="biba/biba-punch.png" alt="Биба бьёт апперкотом" loading="lazy" decoding="async"></div><figcaption><b>Удар</b><small>993×1110</small><a href="biba/biba-punch.png" download="biba-punch.png">Скачать PNG</a></figcaption></figure>
-      <figure><div class="pic"><img src="biba/biba-hit.png" alt="Биба получил удар" loading="lazy" decoding="async"></div><figcaption><b>Получил удар</b><small>1190×1068</small><a href="biba/biba-hit.png" download="biba-hit.png">Скачать PNG</a></figcaption></figure>
-      <figure><div class="pic"><img src="biba/biba-ko.png" alt="Биба в нокауте" loading="lazy" decoding="async"></div><figcaption><b>Нокаут</b><small>1564×679</small><a href="biba/biba-ko.png" download="biba-ko.png">Скачать PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="biba/biba-idle.png" alt="Биба в стойке" loading="lazy" decoding="async"></div><figcaption><b>Стойка</b><small>1079×1199</small><a href="biba/biba-idle.png" download="biba-idle.png">↓ PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="biba/biba-punch.png" alt="Биба бьёт апперкотом" loading="lazy" decoding="async"></div><figcaption><b>Удар</b><small>993×1110</small><a href="biba/biba-punch.png" download="biba-punch.png">↓ PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="biba/biba-hit.png" alt="Биба получил удар" loading="lazy" decoding="async"></div><figcaption><b>Получил удар</b><small>1190×1068</small><a href="biba/biba-hit.png" download="biba-hit.png">↓ PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="biba/biba-ko.png" alt="Биба в нокауте" loading="lazy" decoding="async"></div><figcaption><b>Нокаут</b><small>1564×679</small><a href="biba/biba-ko.png" download="biba-ko.png">↓ PNG</a></figcaption></figure>
     </div>
   </section>
 
   <section>
     <h2><i style="background:var(--violet)"></i>Боба — герой RBM</h2>
     <div class="grid">
-      <figure><div class="pic"><img src="boba/boba-idle.png" alt="Боба в полёте" loading="lazy" decoding="async"></div><figcaption><b>Полёт</b><small>1247×1048</small><a href="boba/boba-idle.png" download="boba-idle.png">Скачать PNG</a></figcaption></figure>
-      <figure><div class="pic"><img src="boba/boba-punch.png" alt="Боба бьёт в пике" loading="lazy" decoding="async"></div><figcaption><b>Удар в пике</b><small>1217×1050</small><a href="boba/boba-punch.png" download="boba-punch.png">Скачать PNG</a></figcaption></figure>
-      <figure><div class="pic"><img src="boba/boba-hit.png" alt="Боба получил удар" loading="lazy" decoding="async"></div><figcaption><b>Получил удар</b><small>1211×976</small><a href="boba/boba-hit.png" download="boba-hit.png">Скачать PNG</a></figcaption></figure>
-      <figure><div class="pic"><img src="boba/boba-wave-1.png" alt="Боба машет, кадр 1" loading="lazy" decoding="async"></div><figcaption><b>Машет, кадр 1</b><small>843×789</small><a href="boba/boba-wave-1.png" download="boba-wave-1.png">Скачать PNG</a></figcaption></figure>
-      <figure><div class="pic"><img src="boba/boba-wave-2.png" alt="Боба машет, кадр 2" loading="lazy" decoding="async"></div><figcaption><b>Машет, кадр 2</b><small>817×790</small><a href="boba/boba-wave-2.png" download="boba-wave-2.png">Скачать PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-idle.png" alt="Боба в полёте" loading="lazy" decoding="async"></div><figcaption><b>Полёт</b><small>1247×1048</small><a href="boba/boba-idle.png" download="boba-idle.png">↓ PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-punch.png" alt="Боба бьёт в пике" loading="lazy" decoding="async"></div><figcaption><b>Удар в пике</b><small>1217×1050</small><a href="boba/boba-punch.png" download="boba-punch.png">↓ PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-hit.png" alt="Боба получил удар" loading="lazy" decoding="async"></div><figcaption><b>Получил удар</b><small>1211×976</small><a href="boba/boba-hit.png" download="boba-hit.png">↓ PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-wave-1.png" alt="Боба машет, кадр 1" loading="lazy" decoding="async"></div><figcaption><b>Машет, кадр 1</b><small>843×789</small><a href="boba/boba-wave-1.png" download="boba-wave-1.png">↓ PNG</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-wave-2.png" alt="Боба машет, кадр 2" loading="lazy" decoding="async"></div><figcaption><b>Машет, кадр 2</b><small>817×790</small><a href="boba/boba-wave-2.png" download="boba-wave-2.png">↓ PNG</a></figcaption></figure>
     </div>
   </section>
 
   <section>
     <h2><i style="background:#C9B2FF"></i>Толпа болельщиков</h2>
     <div class="grid">
-      <figure class="full"><div class="pic wide"><img src="crowd.png" alt="Толпа болельщиков" loading="lazy" decoding="async"></div><figcaption><b>Фон для середины баннера</b><small>2172×577</small><a href="crowd.png" download="crowd.png">Скачать PNG</a></figcaption></figure>
+      <figure class="full"><div class="pic wide"><img src="crowd.png" alt="Толпа болельщиков" loading="lazy" decoding="async"></div><figcaption><b>Фон для середины баннера</b><small>2172×577</small><a href="crowd.png" download="crowd.png">↓ PNG</a></figcaption></figure>
     </div>
   </section>
 
