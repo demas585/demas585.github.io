@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Биба и Боба — персонажи</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&display=swap">
+<style>
+:root{--bg:#F7F5FA;--ink:#17141F;--muted:#6B6578;--line:#E2DDEB;--card:#fff;--violet:#7226C4;--coral:#F2553D}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:500 15px/1.5 Manrope,system-ui,sans-serif}
+.wrap{max-width:1200px;margin:0 auto;padding:40px 16px 64px;display:grid;gap:40px}
+h1{font-size:clamp(26px,4vw,40px);margin:0 0 8px;font-weight:800}
+p{margin:0;color:var(--muted);max-width:70ch}
+a{color:var(--violet)}
+h2{margin:0 0 14px;font-size:22px;font-weight:800;display:flex;gap:10px;align-items:center}
+h2 i{width:12px;height:12px;border-radius:50%}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+figure{margin:0;background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:grid}
+.pic{aspect-ratio:1;display:grid;place-items:center;padding:14px;background:repeating-conic-gradient(#0000000a 0 25%,#0000 0 50%) 0 0/18px 18px}
+.pic img{max-width:100%;max-height:100%;object-fit:contain}
+figcaption{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 14px;border-top:1px solid var(--line);font-size:14px}
+figcaption b{font-weight:700}
+figcaption a{font-weight:700;text-decoration:none;white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Биба и Боба</h1>
+    <p>Все позы персонажей баннера «Прямые руки» в полном размере, PNG с прозрачным фоном. Сгенерированы через Codex. Баннер с ними — <a href="../">demas585.github.io/pryamye-ruki</a>.</p>
+  </header>
+
+  <section>
+    <h2><i style="background:var(--coral)"></i>Биба — монстр-дедлайн</h2>
+    <div class="grid">
+      <figure><div class="pic"><img src="biba/biba-idle.png" alt="Биба в стойке"></div><figcaption><b>Стойка</b><a href="biba/biba-idle.png" download>PNG ↓</a></figcaption></figure>
+      <figure><div class="pic"><img src="biba/biba-punch.png" alt="Биба бьёт апперкотом"></div><figcaption><b>Удар</b><a href="biba/biba-punch.png" download>PNG ↓</a></figcaption></figure>
+      <figure><div class="pic"><img src="biba/biba-hit.png" alt="Биба получил удар"></div><figcaption><b>Получил удар</b><a href="biba/biba-hit.png" download>PNG ↓</a></figcaption></figure>
+      <figure><div class="pic"><img src="biba/biba-ko.png" alt="Биба в нокауте"></div><figcaption><b>Нокаут</b><a href="biba/biba-ko.png" download>PNG ↓</a></figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2><i style="background:var(--violet)"></i>Боба — герой RBM</h2>
+    <div class="grid">
+      <figure><div class="pic"><img src="boba/boba-idle.png" alt="Боба в полёте"></div><figcaption><b>Полёт</b><a href="boba/boba-idle.png" download>PNG ↓</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-punch.png" alt="Боба бьёт в пике"></div><figcaption><b>Удар в пике</b><a href="boba/boba-punch.png" download>PNG ↓</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-hit.png" alt="Боба получил удар"></div><figcaption><b>Получил удар</b><a href="boba/boba-hit.png" download>PNG ↓</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-wave-1.png" alt="Боба машет, кадр 1"></div><figcaption><b>Машет, кадр 1</b><a href="boba/boba-wave-1.png" download>PNG ↓</a></figcaption></figure>
+      <figure><div class="pic"><img src="boba/boba-wave-2.png" alt="Боба машет, кадр 2"></div><figcaption><b>Машет, кадр 2</b><a href="boba/boba-wave-2.png" download>PNG ↓</a></figcaption></figure>
+    </div>
+  </section>
+
+  <section>
+    <h2><i style="background:#C9B2FF"></i>Толпа болельщиков</h2>
+    <div class="grid">
+      <figure style="grid-column:1/-1"><div class="pic" style="aspect-ratio:4/1"><img src="crowd.png" alt="Толпа болельщиков"></div><figcaption><b>Фон для середины баннера</b><a href="crowd.png" download>PNG ↓</a></figcaption></figure>
+    </div>
+  </section>
+</div>
+</body>
+</html>
