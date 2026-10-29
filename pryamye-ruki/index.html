@@ -1,0 +1,791 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Прямые руки: баннер-дуэль</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500&family=Golos+Text:wght@400;600&display=swap">
+<style>
+/* Блок 1374×400 без фона из макета (копия первого экрана): тексты по углам, бойцы дерутся по диагонали между ними, за ними толпа в дымке. Сцена масштабируется под ширину. */
+:root{
+  --bg:#F7F5FA; --ink:#000000; --muted:#6B6578; --line:#E2DDEB; --panel:#FFFFFF;
+  --f-ui:"Golos Text",system-ui,sans-serif; --f-head:"Cera Pro","Manrope",system-ui,sans-serif;
+  --crowd-opacity:.32; --tone-opacity:.2;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121016;--ink:#F2EEF8;--muted:#A49DB2;--line:#2E2938;--panel:#1C1923;--crowd-opacity:.22;--tone-opacity:.26;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#121016;--ink:#F2EEF8;--muted:#A49DB2;--line:#2E2938;--panel:#1C1923;--crowd-opacity:.22;--tone-opacity:.26;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-ui);font-size:15px;line-height:1.5}
+.wrap{max-width:1374px;margin:0 auto;padding-block:40px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:28px}
+h1{font:600 14px/1.2 var(--f-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+
+.block{position:relative;width:100%;max-width:100%;aspect-ratio:1374/400;cursor:crosshair;-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.block,.block *{-webkit-user-select:none;user-select:none;-webkit-user-drag:none;-webkit-touch-callout:none}
+.block:focus-visible{outline:2px dashed #7226C4;outline-offset:6px;border-radius:8px}
+#red{cursor:pointer}
+/* сцена в координатах макета 1374×400; на телефоне показываем её середину (кадр x 150–1180) крупнее, а интерфейс внутри увеличиваем на --u */
+.stage{position:absolute;left:0;top:0;width:1374px;height:400px;transform-origin:0 0;transform:translateX(var(--tx,0px)) scale(var(--k,1));--u:1}
+.mh{display:none;margin:0;font:500 clamp(20px,6vw,28px)/1.15 var(--f-head);color:var(--ink);text-wrap:balance}
+.mh.r{text-align:right}
+.banner{display:grid;gap:10px;overflow-x:clip;overflow-clip-margin:0}
+html,body{overflow-x:clip}
+.banner.m .mh{display:block}
+.banner.m .txt{display:none}
+.txt{position:absolute;margin:0;font:500 40px/1.15 var(--f-head);color:var(--ink);white-space:nowrap;z-index:6}
+.txt.l{left:0;top:0}
+.txt.r{right:0;bottom:0;text-align:right}
+
+/* толпа: полосы одной картинки подпрыгивают вразнобой; дымка — прозрачность, размытие и маска по краям */
+.crowd{position:absolute;left:250px;top:174px;width:880px;height:226px;opacity:var(--crowd-opacity);filter:blur(1.6px) saturate(.7);
+  -webkit-mask-image:radial-gradient(60% 85% at 50% 75%,#000 55%,#0000 100%);mask-image:radial-gradient(60% 85% at 50% 75%,#000 55%,#0000 100%);z-index:0;pointer-events:none}
+.crowd i{position:absolute;top:0;height:100%;background:url(duel/crowd.webp) no-repeat;background-size:880px 226px}
+/* фоновый декор, всё приглушённое: лучи прожекторов сверху, полутон в пустых углах, медленное конфетти, мерцающие искорки */
+.decor{position:absolute;pointer-events:none;z-index:0}
+.beam{top:-30px;width:170px;height:430px;margin-left:-85px;transform-origin:50% 0;clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);
+  background:linear-gradient(#A97CF840,#A97CF80d 70%,#A97CF800);filter:blur(5px)}
+.tone{background:radial-gradient(circle,#7226C4 1.7px,#0000 2.3px) 0 0/15px 15px;opacity:var(--tone-opacity);
+  -webkit-mask-image:radial-gradient(closest-side,#000 20%,#0000);mask-image:radial-gradient(closest-side,#000 20%,#0000)}
+.bit2{width:12px;height:8px;border-radius:2px;opacity:.34;filter:blur(.6px)}
+.twinkle{width:18px;height:18px;margin:-9px;opacity:0}
+
+.fighter{position:absolute;z-index:2;will-change:transform}
+.fighter .bob{position:absolute;inset:0}
+.fighter img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain}
+.fighter img+img{opacity:0}
+.fighter img.ko{inset:auto;left:-60px;bottom:0;width:360px;height:auto}
+#red{left:230px;top:150px;width:250px;height:250px}
+#purple{left:860px;top:0;width:258px;height:220px;z-index:3}
+.ghost{position:absolute;left:860px;top:0;width:258px;height:220px;opacity:0;pointer-events:none;z-index:1}
+.ghost img{width:100%;height:100%;object-fit:contain;filter:blur(2px) saturate(1.4)}
+.shadow{position:absolute;left:250px;top:384px;width:210px;height:20px;border-radius:50%;background:radial-gradient(#3a1a7a40,#3a1a7a00 70%);z-index:1}
+
+/* эффекты удара: кольца, вспышка, штрихи скорости, облачка, бумажное конфетти — выбираются случайно */
+.fx{position:absolute;left:0;top:0;opacity:0;pointer-events:none;z-index:5}
+.ring{width:120px;height:120px;margin:-60px;border-radius:50%;border:5px solid #7226C4}
+.ring.c{border-color:#F2553D;border-width:3px}
+.flash{width:200px;height:200px;margin:-100px;border-radius:50%;background:radial-gradient(#fff 0 18%,#FFF3C4 34%,#F8CF2E66 52%,#F8CF2E00 70%)}
+.zap{width:260px;height:260px;margin:-130px;overflow:visible}
+.puff{width:56px;height:56px;margin:-28px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,#E6DDF5 70%)}
+.bit{width:14px;height:10px;margin:-5px -7px;border-radius:2px}
+.spark{position:absolute;width:calc(26px*var(--u));height:calc(26px*var(--u));margin:calc(-13px*var(--u)) 0 0 calc(-13px*var(--u));opacity:0;z-index:5;pointer-events:none}
+.dizzy{position:absolute;left:360px;top:152px;width:0;height:0;z-index:5;opacity:0}
+.dizzy svg{position:absolute;width:calc(22px*var(--u));height:calc(22px*var(--u));margin:calc(-11px*var(--u))}
+.note{position:absolute;width:30px;height:30px;margin:-15px;border-radius:4px;background:#FFD9CF;box-shadow:0 3px 6px #0000001f;z-index:4;opacity:0;pointer-events:none}
+.note::after{content:"";position:absolute;inset:8px 6px;border-top:2px solid #F2553D;border-bottom:2px solid #F2553D;transform:rotate(-12deg)}
+.whoosh{position:absolute;z-index:1;opacity:0;pointer-events:none}
+/* реплики: проблема (монстр) и решение (герой) */
+/* речевые пузыри: у монстра колючий «крик», у героя гладкий скруглённый; форма — SVG под текстом, хвост смотрит на говорящего */
+.say{position:absolute;left:0;top:0;padding:calc(9px*var(--u)) calc(16px*var(--u));white-space:nowrap;opacity:0;z-index:7;pointer-events:none;color:#fff}
+.say svg{position:absolute;z-index:-1;overflow:visible}
+.say span{position:relative}
+.say.p{font:800 calc(15px*var(--u))/1.2 "Manrope",var(--f-ui);letter-spacing:.02em;text-transform:uppercase;padding:calc(11px*var(--u)) calc(20px*var(--u))}
+.say.s{font:700 calc(16px*var(--u))/1.2 "Manrope",var(--f-ui)}
+.say.s svg{filter:drop-shadow(0 6px 10px #7226C440)}
+.cta{position:absolute;left:868px;top:30px;transform:translateY(-50%);padding:calc(10px*var(--u)) calc(20px*var(--u));border-radius:999px;background:#fff;border:calc(2px*var(--u)) solid #7226C4;color:#7226C4;font:700 calc(18px*var(--u))/1.1 "Manrope",var(--f-ui);white-space:nowrap;text-decoration:none;opacity:0;visibility:hidden;z-index:8;box-shadow:0 8px 20px #7226C433;cursor:pointer}
+.cta:hover{background:#7226C4;color:#fff}
+.cta:focus-visible{outline:2px solid #7226C4;outline-offset:3px}
+.banner.m .cta{left:687px;top:368px;transform:translate(-50%,-50%)}
+.banner.m .win{top:52px}
+.combo{position:absolute;left:0;top:0;font:900 italic calc(34px*var(--u))/1 "Manrope",var(--f-ui);color:#F8CF2E;-webkit-text-stroke:calc(2px*var(--u)) #7226C4;paint-order:stroke fill;text-shadow:calc(3px*var(--u)) calc(3px*var(--u)) 0 #7226C4;white-space:nowrap;opacity:0;z-index:8;pointer-events:none}
+.win{position:absolute;left:687px;top:30px;padding:calc(10px*var(--u)) calc(26px*var(--u));border-radius:999px;background:#7226C4;color:#fff;font:600 calc(30px*var(--u))/1.1 "Manrope",var(--f-ui);white-space:nowrap;opacity:0;z-index:7;box-shadow:0 10px 30px #7226C455;pointer-events:none}
+/* подсказка и здоровье монстра */
+.hud{position:absolute;left:498px;top:330px;z-index:2;pointer-events:none}
+.hint{padding:calc(6px*var(--u)) calc(12px*var(--u)) calc(6px*var(--u)) calc(10px*var(--u));border-radius:999px;background:#fff;border:calc(1.5px*var(--u)) solid #7226C4;color:#7226C4;font:700 calc(14px*var(--u))/1 "Manrope",var(--f-ui);white-space:nowrap;box-shadow:0 4px 10px #7226C426}
+/* здоровье монстра: вертикальная шкала слева от него, едет за ним по горизонтали */
+.hp{position:absolute;left:200px;top:220px;width:calc(14px*var(--u)*.75 + 3.5px);height:150px;border:calc(2px*var(--u)*.75 + .5px) solid #141414;border-radius:8px;background:#fff;overflow:hidden;z-index:2;display:flex;align-items:flex-end;pointer-events:none}
+.hp i{display:block;width:100%;height:100%;background:linear-gradient(90deg,#FF7A63,#F2553D)}
+.hp.low i{background:linear-gradient(90deg,#FFB4A6,#F2553D)}
+/* усталость и энергетик живут внутри монстра, в его координатах */
+.drop{position:absolute;width:9px;height:13px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;background:#8FD3FF;opacity:0}
+.can{position:absolute;left:0;top:0;width:calc(30px*var(--u)*.8 + 6px);height:calc(50px*var(--u)*.8 + 10px);margin:calc(-25px*var(--u)*.8 - 5px) calc(-15px*var(--u)*.8 - 3px);opacity:0;z-index:3}
+.plus{position:absolute;left:270px;top:40px;font:800 calc(24px*var(--u))/1 "Manrope",var(--f-ui);color:#2BB673;opacity:0;white-space:nowrap}
+
+.ctrl{justify-self:start;border:1px solid var(--line);background:var(--panel);color:var(--ink);border-radius:999px;padding:8px 16px;font:600 13px/1 var(--f-ui);cursor:pointer}
+.ctrl:focus-visible{outline:2px solid #7226C4;outline-offset:2px}
+.now{font-size:13px;color:var(--muted);min-height:20px}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px 40px}
+.notes h2{font:600 13px/1.2 var(--f-ui);letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+.notes p,.notes ul{margin:0;max-width:62ch}
+.notes ul{padding-left:18px}
+.row{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+</style>
+
+<div class="wrap">
+  <h1>Первый экран · вариант без фона</h1>
+
+  <div class="banner" id="banner">
+  <p class="mh l">Ведёте маркетинг на&nbsp;предприятии в&nbsp;одиночку?</p>
+  <div class="block" id="block" tabindex="0" role="button" aria-label="Монстр-дедлайн и герой RBM дерутся между заголовками. Нажмите, чтобы герой ударил монстра">
+    <div class="stage" id="stage">
+      <div class="decor tone" style="left:-90px;top:170px;width:420px;height:300px"></div>
+      <div class="decor tone" style="left:1080px;top:-110px;width:400px;height:320px"></div>
+      <div class="decor tone" style="left:470px;top:-120px;width:440px;height:230px"></div>
+      <div class="decor beam" style="left:560px"></div>
+      <div class="decor beam" style="left:700px"></div>
+      <div class="decor beam" style="left:840px"></div>
+      <div class="crowd" id="crowd"></div>
+      <p class="txt l">Ведёте маркетинг<br>на предприятии<br>в одиночку?</p>
+      <p class="txt r">Станем вашими<br>руками и поможем<br>решить все задачи!</p>
+
+      <div class="shadow" id="shadow"></div>
+      <svg class="whoosh" id="whoosh" width="260" height="120" viewBox="0 0 260 120" aria-hidden="true"><g stroke="#7226C4" stroke-width="5" stroke-linecap="round" opacity=".55"><path d="M20 30 C90 10 170 10 240 40"/><path d="M40 60 C110 40 180 45 230 70"/><path d="M70 92 C130 78 180 82 220 98"/></g></svg>
+      <div class="ghost"><img src="duel/purple-punch.webp" alt=""></div>
+      <div class="ghost"><img src="duel/purple-punch.webp" alt=""></div>
+      <div class="ghost"><img src="duel/purple-punch.webp" alt=""></div>
+
+      <div class="fighter" id="red"><div class="bob">
+        <img src="duel/red-idle.webp" alt="" data-pose="idle">
+        <img src="duel/red-punch.webp" alt="" data-pose="punch">
+        <img src="duel/red-hit.webp" alt="" data-pose="hit">
+        <img src="duel/red-ko.webp" alt="" data-pose="ko" class="ko">
+        <div class="drop" style="left:182px;top:40px"></div><div class="drop" style="left:62px;top:56px"></div>
+      </div>
+        <svg class="can" id="can" viewBox="0 0 30 50" aria-hidden="true"><rect x="2" y="5" width="26" height="42" rx="5" fill="#F8CF2E" stroke="#141414" stroke-width="2"/><rect x="4" y="1" width="22" height="6" rx="2" fill="#D8D2E4" stroke="#141414" stroke-width="2"/><path d="M17 12 9 27h6l-2 12 9-17h-6l2-10Z" fill="#7226C4"/></svg>
+        <div class="plus" id="plus">+45</div>
+      </div>
+      <div class="fighter" id="purple"><div class="bob">
+        <img src="duel/purple-idle.webp" alt="" data-pose="idle">
+        <img src="duel/purple-punch.webp" alt="" data-pose="punch">
+        <img src="duel/purple-hit.webp" alt="" data-pose="hit">
+        <img src="duel/purple-wave1.webp" alt="" data-pose="wave1">
+        <img src="duel/purple-wave2.webp" alt="" data-pose="wave2">
+      </div></div>
+
+      <div class="dizzy" id="dizzy"></div>
+      <div class="hud" id="hud"><div class="hint" id="hint">← Кликайте для удара</div></div>
+      <div class="hp" id="hp" role="meter" aria-label="Здоровье монстра" aria-valuemin="0" aria-valuemax="100" aria-valuenow="100"><i id="hpbar"></i></div>
+      <div class="say p" id="sayP"><svg aria-hidden="true"></svg><span></span></div>
+      <div class="say s" id="sayS"><svg aria-hidden="true"></svg><span></span></div>
+      <div class="win" id="win">Все задачи решены!</div>
+      <div class="combo" id="combo">КОМБО ×3!</div>
+      <a class="cta" id="cta" href="#zayavka">Решим ваши задачи →</a>
+    </div>
+  </div>
+  <p class="mh r">Станем вашими руками и&nbsp;поможем решить все задачи!</p>
+  </div>
+
+  <div class="row"><button class="ctrl" id="toggle" type="button">Пауза</button><button class="ctrl" id="sound" type="button" aria-pressed="false">Звук: выкл</button><span class="now">Кликните по монстру — герой ударит. Ваших ударов: <b id="hits">0</b></span><span class="now" id="now" aria-live="off"></span></div>
+
+  <div class="notes">
+    <div>
+      <h2>Приёмы, выбираются случайно</h2>
+      <ul>
+        <li>Апперкот Бибы — мимо или в цель</li>
+        <li>Биба попадает стикером Бобе в лицо</li>
+        <li>Биба пригибается от пике и бьёт контрударом</li>
+        <li>Пике героя — в цель или монстр пригибается</li>
+        <li>Серия из трёх ударов героя</li>
+        <li>Биба швыряет пачку стикеров — все прилетают Бобе в лицо</li>
+        <li>Лобовое столкновение в центре</li>
+        <li>Удары каждый раз с разным эффектом: кольца, вспышка, штрихи, облачка, бумажное конфетти</li>
+        <li>Передышка: Боба поворачивается к зрителю и машет рукой, Биба злобно топает</li>
+        <li>Когда здоровья мало, монстр устаёт (потеет, сутулится, реже нападает) и пьёт энергетик</li>
+        <li>Нокаут — только от ваших кликов: в автобое здоровье не опускается ниже 8%. Герой вылетает в центр, «Все задачи решены!» и кнопка «Решим ваши задачи» (на сайте ведёт к форме заявки)</li>
+        <li>Энергетик — не чаще раза в 30 секунд</li>
+        <li>Звук ударов включается кнопкой под баннером; анимация останавливается, когда баннер ушёл с экрана</li>
+        <li>Три быстрых клика по Бибе — комбо: три джеба и добивающий удар, надпись «КОМБО ×3!»</li>
+        <li>Клик по монстру — герой бьёт в точку клика; клик по Бобе — он машет вам рукой; мимо — искры и болельщики шумят. С клавиатуры: Enter</li>
+      </ul>
+    </div>
+    <div>
+      <h2>Как устроено</h2>
+      <p>Бойцы всегда остаются в блоке и после каждого приёма возвращаются на свои места: монстр в левом нижнем углу, герой в правом верхнем, ближе к центру по горизонтали. Следующий приём выбирается случайно и не повторяет предыдущий, поэтому схватка не выглядит зацикленной. Толпа за бойцами приглушена, размыта и подпрыгивает вразнобой. Пустоты сверху и по углам заполняют едва заметные лучи прожекторов, полутон, медленное конфетти и мерцающие искорки. Движение на GSAP.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+const block=$('block'),stage=$('stage');
+// раскладка: десктоп — вся сцена; телефон — средняя часть сцены крупнее, заголовки вынесены текстом, интерфейс увеличен
+let VIEW={x0:0,x1:1374,head:true,m:false},K=1,U=1;
+function layout(){
+  const w=block.clientWidth,m=w<700;
+  VIEW=m?{x0:150,x1:1180,head:false,m:true}:{x0:0,x1:1374,head:true,m:false};
+  K=w/(VIEW.x1-VIEW.x0);U=m?Math.min(2.8,Math.max(1,1/(K*1.2))):1;
+  block.style.aspectRatio=`${VIEW.x1-VIEW.x0}/400`;
+  stage.style.setProperty('--k',K);stage.style.setProperty('--tx',-VIEW.x0*K+'px');stage.style.setProperty('--u',U);
+  document.getElementById('banner').classList.toggle('m',m);
+  const h=document.getElementById('hint');if(h)h.textContent=matchMedia('(pointer: coarse)').matches?'← Тапайте для удара':'← Кликайте для удара';
+}
+new ResizeObserver(layout).observe(block);layout();
+
+const STAR='<svg viewBox="-12 -12 24 24"><path d="M0-11 3-3 11 0 3 3 0 11-3 3-11 0-3-3Z" fill="#F8CF2E" stroke="#141414" stroke-width="2" stroke-linejoin="round"/></svg>';
+const sparks=[...Array(8)].map(()=>{const s=document.createElement('div');s.className='spark';s.innerHTML=STAR;stage.append(s);return s});
+const notes=[...Array(3)].map(()=>{const s=document.createElement('div');s.className='note';stage.append(s);return s});
+$('dizzy').innerHTML=STAR+STAR+STAR;
+
+// толпа: 8 вертикальных полос одной картинки
+const crowd=$('crowd'),STRIPS=8,SW=880/STRIPS;
+const strips=[...Array(STRIPS)].map((_,i)=>{const s=document.createElement('i');s.style.left=i*SW+'px';s.style.width=SW+1+'px';s.style.backgroundPosition=`${-i*SW}px 0`;crowd.append(s);return s});
+
+const red=$('red'),purple=$('purple'),ghosts=gsap.utils.toArray('.ghost'),shadow=$('shadow');
+const pose=(el,p)=>el.querySelectorAll('img').forEach(i=>i.style.opacity=i.dataset.pose===p?1:0);
+const R=gsap.utils.random;
+gsap.defaults({ease:'power2.out'});
+
+// --- эффекты ---
+const mk=(cls,n,html='')=>[...Array(n)].map(()=>{const e=document.createElement(html?'div':'div');e.className='fx '+cls;e.innerHTML=html;stage.append(e);return e});
+const rings=mk('ring',1).concat(mk('ring c',1)),flash=mk('flash',1)[0],puffs=mk('puff',7),
+  bits=mk('bit',12).map((b,i)=>(b.style.background=['#F2553D','#FFD9CF','#fff','#A97CF8'][i%4],b)),
+  zap=(()=>{const z=document.createElementNS('http://www.w3.org/2000/svg','svg');z.setAttribute('viewBox','-130 -130 260 260');z.setAttribute('class','fx zap');
+    let h='';for(let k=0;k<14;k++){const a=k/14*Math.PI*2,r1=46+(k%3)*8,r2=r1+40+(k%2)*26;
+      h+=`<line x1="${Math.cos(a)*r1}" y1="${Math.sin(a)*r1}" x2="${Math.cos(a)*r2}" y2="${Math.sin(a)*r2}" stroke="${k%2?'#7226C4':'#F2553D'}" stroke-width="${k%3?4:6}" stroke-linecap="round"/>`}
+    z.innerHTML=h;stage.append(z);return z})();
+const FX={
+  rings(tl,at,x,y,s){tl.set(rings,{left:x,top:y,opacity:1,scale:.2},at)
+    .to(rings,{scale:i=>(1.6+i*.7)*s,opacity:0,duration:i=>.42+i*.12,ease:'power2.out',stagger:.05},at)},
+  flash(tl,at,x,y,s){tl.set(flash,{left:x,top:y,opacity:1,scale:.3*s},at)
+    .to(flash,{scale:1.25*s,duration:.1,ease:'power3.out'},at).to(flash,{opacity:0,scale:1.5*s,duration:.22},at+'+=.1')},
+  zap(tl,at,x,y,s){tl.set(zap,{left:x,top:y,opacity:1,scale:.45*s,rotation:R(0,30)},at)
+    .to(zap,{scale:1.05*s,duration:.14,ease:'power3.out'},at).to(zap,{opacity:0,scale:1.25*s,duration:.18},at+'+=.12')},
+  puffs(tl,at,x,y,s){tl.set(puffs,{left:x,top:y,x:0,y:0,opacity:.95,scale:.3},at)
+    .to(puffs,{x:i=>Math.cos(i/7*Math.PI*2)*55*s,y:i=>Math.sin(i/7*Math.PI*2)*38*s,scale:i=>(.9+(i%3)*.3)*s,duration:.35,ease:'power3.out'},at)
+    .to(puffs,{opacity:0,scale:'+=.4',duration:.3},at+'+=.25')},
+  bits(tl,at,x,y,s){tl.set(bits,{left:x,top:y,x:0,y:0,opacity:1,rotation:0},at)
+    .to(bits,{keyframes:{x:i=>[0,Math.cos(i/12*Math.PI*2)*90*s],y:i=>[0,Math.sin(i/12*Math.PI*2)*60*s-30]},rotation:()=>R(-540,540),duration:.45,ease:'power2.out'},at)
+    .to(bits,{y:'+=40',opacity:0,duration:.35,ease:'power1.in'},at+'+=.42')},
+};
+const COMBOS=[['flash','rings'],['zap','puffs'],['rings','bits'],['flash','zap'],['puffs','bits'],['zap','rings']];
+function boom(tl,at,x,y,size=1){
+  tl.call(sfx,['hit',Math.min(1,size)],at);
+  for(const f of COMBOS[Math.floor(Math.random()*COMBOS.length)]) FX[f](tl,at,x,y,size);
+  tl.set(sparks,{left:x,top:y,x:0,y:0,opacity:1,scale:.4,rotation:0},at)
+    .to(sparks,{x:i=>Math.cos(i/8*Math.PI*2+.3)*(80+(i%3)*40)*size,y:i=>Math.sin(i/8*Math.PI*2+.3)*(60+(i%2)*35)*size,
+      scale:i=>.5+(i%3)*.25,rotation:180,duration:.5,ease:'power3.out'},at)
+    .to(sparks,{opacity:0,duration:.18},at+'+=.36')
+    .fromTo(block,{x:0,y:0},{x:()=>R(-8,8)*size,y:()=>R(-6,6)*size,duration:.04,repeat:7,yoyo:true,ease:'none',clearProps:'x,y'},at);
+  cheer(tl,at);
+}
+function cheer(tl,at){tl.call(()=>strips.forEach(s=>gsap.fromTo(s,{y:0},{y:-R(6,16),duration:R(.12,.2),repeat:3,yoyo:true,ease:'sine.inOut',delay:R(0,.15),overwrite:true})),null,at)}
+function dizzy(tl,at){
+  tl.fromTo('#dizzy',{opacity:0},{opacity:1,duration:.15},at)
+    .fromTo('#dizzy svg',{x:i=>Math.cos(i*2.1)*46,y:i=>Math.sin(i*2.1)*13},{x:i=>Math.cos(i*2.1+Math.PI*4)*46,y:i=>Math.sin(i*2.1+Math.PI*4)*13,duration:1.2,ease:'none'},at)
+    .to('#dizzy',{opacity:0,duration:.2},at+'+=1.1');
+}
+function home(tl,at,who=[red,purple],d=.45){
+  tl.call(()=>who.forEach(el=>pose(el,'idle')),null,at)
+    .to(who,{x:0,y:0,rotation:0,scale:1,scaleX:1,scaleY:1,duration:d,ease:'power3.out'},at);
+}
+function trail(tl,at,x,y,d){
+  tl.call(sfx,['whoosh'],at);
+  tl.set(ghosts,{x:gsap.getProperty(purple,'x'),y:gsap.getProperty(purple,'y'),opacity:0},at)
+    .to(ghosts,{x,y,opacity:.32,duration:d,ease:'power4.in',stagger:.035},at)
+    .to(ghosts,{opacity:0,duration:.16,stagger:.03},at+'+='+d);
+}
+
+// --- звук: синтез через WebAudio, без файлов; включается кнопкой ---
+const SND={on:false,ctx:null};
+function sfx(name,size=1){
+  if(!SND.on||!SND.ctx)return;
+  try{
+    const c=SND.ctx,t=c.currentTime,out=c.createGain();out.gain.value=.5;out.connect(c.destination);
+    const tone=(type,f1,f2,at,dur,vol)=>{const o=c.createOscillator(),g=c.createGain();o.type=type;
+      o.frequency.setValueAtTime(f1,t+at);o.frequency.exponentialRampToValueAtTime(f2,t+at+dur);
+      g.gain.setValueAtTime(vol,t+at);g.gain.exponentialRampToValueAtTime(.001,t+at+dur);o.connect(g).connect(out);o.start(t+at);o.stop(t+at+dur+.02)};
+    const noise=(at,dur,vol,type,f1,f2=f1)=>{const b=c.createBuffer(1,c.sampleRate*dur,c.sampleRate),d=b.getChannelData(0);
+      for(let i=0;i<d.length;i++)d[i]=Math.random()*2-1;const n=c.createBufferSource(),f=c.createBiquadFilter(),g=c.createGain();
+      n.buffer=b;f.type=type;f.frequency.setValueAtTime(f1,t+at);f.frequency.exponentialRampToValueAtTime(f2,t+at+dur);
+      g.gain.setValueAtTime(vol,t+at);g.gain.exponentialRampToValueAtTime(.001,t+at+dur);n.connect(f).connect(g).connect(out);n.start(t+at)};
+    if(name==='hit'){tone('sine',150,45,0,.18,.9*size);noise(0,.09,.5*size,'bandpass',1400,600)}
+    if(name==='poke'){tone('triangle',900,500,0,.06,.25);noise(0,.04,.15,'highpass',3000)}
+    if(name==='whoosh'){noise(0,.25,.25,'bandpass',500,2200)}
+    if(name==='glug'){for(let k=0;k<4;k++)tone('sine',260+k*20,480,k*.13,.08,.35)}
+    if(name==='win'){[523,659,784,1047].forEach((f,k)=>tone('triangle',f,f,k*.11,.22,.35));noise(.1,1.4,.12,'lowpass',900,500)}
+  }catch(e){}
+}
+
+// --- реплики «проблема → решение» ---
+const PAIRS=[
+  ['Непонятное ТЗ','Разобрали задачу за час'],['Дедлайн вчера','Сдали в срок'],['Нет презентации','Собрали презентацию'],
+  ['Заявки теряются','Проанализировали заявки'],['Нет текстов','Написали тексты'],['Реклама сливает бюджет','Перенастроили рекламу'],
+  ['Сайт не грузится','Починили сайт'],['Пустые соцсети','Запустили соцсети'],['Баннер к выставке','Нарисовали баннер'],
+  ['Нет отчётности','Настроили аналитику'],['Правки по кругу','Учли все правки'],['Каталог устарел','Обновили каталог'],
+  ['Конкуренты обходят','Нашли точки роста'],['Нет идей для акции','Придумали акцию'],
+];
+let P=0,lastP=-1;
+const newPair=()=>{do P=Math.floor(Math.random()*PAIRS.length);while(P===lastP);lastP=P};
+const sP=$('sayP'),sS=$('sayS');gsap.set('#win',{xPercent:-50,yPercent:-50});
+const C=gsap.utils.clamp;
+// форма пузыря в координатах самого пузыря: w×h — тело, (tx,ty) — кончик хвоста, bx — основание хвоста
+function spiky(w,h,bx,tx,ty){        // колючий «крик» монстра с острым хвостом
+  const pts=[],step=24*U,jag=(i,a,b)=>(i%2?a:b)*U;
+  const edge=(x1,y1,x2,y2,ox,oy)=>{const n=Math.max(2,Math.round(Math.hypot(x2-x1,y2-y1)/step));
+    for(let i=0;i<n;i++){const t=i/n,o=jag(i,7,-1);pts.push([x1+(x2-x1)*t+ox*o,y1+(y2-y1)*t+oy*o])}};
+  edge(0,0,w,0,0,-1);edge(w,0,w,h,1,0);
+  pts.push([w,h],[bx+12*U,h],[tx,ty],[bx-8*U,h]);
+  edge(bx-8*U,h,0,h,0,1);edge(0,h,0,0,-1,0);
+  return `<path d="M${pts.map(p=>p[0].toFixed(1)+' '+p[1].toFixed(1)).join('L')}Z" fill="#F2553D" stroke="#141414" stroke-width="2.5" stroke-linejoin="miter"/>`;
+}
+function round(w,h,bx,tx,ty){         // гладкий скруглённый пузырь героя с мягким хвостом
+  const r=Math.min(20*U,h/2),u=U;
+  return `<rect width="${w}" height="${h}" rx="${r}" fill="#7226C4"/><path d="M${bx-12*u} ${h-6*u}Q${bx-4*u} ${h+8*u} ${tx} ${ty}Q${bx+6*u} ${h+6*u} ${bx+14*u} ${h-6*u}Z" fill="#7226C4"/>`;
+}
+// пузырь над головой говорящего (hx, hy — макушка); в пределах блока и мимо заголовков
+function speak(el,text,hx,hy,shape,side){
+  el.querySelector('span').textContent=text;gsap.killTweensOf(el);gsap.set(el,{opacity:0,scale:1,y:0});
+  const w=el.offsetWidth,h=el.offsetHeight,TAIL=20*U;
+  let cx=C(VIEW.x0+w/2+6,VIEW.x1-w/2-6,hx+side),cy=C(h/2+6,400-h/2-TAIL-4,hy-TAIL-h/2-4);
+  if(VIEW.head&&cy-h/2<145&&cx-w/2<420)cx=420+w/2;
+  if(VIEW.head&&cy+h/2>255&&cx+w/2>940)cx=940-w/2;
+  const L=cx-w/2,T=cy-h/2,tx=C(10*U,w-10*U,hx-L),ty=C(h+8*U,h+TAIL,hy-T),bx=C(24,w-24,tx*.55+w*.45/2+(tx>w/2?w*.2:0));
+  const svg=el.querySelector('svg'),M=12*U;
+  svg.setAttribute('viewBox',`${-M} ${-M} ${w+2*M} ${h+2*M+TAIL}`);
+  Object.assign(svg.style,{left:-M+'px',top:-M+'px',width:w+2*M+'px',height:h+2*M+TAIL+'px'});
+  svg.innerHTML=shape(w,h,bx,tx,ty);
+  gsap.set(el,{left:L,top:T,transformOrigin:`${tx}px ${ty}px`});
+  gsap.fromTo(el,{opacity:0,scale:.3,rotation:shape===spiky?-6:0},{opacity:1,scale:1,rotation:0,duration:.28,ease:'back.out(2.6)'});
+  if(shape===spiky)gsap.fromTo(el,{x:-2},{x:2,duration:.05,repeat:5,yoyo:true,ease:'none',delay:.28,clearProps:'x'});
+  gsap.to(el,{opacity:0,y:-14,duration:.35,delay:1.6});
+}
+// монстр кричит проблему, герой отвечает решением — только тот, кто бьёт
+const speakRed=()=>speak(sP,PAIRS[P][0],230+gsap.getProperty(red,'x')+137,150+gsap.getProperty(red,'y')+18,spiky,80);
+const speakPurple=()=>speak(sS,PAIRS[P][1],860+gsap.getProperty(purple,'x')+129,gsap.getProperty(purple,'y')+24,round,-60);
+function sayHit(){speakPurple()}      // удар героя
+function sayRedHit(){speakRed()}      // удар монстра
+
+// --- здоровье монстра, усталость, энергетик ---
+let hp=100,state='fight';
+const redBob=gsap.to('#red .bob',{y:-7,duration:.32,repeat:-1,yoyo:true,ease:'sine.inOut'});
+const sweat=gsap.timeline({repeat:-1,paused:true});
+sweat.fromTo('#red .drop',{y:0,opacity:0},{y:46,opacity:.9,duration:.7,stagger:.35,ease:'power1.in'})
+     .to('#red .drop',{opacity:0,duration:.15,stagger:.35},'-=.5');
+let tired=false;
+function setHp(v,dur=.3){
+  hp=gsap.utils.clamp(0,100,v);
+  gsap.to('#hpbar',{height:hp+'%',duration:dur,ease:'power2.out'});$('hp').setAttribute('aria-valuenow',Math.round(hp));
+  $('hp').classList.toggle('low',hp<35);
+  const t=hp<35&&hp>0;if(t===tired)return;tired=t;
+  gsap.to('#red .bob',{rotation:t?8:0,scaleY:t?.95:1,transformOrigin:'50% 100%',duration:.4});
+  redBob.timeScale(t?.45:1);if(t)sweat.play();else{sweat.pause();gsap.set('#red .drop',{opacity:0})}
+}
+function damage(n,byUser=false){
+  if(state!=='fight')return;
+  if(!byUser)n=Math.min(n,Math.max(0,hp-8));
+  setHp(hp-n);gsap.fromTo('#hp',{x:-4},{x:0,duration:.25,ease:'elastic.out(1,.3)'});
+  if(hp<=0){state='ko';gsap.delayedCall(.45,victory)}
+}
+let lastDrink=-99;
+function drink(amount){
+  const tl=gsap.timeline(),can=$('can'),plus=$('plus');lastDrink=gsap.globalTimeline.time();
+  tl.call(sfx,['glug'],.6);
+  $('now').textContent='Монстр пьёт энергетик';
+  tl.call(()=>{pose(red,'idle');plus.textContent='+'+amount})
+    .to(red,{x:0,y:0,rotation:0,scale:1,duration:.25})
+    .fromTo(can,{x:215,y:150,rotation:10,opacity:1,scale:0},{scale:1,duration:.22,ease:'back.out(2)'})
+    .to(can,{x:168,y:104,rotation:-115,duration:.3,ease:'power2.inOut'})
+    .to(red,{scaleY:1.06,scaleX:.97,transformOrigin:'50% 100%',duration:.14,repeat:5,yoyo:true,ease:'sine.inOut'})
+    .call(()=>setHp(hp+amount,.9),null,'<')
+    .fromTo(plus,{opacity:0,y:10,scale:.6},{opacity:1,y:-14,scale:1,duration:.35,ease:'back.out(2)'},'<.1')
+    .to(plus,{opacity:0,y:-34,duration:.35},'>.5')
+    .to(can,{x:'+=150',y:'-=70',rotation:'+=420',opacity:0,duration:.55,ease:'power2.out'},'<-.3')
+    .to(red,{scale:1.12,duration:.16,ease:'power2.out'},'<')
+    .to(red,{scale:1,duration:.3,ease:'elastic.out(1,.4)'});
+  cheer(tl,'<');
+  return tl;
+}
+function victory(){
+  interrupt();state='ko';$('now').textContent='Нокаут!';
+  setHp(0);gsap.to('#hud,#hp',{opacity:0,duration:.2});
+  const tl=gsap.timeline();
+  tl.call(()=>{pose(red,'ko');pose(purple,'idle')})
+    .fromTo(red,{x:0,y:-40,rotation:0,scale:1},{y:0,duration:.55,ease:'bounce.out'})
+    .to(purple,{x:-302,y:()=>VIEW.m?100:130,scale:()=>VIEW.m?1.1:1.25,rotation:720,duration:.9,ease:'power2.inOut'},.25)
+    .set(purple,{rotation:0})
+    .addLabel('party',1.15)
+    .fromTo('#win',{opacity:0,scale:.3},{opacity:1,scale:1,duration:.45,ease:'back.out(2.2)'},'party')
+    .call(sfx,['win'],'party')
+    .fromTo('#cta',{autoAlpha:0,x:()=>VIEW.m?0:-20},{autoAlpha:1,x:0,duration:.35,ease:'back.out(2)'},'party+=.45')
+    .to(purple,{y:()=>VIEW.m?82:110,duration:.18,repeat:7,yoyo:true,ease:'power1.out'},'party');
+  wave(tl,'party',9,false);
+  for(let k=0;k<4;k++){
+    tl.addLabel('c'+k,'party+='+(k*.5));
+    FX.bits(tl,'c'+k,687+R(-160,160),170+R(-40,40),1.6);FX.rings(tl,'c'+k,687+R(-120,120),180,1);cheer(tl,'c'+k);
+  }
+  tl.call(pose,[purple,'idle'],'party+=1.6')
+    .to('#win',{opacity:0,scale:.9,duration:.35},'party+=4.4')
+    .to('#cta',{autoAlpha:0,duration:.3},'party+=4.4')
+    .call(pose,[red,'idle'],'party+=4.5')
+    .fromTo(red,{y:0},{y:-30,duration:.18,yoyo:true,repeat:1,ease:'power2.out'},'party+=4.5')
+    .to(purple,{x:0,y:0,scale:1,duration:.6,ease:'power3.inOut'},'party+=4.5')
+    .to('#hp',{opacity:1,duration:.3},'party+=4.8');
+  cur=tl;
+  tl.then(()=>{if(cur!==tl)return;state='fight';run(drink(100),.6)});
+}
+
+// Боба поворачивается к зрителю и машет рукой: n взмахов от метки at
+function wave(tl,at,n=6,bob=true){
+  tl.call(pose,[purple,'wave1'],at)
+    .fromTo(purple,{rotation:0},{rotation:-5,duration:.08,ease:'sine.out'},at);
+  for(let k=1;k<=n;k++){
+    const t=at+'+='+(k*.17).toFixed(2);
+    tl.call(pose,[purple,k%2?'wave2':'wave1'],t)
+      .to(purple,{rotation:k%2?5:-5,...(bob?{y:'-='+(k%2?6:-6)}:{}),duration:.17,ease:'sine.inOut'},t);
+  }
+  tl.to(purple,{rotation:0,duration:.12},at+'+='+((n+1)*.17).toFixed(2))
+    .call(pose,[purple,'idle'],at+'+='+((n+1)*.17+.05).toFixed(2));
+}
+
+// --- приёмы: каждый начинается и заканчивается в стойке на своих местах ---
+const RED_FACE={x:398,y:276};      // лицо монстра в стойке
+const P_HIT={x:-517,y:117};        // смещение героя, при котором перчатка у лица монстра
+const moves={
+  'Апперкот монстра — мимо'(){
+    const tl=gsap.timeline();
+    tl.to(red,{x:-12,y:0,scaleY:.85,scaleX:1.08,transformOrigin:'50% 100%',duration:.16,ease:'power1.in'})
+      .call(pose,[red,'punch'])
+      .to(red,{x:330,y:-110,scaleX:1,scaleY:1,rotation:12,duration:.3,ease:'power3.out'})
+      .to(purple,{x:110,y:-6,rotation:24,duration:.2},'<.06')
+      .fromTo('#whoosh',{left:680,top:40,opacity:0,scale:.6},{opacity:1,scale:1,duration:.1},'<.1')
+      .to('#whoosh',{opacity:0,x:50,duration:.25},'>.08');
+    home(tl,'>-.05',[red],.5); home(tl,'<.05',[purple],.4);
+    tl.to(red,{rotation:-8,duration:.07,repeat:3,yoyo:true,ease:'none'},'>-.1').to(red,{rotation:0,duration:.06});
+    return tl;
+  },
+  'Апперкот монстра — в цель'(){
+    const tl=gsap.timeline();
+    tl.to(red,{x:-12,y:0,scaleY:.85,scaleX:1.08,transformOrigin:'50% 100%',duration:.16,ease:'power1.in'})
+      .call(pose,[red,'punch'])
+      .to(purple,{x:-130,y:30,duration:.25,ease:'power1.inOut'},'<')
+      .to(red,{x:400,y:-106,scaleX:1,scaleY:1,rotation:10,duration:.26,ease:'power3.out'},'>-.06')
+      .addLabel('hit');
+    boom(tl,'hit',832,68,.8);
+    tl.call(pose,[purple,'hit'],'hit')
+      .to(purple,{x:70,y:-14,rotation:18,duration:.2,ease:'power3.out'},'hit')
+      .to(purple,{x:40,y:0,rotation:-6,duration:.55,ease:'elastic.out(1,.4)'},'hit+=.2');
+    home(tl,'hit+=.25',[red],.5); home(tl,'hit+=.9',[purple],.35);
+    tl.call(newPair,null,0).call(sayRedHit,[832,68],'hit');
+    return tl;
+  },
+  'Биба: стикер в лицо'(){
+    const tl=gsap.timeline(),n=notes[0],fx=968,fy=64;
+    tl.to(red,{rotation:-12,x:-12,duration:.16})
+      .call(pose,[red,'punch'])
+      .to(red,{rotation:10,x:16,duration:.1})
+      .set(n,{left:440,top:220,x:0,y:0,opacity:1,rotation:0,scale:1.2},'<')
+      .to(n,{keyframes:{x:[0,(fx-440)*.5,fx-440],y:[0,fy-220-80,fy-220],ease:'none'},rotation:720,duration:.45,ease:'power1.in'},'<')
+      .addLabel('hit');
+    boom(tl,'hit',fx,fy,.6);
+    tl.call(pose,[purple,'hit'],'hit')
+      .to(n,{y:'+=40',x:'+=30',rotation:'+=90',opacity:0,duration:.4,ease:'power1.in'},'hit')
+      .to(purple,{x:50,y:-10,rotation:16,duration:.18,ease:'power3.out'},'hit')
+      .to(purple,{x:24,y:0,rotation:-4,duration:.5,ease:'elastic.out(1,.4)'},'hit+=.18')
+      .call(pose,[red,'idle'],'hit+=.1')
+      .to(red,{y:-22,duration:.1,repeat:3,yoyo:true,ease:'power1.out'},'hit+=.1');
+    home(tl,'hit+=.75',[purple],.35); home(tl,'hit+=.5',[red],.3);
+    tl.call(newPair,null,0).call(sayRedHit,null,'hit');
+    return tl;
+  },
+  'Биба: контрудар'(){
+    const tl=gsap.timeline();
+    tl.to(purple,{x:26,y:-8,rotation:-12,scale:1.06,duration:.2,ease:'power1.inOut'})
+      .call(pose,[purple,'punch']);
+    trail(tl,'>',P_HIT.x+60,P_HIT.y-20,.26);
+    tl.to(red,{x:-50,scaleY:.7,scaleX:1.12,transformOrigin:'50% 100%',duration:.14},'<.06')
+      .to(purple,{x:P_HIT.x+60,y:P_HIT.y-20,rotation:0,scale:1.06,duration:.26,ease:'power4.in'},'<-.06')
+      .call(pose,[red,'punch'])
+      .to(red,{x:110,y:-70,scaleX:1,scaleY:1,rotation:12,duration:.16,ease:'power3.out'})
+      .addLabel('hit');
+    boom(tl,'hit',500,170,.9);
+    tl.call(pose,[purple,'hit'],'hit')
+      .to(purple,{x:P_HIT.x+150,y:P_HIT.y-90,rotation:28,scale:1,duration:.24,ease:'power3.out'},'hit')
+      .to(purple,{rotation:-8,duration:.4,ease:'elastic.out(1,.4)'},'hit+=.24');
+    home(tl,'hit+=.2',[red],.45);
+    home(tl,'hit+=.7',[purple],.6);
+    tl.call(newPair,null,0).call(sayRedHit,null,'hit');
+    return tl;
+  },
+  'Пике героя — в цель'(){
+    const tl=gsap.timeline();
+    tl.to(purple,{x:26,y:-8,rotation:-12,scale:1.06,duration:.2,ease:'power1.inOut'})
+      .call(pose,[purple,'punch']);
+    trail(tl,'>',P_HIT.x,P_HIT.y,.28);
+    tl.to(purple,{x:P_HIT.x,y:P_HIT.y,rotation:0,scale:1.08,duration:.28,ease:'power4.in'},'<').addLabel('hit');
+    boom(tl,'hit',RED_FACE.x,RED_FACE.y);
+    tl.call(pose,[red,'hit'],'hit')
+      .to(red,{x:-70,y:-8,rotation:-22,duration:.18,ease:'power3.out'},'hit')
+      .to(red,{x:-40,y:0,rotation:-6,duration:.5,ease:'elastic.out(1,.4)'},'hit+=.2')
+      .to(purple,{x:P_HIT.x+50,y:P_HIT.y-40,scale:1,duration:.15},'hit');
+    dizzy(tl,'hit+=.3');
+    tl.call(pose,[purple,'idle'],'hit+=.25')
+      .to(purple,{keyframes:{x:[P_HIT.x+50,-330,-100,0],y:[P_HIT.y-40,-10,-10,0],rotation:[0,-180,-340,-360]},duration:.8,ease:'power2.inOut'},'hit+=.25')
+      .set(purple,{rotation:0})
+      .to(purple,{scale:1.1,duration:.14,repeat:3,yoyo:true,ease:'sine.inOut'});
+    home(tl,'hit+=1.3',[red],.4);
+    tl.call(newPair,null,0).call(sayHit,[RED_FACE.x,RED_FACE.y],'hit').call(damage,[18],'hit');
+    return tl;
+  },
+  'Пике героя — монстр пригнулся'(){
+    const tl=gsap.timeline();
+    tl.to(purple,{x:26,y:-8,rotation:-12,scale:1.06,duration:.2,ease:'power1.inOut'})
+      .call(pose,[purple,'punch']);
+    trail(tl,'>',P_HIT.x+20,P_HIT.y+10,.28);
+    tl.to(red,{x:-60,y:0,scaleY:.66,scaleX:1.15,transformOrigin:'50% 100%',duration:.16},'<.08')
+      .to(purple,{x:P_HIT.x+20,y:P_HIT.y+10,rotation:0,scale:1.08,duration:.28,ease:'power4.in'},'<-.08')
+      .to(purple,{x:P_HIT.x-30,y:P_HIT.y+16,rotation:-25,scaleX:1.12,scaleY:.9,duration:.14,ease:'power1.out'})
+      .fromTo('#whoosh',{left:330,top:170,opacity:0,scale:.7},{opacity:1,scale:1,duration:.1},'<')
+      .to('#whoosh',{opacity:0,duration:.25},'>.05')
+      .call(pose,[purple,'idle'])
+      .to(red,{scaleY:1.12,scaleX:.95,y:-24,duration:.16,ease:'power2.out'},'>.05')
+      .to(red,{scaleY:1,scaleX:1,y:0,duration:.25,ease:'bounce.out'});
+    home(tl,'>-.1',[purple],.6);
+    home(tl,'<.1',[red],.4);
+    return tl;
+  },
+  'Серия героя'(){
+    const tl=gsap.timeline();
+    tl.to(purple,{x:-440,y:96,rotation:-6,duration:.38,ease:'power3.inOut'});
+    for(let k=0;k<3;k++){
+      const last=k===2,at='jab'+k;
+      tl.addLabel(at,'>+.06')
+        .call(pose,[purple,'punch'],at)
+        .to(purple,{x:-490-(last?30:0),y:110+k*4,duration:.08,ease:'power3.in'},at)
+        .addLabel(at+'h',at+'+=.08');
+      boom(tl,at+'h',RED_FACE.x+R(-14,14),RED_FACE.y+R(-24,10),last?1:.45);
+      tl.call(pose,[red,last?'hit':'idle'],at+'h')
+        .to(red,{x:last?-70:-18-k*6,rotation:last?-20:-6,duration:.12,ease:'power2.out'},at+'h')
+        .call(pose,[purple,'idle'],at+'h+=.1')
+        .to(purple,{x:-440,y:96,duration:.14},at+'h+=.08');
+    }
+    dizzy(tl,'jab2h+=.2');
+    tl.to(red,{x:-40,rotation:-4,duration:.5,ease:'elastic.out(1,.4)'},'jab2h+=.15');
+    home(tl,'jab2h+=.7',[purple],.5);
+    home(tl,'jab2h+=1.2',[red],.4);
+    tl.call(newPair,null,0).call(damage,[7],'jab0h').call(damage,[7],'jab1h').call(damage,[13],'jab2h').call(sayHit,[RED_FACE.x,RED_FACE.y],'jab2h');
+    return tl;
+  },
+  'Биба швыряет стикеры'(){
+    const tl=gsap.timeline();
+    tl.to(red,{rotation:-10,x:-10,duration:.14});
+    notes.forEach((n,k)=>{
+      // каждый стикер прилетает Бобе в лицо: Боба не отбивает, а получает и отлетает чуть дальше
+      const at='t'+k,ox=k*14,ix=968+ox+R(-14,14),iy=64+R(-14,22);
+      tl.addLabel(at,k?'>-.12':'>')
+        .call(pose,[red,'punch'],at)
+        .to(red,{rotation:8,x:14,duration:.1},at)
+        .set(n,{left:440,top:220,x:0,y:0,opacity:1,rotation:0,scale:1.15},at)
+        .to(n,{keyframes:{x:[0,(ix-440)*.5,ix-440],y:[0,iy-220-90,iy-220],ease:'none'},rotation:540,duration:.42,ease:'power1.in'},at)
+        .addLabel(at+'h',at+'+=.42');
+      boom(tl,at+'h',ix,iy,.42);
+      if(!k)tl.call(sayRedHit,null,at+'h');
+      tl.call(pose,[purple,'hit'],at+'h')
+        .to(purple,{x:22+ox,y:-8,rotation:12+k*4,duration:.12,ease:'power3.out'},at+'h')
+        .to(n,{x:'+='+R(10,40),y:'+='+R(70,120),rotation:'+='+R(90,200),opacity:0,duration:.5,ease:'power2.in'},at+'h')
+        .call(pose,[red,'idle'],at+'h')
+        .to(red,{rotation:-10,x:-10,duration:.12},at+'h');
+    });
+    tl.to(purple,{rotation:-6,duration:.07,repeat:3,yoyo:true,ease:'none'},'>.05');
+    home(tl,'>',[purple],.35);
+    home(tl,'<',[red],.35);
+    tl.to(red,{y:-22,duration:.1,repeat:3,yoyo:true,ease:'power1.out'});
+    tl.call(newPair,null,0);
+    return tl;
+  },
+  'Лобовое столкновение'(){
+    const tl=gsap.timeline();
+    tl.to(red,{x:-20,y:0,scaleY:.88,transformOrigin:'50% 100%',duration:.18})
+      .to(purple,{x:30,y:-10,rotation:-10,duration:.18},'<')
+      .call(()=>{pose(red,'punch');pose(purple,'punch')})
+      .to(red,{x:250,y:-70,scaleY:1,rotation:8,duration:.26,ease:'power3.in'})
+      .to(purple,{x:-250,y:76,rotation:0,duration:.26,ease:'power3.in'},'<')
+      .addLabel('hit');
+    boom(tl,'hit',665,215,1.15);
+    tl.call(()=>{pose(red,'hit');pose(purple,'idle')},null,'hit')
+      .to(red,{x:-50,y:0,rotation:-25,duration:.42,ease:'power3.out'},'hit')
+      .to(purple,{x:60,y:-6,rotation:300,duration:.42,ease:'power3.out'},'hit')
+      .set(purple,{rotation:-60});
+    home(tl,'hit+=.5',[red,purple],.5);
+    tl.call(newPair,null,0).call(sayHit,[665,215],'hit').call(damage,[14],'hit');
+    return tl;
+  },
+  'Передышка'(){
+    const tl=gsap.timeline();
+    tl.to(purple,{x:-40,y:40,scale:1.08,duration:.3,ease:'power2.out'}).addLabel('w');
+    wave(tl,'w',6);
+    tl.to(red,{y:-26,duration:.12,repeat:5,yoyo:true,ease:'power1.out'},'w+=.1')
+      .to(red,{rotation:-7,duration:.06,repeat:5,yoyo:true,ease:'none'},'<')
+      .set(red,{rotation:0});
+    cheer(tl,'w');home(tl,'>',[purple],.35);
+    return tl;
+  },
+};
+
+// бесконечный бой: следующий приём случайный и не повторяет предыдущий
+const names=Object.keys(moves),weights={'Передышка':.5,'Пике героя — в цель':1.4,'Серия героя':1.2,'Апперкот монстра — в цель':1.2};
+let last='',paused=false;
+const RED_ATK=['Апперкот монстра — мимо','Апперкот монстра — в цель','Биба швыряет стикеры','Биба: стикер в лицо','Биба: контрудар'];
+function pick(){
+  if(tired&&last!=='Энергетик'&&gsap.globalTimeline.time()-lastDrink>30&&Math.random()<.6)return 'Энергетик';
+  const w=n=>(weights[n]||1)*(tired&&RED_ATK.includes(n)?.35:1);
+  const pool=names.filter(n=>n!==last),sum=pool.reduce((s,n)=>s+w(n),0);
+  let r=Math.random()*sum;for(const n of pool){r-=w(n);if(r<=0)return n}return pool[0];
+}
+let cur=null,dc=null;
+function run(tl,gap){cur=tl;tl.then(()=>{if(cur===tl)dc=gsap.delayedCall(gap,next)})}
+function next(){
+  if(state!=='fight')return;
+  const n=pick();last=n;
+  if(n==='Энергетик'){run(drink(45),R(.35,.8));return}
+  $('now').textContent='Приём: '+n;
+  run(moves[n](),R(.35,.8));
+}
+
+// интерактив: клик по монстру — удар героя в точку клика, по Бобе — он машет зрителю, мимо — искры и толпа
+let hits=0;
+function interrupt(){
+  if(cur)cur.kill();if(dc)dc.kill();intro.progress(1);
+  gsap.to('.fx,.spark,.note,.ghost,#whoosh,#dizzy,#can,#plus,#combo',{opacity:0,duration:.1,overwrite:true});
+}
+const clamp=gsap.utils.clamp;
+function strike(px,py){
+  if(paused||state!=='fight')return;
+  interrupt();hits++;if(hits===1)gsap.to('#hud',{opacity:0,scale:.8,duration:.3,onComplete:()=>$('hud').remove()});$('hits').textContent=hits;$('now').textContent='Ваш удар!';
+  const tl=gsap.timeline(),tx=clamp(-860,256,px-60-860),ty=clamp(-10,180,py-150),rx=gsap.getProperty(red,'x');
+  tl.call(pose,[purple,'punch'],0);
+  trail(tl,0,tx,ty,.18);
+  tl.to(purple,{x:tx,y:ty,rotation:0,scale:1.08,duration:.18,ease:'power4.in',overwrite:'auto'},0).addLabel('hit',.18);
+  boom(tl,'hit',px,py,R(.75,1.1));
+  tl.call(pose,[red,'hit'],'hit')
+    .to(red,{x:clamp(-200,300,rx-55),y:-6,rotation:-22,scale:1,scaleX:1,scaleY:1,duration:.16,ease:'power3.out',overwrite:'auto'},'hit')
+    .to(red,{x:clamp(-200,300,rx-25),y:0,rotation:-6,duration:.45,ease:'elastic.out(1,.4)'},'hit+=.17')
+    .call(pose,[purple,'idle'],'hit+=.2');
+  if(Math.random()<.5)dizzy(tl,'hit+=.3');
+  newPair();
+  tl.call(sayHit,[px,py],'hit').call(damage,[Math.round(R(7,11)),true],'hit');
+  home(tl,'hit+=.35',[purple],.45);
+  home(tl,'hit+=.9',[red],.4);
+  run(tl,.9);
+}
+let clicks=[];
+function monsterClick(x,y){
+  const now=performance.now();clicks=clicks.filter(t=>now-t<900);clicks.push(now);
+  if(clicks.length>=3){clicks=[];combo(x,y)}else strike(x,y);
+}
+function combo(px,py){
+  if(paused||state!=='fight')return;
+  interrupt();hits++;$('hits').textContent=hits;$('now').textContent='Комбо!';
+  if($('hud'))gsap.to('#hud',{opacity:0,scale:.8,duration:.3,onComplete:()=>$('hud')&&$('hud').remove()});
+  const tl=gsap.timeline(),rx=gsap.getProperty(red,'x'),fx=230+rx+150,fy=275,
+    tx=clamp(-860,256,fx+30-60-860),ty=clamp(-10,180,fy-150);
+  newPair();
+  tl.call(pose,[purple,'idle'],0).to(purple,{x:tx+40,y:ty-10,rotation:-8,scale:1.05,duration:.14,ease:'power3.out',overwrite:'auto'},0);
+  // три быстрых джеба
+  for(let k=0;k<3;k++){
+    const at='j'+k,hx=fx+R(-16,16),hy=fy+R(-34,8);
+    tl.addLabel(at,.14+k*.13)
+      .call(pose,[purple,'punch'],at)
+      .to(purple,{x:tx,y:ty+k*4,duration:.06,ease:'power3.in'},at)
+      .call(pose,[red,'hit'],at+'+=.06')
+      .to(red,{x:clamp(-200,300,rx-14-k*10),rotation:-8-k*4,duration:.08,ease:'power2.out',overwrite:'auto'},at+'+=.06')
+      .call(damage,[6,true],at+'+=.06')
+      .to(purple,{x:tx+34,duration:.06},at+'+=.08')
+      .call(pose,[purple,'idle'],at+'+=.08');
+    boom(tl,at+'+=.06',hx,hy,.45);
+  }
+  // замах и добивающий
+  tl.addLabel('wind','j2+=.16')
+    .to(purple,{x:tx+90,y:ty-40,rotation:-18,scale:1.12,duration:.16,ease:'power2.out'},'wind')
+    .call(pose,[purple,'punch'],'wind+=.16')
+    .to(purple,{x:tx-10,y:ty+10,rotation:4,scale:1.12,duration:.1,ease:'power4.in'},'wind+=.16')
+    .addLabel('fin','wind+=.26');
+  boom(tl,'fin',fx-10,fy-10,1.35);
+  tl.call(damage,[14,true],'fin')
+    .call(speakPurple,null,'fin')
+    .to(red,{x:clamp(-200,300,rx-130),y:-10,rotation:-32,duration:.2,ease:'power3.out'},'fin')
+    .to(red,{x:clamp(-200,300,rx-90),y:0,rotation:-8,duration:.6,ease:'elastic.out(1,.35)'},'fin+=.2')
+    .set('#combo',{left:()=>clamp(VIEW.x0+190*U,VIEW.x1-190*U,fx-10),top:clamp(60,330,fy-120),xPercent:-50,yPercent:-50},'fin')
+    .fromTo('#combo',{opacity:1,scale:.2,rotation:-14},{scale:1.15,rotation:-6,duration:.25,ease:'back.out(3)'},'fin')
+    .to('#combo',{scale:1,duration:.15},'fin+=.25')
+    .to('#combo',{opacity:0,y:-24,duration:.4},'fin+=1.1')
+    .set('#combo',{y:0},'fin+=1.5')
+    .call(pose,[purple,'idle'],'fin+=.2');
+  cheer(tl,'fin');cheer(tl,'fin+=.5');dizzy(tl,'fin+=.3');
+  home(tl,'fin+=.45',[purple],.45);
+  home(tl,'fin+=1.1',[red],.4);
+  run(tl,.9);
+}
+function heroShow(){
+  if(paused||state!=='fight')return;
+  interrupt();$('now').textContent='Боба машет вам';
+  const tl=gsap.timeline();
+  tl.to(purple,{x:-40,y:40,rotation:0,scale:1.1,duration:.25,ease:'back.out(1.6)',overwrite:'auto'}).addLabel('w');
+  wave(tl,'w',8);
+  cheer(tl,'w');home(tl,'>',[purple,red],.35);
+  run(tl,.6);
+}
+function poke(px,py){
+  const tl=gsap.timeline();tl.addLabel('p',0);
+  FX[Object.keys(FX)[Math.floor(Math.random()*5)]](tl,'p',px,py,.45);
+  tl.set(sparks,{left:px,top:py,x:0,y:0,opacity:1,scale:.3},'p')
+    .to(sparks,{x:i=>Math.cos(i/8*Math.PI*2)*45,y:i=>Math.sin(i/8*Math.PI*2)*32,scale:.5,duration:.35,ease:'power3.out'},'p')
+    .to(sparks,{opacity:0,duration:.15},'p+=.25');
+  cheer(tl,'p');sfx('poke');
+}
+const toStage=e=>{const r=block.getBoundingClientRect(),k=r.width/(VIEW.x1-VIEW.x0);return[VIEW.x0+(e.clientX-r.left)/k,(e.clientY-r.top)/k]};
+block.addEventListener('pointerdown',e=>{
+  if(e.target.closest('.cta'))return;
+  const [x,y]=toStage(e);
+  const rx=230+gsap.getProperty(red,'x'),ry=150+gsap.getProperty(red,'y');
+  if(x>rx+15&&x<rx+235&&y>ry+10&&y<ry+250)monsterClick(x,y);
+  else if(e.target.closest('#purple'))heroShow();
+  else poke(x,y);
+});
+// без выделения и перетаскивания при частых кликах
+['selectstart','dragstart','dblclick','contextmenu'].forEach(t=>block.addEventListener(t,e=>e.preventDefault()));
+block.addEventListener('mousedown',e=>{if(e.detail>1)e.preventDefault()});
+block.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;e.preventDefault();
+  strike(RED_FACE.x+gsap.getProperty(red,'x')+R(-20,20),RED_FACE.y+gsap.getProperty(red,'y')+R(-30,10));
+});
+red.addEventListener('pointerenter',()=>gsap.fromTo('#red .bob',{rotation:0},{rotation:-7,duration:.12,repeat:3,yoyo:true,ease:'sine.inOut'}));
+
+// дыхание бойцов и тень монстра
+gsap.to('#purple .bob',{y:9,rotation:-2,duration:.55,repeat:-1,yoyo:true,ease:'sine.inOut'});
+gsap.to('#hint',{x:-7,duration:.45,repeat:-1,yoyo:true,ease:'sine.inOut'});
+strips.forEach(s=>gsap.to(s,{y:-R(2,5),duration:R(.5,.9),repeat:-1,yoyo:true,ease:'sine.inOut',delay:R(0,.6)}));
+// декор: прожекторы покачиваются, конфетти медленно падает, искорки мерцают в пустых местах
+gsap.utils.toArray('.beam').forEach((b,i)=>gsap.fromTo(b,{rotation:[-14,4,16][i]},{rotation:[6,-12,-4][i],duration:R(3.5,5),repeat:-1,yoyo:true,ease:'sine.inOut'}));
+const bits2=[...Array(18)].map((_,i)=>{const b=document.createElement('div');b.className='decor bit2';
+  b.style.background=['#A97CF8','#F2553D','#C9B2FF','#7226C4'][i%4];stage.insertBefore(b,crowd);return b});
+bits2.forEach((b,i)=>{
+  const fall=()=>gsap.fromTo(b,{x:R(0,1374),y:-20,rotation:R(0,360)},{y:420,x:'+='+R(-80,80),rotation:'+='+R(-360,360),duration:R(7,12),ease:'none',onComplete:fall});
+  gsap.set(b,{x:R(0,1374),y:R(0,400),rotation:R(0,360)});
+  gsap.delayedCall(R(0,8),fall);
+});
+const TW=[[150,250],[90,370],[620,40],[760,120],[1210,70],[1300,190],[1180,250],[480,150]];
+TW.forEach(([x,y])=>{const t=document.createElement('div');t.className='decor twinkle';
+  t.innerHTML='<svg viewBox="-12 -12 24 24"><path d="M0-11 2.5-2.5 11 0 2.5 2.5 0 11-2.5 2.5-11 0-2.5-2.5Z" fill="#A97CF8"/></svg>';
+  t.style.left=x+'px';t.style.top=y+'px';stage.insertBefore(t,crowd);
+  gsap.to(t,{opacity:.45,scale:1.2,duration:R(.6,1),repeat:-1,yoyo:true,repeatDelay:R(.8,2.5),delay:R(0,3),ease:'sine.inOut'})});
+// ?still&layer=decor — только декор на прозрачном фоне, для слоя в Figma
+if(new URLSearchParams(location.search).get('layer')==='decor'){
+  stage.querySelectorAll(':scope > *').forEach(el=>{if(!el.classList.contains('decor'))el.style.visibility='hidden'});
+  document.querySelectorAll('.wrap > :not(.block)').forEach(el=>el.style.display='none');
+  document.documentElement.style.background=document.body.style.background='transparent';
+  document.querySelector('.wrap').style.cssText='padding:0;max-width:none;display:block';block.style.width='1374px';
+  gsap.globalTimeline.pause();gsap.set('.twinkle',{opacity:.4});
+}
+const hpEl=$('hp');
+gsap.ticker.add(()=>{const x=gsap.getProperty(red,'x'),y=gsap.getProperty(red,'y');hpEl.style.left=200+gsap.utils.clamp(-180,0,x)+'px';
+  gsap.set(shadow,{x,scaleX:Math.max(.4,1+y/350),opacity:Math.max(.25,1+y/250)})});
+
+// вход
+const intro=gsap.timeline();
+intro.call(()=>{pose(red,'idle');pose(purple,'idle')})
+  .from(red,{scale:0,rotation:-25,transformOrigin:'50% 100%',duration:.6,ease:'back.out(1.8)'})
+  .from(purple,{scale:0,rotation:25,duration:.6,ease:'back.out(1.6)'},'<.12');
+cheer(intro,'>-.2');
+
+const btn=$('toggle');
+if(matchMedia('(prefers-reduced-motion: reduce)').matches){gsap.globalTimeline.pause();btn.textContent='Играть'}
+else if(!location.search.includes('still'))intro.then(()=>gsap.delayedCall(.4,next));
+// ?ko — сразу показать нокаут и празднование (для проверки)
+if(location.search.includes('ko'))gsap.delayedCall(1.2,()=>{setHp(4);damage(10)}); // ?still — без автозапуска, для проверки приёмов
+let offscreen=false;
+const sync=()=>(paused||offscreen)?gsap.globalTimeline.pause():gsap.globalTimeline.resume();
+new IntersectionObserver(([e])=>{offscreen=!e.isIntersecting;sync()}).observe(block);
+$('sound').onclick=()=>{SND.on=!SND.on;
+  if(SND.on){try{SND.ctx=SND.ctx||new(window.AudioContext||window.webkitAudioContext)();SND.ctx.resume()}catch(e){SND.on=false}}
+  $('sound').textContent='Звук: '+(SND.on?'вкл':'выкл');$('sound').setAttribute('aria-pressed',SND.on)};
+btn.onclick=()=>{paused=!paused;sync();btn.textContent=paused?'Играть':'Пауза';
+  if(!paused&&!last)next()};
+</script>
